@@ -1,0 +1,171 @@
+body {
+	background-color: #666;
+	background-image: -webkit-gradient(
+	  linear,
+	  left bottom,
+	  left top,
+	  color-stop(0, #666),
+	  color-stop(1, #999)
+	 );
+	background-image: -webkit-linear-gradient(
+	  center bottom,
+	  color-stop(0, #666) 37%,
+	  color-stop(1, #999) 69%
+	 );
+	background-image: -moz-linear-gradient(
+	  center bottom,
+	  color-stop(0, #666) 37%,
+	  color-stop(1, #999) 69%
+	 );
+	background-image: -ms-linear-gradient(
+	  center bottom,
+	  color-stop(0, #666) 37%,
+	  color-stop(1, #999) 69%
+	 );
+	background-image: -o-linear-gradient(
+	  center bottom,
+	  color-stop(0, #666) 37%,
+	  color-stop(1, #999) 69%
+	 );
+}
+body.login {
+	background: grey;
+}
+body:before {
+	content: "Powered by the Custom Login lite plugin for WordPress";
+	position: absolute;
+	left: 25px;
+	bottom: 10px;
+}
+body:after {
+	content: "";
+	position: absolute;
+	top: 0; left: 0; bottom: 0; right: 0;
+	background-image:
+	   -webkit-gradient(linear, 0 0, 100% 100%,
+	      color-stop(.25, rgba(255, 255, 255, .2)),
+	      color-stop(.25, transparent), color-stop(.5, transparent),
+	      color-stop(.5, rgba(255, 255, 255, .2)),
+	      color-stop(.75, rgba(255, 255, 255, .2)),
+	      color-stop(.75, transparent), to(transparent)
+	   );
+	background-image:
+		-webkit-linear-gradient(
+		  -45deg,
+	      rgba(255, 255, 255, .2) 25%,
+	      transparent 25%,
+	      transparent 50%,
+	      rgba(255, 255, 255, .2) 50%,
+	      rgba(255, 255, 255, .2) 75%,
+	      transparent 75%,
+	      transparent
+	   );
+	background-image:
+		-moz-linear-gradient(
+		  -45deg,
+	      rgba(255, 255, 255, .2) 25%,
+	      transparent 25%,
+	      transparent 50%,
+	      rgba(255, 255, 255, .2) 50%,
+	      rgba(255, 255, 255, .2) 75%,
+	      transparent 75%,
+	      transparent
+	   );
+	background-image:
+		-ms-linear-gradient(
+		  -45deg,
+	      rgba(255, 255, 255, .2) 25%,
+	      transparent 25%,
+	      transparent 50%,
+	      rgba(255, 255, 255, .2) 50%,
+	      rgba(255, 255, 255, .2) 75%,
+	      transparent 75%,
+	      transparent
+	   );
+	background-image:
+		-o-linear-gradient(
+		  -45deg,
+	      rgba(255, 255, 255, .2) 25%,
+	      transparent 25%,
+	      transparent 50%,
+	      rgba(255, 255, 255, .2) 50%,
+	      rgba(255, 255, 255, .2) 75%,
+	      transparent 75%,
+	      transparent
+	   );
+	z-index: 1;
+	-webkit-background-size: 50px 50px;
+	-moz-background-size: 50px 50px;
+	overflow: hidden;
+}
+
+#login {
+	position: relative;
+	z-index: 2;
+}
+#login form {
+	background: #5A5E78;
+	padding-top: 20px;
+	margin-top: 0;
+	-moz-border-radius: 8px;
+	-khtml-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-o-border-radius: 8px;
+	border-radius: 8px;
+	border: 1px solid #003333;
+	-moz-box-shadow: 8px 8px 18px #122222;
+	-webkit-box-shadow: 8px 8px 18px #122222;
+	-khtml-box-shadow: 8px 8px 18px #122222;
+	-o-box-shadow: 8px 8px 18px #122222;
+	box-shadow: 8px 8px 18px #122222;
+	
+	-webkit-transition: all .5s linear;
+	-khtml-transition: all .5s linear;
+	-moz-transition: all .5s linear;
+	-o-transition: all .5s linear;
+	transition: all .5s linear;
+}
+#login form:hover, #login form:active {
+	background: #111;
+	border: 1px solid #aaa;
+	-moz-box-shadow: 0 0 28px 15px #ddd;
+	-webkit-box-shadow: 0 0 28px 15px #ddd;
+	-khtml-box-shadow: 0 0 28px 15px #ddd;
+	-o-box-shadow: 0 0 28px 15px #ddd;
+	box-shadow: 0 0 28px 15px #ddd;
+}
+
+#login h1 {
+	margin: 0;
+	display: none;
+}
+	
+.login #nav a, .login #backtoblog a {
+	color: #222 !important;
+	text-shadow: 0 1px 0 #bbb;
+	-moz-text-shadow: 0 1px 0 #bbb;
+	-webkit-text-shadow: 0 1px 0 #bbb;
+	-khtml-text-shadow: 0 1px 0 #bbb;
+}
+.login #nav a:hover, .login #backtoblog a:hover {
+	color: #000 !important;
+}
+	
+label {
+	color: #fff !important;
+	text-shadow: 0 1px 0 #000;
+	-moz-text-shadow: 0 1px 0 #000;
+	-webkit-text-shadow: 0 1px 0 #000;
+	-khtml-text-shadow: 0 1px 0 #000;
+}
+
+span.byauthor {
+	color: #ccc;
+	position: absolute;
+	right: 10px;
+	text-decoration: none;
+	top: 7px;
+}
+span.byauthor a {
+	position: static !important;
+}

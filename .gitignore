@@ -1,0 +1,39 @@
+# Build and Release Folders
+bin-debug/
+bin-release/
+
+# Numerous always-ignore extensions
+*.diff
+*.err
+*.orig
+*.log
+*.rej
+*.swo
+*.swp
+*.vi
+*~
+
+# OS or Editor folders
+.DS_Store
+.cache
+.project
+.settings
+nbproject
+thumbs.db
+Thumbs.db
+Desktop.ini
+
+# Dreamweaver
+_notes
+dwsync.xml
+*_notes
+*dwsync.xml
+
+# Folders to ignore
+.hg
+.svn
+publish
+.idea
+
+# WordPress
+/wp-config-sample.php

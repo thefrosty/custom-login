@@ -1,0 +1,370 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Custom Login\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-02 11:59+0200\n"
+"PO-Revision-Date: 2012-04-02 14:05+0200\n"
+"Last-Translator: kazancexpert <kazancexpert@gmail.com>\n"
+"Language-Team: kazancexpert <kazancexpert@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: Turkish\n"
+"X-Poedit-Country: TURKEY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: library/admin/admin.php:74
+msgid "Custom Login"
+msgstr "Custom Login"
+
+#: library/admin/admin.php:75
+msgid "Custom Login Upgrade"
+msgstr "Custom Login Yükseltme"
+
+#: library/admin/admin.php:75
+#: library/admin/admin.php:964
+msgid "Upgrade"
+msgstr "Yükselt"
+
+#: library/admin/admin.php:271
+msgid "Avtivation &mdash; <em>to infinity and beyond</em>"
+msgstr "Etkinleştirme &mdash; <em>sonsuzluk ve ötesine</em>"
+
+#: library/admin/admin.php:273
+msgid "Announcements"
+msgstr "Duyurular"
+
+#: library/admin/admin.php:275
+msgid "About Custom Login"
+msgstr "Custom Login Hakkında"
+
+#: library/admin/admin.php:277
+msgid "Support Custom Login"
+msgstr "Custom Login Destekle"
+
+#: library/admin/admin.php:279
+msgid "Dashboard Widget"
+msgstr "Pano Widget"
+
+#: library/admin/admin.php:281
+msgid "Preview your work, <em>Master</em>"
+msgstr "Yaptığın işin ön izlemesi, <em>Üstat</em>"
+
+#: library/admin/admin.php:285
+#: library/admin/admin.php:286
+msgid "Upgrade Custom Login"
+msgstr "Custom Login Yükselt"
+
+#: library/admin/admin.php:288
+msgid "General Settings"
+msgstr "Genel Ayarlar"
+
+#: library/admin/admin.php:290
+msgid "Advanced Settings"
+msgstr "Gelişmiş Ayarlar"
+
+#: library/admin/admin.php:292
+msgid "TheFrosty Network"
+msgstr "TheFrosty Ağı"
+
+#: library/admin/admin.php:305
+msgid "Activate:"
+msgstr "Etkinleştir:"
+
+#: library/admin/admin.php:310
+msgid "Check this box to use your own CSS, leave unchecked to use the default style."
+msgstr "Bu kutuyu işaretleyerek kendi CSS inizi kullanın, varsayılan stil için boş bırakın."
+
+#: library/admin/admin.php:315
+msgid "Gravatar:"
+msgstr "Gravatar:"
+
+#: library/admin/admin.php:320
+msgid "This feature only works for sites with registration enabled."
+msgstr "Bu özellik yalnızca üye olma seçeneği etkin olan siteler için çalışır."
+
+#: library/admin/admin.php:320
+msgid "Check this box to activate a AJAX Gravatar image for registration."
+msgstr "Üye kaydında AJAX Gravatar resimlerini açmak için bu kutuyu işaretleyin."
+
+#: library/admin/admin.php:347
+msgid "Plugin:"
+msgstr "Eklenti:"
+
+#: library/admin/admin.php:351
+msgid "Author:"
+msgstr "Yazar:"
+
+#: library/admin/admin.php:355
+msgid "Description:"
+msgstr "Açıklama:"
+
+#: library/admin/admin.php:393
+msgid "Thanks for purchasing the plugin! Here is your download link: "
+msgstr "Eklentiyi satın aldığınız için teşekkürler! İndirme linkiniz burada:"
+
+#: library/admin/admin.php:425
+msgid "Hide the upgrade form?"
+msgstr "Yükseltme formunu gizle?"
+
+#: library/admin/admin.php:434
+#, php-format
+msgid "Want to upgrade to Pro? If you've purchase the plugin login below to get your download link. Need a login? Click %s to purchase the plugin."
+msgstr "Pro sürüme yükseltmek mi istiyorsunuz? Eğer eklentiyi satın aldıysanız indirme linkiniz için alttan giriş yapın. Giriş yapmak mı istiyorsunuz? %s tıklayarak satın alın."
+
+#: library/admin/admin.php:485
+msgid "Donate:"
+msgstr "Bağış:"
+
+#: library/admin/admin.php:486
+msgid "<a href=\"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X4JPT57AWMTYW\">PayPal</a>."
+msgstr "<a href=\"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X4JPT57AWMTYW\">PayPal</a>."
+
+#: library/admin/admin.php:489
+msgid "Rate:"
+msgstr "Oy ver:"
+
+#: library/admin/admin.php:490
+msgid "<a href=\"http://wordpress.org/extend/plugins/custom-login/\">This plugin on WordPress.org</a>."
+msgstr "<a href=\"http://wordpress.org/extend/plugins/custom-login/\">WordPress.org eklenti sayfasına gidin</a>."
+
+#: library/admin/admin.php:493
+msgid "Share:"
+msgstr "Paylaş:"
+
+#: library/admin/admin.php:494
+msgid "Your design on <a href=\"http://www.flickr.com/groups/custom-login/\"><span style=\"color:#0066DC;font-weight:bold;\">Flick</span><span style=\"color:#ff0084;font-weight:bold;\">r</span></a>."
+msgstr "Tasarımınız <a href=\"http://www.flickr.com/groups/custom-login/\"><span style=\"color:#0066DC;font-weight:bold;\">Flick</span><span style=\"color:#ff0084;font-weight:bold;\">r</span></a>'da."
+
+#: library/admin/admin.php:497
+msgid "Support:"
+msgstr "Destek:"
+
+#: library/admin/admin.php:498
+msgid "<a href=\"http://wordpress.org/tags/custom-login\">WordPress support forums</a>."
+msgstr "<a href=\"http://wordpress.org/tags/custom-login\">WordPress destek forumları</a>."
+
+#: library/admin/admin.php:501
+msgid "Go PRO:"
+msgstr "PRO Sürüm:"
+
+#: library/admin/admin.php:502
+msgid "<a href=\"http://thefrosty.com/custom-login-pro/?ref=custom-login&url="
+msgstr "<a href=\"http://thefrosty.com/custom-login-pro/?ref=custom-login&url="
+
+#: library/admin/admin.php:517
+msgid "Dashboard:"
+msgstr "Pano:"
+
+#: library/admin/admin.php:521
+msgid "Hide the dashboard widget?"
+msgstr "Pano widget gizlensin mi?"
+
+#: library/admin/admin.php:534
+msgid "Click here to see a live preview!"
+msgstr "Buraya tıklayarak ön izlemeyi gör!"
+
+#: library/admin/admin.php:535
+msgid "(May not work as of WordPress 3.1.1)"
+msgstr "(WordPress 3.1.1 ile çalışmayabilir)"
+
+#: library/admin/admin.php:554
+msgid "html border-top color:"
+msgstr "html üst-çerçeve rengi:"
+
+#: library/admin/admin.php:559
+msgid ""
+"Use HEX color <strong>with</strong> &ldquo;#&rdquo; <strong>or</strong> RGB/A format.<br />\n"
+"\t\t\t\t<strong>This is the top 15px border color section</strong><br />\n"
+"\t\t\t\tExample: &sup1;<code>#121212</code> &sup2;<code>rgba(255,255,255,0.4)</code>"
+msgstr ""
+"HEX renk kodları <strong>ile</strong> &ldquo;#&rdquo; <strong>veya</strong>RGB/A formatı kullanın.<br />\n"
+"<strong>Bu üst çerçeve 15px renk bölümüdür</strong><br />\n"
+"Örneğin: &sup1;<code>#121212</code> &sup2;<code>rgba(255,255,255,0.4)</code>"
+
+#: library/admin/admin.php:568
+msgid "html border-top background:"
+msgstr "html üst-çerçeve arkaplanı:"
+
+#: library/admin/admin.php:574
+msgid ""
+"This can replace the new background image at the top of the login screen. Upload an image and put the full path here.<br />\n"
+"                Suggested size: <code>1px X 31px</code> (for a repeating background)."
+msgstr ""
+"Bununla giriş ekranının üst kısmına yeni bir arka plan resmi ekleyebilirsiniz. Bir resim yükleyin ve buraya tam yolunu koyun.<br />\n"
+"Tavsiye boyut: <code>1px X 31px</code> (tekrarlayan bir arka plan için)."
+
+#: library/admin/admin.php:582
+msgid "html background color:"
+msgstr "html arkaplan rengi:"
+
+#: library/admin/admin.php:587
+msgid ""
+"Use HEX color <strong>with</strong> &ldquo;#&rdquo; <strong>or</strong> RGB/A format.<br />\n"
+"\t\t\t\tExample: &sup1;<code>#121212</code> &sup2;<code>rgba(255,255,255,0.4)</code>"
+msgstr ""
+"HEX renk kodları <strong>ile</strong> &ldquo;#&rdquo; <strong>veya</strong>RGB/A formatı kullanın.<br />\n"
+"Örneğin: &sup1;<code>#121212</code> &sup2;<code>rgba(255,255,255,0.4)</code>"
+
+#: library/admin/admin.php:595
+msgid "html background url:"
+msgstr "html arkaplan linki:"
+
+#: library/admin/admin.php:601
+#, php-format
+msgid ""
+"Upload an image and put the full path here.<br />\n"
+"                Suggested size: <code>10px X 500px</code> (for a repeating background) or<br />\n"
+"                Full size image with a 100% stretched to fit window image."
+msgstr ""
+"Bir resim yükleyin ve buraya tam yolunu koyun.<br />\n"
+"Tavsiye boyut: <code>10px X 500px</code> (tekrarlayan bir arka plan için) veya <br />\n"
+"Pencereye %100 sığacak bir tam boy resim."
+
+#: library/admin/admin.php:610
+msgid "html background repeat:"
+msgstr "html arkaplan tekrarı:"
+
+#: library/admin/admin.php:615
+msgid "Use <code>no-repeat</code>, <code>repeat</code>, <code>repeat-x</code> or <code>repeat.</code>"
+msgstr "<code>no-repeat</code>, <code>repeat</code>, <code>repeat-x</code> veya <code>repeat.</code> kullanın"
+
+#: library/admin/admin.php:622
+msgid "Logo:"
+msgstr "Logo:"
+
+#: library/admin/admin.php:628
+msgid ""
+"Upload an image and put the full path here.<br />\n"
+"                Suggested size: <code>310px X 70px</code>, which will replace WordPress logo. Be sure to leave blank if not in use. NOTE: Will go <strong>above</strong> the form and it&prime;s border."
+msgstr ""
+"Bir resim yükleyin ve buraya tam yolunu koyun.<br />\n"
+"Tavsiye boyut: <code>310px X 70px</code>, WordPress logosu yerini alır. Eğer kullanımda değilse boş bıraktığınızdan emin olun. NOT: Formun üstü ve çereçevesine yerleşir."
+
+#: library/admin/admin.php:637
+msgid "login form background color:"
+msgstr "Giriş formu arkaplan rengi:"
+
+#: library/admin/admin.php:642
+#: library/admin/admin.php:691
+#: library/admin/admin.php:732
+msgid ""
+"Use HEX color <strong>with</strong> &ldquo;#&rdquo; or RGB/A format.<br />\n"
+"\t\t\t\tExample: &sup1;<code>#121212</code> &sup2;<code>rgba(255,255,255,0.4)</code>"
+msgstr ""
+"HEX renk kodları <strong>ile</strong> &ldquo;#&rdquo; <strong>veya</strong>RGB/A formatı kullanın.<br />\n"
+"Örneğin: &sup1;<code>#121212</code> &sup2;<code>rgba(255,255,255,0.4)</code>"
+
+#: library/admin/admin.php:650
+msgid "login form background url:"
+msgstr "Giriş formu arkaplan linki:"
+
+#: library/admin/admin.php:656
+msgid ""
+"Upload an image and put the full path here. Suggested size: <code>308px X 108px</code><br />\n"
+"                My suggestion: use a transparent .png or .gif. <a href=\""
+msgstr ""
+"Bir resim yükleyin ve buraya tam yolunu koyun. Tavsiye boyut: <code>308px X 108px</code><br />\n"
+"Benim önerim: transparan bir png ya da .gif kullanın. <a href=\""
+
+#: library/admin/admin.php:664
+msgid "login form border radius:"
+msgstr "Giriş formu çerçeve çapı:"
+
+#: library/admin/admin.php:669
+msgid "Choose your border radius, ie <code>8</code> or <code>12</code>. Do not put &ldquo;<strong>px</strong>&rdquo;!"
+msgstr "Çerçeve çapını seçin, örn. <code>8</code> ya da <code>12</code>. &ldquo;<strong>px</strong>&rdquo; koymayın!"
+
+#: library/admin/admin.php:675
+msgid "login form border thickness:"
+msgstr "Giriş formu çerçeve kalınlığı:"
+
+#: library/admin/admin.php:680
+msgid "Choose your border thickness, i.e. <code>1</code> or <code>2</code>. Do not put &ldquo;<strong>px</strong>&rdquo;!"
+msgstr "Çerçeve kalınlığını seçin, örn. <code>1</code> ya da <code>2</code>. &ldquo;<strong>px</strong>&rdquo; koymayın!"
+
+#: library/admin/admin.php:686
+msgid "login form border color:"
+msgstr "Giriş formu çerçeve rengi:"
+
+#: library/admin/admin.php:699
+msgid "login form box shadow:"
+msgstr "Giriş formu kutu gölgesi:"
+
+#: library/admin/admin.php:707
+msgid "Choose your box shadow settings, i.e. <code>5px 5px 18px #464646</code> <em>example code - <code>offset, offset, blur, color</code></em>."
+msgstr "Kutu gölge ayarlarını seçin, örn. <code>5px 5px 18px #464646</code> <em>örnek kod - <code>konum, konum, bulanıklık, renk</code></em>."
+
+#: library/admin/admin.php:714
+msgid "login form padding fix:"
+msgstr "Giriş formu dolgu düzeltme:"
+
+#: library/admin/admin.php:719
+msgid "Select the box if you would like the padding of the form to fit better."
+msgstr "Eğer daha uyumlu bir form dolgusu istiyorsanız kutuyu işaretleyin."
+
+#: library/admin/admin.php:728
+msgid "label font color:"
+msgstr "Font etiket rengi:"
+
+#: library/admin/admin.php:750
+msgid "Custom CSS:"
+msgstr "Kişisel CSS:"
+
+#: library/admin/admin.php:755
+msgid ""
+"Use this box to enter any custom CSS code that may not be shown below.<br />\n"
+"                <strong>Example:</strong> <code>.login #backtoblog a { color:#990000; }</code><br />\n"
+"                &sect; <strong>Example:</strong> <code>#snow { display:block; position:absolute; } #snow img { height:auto; width:100%; }</code><br />\n"
+"                &sect; example CSS code for custom html code example.."
+msgstr ""
+"Bu kutuyu kullanarak altta gösterilmeyen herhangi bir kişisel CSS kodu girin.<br />\n"
+"<strong>Örnek:</strong> <code>.login #backtoblog a { color:#990000; }</code><br />\n"
+"&sect; <strong>Örnek:</strong> <code>#snow { display:block; position:absolute; } #snow img { height:auto; width:100%; }</code><br />\n"
+"&sect; Kişisel html kod örneği için kişisel CSS kod örneğidir.."
+
+#: library/admin/admin.php:765
+msgid "Custom HTML:"
+msgstr "Kişisel HTML:"
+
+#: library/admin/admin.php:770
+msgid ""
+"Use this box to enter any custom HTML coded that you can add custom style to in the custom CSS box.<br />\n"
+"                <strong>Example:</strong> <code>&lt;div id=\"snow\"&gt;&lt;img src=\"../image.jpg\" alt=\"\" /&gt;&lt;/div&gt;<br />&lt;div id=\"snow-bird\"&gt; &lt;/div&gt;</code>"
+msgstr ""
+"Bu kutuyu kullanarak kişisel CSS kutusuna girdiğiniz kişisel stil için kodlanmış kişisel HTML kodlarını girin.<br />\n"
+"<strong>Örnek:</strong> <code>&lt;div id=\"snow\"&gt;&lt;img src=\"../image.jpg\" alt=\"\" /&gt;&lt;/div&gt;<br />&lt;div id=\"snow-bird\"&gt; &lt;/div&gt;</code>"
+
+#: library/admin/admin.php:823
+msgid "Don&prime;t you feel good. You just saved me."
+msgstr "İyi hissetmiyor musun. Beni kurtardın."
+
+#: library/admin/admin.php:841
+msgid "Custom Login Settings"
+msgstr "Custom Login Ayarları"
+
+#: library/admin/admin.php:861
+msgid "Update Settings"
+msgstr "Ayarları Güncelle"
+
+#: library/admin/admin.php:884
+msgid "Custom Login Pro Upgrade Check"
+msgstr "Custom Login Pro Yükseltme Kontrolu"
+
+#: library/admin/admin.php:962
+msgid "Settings"
+msgstr "Ayarlar"
+
+#: library/admin/admin.php:982
+#, php-format
+msgid "Custom Login plugin is not configured yet. It will use the defualt theme unless you configure the %1$s."
+msgstr "Custom Login eklentisi henüz yapılandırılmadı. %1$s ayarlamadığınız sürece varsayılan temayı kullanır."
+
+#: library/admin/dashboard.php:9
+msgid "The Frosty Network <em>feeds</em>"
+msgstr "The Frosty Ağ <em>beslemesi</em>"
+

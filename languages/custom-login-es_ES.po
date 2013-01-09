@@ -1,0 +1,157 @@
+# Translation of the WordPress plugin Custom Login 0.8 by Austin Passy.
+# Copyright (C) 2010 Austin Passy
+# This file is distributed under the same license as the Custom Login package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Custom Login 0.8\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/custom-login\n"
+"POT-Creation-Date: 2010-09-16 22:04+0000\n"
+"PO-Revision-Date: 2012-03-13 05:22-0600\n"
+"Last-Translator: AA\n"
+"Language-Team: -es_ES <arcos.alejandro@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Country: MEXICO\n"
+
+#. #-#-#-#-#  plugin.pot (Custom Login 0.8)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: library/admin/admin.php:70
+msgid "Custom Login"
+msgstr "Custom Login"
+
+#: library/admin/admin.php:215
+msgid "Avtivation &mdash; <em>to infinity and beyond</em>"
+msgstr "Avtivation &mdash; <em>al infinito y más allá</em>"
+
+#: library/admin/admin.php:217
+msgid "Announcements"
+msgstr "Anuncios"
+
+#: library/admin/admin.php:219
+msgid "General Settings"
+msgstr "Configuración general"
+
+#: library/admin/admin.php:221
+msgid "Advanced Settings"
+msgstr "Configuración avanzada"
+
+#: library/admin/admin.php:223
+msgid "About Custom Login"
+msgstr "Acerca de Custom Login"
+
+#: library/admin/admin.php:225
+msgid "Support Custom Login"
+msgstr "Soporte de Custom Login"
+
+#: library/admin/admin.php:227
+msgid "Preview your work, <em>Master</em>"
+msgstr "Vista previa de su trabajo, <em>Maestro</em>"
+
+#: library/admin/admin.php:229
+msgid "TheFrosty Network"
+msgstr "TheFrosty Network"
+
+#: library/admin/admin.php:242
+msgid "Activate:"
+msgstr "Activar:"
+
+#: library/admin/admin.php:253
+msgid "Gravatar:"
+msgstr "Gravatar:"
+
+#: library/admin/admin.php:286
+msgid "Plugin:"
+msgstr "Plugin:"
+
+#: library/admin/admin.php:290
+msgid "Author:"
+msgstr "Autor:"
+
+#: library/admin/admin.php:294
+msgid "Description:"
+msgstr "Descripción:"
+
+#: library/admin/admin.php:309
+msgid "Donate:"
+msgstr "Donar:"
+
+#: library/admin/admin.php:310
+msgid "<a href=\"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X4JPT57AWMTYW\">PayPal</a>."
+msgstr "<a href=\"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X4JPT57AWMTYW\">PayPal</a>."
+
+#: library/admin/admin.php:313
+msgid "Rate:"
+msgstr "Calificar:"
+
+#: library/admin/admin.php:314
+msgid "<a href=\"http://wordpress.org/extend/plugins/custom-login/\">This plugin on WordPress.org</a>."
+msgstr "<a href=\"http://wordpress.org/extend/plugins/custom-login/\">Este plugin en WordPress.org</a>."
+
+#: library/admin/admin.php:317
+msgid "Share:"
+msgstr "Compartir:"
+
+#: library/admin/admin.php:318
+msgid "Your design on <a href=\"http://www.flickr.com/groups/custom-login/\"><span style=\"color:#0066DC;font-weight:bold;\">Flick</span><span style=\"color:#ff0084;font-weight:bold;\">r</span></a>."
+msgstr "Su diseño en <a href=\"http://www.flickr.com/groups/custom-login/\"><span style=\"color:#0066DC;font-weight:bold;\">Flick</span><span style=\"color:#ff0084;font-weight:bold;\">r</span></a>."
+
+#: library/admin/admin.php:321
+msgid "Support:"
+msgstr "Soporte:"
+
+#: library/admin/admin.php:322
+msgid "<a href=\"http://wordpress.org/tags/custom-login\">WordPress support forums</a>."
+msgstr "<a href=\"http://wordpress.org/tags/custom-login\">Foros de soporte de WordPress</a>."
+
+#: library/admin/admin.php:347
+msgid "Custom CSS:"
+msgstr "CSS a la medida"
+
+#: library/admin/admin.php:362
+msgid "Custom HTML:"
+msgstr "HTML a la medida"
+
+#: library/admin/admin.php:602
+msgid "Don&prime;t you feel good. You just saved me."
+msgstr "Siéntase muy bien. Acabas de salvarme."
+
+#: library/admin/admin.php:620
+msgid "Custom Login Settings"
+msgstr "Configuración de Custom Login"
+
+#: library/admin/admin.php:639
+msgid "Update Settings"
+msgstr "Actualizar la configuración"
+
+#: library/admin/admin.php:704
+msgid "Settings"
+msgstr "Opciones"
+
+#: library/admin/admin.php:723
+#, php-format
+msgid "Custom Login plugin is not configured yet. It will use the defualt theme unless you configure the %1$s."
+msgstr "El plugin Custom Login no está configurado aún. Usará el tema instalado por omisión a menos que usted lo configure el %1$s."
+
+#: library/admin/dashboard.php:9
+msgid "The Frosty Network <em>feeds</em>"
+msgstr "El feed de Frosty Network"
+
+#. Plugin URI of the plugin/theme
+msgid "http://austinpassy.com/wordpress-plugins/custom-login"
+msgstr "http://austinpassy.com/wordpress-plugins/custom-login"
+
+#. Description of the plugin/theme
+msgid "A simple way to customize your WordPress login screen! Use the built in, easy to use <a href=\"./options-general.php?page=custom-login\">settings</a> page to do the work for you. So simple a caveboy can do it! Now featuring a HTML &amp; CSS box for advanced users. Share you designs on <a href=\"http://flickr.com/groups/custom-login/\">Flickr</a>!"
+msgstr "Una forma sencila de configurar su pantalla de entrada. Modifique las opciones fáciles de usar para que hagan el trabajo por usted. ¡Tan sencillo que cualquiera puede hacerlo!. hora cuenta con soporte para HTML &amp; CSS en su porpio campo para los usuarios avanzados. ¡Compartá sus diseños en <a href=\"http://flickr.com/groups/custom-login/\">Flickr</a>!"
+
+#. Author of the plugin/theme
+msgid "Austin Passy"
+msgstr "Austin Passy"
+
+#. Author URI of the plugin/theme
+msgid "http://frostywebdesigns.com"
+msgstr "http://frostywebdesigns.com"
+

@@ -1,0 +1,404 @@
+# Copyright (C) 2012 Custom Login lite
+# This file is distributed under the same license as the Custom Login lite package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Custom Login lite 1.0.1\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/custom-login\n"
+"POT-Creation-Date: 2012-04-02 16:51:21+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2012-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: library/admin/admin.php:74
+msgid "Custom Login"
+msgstr ""
+
+#: library/admin/admin.php:75
+msgid "Custom Login Upgrade"
+msgstr ""
+
+#: library/admin/admin.php:75 library/admin/admin.php:964
+msgid "Upgrade"
+msgstr ""
+
+#: library/admin/admin.php:271
+msgid "Avtivation &mdash; <em>to infinity and beyond</em>"
+msgstr ""
+
+#: library/admin/admin.php:273
+msgid "Announcements"
+msgstr ""
+
+#: library/admin/admin.php:275
+msgid "About Custom Login"
+msgstr ""
+
+#: library/admin/admin.php:277
+msgid "Support Custom Login"
+msgstr ""
+
+#: library/admin/admin.php:279
+msgid "Dashboard Widget"
+msgstr ""
+
+#: library/admin/admin.php:281
+msgid "Preview your work, <em>Master</em>"
+msgstr ""
+
+#: library/admin/admin.php:285 library/admin/admin.php:286
+msgid "Upgrade Custom Login"
+msgstr ""
+
+#: library/admin/admin.php:288
+msgid "General Settings"
+msgstr ""
+
+#: library/admin/admin.php:290
+msgid "Advanced Settings"
+msgstr ""
+
+#: library/admin/admin.php:292
+msgid "TheFrosty Network"
+msgstr ""
+
+#: library/admin/admin.php:305
+msgid "Activate:"
+msgstr ""
+
+#: library/admin/admin.php:310
+msgid ""
+"Check this box to use your own CSS, leave unchecked to use the default style."
+msgstr ""
+
+#: library/admin/admin.php:315
+msgid "Gravatar:"
+msgstr ""
+
+#: library/admin/admin.php:320
+msgid "This feature only works for sites with registration enabled."
+msgstr ""
+
+#: library/admin/admin.php:320
+msgid "Check this box to activate a AJAX Gravatar image for registration."
+msgstr ""
+
+#: library/admin/admin.php:347
+msgid "Plugin:"
+msgstr ""
+
+#: library/admin/admin.php:351
+msgid "Author:"
+msgstr ""
+
+#: library/admin/admin.php:355
+msgid "Description:"
+msgstr ""
+
+#: library/admin/admin.php:393
+msgid "Thanks for purchasing the plugin! Here is your download link: "
+msgstr ""
+
+#: library/admin/admin.php:425
+msgid "Hide the upgrade form?"
+msgstr ""
+
+#: library/admin/admin.php:434
+msgid ""
+"Want to upgrade to Pro? If you've purchase the plugin login below to get "
+"your download link. Need a login? Click %s to purchase the plugin."
+msgstr ""
+
+#: library/admin/admin.php:466
+msgid "Upgrade to Custom Login PRO"
+msgstr ""
+
+#: library/admin/admin.php:470
+msgid "You have already downloaded the plugin, download again?"
+msgstr ""
+
+#: library/admin/admin.php:471 library/admin/admin.php:899
+msgid "Get download link"
+msgstr ""
+
+#: library/admin/admin.php:485
+msgid "Donate:"
+msgstr ""
+
+#: library/admin/admin.php:486
+msgid ""
+"<a href=\"https://www.paypal.com/cgi-bin/webscr?cmd=_s-"
+"xclick&hosted_button_id=X4JPT57AWMTYW\">PayPal</a>."
+msgstr ""
+
+#: library/admin/admin.php:489
+msgid "Rate:"
+msgstr ""
+
+#: library/admin/admin.php:490
+msgid ""
+"<a href=\"http://wordpress.org/extend/plugins/custom-login/\">This plugin on "
+"WordPress.org</a>."
+msgstr ""
+
+#: library/admin/admin.php:493
+msgid "Share:"
+msgstr ""
+
+#: library/admin/admin.php:494
+msgid ""
+"Your design on <a href=\"http://www.flickr.com/groups/custom-login/\"><span "
+"style=\"color:#0066DC;font-weight:bold;\">Flick</span><span style=\"color:"
+"#ff0084;font-weight:bold;\">r</span></a>."
+msgstr ""
+
+#: library/admin/admin.php:497
+msgid "Support:"
+msgstr ""
+
+#: library/admin/admin.php:498
+msgid ""
+"<a href=\"http://wordpress.org/tags/custom-login\">WordPress support forums</"
+"a>."
+msgstr ""
+
+#: library/admin/admin.php:501
+msgid "Go PRO:"
+msgstr ""
+
+#: library/admin/admin.php:517
+msgid "Dashboard:"
+msgstr ""
+
+#: library/admin/admin.php:521
+msgid "Hide the dashboard widget?"
+msgstr ""
+
+#: library/admin/admin.php:534
+msgid "Click here to see a live preview!"
+msgstr ""
+
+#: library/admin/admin.php:535
+msgid "(May not work as of WordPress 3.1.1)"
+msgstr ""
+
+#: library/admin/admin.php:554
+msgid "html border-top color:"
+msgstr ""
+
+#: library/admin/admin.php:559
+msgid ""
+"Use HEX color <strong>with</strong> &ldquo;#&rdquo; <strong>or</strong> RGB/"
+"A format.<br />\r\n"
+"\t\t\t\t<strong>This is the top 15px border color section</strong><br />\r\n"
+"\t\t\t\tExample: &sup1;<code>#121212</code> &sup2;<code>rgba(255,255,255,0.4)"
+"</code>"
+msgstr ""
+
+#: library/admin/admin.php:568
+msgid "html border-top background:"
+msgstr ""
+
+#: library/admin/admin.php:574
+msgid ""
+"This can replace the new background image at the top of the login screen. "
+"Upload an image and put the full path here.<br />\r\n"
+"                Suggested size: <code>1px X 31px</code> (for a repeating "
+"background)."
+msgstr ""
+
+#: library/admin/admin.php:582
+msgid "html background color:"
+msgstr ""
+
+#: library/admin/admin.php:587
+msgid ""
+"Use HEX color <strong>with</strong> &ldquo;#&rdquo; <strong>or</strong> RGB/"
+"A format.<br />\r\n"
+"\t\t\t\tExample: &sup1;<code>#121212</code> &sup2;<code>rgba(255,255,255,0.4)"
+"</code>"
+msgstr ""
+
+#: library/admin/admin.php:595
+msgid "html background url:"
+msgstr ""
+
+#: library/admin/admin.php:601
+msgid ""
+"Upload an image and put the full path here.<br />\r\n"
+"                Suggested size: <code>10px X 500px</code> (for a repeating "
+"background) or<br />\r\n"
+"                Full size image with a 100% stretched to fit window image."
+msgstr ""
+
+#: library/admin/admin.php:610
+msgid "html background repeat:"
+msgstr ""
+
+#: library/admin/admin.php:615
+msgid ""
+"Use <code>no-repeat</code>, <code>repeat</code>, <code>repeat-x</code> or "
+"<code>repeat.</code>"
+msgstr ""
+
+#: library/admin/admin.php:622
+msgid "Logo:"
+msgstr ""
+
+#: library/admin/admin.php:628
+msgid ""
+"Upload an image and put the full path here.<br />\r\n"
+"                Suggested size: <code>310px X 70px</code>, which will "
+"replace WordPress logo. Be sure to leave blank if not in use. NOTE: Will go "
+"<strong>above</strong> the form and it&prime;s border."
+msgstr ""
+
+#: library/admin/admin.php:637
+msgid "login form background color:"
+msgstr ""
+
+#: library/admin/admin.php:642 library/admin/admin.php:691
+#: library/admin/admin.php:732
+msgid ""
+"Use HEX color <strong>with</strong> &ldquo;#&rdquo; or RGB/A format.<br />"
+"\r\n"
+"\t\t\t\tExample: &sup1;<code>#121212</code> &sup2;<code>rgba(255,255,255,0.4)"
+"</code>"
+msgstr ""
+
+#: library/admin/admin.php:650
+msgid "login form background url:"
+msgstr ""
+
+#: library/admin/admin.php:664
+msgid "login form border radius:"
+msgstr ""
+
+#: library/admin/admin.php:669
+msgid ""
+"Choose your border radius, ie <code>8</code> or <code>12</code>. Do not put "
+"&ldquo;<strong>px</strong>&rdquo;!"
+msgstr ""
+
+#: library/admin/admin.php:675
+msgid "login form border thickness:"
+msgstr ""
+
+#: library/admin/admin.php:680
+msgid ""
+"Choose your border thickness, i.e. <code>1</code> or <code>2</code>. Do not "
+"put &ldquo;<strong>px</strong>&rdquo;!"
+msgstr ""
+
+#: library/admin/admin.php:686
+msgid "login form border color:"
+msgstr ""
+
+#: library/admin/admin.php:699
+msgid "login form box shadow:"
+msgstr ""
+
+#: library/admin/admin.php:707
+msgid ""
+"Choose your box shadow settings, i.e. <code>5px 5px 18px #464646</code> "
+"<em>example code - <code>offset, offset, blur, color</code></em>."
+msgstr ""
+
+#: library/admin/admin.php:714
+msgid "login form padding fix:"
+msgstr ""
+
+#: library/admin/admin.php:719
+msgid "Select the box if you would like the padding of the form to fit better."
+msgstr ""
+
+#: library/admin/admin.php:728
+msgid "label font color:"
+msgstr ""
+
+#: library/admin/admin.php:750
+msgid "Custom CSS:"
+msgstr ""
+
+#: library/admin/admin.php:755
+msgid ""
+"Use this box to enter any custom CSS code that may not be shown below.<br />"
+"\r\n"
+"                <strong>Example:</strong> <code>.login #backtoblog a { color:"
+"#990000; }</code><br />\r\n"
+"                &sect; <strong>Example:</strong> <code>#snow { display:"
+"block; position:absolute; } #snow img { height:auto; width:100%; }</"
+"code><br />\r\n"
+"                &sect; example CSS code for custom html code example.."
+msgstr ""
+
+#: library/admin/admin.php:765
+msgid "Custom HTML:"
+msgstr ""
+
+#: library/admin/admin.php:770
+msgid ""
+"Use this box to enter any custom HTML coded that you can add custom style to "
+"in the custom CSS box.<br />\r\n"
+"                <strong>Example:</strong> <code>&lt;div id=\"snow\"&gt;&lt;"
+"img src=\"../image.jpg\" alt=\"\" /&gt;&lt;/div&gt;<br />&lt;div id=\"snow-"
+"bird\"&gt; &lt;/div&gt;</code>"
+msgstr ""
+
+#: library/admin/admin.php:823
+msgid "Don&prime;t you feel good. You just saved me."
+msgstr ""
+
+#: library/admin/admin.php:841
+msgid "Custom Login Settings"
+msgstr ""
+
+#: library/admin/admin.php:861
+msgid "Update Settings"
+msgstr ""
+
+#: library/admin/admin.php:884
+msgid "Custom Login Pro Upgrade Check"
+msgstr ""
+
+#: library/admin/admin.php:962
+msgid "Settings"
+msgstr ""
+
+#: library/admin/admin.php:982
+msgid ""
+"Custom Login plugin is not configured yet. It will use the defualt theme "
+"unless you configure the %1$s."
+msgstr ""
+
+#: library/admin/dashboard.php:9
+msgid "The Frosty Network <em>feeds</em>"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Custom Login lite"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://austinpassy.com/wordpress-plugins/custom-login"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"A simple way to customize your WordPress login screen! Use the built in, "
+"easy to use <a href=\"./options-general.php?page=custom-login\">settings</a> "
+"page to do the work for you. So simple a neanderthal can do it! Now "
+"featuring a HTML &amp; CSS box for advanced users. Share you designs on <a "
+"href=\"http://flickr.com/groups/custom-login/\">Flickr</a> or upgrade to the "
+"<a href=\"http://thefrosty.com/custom-login-pro/\">PRO</a> version!"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Austin Passy"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://frostywebdesigns.com"
+msgstr ""
