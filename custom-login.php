@@ -3,7 +3,7 @@
  * Plugin Name: Custom Login lite
  * Plugin URI: http://austinpassy.com/wordpress-plugins/custom-login
  * Description: A simple way to customize your WordPress login screen! Use the built in, easy to use <a href="./options-general.php?page=custom-login">settings</a> page to do the work for you. So simple a neanderthal can do it! Now featuring a HTML &amp; CSS box for advanced users. Share you designs on <a href="http://flickr.com/groups/custom-login/">Flickr</a> or upgrade to the <a href="http://thefrosty.com/custom-login-pro/">PRO</a> version!
- * Version: 1.1.0
+ * Version: 1.1.1
  * Author: Austin Passy
  * Author URI: http://austinpassy.com
  *
@@ -226,12 +226,15 @@ function custom_login_prefix_it( $input, $option ) {
 /**
  * Add a semi colon
  *
+ * Remove esc_attr since it's encoding single quotes in image urls with quotes.
+ * 
  * @since	1.1 (1/8/13)
+ * @updated	1.1.1 (1/9/13)
  */
 function trailingsemicolonit( $input ) {
 	$input = rtrim( $input, ';' );
 	
-	return esc_attr( $input ) . ";\n\t";
+	return $input . ";\n\t";
 }
 
 ?>

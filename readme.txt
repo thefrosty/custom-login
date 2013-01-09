@@ -67,6 +67,12 @@ Screenshots of working example in our [Flickr group](http://flickr.com/groups/cu
 
 == Changelog ==
 
+= Version 1.1.1 (1/9/13) =
+
+* Fixed: html background image css missing definition. [issue](http://wordpress.org/support/topic/error-with-version-110?replies=2)
+* Fixed: CSS images need not be escaped. Removed `esc_attr` from `trailingsemicolonit()`.
+* Fixed: CSS form background image.
+
 = Version 1.1.0 (1/8/13) =
 
 * Minimun required WordPress version is now *3.4*!
@@ -378,6 +384,9 @@ Screenshots of working example in our [Flickr group](http://flickr.com/groups/cu
 
 
 == Upgrade Notice ==
+
+= 1.1.1 =
+Fixes background image issues.
 
 = 1.1.0 =
 Fixes a lot of issues reported on the WP forums. Fixes issues with PHP 5.4 object error.

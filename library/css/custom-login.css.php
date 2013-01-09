@@ -56,11 +56,15 @@ if ( $custom_css ) echo wp_specialchars_decode( stripslashes( $custom_css ), 1, 
 
 
 html {
-	background: <?php
+	background-color: <?php
 	
 	if ( !empty( $html_background_color ) ) echo trailingsemicolonit( $html_background_color );
 	
-	if ( !empty( $html_background_url ) ) echo trailingsemicolonit( "url('{$html_background_url}') left top {$html_background_repeat}" );
+	if ( !empty( $html_background_url ) ) {
+		echo trailingsemicolonit( "background-image: url('{$html_background_url}')" );
+		echo trailingsemicolonit( 'background-position: left top' );
+		echo trailingsemicolonit( "background-repeat: {$html_background_repeat}" );
+	}
 	
 	$background_size = ( 'flex' != $html_background_size ) ? $html_background_size : '100% auto';
 	
@@ -77,7 +81,11 @@ body.login {
 #login form {
 	<?php
 	if ( !empty( $login_form_background_color ) )	echo trailingsemicolonit( "background-color: {$login_form_background_color}" );
-	if ( !empty( $login_form_background ) ) 		echo trailingsemicolonit( "background-image: transparent url('{$login_form_background}') center top no-repeat" );
+	if ( !empty( $login_form_background ) ) {
+		echo trailingsemicolonit( "background-image: url('{$login_form_background}')" );
+		echo trailingsemicolonit( 'background-position: center top' );
+		echo trailingsemicolonit( 'background-repeat: no-repeat' );
+	}
 	
 	if ( true == $login_form_padding_top ) 			echo trailingsemicolonit( 'padding-top: 20px' ); else echo trailingsemicolonit( 'padding-top: 100px' ); ?>
 	
