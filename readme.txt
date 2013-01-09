@@ -27,6 +27,7 @@ Now featureing a HTML &amp; CSS box for advanced users to up the customization!
 * My Blog: [http:/austinpassy.com/](http://austinpassy.com/)
 * Twitter: @[TheFrosty](https:/twitter.com/TheFrosty)
 * Twitter: @[Extendd](https:/twitter.com/WPExtendd)
+* **Contribute on [GitHub](https://github.com/thefrosty/custom-login)**
 
 == Installation ==
 
@@ -377,6 +378,9 @@ Screenshots of working example in our [Flickr group](http://flickr.com/groups/cu
 
 
 == Upgrade Notice ==
+
+= 1.1.0 =
+Fixes a lot of issues reported on the WP forums. Fixes issues with PHP 5.4 object error.
 
 = 1.0.1 =
 Fixed save settings and moved upgrade script to new page.
