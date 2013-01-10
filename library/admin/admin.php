@@ -118,6 +118,7 @@ function custom_login_settings() {
 		'login_form_border_top_color' => '',
 		'login_form_background_color' => '',
 		'login_form_background' => '',
+		'login_form_background_size' => 'cover',	
 		'login_form_border_radius' => '11',
 		'login_form_border' => '1',
 		'login_form_border_color' => '',			
@@ -214,6 +215,7 @@ function custom_login_save_settings() {
 	$settings['login_form_border_top_color'] = ( ( isset( $_POST['login_form_border_top_color'] ) ) ? esc_html( $_POST['login_form_border_top_color'] ) : '' );
 	$settings['login_form_background_color'] = esc_html( $_POST['login_form_background_color'] );
 	$settings['login_form_background'] = esc_html( $_POST['login_form_background'] );
+	$settings['login_form_background_size'] = esc_attr( $_POST['login_form_background_size'] );
 	$settings['login_form_border_radius'] = esc_html( $_POST['login_form_border_radius'] );
 	$settings['login_form_border'] = esc_html( $_POST['login_form_border'] );
 	$settings['login_form_border_color'] = esc_html( $_POST['login_form_border_color'] );
@@ -480,7 +482,7 @@ function custom_login_general_meta_box() { ?>
                     <?php } ?>
                 </select>
                 <a class="question" title="Help &amp; Examples">[?]</a><br />
-                <span class="hide"><?php _e( 'Use <code>no-repeat</code>, <code>repeat</code>, <code>repeat-x</code> or <code>repeat-y.</code>', 'custom-login' ); ?></span>
+                <span class="hide"><?php _e( 'See <a href="http://css-tricks.com/perfect-full-page-background-image/">CSS-Tricks</a> and <a href="http://davidwalsh.name/background-size">David Walsh</a> for examples.', 'custom-login' ); ?></span>
             </td>
    		</tr>
         <!-- Break -->
@@ -524,6 +526,22 @@ function custom_login_general_meta_box() { ?>
                 <span class="hide"><?php _e( 'Upload an image and put the full path here. Suggested size: <code>308px X 108px</code><br />
                 My suggestion: use a transparent .png or .gif. <a href="' . CUSTOM_LOGIN_URL . 'library/psd/custom-login.psd">Download included .psd file</a>.', 'custom-login' ); ?>
                 </span>
+            </td>
+   		</tr>
+        
+        <tr>
+            <th>
+            	<label for="login_form_background_size"><?php _e( 'form background size:', 'custom-login' ); ?></label> 
+            </th>
+            <td>
+            	<?php $background_size = array( 'cover', 'contain', 'flex' ); ?>
+                <select name="login_form_background_size" id="login_form_background_size" style="width:88px;">
+					<?php foreach ( $background_size as $option ) { ?>
+                        <option value="<?php echo $option; ?>" <?php selected( $option, custom_login_get_setting( 'login_form_background_size' ) ); ?>><?php echo $option; ?></option>
+                    <?php } ?>
+                </select>
+                <a class="question" title="Help &amp; Examples">[?]</a><br />
+                <span class="hide"><?php _e( 'See <a href="http://css-tricks.com/perfect-full-page-background-image/">CSS-Tricks</a> and <a href="http://davidwalsh.name/background-size">David Walsh</a> for examples.', 'custom-login' ); ?></span>
             </td>
    		</tr>
         

@@ -3,7 +3,7 @@
  * Plugin Name: Custom Login lite
  * Plugin URI: http://austinpassy.com/wordpress-plugins/custom-login
  * Description: A simple way to customize your WordPress login screen! Use the built in, easy to use <a href="./options-general.php?page=custom-login">settings</a> page to do the work for you. So simple a neanderthal can do it! Now featuring a HTML &amp; CSS box for advanced users. Share you designs on <a href="http://flickr.com/groups/custom-login/">Flickr</a> or upgrade to the <a href="http://thefrosty.com/custom-login-pro/">PRO</a> version!
- * Version: 1.1.1
+ * Version: 1.1.2
  * Author: Austin Passy
  * Author URI: http://austinpassy.com
  *
@@ -62,7 +62,8 @@ function custom_login_setup() {
 	add_filter( 'login_headertitle', 'custom_login_title' );
 	
 	/* Load the login head */
-	add_action( 'login_head', 'custom_login' );
+	add_action( 'login_head', 'custom_login_head', 1 );
+	add_action( 'login_enqueue_scripts', 'custom_login_login_scripts' );
 	add_action( 'login_head', 'custom_login_head_js' );
 	
 	add_action( 'login_footer', 'custom_login_custom_html' );
@@ -118,7 +119,7 @@ function custom_login_get_setting( $option = '' ) {
 /**
  * WordPress 3.x check
  *
- * @since 0.8
+ * @since 	0.8
  */
 if ( !function_exists( 'is_version' ) ) {
 	function is_version( $version = '3.0' ) {
@@ -133,26 +134,38 @@ if ( !function_exists( 'is_version' ) ) {
 
 /**
  * Add stylesheet to the login head
- * @since 0.8
+ *
+ * @since 	1.1.2
  */
-function custom_login() {
-	global $custom_login;
-	
+function custom_login_head() {	
+}
+
+/**
+ * Add stylesheet to the login head
+ * For some reason wp_enqueue_script enqueue's but doesn't output 
+ * 	the scripts. So I have to *_print_scripts.
+ *
+ * @since 	1.1.2
+ */
+function custom_login_login_scripts() {
+	/* Generator */
 	echo '<meta name="generator" content="Custom Login lite" />' . "\n";
 	
+	/* Scripts */
 	wp_register_script( 'gravatar', CUSTOM_LOGIN_JS . 'gravatar.js', array( 'jquery' ), '1.2', false );
 	
 	if ( ( custom_login_get_setting( 'custom_html' ) != '' || custom_login_get_setting( 'gravatar' ) != false ) && get_option( 'users_can_register' ) ) {
-		wp_print_scripts( array( 'jquery', 'gravatar' ) );
+		wp_enqueue_script( array( 'jquery', 'gravatar' ) ); // Enqueue to the $wp_scripts engine (doesn't output).
+		wp_print_scripts( array( 'jquery', 'gravatar' ) ); // Output the registered scripts.
 	}
-	if ( custom_login_get_setting( 'custom_html' ) != '' ) {
-		wp_print_scripts( array( 'jquery' ) );
-	}
+	
+	/* Styles */
 	wp_register_style( 'custom-login-defualt', CUSTOM_LOGIN_CSS . 'custom-login.css', false, '0.8', 'screen' );
 	
 	if ( custom_login_get_setting( 'custom' ) != false ) {		
 		require_once( trailingslashit( CUSTOM_LOGIN_DIR ) . 'library/css/custom-login.css.php' );		
 	} else {		
+		wp_enqueue_styles( 'custom-login-defualt' );
 		wp_print_styles( 'custom-login-defualt' );		
 	}
 }
