@@ -64,9 +64,9 @@ function custom_login_setup() {
 	/* Load the login head */
 	add_action( 'login_head', 'custom_login_head', 1 );
 	add_action( 'login_enqueue_scripts', 'custom_login_login_scripts' );
-	add_action( 'login_head', 'custom_login_head_js' );
 	
 	add_action( 'login_footer', 'custom_login_custom_html' );
+	add_action( 'login_footer', 'custom_login_footer_js' );
 
 	do_action( 'custom_login_loaded' );
 }
@@ -154,7 +154,7 @@ function custom_login_login_scripts() {
 	/* Scripts */
 	wp_register_script( 'gravatar', CUSTOM_LOGIN_JS . 'gravatar.js', array( 'jquery' ), '1.2', false );
 	
-	if ( ( custom_login_get_setting( 'custom_html' ) != '' || custom_login_get_setting( 'gravatar' ) != false ) && get_option( 'users_can_register' ) ) {
+	if ( ( custom_login_get_setting( 'custom_jquery' ) != '' || custom_login_get_setting( 'gravatar' ) != false ) && get_option( 'users_can_register' ) ) {
 		wp_enqueue_script( array( 'jquery', 'gravatar' ) ); // Enqueue to the $wp_scripts engine (doesn't output).
 		wp_print_scripts( array( 'jquery', 'gravatar' ) ); // Output the registered scripts.
 	}
@@ -171,13 +171,16 @@ function custom_login_login_scripts() {
 }
 
 /**
- * Add html after the body class
- * @since 0.4.6
+ * Add html to the footer
+ *
+ * @since 	0.4.6
+ * @updated	1.1.2
  */
-function custom_login_head_js() {
+function custom_login_footer_js() {
 	global $custom_login;
 	
 	if ( false != custom_login_get_setting( 'gravatar' ) ) { ?>
+    
 <script type='text/javascript'>
 //<![CDATA[
 jQuery(document).ready(
@@ -207,8 +210,24 @@ function($) {
 }
 );
 //]]>
-</script><?php
-	}
+</script>
+	<?php }
+	
+		if ( '' != custom_login_get_setting( 'custom_jquery' ) ) { ?>
+    
+<script type='text/javascript'>
+//<![CDATA[
+jQuery(document).ready(
+function($) {
+	<?php $jquery = str_replace( '\n', '', custom_login_get_setting( 'custom_jquery' ) ); ?>
+	<?php $jquery = wp_specialchars_decode( stripslashes( $jquery ), 1, 0, 1 ); ?>
+	<?php $jquery = htmlspecialchars( $jquery, ENT_NOQUOTES ); ?>
+	<?php echo $jquery; ?>
+}
+);
+//]]>
+</script>
+	<?php }
 }
 
 /**

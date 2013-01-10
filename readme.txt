@@ -71,6 +71,8 @@ Screenshots of working example in our [Flickr group](http://flickr.com/groups/cu
 
 * Added login scripts to `login_enqueue_scripts`.
 * Added background size to form. Please update settings.
+* Added custom jQuery output.
+* Moved all jQuery calls to the footer.
 
 = Version 1.1.1 (1/9/13) =
 

@@ -106,6 +106,8 @@ function custom_login_settings() {
 		'custom_css' => '',		
 		/* Custom html */	
 		'custom_html' => '',	
+		/* Custom jQUery */	
+		'custom_jquery' => '',	
 		/* html */
 		'html_border_top_color' => '', //WP < 3.x
 		'html_border_top_background' => '', //WP > 3.x
@@ -203,6 +205,7 @@ function custom_login_save_settings() {
 	
 	$settings['custom_css'] = esc_html( $_POST['custom_css'] );
 	$settings['custom_html'] = esc_html( $_POST['custom_html'] );
+	$settings['custom_jquery'] = esc_html( $_POST['custom_jquery'] );
 	
 	$settings['html_border_top_color'] = ( ( isset( $_POST['html_border_top_color'] ) ) ? esc_html( $_POST['html_border_top_color'] ) : '' ); // > 3.0.x
 	$settings['html_border_top_background'] = isset( $_POST['html_border_top_background'] ) ? esc_html( $_POST['html_border_top_background'] ) : '';
@@ -666,6 +669,19 @@ function custom_login_advanced_meta_box() { ?>
                 <a class="question" title="Help &amp; Examples">[?]</a><br />
                 <span class="hide"><?php _e( 'Use this box to enter any custom HTML coded that you can add custom style to in the custom CSS box.<br />
                 <strong>Example:</strong> <code>&lt;div id="snow"&gt;&lt;img src="../image.jpg" alt="" /&gt;&lt;/div&gt;<br />&lt;div id="snow-bird"&gt; &lt;/div&gt;</code>', 'custom-login' ); ?>
+                </span>
+            </td>
+   		</tr>
+        
+		<tr>
+			<th>
+            	<label for="custom_jquery"><?php _e( 'Custom jQuery:', 'custom-login' ); ?></label> 
+            </th>
+            <td>             
+                <textarea id="custom_jquery" name="custom_jquery" cols="50" rows="3" class="large-text code"><?php echo wp_specialchars_decode( stripslashes( custom_login_get_setting( 'custom_jquery' ) ), 1, 0, 1 ); ?></textarea>
+                <a class="question" title="Help &amp; Examples">[?]</a><br />
+                <span class="hide"><?php _e( 'Use this box to enter any custom jQuery.<br />
+                <strong>Example:</strong> <code>$(\'#login\').delay(300).fadeTo(800,1);</code>', 'custom-login' ); ?>
                 </span>
             </td>
    		</tr>
