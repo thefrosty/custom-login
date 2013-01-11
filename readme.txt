@@ -67,7 +67,12 @@ Screenshots of working example in our [Flickr group](http://flickr.com/groups/cu
 
 == Changelog ==
 
-= Version 1.1.2 (1/9/13) =
+= Version 1.1.3 (1/10/13) =
+
+* Add option for no `background-size`.
+* Changed upgrade buttong style from primary to secondary.
+
+= Version 1.1.2 (1/10/13) =
 
 * Added login scripts to `login_enqueue_scripts`.
 * Added background size to form. Please update settings.

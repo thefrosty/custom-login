@@ -64,11 +64,12 @@ html {
 		echo trailingsemicolonit( "background-image: url('{$html_background_url}')" );
 		echo trailingsemicolonit( 'background-position: left top' );
 		echo trailingsemicolonit( "background-repeat: {$html_background_repeat}" );
-	}
 	
-	$html_background_size = ( 'flex' != $html_background_size ) ? $html_background_size : '100% auto';
-	
-    custom_login_prefix_it( 'background-size', $html_background_size ); ?>
+		if ( !empty( $html_background_size ) && 'none' != $html_background_size ) {
+			$html_background_size = ( 'flex' != $html_background_size ) ? $html_background_size : '100% auto';
+			custom_login_prefix_it( 'background-size', $html_background_size );
+		}
+	} ?>
 	
 }
 
@@ -85,11 +86,12 @@ body.login {
 		echo trailingsemicolonit( "background-image: url('{$login_form_background}')" );
 		echo trailingsemicolonit( 'background-position: center top' );
 		echo trailingsemicolonit( 'background-repeat: no-repeat' );
+	
+		if ( !empty( $form_background_size ) && 'none' != $form_background_size ) {
+			$form_background_size = ( 'flex' != $login_form_background_size ) ? $login_form_background_size : '100% auto';
+    		custom_login_prefix_it( 'background-size', $form_background_size );
+		}
 	}
-	
-	$form_background_size = ( 'flex' != $login_form_background_size ) ? $login_form_background_size : '100% auto';
-	
-    custom_login_prefix_it( 'background-size', $form_background_size );
 	
 	if ( true == $login_form_padding_top ) 			echo trailingsemicolonit( 'padding-top: 20px' ); else echo trailingsemicolonit( 'padding-top: 100px' );
 	

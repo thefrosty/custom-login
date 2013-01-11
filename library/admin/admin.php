@@ -339,7 +339,7 @@ function custom_login_about_meta_box() {
 function custom_login_upgrade_link_meta_box() {
 	global $custom_login; ?>
     
-        <div style="height: 25px; padding: 25px; text-align: center"><a href="http://extendd.com/plugin/custom-login-pro/" class="button-primary"/><?php esc_attr_e('Upgrade to Custom Login PRO', 'custom-login'); ?></a></div><?php
+        <div style="height: 25px; padding: 25px; text-align: center"><a href="http://extendd.com/plugin/custom-login-pro/" class="button-secondary"/><?php esc_attr_e('Upgrade to Custom Login PRO', 'custom-login'); ?></a></div><?php
 }
 
 /**
@@ -368,7 +368,7 @@ function custom_login_support_meta_box() { ?>
         </tr>
 		<tr>
 			<th><?php _e( 'Support:', 'custom-login' ); ?></th>
-			<td><?php _e( '<a href="http://wordpress.org/tags/custom-login">WordPress support forums</a>.', 'custom-login' ); ?></td>
+			<td><?php _e( '<a href="http://wordpress.org/support/plugin/custom-login">WordPress support forums</a>.', 'custom-login' ); ?></td>
 		</tr>
 		<tr>
 			<th><?php _e( 'Contribute:', 'custom-login' ); ?></th>
@@ -428,7 +428,11 @@ function custom_login_preview_meta_box() { ?>
  *
  * @since 0.8
  */
-function custom_login_general_meta_box() { ?>
+function custom_login_general_meta_box() {
+	
+	$background_size = array( 'none', 'cover', 'contain', 'flex' );
+	
+	?>
 	<table class="form-table">        
             <th>
             	<label for="html_background_color"><?php _e( 'html background color:', 'custom-login' ); ?></label> 
@@ -478,7 +482,6 @@ function custom_login_general_meta_box() { ?>
             	<label for="html_background_size"><?php _e( 'html background size:', 'custom-login' ); ?></label> 
             </th>
             <td>
-            	<?php $background_size = array( 'cover', 'contain', 'flex' ); ?>
                 <select name="html_background_size" id="html_background_size" style="width:88px;">
 					<?php foreach ( $background_size as $option ) { ?>
                         <option value="<?php echo $option; ?>" <?php selected( $option, custom_login_get_setting( 'html_background_size' ) ); ?>><?php echo $option; ?></option>
@@ -537,7 +540,6 @@ function custom_login_general_meta_box() { ?>
             	<label for="login_form_background_size"><?php _e( 'form background size:', 'custom-login' ); ?></label> 
             </th>
             <td>
-            	<?php $background_size = array( 'cover', 'contain', 'flex' ); ?>
                 <select name="login_form_background_size" id="login_form_background_size" style="width:88px;">
 					<?php foreach ( $background_size as $option ) { ?>
                         <option value="<?php echo $option; ?>" <?php selected( $option, custom_login_get_setting( 'login_form_background_size' ) ); ?>><?php echo $option; ?></option>
