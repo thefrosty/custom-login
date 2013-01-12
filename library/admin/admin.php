@@ -702,13 +702,11 @@ function custom_login_tabs_meta_box() { ?>
         <ul class="tabs">        
             <li class="t1 t"><a class="t1 tab">Austin Passy</a></li>
             <li class="t2 t"><a class="t2 tab">WordCamp<strong>LA</strong></a></li>
-            <li class="t4 t"><a class="t3 tab">Extendd</a></li>  
-            <li class="t4 t"><a class="t4 tab">Premium WP Plugins</a></li>  
-            <li class="t4 t"><a class="t5 tab">Infield Box</a></li>  
-            <li class="t5 t"><a class="t6 tab">Float-O-holics</a></li>  
-            <li class="t6 t"><a class="t7 tab">Great Escape</a></li>   
-            <li class="t7 t"><a class="t8 tab">PDXbyPix</a></li>      
-            <li class="t8 t"><a class="t9 tab">Jeana Arter</a></li>             
+            <li class="t4 t"><a class="t3 tab">Extendd.com</a></li>  
+            <li class="t4 t"><a class="t4 tab">WordPress Plugins</a></li>  
+            <li class="t4 t"><a class="t5 tab">Infield Box</a></li> 
+            <li class="t6 t"><a class="t6 tab">Great Escape Cabo</a></li>   
+            <li class="t8 t"><a class="t7 tab">Jeana Arter</a></li>             
         </ul>
         
 		<?php 
@@ -718,10 +716,8 @@ function custom_login_tabs_meta_box() { ?>
        		thefrosty_network_feed( 'http://extendd.com/feed', '3' );
        		thefrosty_network_feed( 'http://extendd.com/feed?post_type=plugin', '4' );
        		thefrosty_network_feed( 'http://infieldbox.com/feed', '5' );
-        	thefrosty_network_feed( 'http://floatoholics.com/feed', '6' );
-        	thefrosty_network_feed( 'http://greatescapecabofishing.com/feed', '7' ); 
-        	thefrosty_network_feed( 'http://pdxbypix.com/feed', '8' );  
-        	thefrosty_network_feed( 'http://feeds.feedburner.com/JeanaArter', '9' );  
+        	thefrosty_network_feed( 'http://greatescapecabofishing.com/feed', '6' );
+        	thefrosty_network_feed( 'http://feeds.feedburner.com/JeanaArter', '7' );  
 		} ?>
         
     	</div>

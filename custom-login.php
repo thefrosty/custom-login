@@ -3,7 +3,7 @@
  * Plugin Name: Custom Login lite
  * Plugin URI: http://austinpassy.com/wordpress-plugins/custom-login
  * Description: A simple way to customize your WordPress login screen! Use the built in, easy to use <a href="./options-general.php?page=custom-login">settings</a> page to do the work for you. So simple a neanderthal can do it! Now featuring a HTML &amp; CSS box for advanced users. Share you designs on <a href="http://flickr.com/groups/custom-login/">Flickr</a> or upgrade to the <a href="http://thefrosty.com/custom-login-pro/">PRO</a> version!
- * Version: 1.1.3
+ * Version: 1.1.4
  * Author: Austin Passy
  * Author URI: http://austinpassy.com
  *
@@ -165,7 +165,7 @@ function custom_login_login_scripts() {
 	if ( custom_login_get_setting( 'custom' ) != false ) {		
 		require_once( trailingslashit( CUSTOM_LOGIN_DIR ) . 'library/css/custom-login.css.php' );		
 	} else {		
-		wp_enqueue_styles( 'custom-login-defualt' );
+		wp_enqueue_style( 'custom-login-defualt' );
 		wp_print_styles( 'custom-login-defualt' );		
 	}
 }

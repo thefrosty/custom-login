@@ -67,6 +67,12 @@ Screenshots of working example in our [Flickr group](http://flickr.com/groups/cu
 
 == Changelog ==
 
+= Version 1.1.4 (1/12/13) =
+
+* Fixed fatal error `Fatal error: Call to undefined function wp_enqueue_styles() in /home/[site path]/plugins/custom-login/custom-login.php on line 168`. No trailing "s".
+* Updated Turkish translation.
+
+
 = Version 1.1.3 (1/10/13) =
 
 * Add option for no `background-size`.
@@ -396,6 +402,9 @@ Screenshots of working example in our [Flickr group](http://flickr.com/groups/cu
 
 
 == Upgrade Notice ==
+
+= 1.1.4 =
+Fixed Fatal error!
 
 = 1.1.2 =
 Added background-size to form, please visit and update settings page.
