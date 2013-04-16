@@ -1,0 +1,164 @@
+.wp-admin select {
+	min-width: 150px;
+}
+
+ul.social li {	
+	-webkit-transition: margin 0.25s linear;
+	-moz-transition: margin 0.25s linear;
+	-o-transition: margin 0.25s linear;
+	transition: margin 0.25s linear;
+	display: block;
+}
+ul.social li:hover {
+	margin-left: 10px;
+}
+
+/**
+ * Genericons
+ */
+
+/* Social icons */
+ul.social .genericon-wordpress:before {
+	color: #21759b;
+}
+ul.social .genericon-flickr:before {
+	color: #0063DC;
+}
+ul.social .genericon-github:before {
+	color: #101010;
+}
+.genericon-facebook:before, .genericon-facebook-alt:before {
+	color: #3B5998;
+}
+ul.social .genericon-twitter:before {
+	color: #00ACED;
+}
+ul.social .genericon-googleplus:before {
+	color: #DB4A38;
+}
+
+/* General icons */
+ul.social .genericon-star:before {
+	color: #FFD300;
+    text-shadow: 1px 1px 0 #FFFFFF;
+}
+ul.social .genericon-mail:before {
+	color: #7D7D7D;
+    text-shadow: 0 1px 0 #FFFFFF;
+}
+
+/**
+ * Checkboxes and Radios
+ * @ref http://codepen.io/Jackreichert/pen/xjyer
+ */
+.metabox-left-wrapper input[type="checkbox"],
+.metabox-left-wrapper input[type="radio"] {
+	visibility: hidden;
+}
+.metabox-left-wrapper .checkbox-wrap,
+.metabox-left-wrapper .checkbox-wrap > ul li,
+.metabox-left-wrapper .radio-wrap,
+.metabox-left-wrapper .radio-wrap > ul li {
+	float: left;
+	margin: 0 20px 0 -10px;
+	position: relative;
+	width: 20px;
+}
+.metabox-left-wrapper .checkbox-wrap > ul,
+.metabox-left-wrapper .radio-wrap > ul {
+	margin: 0;
+	padding: 0;
+}
+.metabox-left-wrapper .checkbox-wrap li,
+.metabox-left-wrapper .radio-wrap li {
+	line-height: 2.4em;
+	margin-left: 0 !important;
+}
+.metabox-left-wrapper .checkbox-wrap label,
+.metabox-left-wrapper .radio-wrap label {
+	-moz-border-bottom-colors: none;
+	-moz-border-left-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-top-colors: none;
+	background: #f5f5f5; /* Old browsers */
+	background: -moz-linear-gradient(top, #ffffff 0%, #e6e6e6 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#e6e6e6)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #ffffff 0%,#e6e6e6 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #ffffff 0%,#e6e6e6 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #ffffff 0%,#e6e6e6 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #ffffff 0%,#e6e6e6 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e6e6e6',GradientType=0 ); /* IE6-9 */
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) #A2A2A2;
+	border-image: none;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	border-style: solid;
+	border-width: 1px;
+	-webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+	-moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+	cursor: pointer;
+	height: 20px;
+	position: absolute;
+	top: 0;
+	width: 20px;
+	text-indent: 30px;
+}
+.metabox-left-wrapper .radio-wrap label {
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+}
+.metabox-left-wrapper .checkbox-wrap label:after,
+.metabox-left-wrapper .radio-wrap label:after {
+	content: attr(title);
+	visibility: hidden;
+}
+.metabox-left-wrapper .checkbox-wrap label:before,
+.metabox-left-wrapper .radio-wrap label:before {
+	-moz-border-bottom-colors: none;
+	-moz-border-left-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-top-colors: none;
+	background: none repeat scroll 0 0 transparent;
+	border-color: -moz-use-text-color -moz-use-text-color #333333 #333333;
+	border-image: none;
+	border-style: none none solid solid;
+	border-width: medium medium 3px 3px;
+	content: "";
+	height: 5px;
+	left: 4px;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	filter: alpha(opacity=0);
+	opacity: 0;
+	position: absolute;
+	top: 4px;
+	-webkit-transform: rotate(-45deg);
+	-moz-transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);
+	-o-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+	width: 9px;
+}
+.metabox-left-wrapper .checkbox-wrap label:hover:before,
+.metabox-left-wrapper .radio-wrap label:hover:before {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+	filter: alpha(opacity=50);
+	opacity: 0.5;
+}
+.metabox-left-wrapper .checkbox-wrap input[type="checkbox"]:checked + label:before,
+.metabox-left-wrapper .radio-wrap input[type="radio"]:checked + label:before {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+	filter: alpha(opacity=100);
+	opacity: 1;
+}
+
+/**
+ * MISC
+ */
+
+.metabox-left-wrapper .wp-picker-container,
+.metabox-left-wrapper .wp-picker-container:active {
+	float: left !important;
+}
