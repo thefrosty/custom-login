@@ -14,7 +14,7 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 	/**
 	 * Version
 	 */
-	var $api_version = '1.0.1';
+	var $api_version = '1.0.2';
 
     /**
      * settings sections array
@@ -721,25 +721,24 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 	 *
 	 * @uses	http://codex.wordpress.org/Transients_API#Using_Time_Constants
      */
-    function show_notifications() {	
-		global $current_user;		
-		$user_id  		 = $current_user->ID;
-		$ignore_announce = $this->prefix . '_ignore_announcement';		
-		$message		 = get_option( $this->prefix . '_announcement_message' );
+    function show_notifications() {
+		$transient		= $this->prefix . '_announcement';	
+		$ignore			= $this->prefix . '_ignore_announcement';		
+		$message		= get_option( $this->prefix . '_announcement_message' );
 		
-		//delete_transient( $this->prefix . '_announcement' );
+		//delete_transient( $transient );
 		//delete_option( $this->prefix . '_announcement_message' );
 		
 		/* Current user can */
 		if ( !current_user_can( 'manage_options' ) )
 			return;
 		
-		if ( false === ( $announcement = get_transient( $this->prefix . '_announcements' ) ) ) {
+		if ( false === ( $announcement = get_transient( $transient ) ) ) {
 			$site = wp_remote_get( 'https://raw.github.com/thefrosty/custom-login/master/extensions.json', array( 'timeout' => 15, 'sslverify' => false ) );
 			if ( !is_wp_error( $site ) ) {
 				if ( isset( $site['body'] ) && strlen( $site['body'] ) > 0 ) {
-					$announcements = json_decode( wp_remote_retrieve_body( $site ) );
-					set_transient( $this->prefix . '_announcement', $announcement, WEEK_IN_SECONDS * 2 ); // Cache for two weeks
+					$announcement = json_decode( wp_remote_retrieve_body( $site ) );
+					set_transient( $transient, $announcement, WEEK_IN_SECONDS * 2 ); // Cache for two weeks
 					update_option( $this->prefix . '_announcement_message', $announcement->message ); // Update the message
 				}
 			} else {
@@ -749,13 +748,13 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 		}
 		
 		if ( $message !== $announcement->message )
-			 delete_user_meta( $user_id, $ignore_announce );
+			 delete_user_meta( get_current_user_id(), $ignore );
 		
-		$html  = '<div class="updated"><p>'; 
-		$html .= sprintf( __( '%1$s | <a href="%2$s">Dismiss notice</a>', 'custom-login' ), $announcement->message, esc_url( add_query_arg( $ignore_announce, wp_create_nonce( $ignore_announce ), admin_url() ) ) );
+		$html  = '<div class="updated" data-message="' . esc_attr( $message ) . '" data-announce="' . esc_attr( $announcement->message ) . '"><p>'; 
+		$html .= sprintf( __( '%1$s | <a href="%2$s">Dismiss notice</a>', 'custom-login' ), $announcement->message, esc_url( add_query_arg( $ignore, wp_create_nonce( $ignore ), admin_url() ) ) );
 		$html .= '</p></div>';
 		
-		if ( !get_user_meta( $user_id, $ignore_announce ) )
+		if ( !get_user_meta( get_current_user_id(), $ignore ) )
 			echo $html;
 	}
 	

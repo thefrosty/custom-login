@@ -18,7 +18,7 @@ Join in on the [conversation](http://austinpassy.com/wordpress-plugins/custom-lo
 
 You can find Custom Login [PRO](http://extendd.com/plugin/custom-login-pro/)  on [Extendd.com](http://extendd.com): A plugin marketplace. New features include faster login loading (no database access), Custom Post Types (for multiple designs) and four default CSS designs. **Custom Login Pro is a completly different plugin than Custom Login**.
 
-https://www.youtube.com/watch?v=XOZwaLwpjNo
+http://www.youtube.com/watch?v=XOZwaLwpjNo
 
 = Extensions =
 
@@ -100,6 +100,11 @@ Screenshots of working example in our [Flickr group](http://flickr.com/groups/cu
 
 == Changelog ==
 
+= Version 2.0.6 (4/18/13) =
+
+* Fix notice not going away on dismiss.
+* Updated translation files.
+
 = Version 2.0.5 (4/17/13) =
 
 * Fix double escaped custom HTML on first import with `wp_specialchars_decode`.
@@ -145,5 +150,5 @@ Screenshots of working example in our [Flickr group](http://flickr.com/groups/cu
 
 == Upgrade Notice ==
 
-= 2.0.4 =
-Important update to fix transient errors, and possible admin crashes.
+= 2.0.6 =
+Updated translation files and fixed dismiss notice from not getting removed.
