@@ -1,5 +1,10 @@
 <?php
 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+if ( !defined( 'SHORTINIT' ) ) define( 'SHORTINIT', true );
+
 /* Setup the plugin */
 $login = CUSTOMLOGIN();
 
@@ -11,9 +16,7 @@ global $cl_js_atts;
 extract( $cl_js_atts, EXTR_SKIP );
 
 /* Cache ALL THE THINGS! */
-$js = wp_cache_get( $login->id . '_script' );
-
-if ( false === $js ) :
+if ( false === ( $js = get_transient( $login->id . '_script' ) ) ) :
 
 	$js = '';
 	
@@ -43,7 +46,7 @@ if ( false === $js ) :
 	$js .= '});';
 
 	/* WP Magic */
-	wp_cache_set( $login->id . '_script', $js );
+	set_transient( $login->id . '_script', $js, YEAR_IN_SECONDS ); // Cache for a year
 endif;
 
 /* Out of the frying pan, and into the fire! */

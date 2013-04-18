@@ -1,5 +1,7 @@
 <?php
 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 if ( !class_exists( 'Custom_Login_Templates' ) ) :
 class Custom_Login_Templates {

@@ -2,7 +2,7 @@
 Contributors: austyfrosty
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290
 Tags: admin, branding, customization, custom login, login, logo, error, login error, custom login pro
-Requires at least: 3.4
+Requires at least: 3.5
 Tested up to: 3.6
 Stable tag: trunk
 License: GPLv2 or later
@@ -12,11 +12,13 @@ Use this plugin to customize your login screen, great for client sites!
 
 == Description ==
 
-**Version 2.0** is now 140% faster in the admin and uses a lot less resources!
+**Version 2.0** is now 140% faster in the admin and uses a lot less resources! Minimum WordPress version 3.5.
 
 Join in on the [conversation](http://austinpassy.com/wordpress-plugins/custom-login) on my personal blog.
 
 You can find Custom Login [PRO](http://extendd.com/plugin/custom-login-pro/)  on [Extendd.com](http://extendd.com): A plugin marketplace. New features include faster login loading (no database access), Custom Post Types (for multiple designs) and four default CSS designs. **Custom Login Pro is a completly different plugin than Custom Login**.
+
+https://www.youtube.com/watch?v=XOZwaLwpjNo
 
 = Extensions =
 
@@ -73,6 +75,9 @@ Follow the steps below to install the plugin.
 = What are extensions? =
 They are additional plugins that add functionality to the Custom Login plugin. Depending of what the extension does. You can find all Custom Login extensions on [extendd.com](http://extendd.com).
 
+= My new settings aren't showing up =
+This plugin caches all settings in a transient, try clicking the new 'Update stylesheet' button to delete and refresh the cache.
+
 = Is there a PRO version? =
 Why yes there is, you can purchase the [PRO](http://extendd.com/plugin/custom-login-pro/) version on [http://extendd.com](http://extendd.com). Note that since Custom Login 2.0, Custom Login PRO is a completely different plugin.
 
@@ -95,7 +100,27 @@ Screenshots of working example in our [Flickr group](http://flickr.com/groups/cu
 
 == Changelog ==
 
-= Version 2.0.3 (4/16/13) =
+= Version 2.0.5 (4/17/13) =
+
+* Fix double escaped custom HTML on first import with `wp_specialchars_decode`.
+* Add `SHORTINIT` to the PHP stylesheet and script to limit WordPress loading.
+* Change wp_cache to transients on PHP scripts and styles, a lot faster!
+* Added a delete transient cache button atop the 'Save Changes' button.
+
+= Version 2.0.4 (4/17/13) =
+
+* Updated JSON file to extenal GitHub.
+
+= Version 2.0.3 (4/17/13) =
+
+* Deactivate if minimum WordPress version isn't met.
+* Min WordPress version **3.5**
+* Version bump to match readme.txt.
+* Turkish translations re-added.
+* Added `rgba2hex` function to fix updates where rgba was set.
+* Make sure function_exists 'wp_enqueue_media'.
+
+= Version 2.0.2 (4/16/13) =
 
 * Updated templates functions into a class.
 * Moved some files.
@@ -103,13 +128,10 @@ Screenshots of working example in our [Flickr group](http://flickr.com/groups/cu
 * Removed post_type and install script.
 * Hide WP_LOCAL_DEV queries.
 
-= Version 2.0.2 (4/16/13) =
+= Version 2.0.1 (4/16/13) =
 
 * Wrap any function that can be replicated in if exists to avoid possible issues.
 * Prefix any other function with `ap_` as to make sure nothing is replicated in other plugins.
-
-= Version 2.0.1 (4/16/13) =
-
 * Fixed broken logo CSS.
 * Add hide WordPress logo to settings.
 
@@ -123,8 +145,5 @@ Screenshots of working example in our [Flickr group](http://flickr.com/groups/cu
 
 == Upgrade Notice ==
 
-= 2.0.1 =
-Fix logo CSS and add remove WordPress logo option.
-
-= 2.0.0 =
-Complete rewrite of plugin. You will have to run the update script upon activation.
+= 2.0.4 =
+Important update to fix transient errors, and possible admin crashes.

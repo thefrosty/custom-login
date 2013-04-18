@@ -1,5 +1,10 @@
 <?php
 
+// Exit if accessed directly
+if ( !defined( 'ABSPATH' ) ) exit;
+
+if ( !defined( 'SHORTINIT' ) ) define( 'SHORTINIT', true );
+
 /* Setup the plugin */
 $login = CUSTOMLOGIN();
 
@@ -12,9 +17,7 @@ global $cl_css_atts;
 extract( $cl_css_atts, EXTR_SKIP );
 
 /* Cache ALL THE THINGS! */
-$css = wp_cache_get( $login->id . '_style' );
-
-if ( false === $css ) :
+if ( false === ( $css = get_transient( $login->id . '_style' ) ) ) :
 
 	$css = '';
 	$close_rule = "}\n";
@@ -284,7 +287,7 @@ if ( false === $css ) :
 	}
 	
 	/* WP Magic */
-	wp_cache_set( $login->id . '_style', $css );
+	set_transient( $login->id . '_style', $css, YEAR_IN_SECONDS ); // Cache for a year
 endif;
 
 /* Out of the frying pan, and into the fire! */

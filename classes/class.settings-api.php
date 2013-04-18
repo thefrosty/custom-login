@@ -1,5 +1,8 @@
 <?php
 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 /**
  * Extendd Plugin Settings API wrapper class
  *
@@ -11,7 +14,7 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 	/**
 	 * Version
 	 */
-	var $api_version = '1.0.0';
+	var $api_version = '1.0.1';
 
     /**
      * settings sections array
@@ -106,7 +109,7 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
      */
     function admin_enqueue_scripts() {
 		/* Core */
-        wp_enqueue_media();
+		if ( function_exists( 'wp_enqueue_media' ) ) wp_enqueue_media();
 		wp_enqueue_script( 'wp-color-picker' );
 		wp_enqueue_style( 'wp-color-picker' );
 		
@@ -727,19 +730,26 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 		//delete_transient( $this->prefix . '_announcement' );
 		//delete_option( $this->prefix . '_announcement_message' );
 		
+		/* Current user can */
+		if ( !current_user_can( 'manage_options' ) )
+			return;
+		
 		if ( false === ( $announcement = get_transient( $this->prefix . '_announcements' ) ) ) {
-			$site = wp_remote_get( 'http://extendd.com/?notice-' . $this->prefix . '=true', array( 'timeout' => 15, 'sslverify' => false ) );
+			$site = wp_remote_get( 'https://raw.github.com/thefrosty/custom-login/master/extensions.json', array( 'timeout' => 15, 'sslverify' => false ) );
 			if ( !is_wp_error( $site ) ) {
 				if ( isset( $site['body'] ) && strlen( $site['body'] ) > 0 ) {
 					$announcements = json_decode( wp_remote_retrieve_body( $site ) );
-					set_transient( $this->prefix . '_announcement', $announcement, WEEK_IN_SECONDS ); // Cache for a week
+					set_transient( $this->prefix . '_announcement', $announcement, WEEK_IN_SECONDS * 2 ); // Cache for two weeks
 					update_option( $this->prefix . '_announcement_message', $announcement->message ); // Update the message
 				}
+			} else {
+				// Error, lets return!
+				return;
 			}
 		}
 		
 		if ( $message !== $announcement->message )
-			 delete_user_meta( $user_id, $this->prefix . '_notice' );
+			 delete_user_meta( $user_id, $ignore_announce );
 		
 		$html  = '<div class="updated"><p>'; 
 		$html .= sprintf( __( '%1$s | <a href="%2$s">Dismiss notice</a>', 'custom-login' ), $announcement->message, esc_url( add_query_arg( $ignore_announce, wp_create_nonce( $ignore_announce ), admin_url() ) ) );
