@@ -2,8 +2,8 @@
 Contributors: austyfrosty
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290
 Tags: admin, branding, customization, custom login, login, logo, error, login error, custom login pro
-Requires at least: 3.5
-Tested up to: 3.6
+Requires at least: 3.7
+Tested up to: 3.8
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -100,6 +100,64 @@ Screenshots of working example in our [Flickr group](http://flickr.com/groups/cu
 
 == Changelog ==
 
+= Version 2.2.0 (1/23/14) =
+
+* Updated settings page and CSS (now responsive).
+* Updated Genericons to v 3.0.3
+
+= Version 2.1.9 (1/8/14) =
+
+* Fixed chosen() JS 1.0.0 class variables on opacity options.
+* Be sure to only output one instace of the settings scripts.
+* Added actual width and height options to logo to fix WP 3.8 CSS settings.
+
+= Version 2.1.8 (12/17/13) =
+
+* Logo CSS fix.
+* Updated Chosen.js to `1.0.0`
+
+= Version 2.1.7 (12/13/13) =
+
+* WordPress 3.8.x compatability. 
+* Adds custom background-size capability to fix new `80px X 80px` background-size standard.
+
+= Version 2.1.6 (11/21/13) =
+
+* Updated for PHP 5.4 &amp; WordPress 3.8.x compatibility. 
+
+= Version 2.1.5 (5/20/13) =
+
+* Fix for some users who still can't dismess the notice.
+
+= Version 2.1.4 (5/17/13) =
+
+* Fixed notification not clearing on 'dismiss notice'. Sorry about that.
+
+= Version 2.1.3 (5/13/13) =
+
+* Fixed `notice` in class.settings-api.php.
+
+= Version 2.1.2 (4/22/13) =
+
+* Changed wrong $hook prefix for scripts.
+
+= Version 2.1.1 (4/22/13) =
+
+* Fix untranslatable items in the settings page.
+* Added clear transient cache to Custom Login sidebar (as well as above save settings).
+* Changed HTML position from input field to dropdown.
+* Added notification on transient cache deletion.
+* Removed "test" echo.
+* Added delete transient on settings save.
+
+= Version 2.1.0 (4/18/13) =
+
+* Updated notice URL.
+* For reals fixed the "remove notice" button. :D
+* Moved the CSS back into the login head instead of external CSS (fixes WordPress CSS flash).
+* Changed custom textarea to sanitize on save and output so line breaks are kept in tact.
+* More data sanitization on settings.
+
 = Version 2.0.6 (4/18/13) =
 
 * Fix notice not going away on dismiss.
@@ -149,6 +207,9 @@ Screenshots of working example in our [Flickr group](http://flickr.com/groups/cu
 
 
 == Upgrade Notice ==
+
+= 2.1.9 =
+Happy New Year! Finally fixed the logo issue with WordPress 3.8! If you find this plugin useful please consider donating, I've spend countless hours making it better for you. 
 
 = 2.0.6 =
 Updated translation files and fixed dismiss notice from not getting removed.
