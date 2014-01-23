@@ -166,20 +166,18 @@ class Custom_Login_Welcome {
 	 * @return     void
 	 */
 	public function welcome() {
-		global $edd_options;
-
 		// Bail if no activation redirect
-		if ( ! get_transient( '_edd_activation_redirect' ) )
+		if ( ! get_transient( '_custom_login_activation_redirect' ) )
 			return;
 
 		// Delete the redirect transient
-		delete_transient( '_edd_activation_redirect' );
+		delete_transient( '_custom_login_activation_redirect' );
 
 		// Bail if activating from network, or bulk
 		if ( is_network_admin() || isset( $_GET['activate-multi'] ) )
 			return;
 
-		wp_safe_redirect( admin_url( 'index.php?page=edd-about' ) ); exit;
+		wp_safe_redirect( admin_url( 'index.php?page=custom-login-about' ) ); exit;
 
 	}
 }
