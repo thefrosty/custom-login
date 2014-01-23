@@ -51,31 +51,31 @@ ul.social .genericon-mail:before {
  * Checkboxes and Radios
  * @ref http://codepen.io/Jackreichert/pen/xjyer
  */
-.metabox-left-wrapper input[type="checkbox"],
-.metabox-left-wrapper input[type="radio"] {
+.section input[type="checkbox"],
+.section input[type="radio"] {
 	visibility: hidden;
 }
-.metabox-left-wrapper .checkbox-wrap,
-.metabox-left-wrapper .checkbox-wrap > ul li,
-.metabox-left-wrapper .radio-wrap,
-.metabox-left-wrapper .radio-wrap > ul li {
+.section .checkbox-wrap,
+.section .checkbox-wrap > ul li,
+.section .radio-wrap,
+.section .radio-wrap > ul li {
 	float: left;
-	margin: 0 20px 0 -10px;
+	margin: 0 35px 0 -10px;
 	position: relative;
 	width: 20px;
 }
-.metabox-left-wrapper .checkbox-wrap > ul,
-.metabox-left-wrapper .radio-wrap > ul {
+.section .checkbox-wrap > ul,
+.section .radio-wrap > ul {
 	margin: 0;
 	padding: 0;
 }
-.metabox-left-wrapper .checkbox-wrap li,
-.metabox-left-wrapper .radio-wrap li {
+.section .checkbox-wrap li,
+.section .radio-wrap li {
 	line-height: 2.4em;
 	margin-left: 0 !important;
 }
-.metabox-left-wrapper .checkbox-wrap label,
-.metabox-left-wrapper .radio-wrap label {
+.section .checkbox-wrap label,
+.section .radio-wrap label {
 	-moz-border-bottom-colors: none;
 	-moz-border-left-colors: none;
 	-moz-border-right-colors: none;
@@ -105,18 +105,18 @@ ul.social .genericon-mail:before {
 	width: 20px;
 	text-indent: 30px;
 }
-.metabox-left-wrapper .radio-wrap label {
+.section .radio-wrap label {
 	-webkit-border-radius: 20px;
 	-moz-border-radius: 20px;
 	border-radius: 20px;
 }
-.metabox-left-wrapper .checkbox-wrap label:after,
-.metabox-left-wrapper .radio-wrap label:after {
+.section .checkbox-wrap label:after,
+.section .radio-wrap label:after {
 	content: attr(title);
 	visibility: hidden;
 }
-.metabox-left-wrapper .checkbox-wrap label:before,
-.metabox-left-wrapper .radio-wrap label:before {
+.section .checkbox-wrap label:before,
+.section .radio-wrap label:before {
 	-moz-border-bottom-colors: none;
 	-moz-border-left-colors: none;
 	-moz-border-right-colors: none;
@@ -141,24 +141,107 @@ ul.social .genericon-mail:before {
 	transform: rotate(-45deg);
 	width: 9px;
 }
-.metabox-left-wrapper .checkbox-wrap label:hover:before,
-.metabox-left-wrapper .radio-wrap label:hover:before {
+.section .checkbox-wrap label:hover:before,
+.section .radio-wrap label:hover:before {
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
 	filter: alpha(opacity=50);
 	opacity: 0.5;
 }
-.metabox-left-wrapper .checkbox-wrap input[type="checkbox"]:checked + label:before,
-.metabox-left-wrapper .radio-wrap input[type="radio"]:checked + label:before {
+.section .checkbox-wrap input[type="checkbox"]:checked + label:before,
+.section .radio-wrap input[type="radio"]:checked + label:before {
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
 	filter: alpha(opacity=100);
 	opacity: 1;
 }
 
 /**
+ * Input fields
+ */
+.section input.regular-text {
+    width: auto;
+}
+.section textarea {
+    width: auto;
+}
+.section code {
+	display: inline-block;
+}
+.section .description {
+	width: 100%;
+}
+
+/**
  * MISC
  */
 
-.metabox-left-wrapper .wp-picker-container,
-.metabox-left-wrapper .wp-picker-container:active {
+.section .wp-picker-container,
+.section .wp-picker-container:active {
 	float: left !important;
+}
+
+/**
+ * http://www.responsivegridsystem.com/
+ */
+ 
+/*  SECTIONS  */
+.section {
+	clear: both;
+	padding: 0px;
+	margin: 0px;
+}
+
+.section * {
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+/*  COLUMN SETUP  */
+.col {
+	display: block;
+	float: left;
+	margin: 1% 0 1% 1.6%;
+}
+.col:first-child { margin-left: 0; }
+
+
+/*  GROUPING  */
+.col-group:before,
+.col-group:after {
+	content:"";
+	display:table;
+}
+.col-group:after {
+	clear:both;
+}
+
+/*  GRID OF THREE  */
+.span_3_of_3 {
+	width: 100%;
+}
+.span_2_of_3 {
+	width: 66.1%;
+}
+.span_1_of_3 {
+	width: 32.2%;
+}
+
+/*  GO FULL WIDTH AT LESS THAN 480 PIXELS */
+
+@media only screen and (max-width: 762px) {
+	.col { 
+		margin: 1% 0 1% 0%;
+	}
+}
+
+@media only screen and (max-width: 762px) {
+	.span_3_of_3 {
+		width: 100%; 
+	}
+	.span_2_of_3 {
+		width: 100%; 
+	}
+	.span_1_of_3 {
+		width: 100%;
+	}
 }
