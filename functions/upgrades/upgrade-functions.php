@@ -94,6 +94,7 @@ function ap_custom_login_v2_0_0_upgrades() {
     $new_settings['html_background_position'] = 'left top';
     $new_settings['html_background_repeat'] = $old_settings['html_background_repeat'];
     $new_settings['html_background_size'] = $old_settings['html_background_size'];
+	$new_settomgs['hide_wp_logo'] = 'on';
     $new_settings['logo_background_url'] = $old_settings['login_form_logo'];
     $new_settings['logo_background_position'] = 'top center';
     $new_settings['logo_background_repeat'] = '';
