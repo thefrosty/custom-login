@@ -14,7 +14,7 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 	/**
 	 * Version
 	 */
-	var $api_version = '1.0.2';
+	var $api_version = '1.0.11';
 
     /**
      * settings sections array
@@ -43,6 +43,13 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 	 * @var string
 	 */
 	private $prefix;
+	
+	/**
+	 * The Plugin domain
+	 * 
+	 * @var string
+	 */
+	private $domain;
 	
 	/**
 	 * The Parent Plugin version
@@ -95,6 +102,16 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 	}
 	
 	/**
+	 * Set parent domain
+	 * 
+	 * @param string $domain
+	 * @return void
+	 */
+	public function set_domain( $domain ) {
+		$this->domain = $domain;
+	}
+	
+	/**
 	 * Set parent version
 	 * 
 	 * @param string $version
@@ -107,21 +124,25 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
     /**
      * Enqueue scripts and styles
      */
-    function admin_enqueue_scripts() {
+    function admin_enqueue_scripts( $hook ) {
+		if ( 'settings_page_' . $this->domain !== $hook )
+			return;
+			
 		/* Core */
 		if ( function_exists( 'wp_enqueue_media' ) ) wp_enqueue_media();
 		wp_enqueue_script( 'wp-color-picker' );
 		wp_enqueue_style( 'wp-color-picker' );
 		
 		/* jQuery Chosen */
-		wp_enqueue_script( 'jquery-chosen', plugins_url( 'assets/js/chosen.jquery.min.js', CUSTOM_LOGIN_FILE ), array( 'jquery' ), '0.9.12', false );
-		wp_enqueue_style( 'jquery-chosen', plugins_url( 'assets/css/chosen.css', CUSTOM_LOGIN_FILE ), false, '0.9.12', 'screen' );
+		wp_enqueue_script( 'jquery-chosen', plugins_url( 'assets/js/chosen.jquery.min.js', CUSTOM_LOGIN_FILE ), array( 'jquery' ), '1.0.0', false );
+		wp_enqueue_style( 'jquery-chosen', plugins_url( 'assets/css/chosen.css', CUSTOM_LOGIN_FILE ), false, '1.0.0', 'screen' );
 		
 		/* Admin */
-		wp_enqueue_style( $this->prefix, plugins_url( 'assets/css/admin.css', CUSTOM_LOGIN_FILE ), false, '', 'screen' );
+		wp_enqueue_script( $this->domain, plugins_url( 'assets/js/admin.js', CUSTOM_LOGIN_FILE ), array( 'jquery' ), $this->version, false );
+		wp_enqueue_style( $this->domain, plugins_url( 'assets/css/admin.css', CUSTOM_LOGIN_FILE ), false, $this->version, 'screen' );
 		
 		/* Genericons */
-		wp_enqueue_style( 'genericons', plugins_url( 'assets/css/genericons.css', CUSTOM_LOGIN_FILE ), false, '', 'screen' );
+		wp_enqueue_style( 'genericons', plugins_url( 'assets/css/genericons.css', CUSTOM_LOGIN_FILE ), false, '3.0.3', 'screen' );
     }
 
     /**
@@ -252,6 +273,7 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
      * @param array   $args settings field args
      */
     function callback_text_array( $args ) {
+		static $counter = 0;
 		
         $value = $this->get_option( $args['id'], $args['section'], $args['std'] );
         $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
@@ -275,6 +297,7 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 		$html .= '</ul>';
 		$html .= sprintf( '<a href="#" class="button docopy-%1$s[%2$s]">+</a>', $args['section'], $args['id'] );
 		
+		$counter++;
 		ob_start(); ?>
 		<script>
 		jQuery(document).ready(function($) {
@@ -295,13 +318,14 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 			});
 			$('body').on('click', 'a[class^="button dodelete-"]', function(e) {
 				e.preventDefault();
-				console.log(this);
+			//	console.log(this);
 				
 				$(this).parent().remove();
 			});
 		});
 		</script><?php
-		$html .= ob_get_clean();
+		
+		$html .= 1 === $counter ? ob_get_clean() : '';
 				
         $html .= sprintf( '<span class="description"> %s</span>', $args['desc'] );
 
@@ -314,6 +338,7 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
      * @param array   $args settings field args
      */
     function callback_colorpicker( $args ) {
+		static $counter = 0;
 		
         $value	 = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
 		$check	 = esc_attr( $this->get_option( $args['id'] . '_checkbox', $args['section'], $args['std'] ) );
@@ -328,7 +353,7 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 		$html .= '<div class="checkbox-wrap">';
         $html .= sprintf( '<input type="hidden" name="%1$s[%2$s]" value="off" />', $args['section'], $args['id'] . '_checkbox' );
         $html .= sprintf( '<input type="checkbox" class="checkbox" id="%1$s[%2$s]" name="%1$s[%2$s]" value="on"%4$s />', $args['section'], $args['id'] . '_checkbox', $check, checked( $check, 'on', false ) );
-        $html .= sprintf( '<label for="%1$s[%2$s]">Opacity</label>', $args['section'], $args['id'] . '_checkbox' );
+        $html .= sprintf( __( '<label for="%1$s[%2$s]">Opacity</label>', $this->domain ), $args['section'], $args['id'] . '_checkbox' );
         $html .= '</div>';
 		
 		/* Opacity */
@@ -339,6 +364,7 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
         }
         $html .= sprintf( '</select>' );
 		
+		$counter++;
 		ob_start(); ?>
         <script>
 		jQuery(document).ready(function($) {
@@ -358,18 +384,18 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 			};
 			$('input[name="<?php echo $args['section'] . '[' . $args['id'] . ']'; ?>"]').wpColorPicker();
 		   
-		    $('select[name="<?php echo $args['section'] . '[' . $args['id'] . '_opacity]'; ?>"]').chosen();
+		    $('select[name="<?php echo $args['section'] . '[' . $args['id'] . '_opacity]'; ?>"]').removeClass('hidden').chosen().addClass('hidden');
 			if ( $('select[name="<?php echo $args['section'] . '[' . $args['id'] . '_opacity]'; ?>"]').hasClass('hidden') ) {
-		    	$('#<?php echo str_replace( '[', '_', $args['section'] . '[' . $args['id'] . '_opacity' ); ?>__chzn').hide();
+		    	$('#<?php echo str_replace( '[', '_', $args['section'] . '[' . $args['id'] . '_opacity' ); ?>__chosen').hide();
 			}
 			
 		    $('input[name="<?php echo $args['section'] . '[' . $args['id'] . '_checkbox]'; ?>"]').on('change', function() {
 		    	//$('select[name="<?php echo $args['section'] . '[' . $args['id'] . '_opacity]'; ?>"]').toggle();
-		    	$('#<?php echo str_replace( '[', '_', $args['section'] . '[' . $args['id'] . '_opacity' ); ?>__chzn').toggle();
+		    	$('#<?php echo str_replace( '[', '_', $args['section'] . '[' . $args['id'] . '_opacity' ); ?>__chosen').toggle();
 			});
 		});
 		</script><?php
-		$html .= ob_get_clean();
+		$html .= 1 === $counter ? ob_get_clean() : '';
 		
 		/* Description */
         $html .= sprintf( '<span class="description"> %s</span>', $args['desc'] );
@@ -440,6 +466,8 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
         }
         $html .= '</ul>';
         $html .= '</div>';
+
+
         $html .= sprintf( '<span class="description"> %s</label>', $args['desc'] );
 
         echo $html;
@@ -460,12 +488,14 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
             $html .= sprintf( '<option value="%s"%s>%s</option>', $key, selected( $value, $key, false ), $label );
         }
         $html .= sprintf( '</select>' );
+		
 		ob_start(); ?>
         <script>
 		jQuery(document).ready(function($) {
 		    $('select[name="<?php echo $args['section'] . '[' . $args['id'] . ']'; ?>"]').chosen();
 		});
 		</script><?php
+		
 		$html .= ob_get_clean();
         $html .= sprintf( '<span class="description"> %s</span>', $args['desc'] );
 
@@ -480,6 +510,7 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
     function callback_textarea( $args ) {
 
         $value = esc_textarea( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
+		//$value = wp_specialchars_decode( stripslashes( $this->get_option( $args['id'], $args['section'], $args['std'] ) ), 1, 0, 1 );
         $size = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
 
         $html = sprintf( '<textarea rows="5" cols="55" class="%1$s-text" id="%2$s[%3$s]" name="%2$s[%3$s]">%4$s</textarea>', $size, $args['section'], $args['id'], $value );
@@ -530,7 +561,9 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
         $html = sprintf( '<input type="text" class="%1$s-text" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s"/>', $size, $args['section'], $args['id'], $value );
         $html .= '<input type="button" class="button extendd-browse" id="'. $id .'_button" value="Browse" style="margin-left:5px" />';
         $html .= '<input type="button" class="button extendd-clear" id="'. $id .'_clear" value="Clear" style="margin-left:5px" />';
-		if ( 0 == $counter ) {
+		
+		$counter++;
+		if ( 1 === $counter ) {
 			ob_start(); ?>
 			<script>
 			jQuery(document).ready(function($) {			
@@ -615,7 +648,6 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
         $html .= sprintf( '<br><span class="description"> %s</span>', $args['desc'] );
 
         echo $html;
-		$counter++;
     }
 
     /**
@@ -638,6 +670,9 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
      * Sanitize callback for Settings API
      */ 
     function sanitize_options( $options ) {
+		delete_transient( $this->prefix . '_style' );
+		delete_transient( $this->prefix . '_script' );
+		
         foreach( $options as $option_slug => $option_value ) {
             $sanitize_callback = $this->get_sanitize_callback( $option_slug );
 
@@ -713,6 +748,39 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 
         echo $html;
     }
+	
+	/**
+     * Helper function to make remote calls
+	 *
+	 * @since 2.2
+     */
+    function wp_remote_get_set_transient( $url = false, $transient, $type = 'message' ) {
+		if ( !$url ) return;
+		
+		if ( false === ( $output = get_transient( $transient ) ) ) {
+			$site = wp_remote_get( $url, array( 'timeout' => 15, 'sslverify' => false ) );
+			if ( !is_wp_error( $site ) ) {
+				if ( isset( $site['body'] ) && strlen( $site['body'] ) > 0 ) {
+					$output = json_decode( wp_remote_retrieve_body( $site ) );
+					
+					// For when I mess up the JSON or github is down.
+					if ( is_wp_error( $output ) || empty( $output->$type ) )
+						return false;
+						
+					set_transient( $transient, $output, WEEK_IN_SECONDS * 2 ); // Cache for two weeks
+					update_option( $transient . '_message', $output->$type ); // Update the message
+					
+					// Return the data
+					return $output;
+				}
+			} else {
+				// Error, lets return!
+				return false;
+			}
+		}
+		return $output;
+		
+	}
 
     /**
      * Show the section settings forms
@@ -724,37 +792,35 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
     function show_notifications() {
 		$transient		= $this->prefix . '_announcement';	
 		$ignore			= $this->prefix . '_ignore_announcement';		
-		$message		= get_option( $this->prefix . '_announcement_message' );
+		$old_message	= get_option( $transient . '_message' );
+		$user_meta		= get_user_meta( get_current_user_id(), $ignore, true );		
 		
-		//delete_transient( $transient );
-		//delete_option( $this->prefix . '_announcement_message' );
+//		delete_user_meta( get_current_user_id(), $ignore, 1 );
+//		delete_transient( $transient );
+//		delete_option( $this->prefix . '_announcement_message' );
 		
 		/* Current user can */
 		if ( !current_user_can( 'manage_options' ) )
 			return;
 		
-		if ( false === ( $announcement = get_transient( $transient ) ) ) {
-			$site = wp_remote_get( 'https://raw.github.com/thefrosty/custom-login/master/extensions.json', array( 'timeout' => 15, 'sslverify' => false ) );
-			if ( !is_wp_error( $site ) ) {
-				if ( isset( $site['body'] ) && strlen( $site['body'] ) > 0 ) {
-					$announcement = json_decode( wp_remote_retrieve_body( $site ) );
-					set_transient( $transient, $announcement, WEEK_IN_SECONDS * 2 ); // Cache for two weeks
-					update_option( $this->prefix . '_announcement_message', $announcement->message ); // Update the message
-				}
-			} else {
-				// Error, lets return!
-				return;
-			}
+		$announcement = $this->wp_remote_get_set_transient( 'https://raw.github.com/thefrosty/custom-login/master/extensions.json', $transient, 'message' );
+		
+		//print_r( $announcement );
+		
+		if ( false === $announcement ) return;
+			
+		if ( trim( $old_message ) !== trim( $announcement->message ) && !empty( $old_message ) ) {
+			delete_user_meta( get_current_user_id(), $ignore, 1 );
+			delete_transient( $transient );
+			delete_option( $transient . '_message' );			
+			//echo 'test';
 		}
 		
-		if ( $message !== $announcement->message )
-			 delete_user_meta( get_current_user_id(), $ignore );
-		
-		$html  = '<div class="updated" data-message="' . esc_attr( $message ) . '" data-announce="' . esc_attr( $announcement->message ) . '"><p>'; 
-		$html .= sprintf( __( '%1$s | <a href="%2$s">Dismiss notice</a>', 'custom-login' ), $announcement->message, esc_url( add_query_arg( $ignore, wp_create_nonce( $ignore ), admin_url() ) ) );
+		$html  = '<div class="updated" data-old-message="' . esc_attr( $old_message ) . '" data-announcement="' . esc_attr( $announcement->message ) . '"><p>'; 
+		$html .= sprintf( __( '%1$s | <a href="%2$s">Dismiss notice</a>', $this->domain ), $announcement->message, esc_url( add_query_arg( $ignore, wp_create_nonce( $ignore ), admin_url( 'options-general.php?page=custom-login' ) ) ) );
 		$html .= '</p></div>';
 		
-		if ( !get_user_meta( get_current_user_id(), $ignore ) )
+		if ( !$user_meta && 1 !== $user_meta )
 			echo $html;
 	}
 	
@@ -783,18 +849,16 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
      *
      * This function displays every sections in a different form
      */
-    function show_forms() {
-?>
-        <div class="metabox-left-wrapper" style="float:left; width:73%">
-        <div class="metabox-holder">
-            <div class="postbox">
+    function show_forms() { ?>
+        <div class="section col-group">
+            <div class="postbox col span_2_of_3">
                 <?php foreach ( $this->settings_sections as $form ) { ?>
                     <div id="<?php echo $form['id']; ?>" class="group">
                         <form method="post" action="options.php">
 
                             <?php do_action( $this->prefix . '_form_top_' . $form['id'], $form ); ?>
                             <?php settings_fields( $form['id'] ); ?>
-                            <?php do_settings_sections( $form['id'] ); ?>
+                            <div class="inside"><?php do_settings_sections( $form['id'] ); ?></div>
                             <?php do_action( $this->prefix . '_form_bottom_' . $form['id'], $form ); ?>
 
                             <div style="padding-left: 10px">
@@ -804,10 +868,10 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
                     </div>
                 <?php } ?>
             </div>
-        </div>
-        </div><!-- .metabox-left-wrapper -->
-        <div style="float:right; max-width:300px; width:25%;">
+        <div class="col span_1_of_3" style="margin-top:0">
         	<?php do_action( $this->prefix . '_settings_sidebars', $this->settings_sidebars ); ?>
+        </div>
+        
         </div>
         <br class="clear">
         <?php
@@ -863,12 +927,12 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 			$(clicked_group + '_sidebar').fadeIn();
 			e.preventDefault();
 		});
-		<?php if ( isset( $_GET['settings-updated'] ) && 'true' === $_GET['settings-updated'] ) { ?>
+	<?php if ( isset( $_GET['settings-updated'] ) && 'true' === $_GET['settings-updated'] ) { ?>
 		
 		setTimeout( function() {
-			$('#setting-error-settings_updated').fadeOut('slow');
+			$('#setting-error-settings_updated, #setting-error-transitent_deleted').fadeOut('slow');
 		}, 4000 );
-		<?php } ?>
+	<?php } ?>
 	});
 </script><?php
     }
@@ -899,7 +963,9 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 	 * @return 	array|bool False on error, array of RSS items on success.
 	 */
 	public function fetch_rss_items( $num, $feed ) {
-		include_once( ABSPATH . WPINC . '/feed.php' );
+		if ( !function_exists( 'fetch_feed' ) )
+			include_once( ABSPATH . WPINC . '/feed.php' );
+			
 		$rss = fetch_feed( $feed );
 
 		// Bail if feed doesn't work
@@ -927,7 +993,7 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 		
 		$defaults = array(
 			'items' => 6,
-			'feed' 	=> 'http://extendd.com/feed/?post_type=plugin',
+			'feed' 	=> 'http://extendd.com/feed/?post_type=download',
 		);
 		
 		$args = wp_parse_args( $args, $defaults );
@@ -936,7 +1002,7 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 		
 		$content = '<ul>';
 		if ( !$rss_items ) {
-			$content .= '<li>' . __( 'Error fetching feed', 'custom-login' ) . '</li>';
+			$content .= '<li>' . __( 'Error fetching feed', $this->domain ) . '</li>';
 		} else {
 			foreach ( $rss_items as $item ) {
 				$url = preg_replace( '/#.*/', '', esc_url( $item->get_permalink(), null, 'display' ) );
@@ -947,14 +1013,14 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 		}
 		$content .= '</ul>';
 		$content .= '<ul class="social">';
-		$content .= '<li class="facebook"><a href="https://www.facebook.com/WPExtendd">' . __( 'Like Extendd on Facebook', 'custom-login' ) . '</a></li>';
-		$content .= '<li class="twitter"><a href="http://twitter.com/WPExtendd">' . __( 'Follow Extendd on Twitter', 'custom-login' ) . '</a></li>';
-		$content .= '<li class="twitter"><a href="http://twitter.com/TheFrosty">' . __( 'Follow Austin on Twitter', 'custom-login' ) . '</a></li>';
-		$content .= '<li class="googleplus"><a href="https://plus.google.com/113609352601311785002/">' . __( 'Circle Extendd on Google+', 'custom-login' ) . '</a></li>';
-		$content .= '<li class="email"><a href="http://eepurl.com/vi0bz">' . __( 'Subscribe via email', 'custom-login' ) . '</a></li>';
+		$content .= '<li class="facebook"><a href="https://www.facebook.com/WPExtendd">' . __( 'Like Extendd on Facebook', $this->domain ) . '</a></li>';
+		$content .= '<li class="twitter"><a href="http://twitter.com/WPExtendd">' . __( 'Follow Extendd on Twitter', $this->domain ) . '</a></li>';
+		$content .= '<li class="twitter"><a href="http://twitter.com/TheFrosty">' . __( 'Follow Austin on Twitter', $this->domain ) . '</a></li>';
+		$content .= '<li class="googleplus"><a href="https://plus.google.com/113609352601311785002/">' . __( 'Circle Extendd on Google+', $this->domain ) . '</a></li>';
+		$content .= '<li class="email"><a href="http://eepurl.com/vi0bz">' . __( 'Subscribe via email', $this->domain ) . '</a></li>';
 
 		$content .= '</ul>';
-		$this->postbox( 'extenddlatest', __( 'Latest plugins from Extendd.com' ), $content );
+		$this->postbox( 'extenddlatest', __( 'Latest plugins from Extendd.com', $this->domain ), $content );
 	}
 
 }
