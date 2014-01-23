@@ -1,0 +1,24 @@
+Version 1.0.11 (1/23/14)
+Added helper class wp_remote_get_set_transient();
+
+Version 1.0.10 (1/8/14)
+
+Updated chosen() class names for 1.0.0
+Added static $couters to functions to output scripts once.
+
+Version 1.0.9 (12/17/13)
+
+Added admin.js
+Updated chosen().js to version 1.0.0
+
+Version 1.0.8 (12/3/13)
+
+Make sure the $announcement isn't empty or has error before caching.
+
+Version 1.0.7 (5/20/13)
+
+!empty( $old_message )
+
+Version 1.0.4 (4/22/13)
+
+Only enqueue admin scripts on "settings_page_custom-login" $hook
