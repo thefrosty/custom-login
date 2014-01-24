@@ -1,0 +1,437 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Custom Login 2.0\n"
+"POT-Creation-Date: 2013-04-22 09:03-0800\n"
+"PO-Revision-Date: 2013-04-22 09:03-0800\n"
+"Last-Translator: Austin Passy <austin@thefrosty.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e;_x\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: ..\n"
+
+#: ../custom-login.php:147
+#, php-format
+msgid ""
+"Custom Login has been deactivated because it requires a WordPress version "
+"greater than 3.5. You are running <code>%s</code>"
+msgstr ""
+
+#: ../custom-login.php:338
+msgid "General Settings"
+msgstr ""
+
+#: ../custom-login.php:346
+msgid "Activate"
+msgstr ""
+
+#: ../custom-login.php:347
+msgid "Toggle this plugin on &amp; off."
+msgstr ""
+
+#: ../custom-login.php:353
+msgid "<h4><abbr title=\"Hyper Text Markup Language\">HTML</abbr></h4>"
+msgstr ""
+
+#: ../custom-login.php:360
+msgid "HTML Background Color"
+msgstr ""
+
+#: ../custom-login.php:367
+msgid "HTML Background Image"
+msgstr ""
+
+#: ../custom-login.php:368
+msgid "Upload an image or a repeating pattern (optional)."
+msgstr ""
+
+#: ../custom-login.php:376
+msgid "HTML Background Position"
+msgstr ""
+
+#: ../custom-login.php:377 ../custom-login.php:441 ../custom-login.php:506
+#, php-format
+msgid "<a href=\"%s\">html background position</a>."
+msgstr ""
+
+#: ../custom-login.php:393
+msgid "HTML Background repeat"
+msgstr ""
+
+#: ../custom-login.php:405
+msgid "HTML Background size"
+msgstr ""
+
+#: ../custom-login.php:418
+msgid "<h4>Logo</h4>"
+msgstr ""
+
+#: ../custom-login.php:425
+msgid "Hide the WP logo"
+msgstr ""
+
+#: ../custom-login.php:426
+msgid ""
+"Works when there is no logo present, otherwise the WP logo is replaced by "
+"your logo."
+msgstr ""
+
+#: ../custom-login.php:431
+msgid "Logo"
+msgstr ""
+
+#: ../custom-login.php:432
+msgid "Replace the WordPress logo (optional)."
+msgstr ""
+
+#: ../custom-login.php:440
+msgid "Logo Background Position"
+msgstr ""
+
+#: ../custom-login.php:457
+msgid "Logo Background repeat"
+msgstr ""
+
+#: ../custom-login.php:469
+msgid "Logo Background size"
+msgstr ""
+
+#: ../custom-login.php:482
+msgid "<h4>Login form</h4>"
+msgstr ""
+
+#: ../custom-login.php:489
+msgid "Login Form Background Color"
+msgstr ""
+
+#: ../custom-login.php:496
+msgid "Login Form Background URL"
+msgstr ""
+
+#: ../custom-login.php:497
+msgid "Add an image to the form (optional)."
+msgstr ""
+
+#: ../custom-login.php:505
+msgid "Login Form Background Position"
+msgstr ""
+
+#: ../custom-login.php:522
+msgid "Login Form Background repeat"
+msgstr ""
+
+#: ../custom-login.php:534
+msgid "Login Form Background size"
+msgstr ""
+
+#: ../custom-login.php:546
+msgid "Login Form Border Radius"
+msgstr ""
+
+#: ../custom-login.php:555
+msgid "Login Form Border Size"
+msgstr ""
+
+#: ../custom-login.php:564
+msgid "Login Form Border Color"
+msgstr ""
+
+#: ../custom-login.php:571
+msgid "Login Form Box Shadow"
+msgstr ""
+
+#: ../custom-login.php:572
+#, php-format
+msgid ""
+"Use <a href=\"%s\">box shadow</a> syntax w/ out color. <code>inset h-shadow "
+"v-shadow blur spread</code>"
+msgstr ""
+
+#: ../custom-login.php:579
+msgid "Login Form Box Shadow Color"
+msgstr ""
+
+#: ../custom-login.php:587
+msgid "<h4>Misc.</h4>"
+msgstr ""
+
+#: ../custom-login.php:594
+msgid "Login Form Label Color"
+msgstr ""
+
+#: ../custom-login.php:602
+msgid "<h4>Below form anchor</h4>"
+msgstr ""
+
+#: ../custom-login.php:609
+msgid "Below form nav color"
+msgstr ""
+
+#: ../custom-login.php:616
+msgid "Below form nav text-shadow color"
+msgstr ""
+
+#: ../custom-login.php:623
+msgid "Below form nav color hover"
+msgstr ""
+
+#: ../custom-login.php:630
+msgid "Below form nav text-shadow hover"
+msgstr ""
+
+#: ../custom-login.php:638
+msgid "<h4>Custom HTML/CSS &amp; jQuery</h4>"
+msgstr ""
+
+#: ../custom-login.php:645
+msgid "Custom CSS"
+msgstr ""
+
+#: ../custom-login.php:652
+msgid "Custom HTML"
+msgstr ""
+
+#: ../custom-login.php:659
+msgid "Custom jQuery"
+msgstr ""
+
+#: ../custom-login.php:684 ../functions/install.php:32
+#: ../functions/install.php:40
+msgid "Custom Login Settings"
+msgstr ""
+
+#: ../custom-login.php:684 ../functions/post-types.php:37
+msgid "Custom Login"
+msgstr ""
+
+#: ../custom-login.php:696
+msgid ""
+"If your stylesheet isn't updating click update above to delete the transient "
+"cache."
+msgstr ""
+
+#: ../custom-login.php:712
+msgid "Clear stylesheet cache"
+msgstr ""
+
+#: ../custom-login.php:751
+msgid "The cache has been deleted."
+msgstr ""
+
+#: ../custom-login.php:770
+msgid "Settings"
+msgstr ""
+
+#: ../custom-login.php:808
+msgid "Support this plugin and buy me a beer"
+msgstr ""
+
+#: ../custom-login.php:809
+msgid "Rate this plugin on WordPress.org"
+msgstr ""
+
+#: ../custom-login.php:810
+msgid ""
+"Share your designs on <strong style=\"color:#0066DC;\">Flick</strong><strong "
+"style=\"color:#ff0084;\">r</strong>"
+msgstr ""
+
+#: ../custom-login.php:811
+msgid "Get support on WordPress.org"
+msgstr ""
+
+#: ../custom-login.php:812
+msgid "Contribute development on GitHub"
+msgstr ""
+
+#: ../custom-login.php:813
+msgid "Get Custom Login Add-ons"
+msgstr ""
+
+#: ../custom-login.php:822
+#, php-format
+msgid "<a href=\"%s\">%s</a> | <code>version %s</code>"
+msgstr ""
+
+#: ../classes/class.settings-api.php:351
+#, php-format
+msgid "<label for=\"%1$s[%2$s]\">Opacity</label>"
+msgstr ""
+
+#: ../classes/class.settings-api.php:783
+#, php-format
+msgid "%1$s | <a href=\"%2$s\">Dismiss notice</a>"
+msgstr ""
+
+#: ../classes/class.settings-api.php:968
+msgid "Error fetching feed"
+msgstr ""
+
+#: ../classes/class.settings-api.php:979
+msgid "Like Extendd on Facebook"
+msgstr ""
+
+#: ../classes/class.settings-api.php:980
+msgid "Follow Extendd on Twitter"
+msgstr ""
+
+#: ../classes/class.settings-api.php:981
+msgid "Follow Austin on Twitter"
+msgstr ""
+
+#: ../classes/class.settings-api.php:982
+msgid "Circle Extendd on Google+"
+msgstr ""
+
+#: ../classes/class.settings-api.php:983
+msgid "Subscribe via email"
+msgstr ""
+
+#: ../classes/class.settings-api.php:986
+msgid "Latest plugins from Extendd.com"
+msgstr ""
+
+#: ../classes/welcome.php:56 ../classes/welcome.php:57
+msgid "Welcome to Custom Login"
+msgstr ""
+
+#: ../classes/welcome.php:111
+#, php-format
+msgid "Welcome to Custom Login %s"
+msgstr ""
+
+#: ../classes/welcome.php:112
+#, php-format
+msgid ""
+"Thank you for updating to the latest version! Custom Login %s is ready to "
+"make your login page better!"
+msgstr ""
+
+#: ../classes/welcome.php:113
+#, php-format
+msgid "Version %s"
+msgstr ""
+
+#: ../classes/welcome.php:117
+msgid "What's New"
+msgstr ""
+
+#: ../classes/welcome.php:122
+msgid "Improved Settings"
+msgstr ""
+
+#: ../classes/welcome.php:126
+msgid "Load times"
+msgstr ""
+
+#: ../classes/welcome.php:127
+msgid ""
+"There were issues in the past version that had the plugin loading on pages "
+"it wasn't supposted to. <strong>CL</strong> now caches all queries and "
+"database calls."
+msgstr ""
+
+#: ../classes/welcome.php:129
+msgid "Better features"
+msgstr ""
+
+#: ../classes/welcome.php:130
+#, php-format
+msgid ""
+"With a complete rewrite of the plugin, I have to ability to build custom add-"
+"ons (think extensions), like stealth login, email logins and 2-step "
+"authentication to name a few of the add-ons you can find on %sExtendd.com%s "
+"in the future."
+msgstr ""
+
+#: ../classes/welcome.php:136
+msgid "Under the Hood"
+msgstr ""
+
+#: ../classes/welcome.php:140
+msgid "Settings Class"
+msgstr ""
+
+#: ../classes/welcome.php:141
+#, php-format
+msgid ""
+"The new settings class allows to add your own add-ons! Documentation can be "
+"found on the %sExtendd.com%s site."
+msgstr ""
+
+#: ../classes/welcome.php:145
+msgid "Templates"
+msgstr ""
+
+#: ../classes/welcome.php:146
+#, php-format
+msgid ""
+"Custom login %stemplates%s can be created in your theme using the new login "
+"template add-on (coming soon)."
+msgstr ""
+
+#: ../classes/welcome.php:156
+msgid "Go to Custom Login Settings"
+msgstr ""
+
+#: ../functions/post-types.php:25
+msgid "Logins"
+msgstr ""
+
+#: ../functions/post-types.php:26
+msgid "Login"
+msgstr ""
+
+#: ../functions/post-types.php:27
+msgid "Add New"
+msgstr ""
+
+#: ../functions/post-types.php:28
+msgid "Add New Login"
+msgstr ""
+
+#: ../functions/post-types.php:29
+msgid "Edit Login"
+msgstr ""
+
+#: ../functions/post-types.php:30
+msgid "New Login"
+msgstr ""
+
+#: ../functions/post-types.php:31
+msgid "All Logins"
+msgstr ""
+
+#: ../functions/post-types.php:32
+msgid "View Login"
+msgstr ""
+
+#: ../functions/post-types.php:33
+msgid "Search Logins"
+msgstr ""
+
+#: ../functions/post-types.php:34
+msgid "No Logins found"
+msgstr ""
+
+#: ../functions/post-types.php:35
+msgid "No Logins found in Trash"
+msgstr ""
+
+#: ../functions/upgrades/upgrades.php:25
+msgid "Custom Login - Upgrades"
+msgstr ""
+
+#: ../functions/upgrades/upgrades.php:28
+msgid ""
+"The upgrade process has started, please be patient. This could take several "
+"minutes. You will be automatically redirected when the upgrade is finished."
+msgstr ""
+
+#: ../functions/upgrades/upgrades.php:59
+msgid "Custom Login Upgrades"
+msgstr ""
