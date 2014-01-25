@@ -812,7 +812,7 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 		if ( trim( $old_message ) !== trim( $announcement->message ) && !empty( $old_message ) ) {
 			delete_user_meta( get_current_user_id(), $ignore, 1 );
 			delete_transient( $transient );
-			delete_option( $transient . '_message' );			
+			delete_option( $transient . '_message' );
 			//echo 'test';
 		}
 		

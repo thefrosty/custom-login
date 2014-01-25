@@ -6,12 +6,12 @@
  * Description: A simple way to customize your WordPress <code>wp-login.php</code> screen! Use the built in, easy to use <a href="./options-general.php?page=custom-login">settings</a> page to do the work for you. Share you designs on <a href="http://flickr.com/groups/custom-login/">Flickr</a> or get Custom Login extensions at <a href="http://extendd.com/plugins/tag/custom-login-extension">Extendd.com</a>.
  * Version: 2.2
  * Author: Austin Passy
- * Author URI: http://austinpassy.com
+ * Author URI: http://austin.passy.co
  * Text Domain: custom-login
  *
  * @copyright 2012 - 2014
  * @author Austin Passy
- * @link http://austinpassy.com/
+ * @link http://austin.passy.co/
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  *
  * This program is distributed in the hope that it will be useful,
@@ -272,8 +272,12 @@ class Custom_Login {
 			require_once( trailingslashit( plugin_dir_path( __FILE__ ) ) . 'classes/welcome.php' );
 			
 			// Extensions install API
-			$this->class_exists_require( 'Extendd_Remote_Install_Client', 'edd-remote-install-client/EDD_Remote_Install_Client.php' );
-			$this->remote_install = new Extendd_Remote_Install_Client( EXTENDD_API_URL, 'settings_page_' . $this->domain, array( 'skipplugincheck' => false ) );
+			if ( $this->class_exists_require( 'Extendd_Remote_Install_Client', 'edd-remote-install-client/EDD_Remote_Install_Client.php' ) ) {
+				$this->remote_install = new Extendd_Remote_Install_Client( EXTENDD_API_URL, 'settings_page_' . $this->domain,
+					array( 'skipplugincheck' => false, )
+				);
+				add_action( 'eddri-install-complete-settings_page_' . $this->domain, array( $this, 'custom_login_extension_install_complete' ), 10, 1 );
+			}
 		}
 		require_once( trailingslashit( plugin_dir_path( __FILE__ ) ) . 'classes/templates.php' );
 	}
@@ -296,8 +300,13 @@ class Custom_Login {
 		if ( !class_exists( $class_name ) ) {
 			$dir_path = trailingslashit( plugin_dir_path( __FILE__ ) ) . 'classes/' . $dir_path;
 			
-			if ( file_exists( $dir_path ) )	require_once( $dir_path );
+			if ( file_exists( $dir_path ) )	{
+				require_once( $dir_path );
+				return true;
+			}
+			return false;
 		}
+		return false;
 	}
 	
 	/**
@@ -872,7 +881,7 @@ class Custom_Login {
 		
 		$content .= wpautop( sprintf( __( '<span id="extendd-license" style="display:none">Most of these extensions require a license key which can be purchased on <a href="%1$s" target="_blank">%2$s</a>. You\'ll have to have the key ready to install the extension.</span>', $this->domain ), 'http://extendd.com/plugins/tag/custom-login-extension/', 'Extendd.com' ) );
 		
-		$content .= wpautop( __( '<span id="extendd-license-help" style="display:none">Click "install" to auto-install the extension on your site (which will also auto-activate it).<br>Free extensions will auto-install, while paid extensions will need a valid license key.</span>', $this->domain ) );
+		$content .= wpautop( __( '<span id="extendd-license-help" style="display:none">Click "install" to auto-install the extension on your site (which will also auto-activate it).<br>Free extensions will auto-install, while paid extensions will need a valid license key. Prices subject to change. Clicking "Purchase License" will show a quick link to purchase the extension (license) directly through PayPal. Choose which license you\'d like and you\'ll receive an email with your license key.</span>', $this->domain ) );
 				
 		$transient	= $this->id . '_extensions';	
 		$old_html	= get_option( $transient . '_message' );
@@ -881,11 +890,21 @@ class Custom_Login {
 		if ( false === $extensions ) {
 			$content .= '<div class="eddri-addon">
 				<div class="eddri-addon-container">
-					<img class="eddri-thumbnail" src="https://raw.github.com/thefrosty/custom-login/master/assets/images/extensions/custom-login-stealth-login-300x200.jpg">
+					<div class="eddri-img-wrap">
+						<a href="http://extendd.com/plugin/custom-login-stealth-login/" target="_blank"><img class="eddri-thumbnail" src="https://raw.github.com/thefrosty/custom-login/master/assets/images/extensions/custom-login-stealth-login-300x200.jpg"></a>
+						<p>Protect your wp-login.php page from brute force attacks.</p>
+					</div>
 					<h3>Stealth Login</h3>
 					<span class="eddri-status">Not Installed</span>
 					<a class="button" data-edd-install="Custom Login Stealth Login">Install</a>
-					<p>Protect your wp-login.php page from brute force attacks.</p>
+					<a class="button show-if-not-purchased" data-toggle="purchase-links" style="display:none">Purchase License</a>
+					<div id="purchase-links" style="display:none">
+					<ul>
+						<li><a href="http://extendd.com/checkout?edd_action=straight_to_gateway&download_id=7819&edd_options[price_id]=0">Single site license ($19.99)</a></li>
+						<li><a href="http://extendd.com/checkout?edd_action=straight_to_gateway&download_id=7819&edd_options[price_id]=1">Up to 5 site licenses ($39.99)</a></li>
+						<li><a href="http://extendd.com/checkout?edd_action=straight_to_gateway&download_id=7819&edd_options[price_id]=2">Unlimited site licenses ($79.99)</a></li>
+					</ul>
+					</div>
 				</div>
 			</div>';
 		}
@@ -893,7 +912,6 @@ class Custom_Login {
 			$content .= $extensions->html;
 			
 			if ( trim( $old_html ) !== trim( $extensions->html ) && !empty( $old_html ) ) {
-				delete_user_meta( get_current_user_id(), $ignore, 1 );
 				delete_transient( $transient );
 				delete_option( $transient . '_message' );
 			}
@@ -955,6 +973,23 @@ class Custom_Login {
 	 */
 	function get_queries( $display = false ) {
 		return sprintf( ( $display ? '' : '<div style="display:none">' ) . esc_attr__( '%s queries in %s seconds.', $this->domain ) . ( $display ? '' : '</div>' ), get_num_queries(), timer_stop() );
+	}
+	
+	/**
+	 * Activate the license key for the Extendd Settings API.
+	 *
+	 * Extendd settings format: 'extendd_' . 'plugin_folder_name'
+	 */
+	function custom_login_extension_install_complete( $args ) {
+		$plugin	= 'extendd_' . str_replace( '-', '_', $args['slug'] ); 
+		$option = get_option( $plugin, array() );
+		
+		if ( empty( $option ) || empty( $option['license_key'] ) ) {
+			$option['license_key']		= $args['license'];
+			$option['license_active']	= $args['license_active'];
+			// Update the settings
+			update_option( $plugin, $option );
+		}
 	}
 	
 }

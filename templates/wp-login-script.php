@@ -26,9 +26,9 @@ if ( false === ( $js = get_transient( $login->id . '_script' ) ) ) :
 	/**
 	 * Custom Login by Austin Passy
 	 *
-	 * Plugin URI	: http://austinpassy.com/wordpress-plugins/custom-login
+	 * Plugin URI	: http://austin.passy.co/wordpress-plugins/custom-login
 	 * Version		: $version
-	 * Author URI	: http://austinpassy.com
+	 * Author URI	: http://austin.passy.co
 	 * Pro Version	: http://extendd.com/plugin/custom-login-pro
 	 */\n\n";
 	 

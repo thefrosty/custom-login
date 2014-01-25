@@ -2,7 +2,7 @@
 Contributors: austyfrosty
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290
 Tags: admin, branding, customization, custom login, login, logo, error, login error, custom login pro
-Requires at least: 3.7
+Requires at least: 3.5
 Tested up to: 3.8
 Stable tag: trunk
 License: GPLv2 or later
@@ -14,7 +14,7 @@ Use this plugin to customize your login screen, great for client sites!
 
 **Version 2.0** is now 140% faster in the admin and uses a lot less resources! Minimum WordPress version 3.5.
 
-Join in on the [conversation](http://austinpassy.com/wordpress-plugins/custom-login) on my personal blog.
+Join in on the [conversation](http://austin.passy.co/wordpress-plugins/custom-login) on my personal blog.
 
 You can find Custom Login [PRO](http://extendd.com/plugin/custom-login-pro/)  on [Extendd.com](http://extendd.com): A plugin marketplace. New features include faster login loading (no database access), Custom Post Types (for multiple designs) and four default CSS designs. **Custom Login Pro is a completly different plugin than Custom Login**.
 
@@ -26,7 +26,7 @@ Custom Login 2.0 now has many extensions to make your login page better!
 
 **Available Now**
 
-* <a href="http://extendd.com/plugin/custom-login-stealth-login/" title="Custom Login Stealth Login">Stealth Login</a> - obscure your login URL.
+* <a href="http://extendd.com/plugin/custom-login-stealth-login/" title="Custom Login Stealth Login">Stealth Login</a> - obscure your login URL (as of CL v2.2, you can install this plugin within the settings page with an active licence key).
 
 **In Development**
 
@@ -51,10 +51,10 @@ Now featureing a HTML, CSS &amp; jQuery box for advanced users to up the customi
 
 = links =
 
-* More Plugins: [Extendd](http://extendd.com/)
-* My Blog: [http:/austinpassy.com/](http://austinpassy.com/)
-* My Twitter: @[TheFrosty](https:/twitter.com/TheFrosty)
-* WP Twitter: @[Extendd](https:/twitter.com/WPExtendd)
+* Premium Plugins: [Extendd](http://extendd.com/)
+* My Blog: [http:/austin.passy.co/](http://austin.passy.co/)
+* Follow me on Twitter: @[TheFrosty](https:/twitter.com/TheFrosty)
+* Follow Extendd Twitter: @[Extendd](https:/twitter.com/WPExtendd)
 * **Contribute on [GitHub](https://github.com/thefrosty/custom-login)**
 
 = Hooks and Filters =
@@ -103,7 +103,9 @@ Screenshots of working example in our [Flickr group](http://flickr.com/groups/cu
 = Version 2.2.0 (1/23/14) =
 
 * Updated settings page and CSS (now responsive).
-* Updated Genericons to v 3.0.3
+* Updated Genericons to v 3.0.3.
+* Add Remote Install class to auto-install Custom Login Extensions from Extendd.com (license key needed for paid extensions).
+* Update and cleanup code.
 
 = Version 2.1.9 (1/8/14) =
 
@@ -207,6 +209,9 @@ Screenshots of working example in our [Flickr group](http://flickr.com/groups/cu
 
 
 == Upgrade Notice ==
+
+= 2.2.0 =
+Now you can auto-install Custom Login extensions with an active license key!
 
 = 2.1.9 =
 Happy New Year! Finally fixed the logo issue with WordPress 3.8! If you find this plugin useful please consider donating, I've spend countless hours making it better for you. 

@@ -20,10 +20,19 @@ jQuery(document).ready(function($) {
 		
 	});
 	
-	// Remote API
+	// Remote API helper
 	$('#custom_login_extensions a[data-toggle]').on('click',function(e) {
 		e.preventDefault();
 		$('#' + $(this).data('toggle')).toggle();
+	});
+	
+	// Show Purchase button
+    $('a[data-edd-install]').each(function() {
+		var $this = $(this);
+		setTimeout( function() {
+			if ( $this.prev('.eddri-status').text() === 'Not Installed' )
+				$this.closest( $this.parent() ).children('a.button.show-if-not-purchased').show()
+		}, 5000 );
 	});
     
 });
