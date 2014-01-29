@@ -14,7 +14,7 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 	/**
 	 * Version
 	 */
-	var $api_version = '1.0.11';
+	var $api_version = '1.0.13';
 
     /**
      * settings sections array
@@ -513,7 +513,7 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 		//$value = wp_specialchars_decode( stripslashes( $this->get_option( $args['id'], $args['section'], $args['std'] ) ), 1, 0, 1 );
         $size = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
 
-        $html = sprintf( '<textarea rows="5" cols="55" class="%1$s-text" id="%2$s[%3$s]" name="%2$s[%3$s]">%4$s</textarea>', $size, $args['section'], $args['id'], $value );
+        $html = sprintf( '<textarea rows="5" cols="55" class="%1$s-text" id="%2$s[%3$s]" name="%2$s[%3$s]">%4$s</textarea>', $size, $args['section'], $args['id'], stripslashes( $value ) );
         $html .= sprintf( '<br><span class="description"> %s</span>', $args['desc'] );
 
         echo $html;
@@ -535,8 +535,8 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
      */
     function callback_wysiwyg( $args ) {
 
-        $value = wpautop( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
-        $size = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : '500px';
+        $value	= wpautop( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
+        $size	= isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : '500px';
 
         echo '<div style="width: ' . $size . ';">';
 
@@ -555,12 +555,12 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
     function callback_file( $args ) {
 		static $counter = 0;
 		
-        $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
-        $size = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
-        $id = $args['section']  . '[' . $args['id'] . ']';
-        $html = sprintf( '<input type="text" class="%1$s-text" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s"/>', $size, $args['section'], $args['id'], $value );
-        $html .= '<input type="button" class="button extendd-browse" id="'. $id .'_button" value="Browse" style="margin-left:5px" />';
-        $html .= '<input type="button" class="button extendd-clear" id="'. $id .'_clear" value="Clear" style="margin-left:5px" />';
+        $value	= esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
+        $size	= isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
+        $id		= $args['section']  . '[' . $args['id'] . ']';
+        $html 	= sprintf( '<input type="text" class="%1$s-text" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s"/>', $size, $args['section'], $args['id'], $value );
+        $html  .= '<input type="button" class="button extendd-browse" id="'. $id .'_button" value="Browse" style="margin-left:5px" />';
+        $html  .= '<input type="button" class="button extendd-clear" id="'. $id .'_clear" value="Clear" style="margin-left:5px" />';
 		
 		$counter++;
 		if ( 1 === $counter ) {
@@ -620,12 +620,12 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 					});
 		
 					// When an image is selected, run a callback.
-					file_frame.on( 'insert', function() {
-		
+					file_frame.on( 'insert', function() {	
 						var attachment = file_frame.state().get('selection').first().toJSON();
 					//	console.log(attachment);
+					
 						window.formfield.find('input[type="text"]').val(attachment.url);
-					//	window.formfield.find('').val(attachment.title);
+						window.formfield.find('#<?php echo $id; ?>_preview').html('<div class="img" style="width:250px"><img src="'+attachment.url+'" alt="" /><a href="#" class="remove_file_button" rel="<?php echo $id; ?>">Remove Image</a></div>');
 					});
 		
 					// Finally, open the modal
@@ -637,15 +637,33 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 				window.formfield = ''; 
 				
 				$('input[type="button"].button.extendd-clear').on('click', function(e) {  
-					e.preventDefault();		
-					var $this = $(this);
-					$this.closest('td').find('input[type="text"]').val('');
+					e.preventDefault();
+					$(this).closest('td').find('input[type="text"]').val('');
+					$(this).closest('td').find('#' + $(this).prop('id').replace( '_clear', '_preview') + ' div.image').remove();
+				});
+				$('a.remove_file_button').on( 'click', function(e) {
+					e.preventDefault();
+					$(this).closest('td').find('input[type="text"]').val('');
+					$(this).parent().slideUp().remove();
 				});
 			});
 			</script><?php
 			$html .= ob_get_clean();
 		}
         $html .= sprintf( '<br><span class="description"> %s</span>', $args['desc'] );
+		
+		/* Image */
+		$html .= '<div id="' . $id . '_preview" class="' . $id . '_preview">';	
+			if ( $value != '' ) { 
+				$check_image = preg_match( '/(^.*\.jpg|jpeg|png|gif|ico*)/i', $value );
+				if ( $check_image ) {
+					$html .= '<div class="img" style="display:none">';
+					$html .= '<img src="' . $value . '" alt="" />';
+					$html .= '<a href="#" class="remove_file_button" rel="' . $id . '">Remove Image</a>';
+					$html .= '</div>';
+				}
+			}
+		$html .= '</div>';
 
         echo $html;
     }
@@ -754,8 +772,15 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 	 *
 	 * @since 2.2
      */
-    function wp_remote_get_set_transient( $url = false, $transient, $type = 'message' ) {
+    function wp_remote_get_set_transient( $url = false, $transient, $type = 'message', $cache_time = null ) {
 		if ( !$url ) return;
+		
+		if ( is_null( $cache_time ) ) {
+			if ( defined( 'DAY_IN_SECONDS' ) )
+				$cache_time = DAY_IN_SECONDS;
+			else
+				$cache_time = 24 * 60 * 60;
+		}
 		
 		if ( false === ( $output = get_transient( $transient ) ) ) {
 			$site = wp_remote_get( $url, array( 'timeout' => 15, 'sslverify' => false ) );
@@ -767,7 +792,7 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 					if ( is_wp_error( $output ) || empty( $output->$type ) )
 						return false;
 						
-					set_transient( $transient, $output, WEEK_IN_SECONDS * 2 ); // Cache for two weeks
+					set_transient( $transient, $output, $cache_time ); // Cache for two weeks
 					update_option( $transient . '_message', $output->$type ); // Update the message
 					
 					// Return the data
@@ -1013,11 +1038,11 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 		}
 		$content .= '</ul>';
 		$content .= '<ul class="social">';
-		$content .= '<li class="facebook"><a href="https://www.facebook.com/WPExtendd">' . __( 'Like Extendd on Facebook', $this->domain ) . '</a></li>';
-		$content .= '<li class="twitter"><a href="http://twitter.com/WPExtendd">' . __( 'Follow Extendd on Twitter', $this->domain ) . '</a></li>';
-		$content .= '<li class="twitter"><a href="http://twitter.com/TheFrosty">' . __( 'Follow Austin on Twitter', $this->domain ) . '</a></li>';
-		$content .= '<li class="googleplus"><a href="https://plus.google.com/113609352601311785002/">' . __( 'Circle Extendd on Google+', $this->domain ) . '</a></li>';
-		$content .= '<li class="email"><a href="http://eepurl.com/vi0bz">' . __( 'Subscribe via email', $this->domain ) . '</a></li>';
+		$content .= '<li class="facebook"><span class="genericon genericon-facebook"></span><a href="https://www.facebook.com/WPExtendd">' . __( 'Like Extendd on Facebook', $this->domain ) . '</a></li>';
+		$content .= '<li class="twitter"><span class="genericon genericon-twitter"></span><a href="http://twitter.com/WPExtendd">' . __( 'Follow Extendd on Twitter', $this->domain ) . '</a></li>';
+		$content .= '<li class="twitter"><span class="genericon genericon-twitter"></span><a href="http://twitter.com/TheFrosty">' . __( 'Follow Austin on Twitter', $this->domain ) . '</a></li>';
+		$content .= '<li class="googleplus"><span class="genericon genericon-googleplus"></span><a href="https://plus.google.com/113609352601311785002/">' . __( 'Circle Extendd on Google+', $this->domain ) . '</a></li>';
+		$content .= '<li class="email"><span class="genericons genericons-mail"></span><a href="http://eepurl.com/vi0bz">' . __( 'Subscribe via email', $this->domain ) . '</a></li>';
 
 		$content .= '</ul>';
 		$this->postbox( 'extenddlatest', __( 'Latest plugins from Extendd.com', $this->domain ), $content );

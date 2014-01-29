@@ -26,7 +26,9 @@ Custom Login 2.0 now has many extensions to make your login page better!
 
 **Available Now**
 
-* <a href="http://extendd.com/plugin/custom-login-stealth-login/" title="Custom Login Stealth Login">Stealth Login</a> - obscure your login URL (as of CL v2.2, you can install this plugin within the settings page with an active licence key).
+* *In Custom Login > version 2.2 you can auto-install all extensions within the settings page with an active licence key.*
+* <a href="http://extendd.com/plugin/custom-login-stealth-login/" title="Custom Login Stealth Login">Stealth Login</a> - obscure your login URL.
+* <a href="http://extendd.com/plugin/custom-login-page-template/" title="Custom Login Page Template">Page Template</a> - add a login form to any WordPress page. 
 
 **In Development**
 
@@ -51,10 +53,10 @@ Now featureing a HTML, CSS &amp; jQuery box for advanced users to up the customi
 
 = links =
 
-* Premium Plugins: [Extendd](http://extendd.com/)
-* My Blog: [http:/austin.passy.co/](http://austin.passy.co/)
-* Follow me on Twitter: @[TheFrosty](https:/twitter.com/TheFrosty)
-* Follow Extendd Twitter: @[Extendd](https:/twitter.com/WPExtendd)
+* Plugin Marketplace: [Extendd.com](http://extendd.com/ "WordPress plugin markeetplace")
+* My Blog: [http:/austin.passy.co/](http://austin.passy.co/ "Austin Passy's blog")
+* Follow me on Twitter: @[TheFrosty](https:/twitter.com/TheFrosty "Austin TheFrosty' Passy on Twitter")
+* Follow Extendd Twitter: @[Extendd](https:/twitter.com/WPExtendd "Extendd on Twitter")
 * **Contribute on [GitHub](https://github.com/thefrosty/custom-login)**
 
 = Hooks and Filters =
@@ -100,7 +102,24 @@ Screenshots of working example in our [Flickr group](http://flickr.com/groups/cu
 
 == Changelog ==
 
-= Version 2.2.0 (1/23/14) =
+= Version 2.2.3 (1/28/14) =
+
+* Added image previews after file fields.
+
+= Version 2.2.2 (1/28/14) =
+
+* Allowed variables to account for unicode in Custom CSS.
+* - Use `%%BLASH%%` for a backslash.
+
+= Version 2.2.1 (1/25/14) =
+
+* $version variable not loading.
+* Updated sanitization on Custom CSS & HTML textarea fields.
+* CSS sanitized with `wp_filter_nohtml_kses`.
+* HTML sanitized with `wp_kses_post`.
+* Allow use of "Tab" key in the CSS textarea to format CSS.
+
+= Version 2.2.0 (1/24/14) =
 
 * Updated settings page and CSS (now responsive).
 * Updated Genericons to v 3.0.3.

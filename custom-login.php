@@ -4,7 +4,7 @@
  * Plugin Name: Custom Login
  * Plugin URI: http://extendd.com/plugin/custom-login
  * Description: A simple way to customize your WordPress <code>wp-login.php</code> screen! Use the built in, easy to use <a href="./options-general.php?page=custom-login">settings</a> page to do the work for you. Share you designs on <a href="http://flickr.com/groups/custom-login/">Flickr</a> or get Custom Login extensions at <a href="http://extendd.com/plugins/tag/custom-login-extension">Extendd.com</a>.
- * Version: 2.2
+ * Version: 2.2.3
  * Author: Austin Passy
  * Author URI: http://austin.passy.co
  * Text Domain: custom-login
@@ -31,9 +31,9 @@ class Custom_Login {
 	 * Plugin vars
 	 * @return string
 	 */
-	var $version,
-		$id,
-		$domain;
+	var $version = '2.2.3',
+		$domain,
+		$id;
 	
 	/**
 	 * Private settings
@@ -70,7 +70,6 @@ class Custom_Login {
 	function init() {
 		
 		/* vars */
-		$this->version	= '2.2';
 		$this->domain	= 'custom-login';
 		$this->id		= 'custom_login';
 		
@@ -690,16 +689,19 @@ class Custom_Login {
 				array(
 					'name' 		=> 'custom_css',
 					'label' 	=> __( 'Custom CSS', $this->domain ),
-					'desc' 		=> '',
+					'desc' 		=> sprintf( __( 'Use the "Tab" key to format your CSS.<br><strong>New:</strong> %sAllowed variables%s. %s', $this->domain ), '<a href="#" data-toggle="custom-css-variables">', '</a>', '<div id="custom-css-variables" style="display:none"><ul>
+					<li>%%BSLASH%% = "\" (backslash)</li>
+					<li><a href="http://wordpress.org/support/topic/quotes-in-custom-css-gets-replaced-with-useless-quote?replies=4">Request others</a></li>
+					</ul></div>' ),
 					'type' 		=> 'textarea',
-					'sanitize_callback' => 'esc_attr',
+					'sanitize_callback' => 'wp_filter_nohtml_kses',
 				),
 				array(
 					'name' 		=> 'custom_html',
 					'label' 	=> __( 'Custom HTML', $this->domain ),
 					'desc' 		=> '',
 					'type' 		=> 'textarea',
-					'sanitize_callback' => 'stripslashes_deep', //Allow HTML
+					'sanitize_callback' => 'wp_kses_post', //Allow HTML
 				),
 				array(
 					'name' 		=> 'custom_jquery',

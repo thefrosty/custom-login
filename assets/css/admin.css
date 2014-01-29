@@ -171,6 +171,22 @@ ul.social .genericon-mail:before {
 }
 
 /**
+ * File uploads
+ */
+div.img {
+	background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #F5F5F5;
+    box-shadow: 5px 5px 0 #EFEFEF, 10px 10px 1px #DEDEDE;
+    padding: 25px;
+	max-width: 460px;
+}
+div.img img {
+	max-width: 100%;
+	width: auto;
+	height: auto;
+}
+
+/**
  * MISC
  */
 

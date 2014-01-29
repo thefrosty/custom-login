@@ -1,3 +1,9 @@
+Version 1.0.13 (1/28/14)
+Added image preview on files.
+
+Version 1.0.12 (1/25/14)
+Added $cache_time to wp_remote_get_set_transient();
+
 Version 1.0.11 (1/23/14)
 Added helper class wp_remote_get_set_transient();
 

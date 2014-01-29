@@ -39,9 +39,15 @@ if ( false === ( $css = get_transient( $login->id . '_style' ) ) ) :
 	
 	/* Custom user input */
 	if ( !empty( $custom_css ) ) {
+		$custom_css = wp_specialchars_decode( stripslashes( $custom_css ), 1, 0, 1 );
 		
-		$css .= "/* Custom CSS */\n";
-		$css .= wp_specialchars_decode( stripslashes( $custom_css ), 1, 0, 1 );
+		$css .= "/* START Custom CSS */\n";
+		$css .= str_replace(
+			array( '%%BSLASH%%' ),
+			array( '\\' ),
+			$custom_css
+		);
+		$css .= "\n/* END Custom CSS */\n";
 		$css .= "\n\n";
 		
 	}
