@@ -68,8 +68,7 @@ function ap_custom_login_trigger_upgrades() {
 		ap_custom_login_v2_0_0_upgrades();
 	}
 
-	if ( DOING_AJAX )
-		die( 'complete' ); // Let ajax know we are done
+	if ( DOING_AJAX ) die( 'complete' ); // Let ajax know we are done
 }
 add_action( 'wp_ajax_custom_login_trigger_upgrades', 'ap_custom_login_trigger_upgrades' );
 
@@ -81,13 +80,14 @@ add_action( 'wp_ajax_custom_login_trigger_upgrades', 'ap_custom_login_trigger_up
  * @return      void
  */
 function ap_custom_login_v2_0_0_upgrades() {
-	$login = CUSTOMLOGIN();
+	$login 	= CUSTOMLOGIN();
+	$ss		= CUSTOM_LOGIN_SCRIPT_STYLES();
 	$old_settings = get_option( 'custom_login_settings' );
 	$new_settings = get_option( $login->id, array() );
 		
 	$new_settings['active'] = $login->version;
 	$new_settings['active'] = true === $old_settings['custom'] ? 'on' : 'off';
-	$new_settings['html_background_color'] = is_rgba( $old_settings['html_background_color'] ) ? rgba2hex( $old_settings['html_background_color'] ) : $old_settings['html_background_color'];
+	$new_settings['html_background_color'] = $ss->is_rgba( $old_settings['html_background_color'] ) ? $ss->rgba2hex( $old_settings['html_background_color'] ) : $old_settings['html_background_color'];
     $new_settings['html_background_color_checkbox'] = 'off';
     $new_settings['html_background_color_opacity'] = '';
     $new_settings['html_background_url'] = $old_settings['html_background_url'];
@@ -99,7 +99,7 @@ function ap_custom_login_v2_0_0_upgrades() {
     $new_settings['logo_background_position'] = 'top center';
     $new_settings['logo_background_repeat'] = '';
     $new_settings['logo_background_size'] = '';
-    $new_settings['login_form_background_color'] = is_rgba( $old_settings['html_background_color'] ) ? rgba2hex( $old_settings['login_form_background_color'] ) : $old_settings['login_form_background_color'];
+    $new_settings['login_form_background_color'] = $ss->is_rgba( $old_settings['html_background_color'] ) ? $ss->rgba2hex( $old_settings['login_form_background_color'] ) : $old_settings['login_form_background_color'];
     $new_settings['login_form_background_color_checkbox'] = 'off';
     $new_settings['login_form_background_color_opacity'] = '';
     $new_settings['login_form_background_url'] = $old_settings['login_form_background'];
@@ -108,14 +108,14 @@ function ap_custom_login_v2_0_0_upgrades() {
     $new_settings['login_form_background_size'] = $old_settings['login_form_background_size'];
     $new_settings['login_form_border_radius'] = $old_settings['login_form_border_radius'];
     $new_settings['login_form_border_size'] = $old_settings['login_form_border'];
-    $new_settings['login_form_border_color'] = is_rgba( $old_settings['html_background_color'] ) ? rgba2hex( $old_settings['login_form_border_color'] ) : $old_settings['login_form_border_color'];
+    $new_settings['login_form_border_color'] = $ss->is_rgba( $old_settings['html_background_color'] ) ? $ss->rgba2hex( $old_settings['login_form_border_color'] ) : $old_settings['login_form_border_color'];
     $new_settings['login_form_border_color_checkbox'] = 'off';
     $new_settings['login_form_border_color_opacity'] = '';
     $new_settings['login_form_box_shadow'] = $old_settings['login_form_box_shadow_1'] . 'px ' . $old_settings['login_form_box_shadow_2'] . 'px ' . $old_settings['login_form_box_shadow_3'] . 'px';
-    $new_settings['login_form_box_shadow_color'] = is_rgba( $old_settings['html_background_color'] ) ? rgba2hex( $old_settings['login_form_box_shadow_4'] ) : $old_settings['login_form_box_shadow_4'];
+    $new_settings['login_form_box_shadow_color'] = $ss->is_rgba( $old_settings['html_background_color'] ) ? $ss->rgba2hex( $old_settings['login_form_box_shadow_4'] ) : $old_settings['login_form_box_shadow_4'];
     $new_settings['login_form_box_shadow_color_checkbox'] = 'off';
     $new_settings['login_form_box_shadow_color_opacity'] = '';
-    $new_settings['label_color'] = is_rgba( $old_settings['html_background_color'] ) ? rgba2hex( $old_settings['label_color'] ) : $old_settings['label_color'];
+    $new_settings['label_color'] = $ss->is_rgba( $old_settings['html_background_color'] ) ? $ss->rgba2hex( $old_settings['label_color'] ) : $old_settings['label_color'];
     $new_settings['label_color_checkbox'] = 'off';
     $new_settings['label_color_opacity'] = '';
     $new_settings['nav_color'] = '';

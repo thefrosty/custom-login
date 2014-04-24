@@ -3,7 +3,7 @@ Contributors: austyfrosty
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290
 Tags: admin, branding, customization, custom login, login, logo, error, login error, custom login pro
 Requires at least: 3.5
-Tested up to: 3.8
+Tested up to: 3.9
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -27,15 +27,15 @@ Custom Login 2.0 now has many extensions to make your login page better!
 **Available Now**
 
 * *In Custom Login > version 2.2 you can auto-install all extensions within the settings page with an active licence key.*
-* <a href="http://extendd.com/plugin/custom-login-stealth-login/" title="Custom Login Stealth Login">Stealth Login</a> - obscure your login URL.
-* <a href="http://extendd.com/plugin/custom-login-page-template/" title="Custom Login Page Template">Page Template</a> - add a login form to any WordPress page. 
+* <a href="http://extendd.com/plugin/custom-login-stealth-login?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=freemium" title="Custom Login Stealth Login">Stealth Login</a> - obscure your login URL.
+* <a href="http://extendd.com/plugin/custom-login-page-template?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=freemium" title="Custom Login Page Template">Page Template</a> - add a login form to any WordPress page. 
+* **NEW** <a href="http://extendd.com/plugin/wordpress-login-redirects?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=freemium" title="Custom Login Redirects">Login Redirects</a> - Manage login redirects. 
 
 **In Development**
 
 * User Hash Key logins (think generated guest logins with-out having to use the login form).
 * Email Logins for usernames.
 * 2-step Authentication.
-* Custom Login page.
 * "Super User" only access for client sites.
 * WordPress Login CSS style remover (for sites that see a quick flash of the default login page).
 * Submit button styles!
@@ -101,6 +101,11 @@ Screenshots of working example in our [Flickr group](http://flickr.com/groups/cu
 2. Example of a custom login page using the nyan.cat as a animated background! [see user generated designs](http://flickr.com/groups/custom-login/).
 
 == Changelog ==
+
+= Version 2.3 (3/13/14) =
+
+* Renamed helper functions to avoid function exists errors even though I've wrapped those functions in `function_exists`
+* New: Class 'Custom_Login_Scripts_Styles'.
 
 = Version 2.2.3 (1/28/14) =
 

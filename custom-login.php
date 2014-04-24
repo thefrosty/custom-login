@@ -4,7 +4,7 @@
  * Plugin Name: Custom Login
  * Plugin URI: http://extendd.com/plugin/custom-login
  * Description: A simple way to customize your WordPress <code>wp-login.php</code> screen! Use the built in, easy to use <a href="./options-general.php?page=custom-login">settings</a> page to do the work for you. Share you designs on <a href="http://flickr.com/groups/custom-login/">Flickr</a> or get Custom Login extensions at <a href="http://extendd.com/plugins/tag/custom-login-extension">Extendd.com</a>.
- * Version: 2.2.3
+ * Version: 2.3
  * Author: Austin Passy
  * Author URI: http://austin.passy.co
  * Text Domain: custom-login
@@ -31,7 +31,7 @@ class Custom_Login {
 	 * Plugin vars
 	 * @return string
 	 */
-	var $version = '2.2.3',
+	var $version = '2.3',
 		$domain,
 		$id;
 	
@@ -279,6 +279,7 @@ class Custom_Login {
 			}
 		}
 		require_once( trailingslashit( plugin_dir_path( __FILE__ ) ) . 'classes/templates.php' );
+		require_once( trailingslashit( plugin_dir_path( __FILE__ ) ) . 'classes/scripts-styles.php' );
 	}
 	
 	/**
@@ -288,7 +289,6 @@ class Custom_Login {
 	function required_functions() {
 		require_once( trailingslashit( plugin_dir_path( __FILE__ ) ) . 'functions/upgrades/upgrade-functions.php' );
 		require_once( trailingslashit( plugin_dir_path( __FILE__ ) ) . 'functions/upgrades/upgrades.php' );
-		require_once( trailingslashit( plugin_dir_path( __FILE__ ) ) . 'functions/scripts-styles.php' );
 	}
 	
 	/**
@@ -313,7 +313,7 @@ class Custom_Login {
 	 *
 	 */
 	function add_shortcodes() {
-		add_shortcode( 'custom-login', array( $this, 'login_shortcode' ) );
+		#add_shortcode( 'custom-login', array( $this, 'login_shortcode' ) );
 	}
 	
 	/**
