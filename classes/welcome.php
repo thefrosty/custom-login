@@ -87,7 +87,6 @@ class Custom_Login_Welcome {
 			margin: 0 -5px;
 			background: url('<?php echo $badge_url; ?>') no-repeat;
 		}
-
 		.about-wrap .cl-badge {
 			position: absolute;
 			top: 0;
@@ -124,7 +123,7 @@ class Custom_Login_Welcome {
 				<div class="feature-section">
 
 					<h4><?php _e( 'Load times', $login->domain ); ?></h4>
-					<p><?php _e( 'There were issues in the past version that had the plugin loading on pages it wasn\'t supposted to. <strong>CL</strong> now caches all queries and database calls.', $login->domain ); ?></p>
+					<p><?php _e( 'There were some rare cases in versions 1.x that had the plugin loading on pages it wasn\'t supposted to. Custom Login <strong>2.x</strong> now caches all queries and database calls. Making it over 140% faster.', $login->domain ); ?></p>
 
 					<h4><?php _e( 'Better features', $login->domain ); ?></h4>
 					<p><?php printf( __( 'With a complete rewrite of the plugin, I have to ability to build custom add-ons (think extensions), like stealth login, email logins and 2-step authentication to name a few of the add-ons you can find on %sExtendd.com%s in the future.', $login->domain ), '<a href="http://extendd.com">', '</a>' ); ?></p>
@@ -133,21 +132,31 @@ class Custom_Login_Welcome {
 			</div>
 
 			<div class="changelog">
-				<h3><?php _e( 'Under the Hood', $login->domain ); ?></h3>
+				<h3><?php _e( 'Extensions', $login->domain ); ?></h3>
 
 				<div class="feature-section col three-col">
 					<div>
-						<h4><?php _e( 'Settings Class', $login->domain ); ?></h4>
-						<p><?php printf( __( 'The new settings class allows to add your own add-ons! Documentation can be found on the %sExtendd.com%s site.', $login->domain ), '<a href="http://extendd.com/documentation/">', '</a>' ); ?></p>
+						<h4><?php _e( 'Stealth Login', $login->domain ); ?></h4>
+                        <a href="http://extendd.com/plugin/custom-login-stealth-login/?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=welcome" target="_blank">
+                        	<img src="https://i.imgur.com/mhuymPG.jpg">
+                        </a>
+						<p><?php _e( 'Protect your wp-login.php page from brute force attacks.', $login->domain ); ?></p>
 					</div>
 
 					<div>
-						<h4><?php _e( 'Templates', $login->domain ); ?></h4>
-						<p><?php printf( __( 'Custom login %stemplates%s can be created in your theme using the new login template add-on (coming soon).', $login->domain ), '<a href="http://extendd.com/documentation/">', '</a>' ); ?></p>
+						<h4><?php _e( 'Page Template', $login->domain ); ?></h4>
+                        <a href="http://extendd.com/plugin/custom-login-page-template/?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=welcome" target="_blank">
+                        	<img src="https://i.imgur.com/A0rzS9q.jpg">
+                        </a>
+						<p><?php _e( 'Add a login form to any WordPress page.', $login->domain ); ?></p>
 					</div>
 
 					<div class="last-feature">
-						
+						<h4><?php _e( 'Login Redirects', $login->domain ); ?></h4>
+                        <a href="http://extendd.com/plugin/wordpress-login-redirects/?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=welcome" target="_blank">
+                        	<img class="eddri-thumbnail" src="https://i.imgur.com/aNGoyAa.jpg">
+                        </a>
+						<p><?php _e( 'Manage redirects after logging in.', $login->domain ); ?></p>
 					</div>
 				</div>
 			</div>

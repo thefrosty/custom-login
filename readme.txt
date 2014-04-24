@@ -102,6 +102,11 @@ Screenshots of working example in our [Flickr group](http://flickr.com/groups/cu
 
 == Changelog ==
 
+= Version 2.3.1 (4/24/14) =
+
+* Added new extension to manage redirects.
+* Upate the Welcome page.
+
 = Version 2.3 (3/13/14) =
 
 * Renamed helper functions to avoid function exists errors even though I've wrapped those functions in `function_exists`
