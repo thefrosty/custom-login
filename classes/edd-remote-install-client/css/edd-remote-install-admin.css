@@ -46,47 +46,16 @@
 }
 
 .eddri-addon {
-	border-top: 1px solid #E8E8E8;
-    margin-top: 15px;
-    padding-top: 10px;
     vertical-align: top;
-}
-.eddri-addon:nth-of-type(1) {
-	border-top: 0px;
-    margin-top: 0;
-    padding-top: 0;
+    border: 1px solid #CCC;
+    -moz-box-shadow: 0 0 5px rgba(0,0,0,0.25);
+    -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+    width: 300px;
 }
 
 .eddri-addon .eddri-addon-container {
-    margin: 5px;
-}
-
-.eddri-addon .eddri-img-wrap {
-	border: 1px solid #efefef;
-	overflow: hidden;
-	position: relative;
-}
-.eddri-addon .eddri-img-wrap > p {
-	background: #fff;
-    bottom: 0;
-    margin: 0 0 -25px 0;
-    padding: 10px;
-    position: absolute;
-	opacity: 0.1;
-	
-	-webkit-transition: all 0.15s linear;
-	-moz-transition: all 0.15s linear;
-	-o-transition: all 0.15s linear;
-	transition: all 0.15s linear;
-}
-.eddri-addon .eddri-img-wrap:hover > p {
-	margin: 0;
-	opacity: 0.98;
-}
-
-.eddri-addon .eddri-thumbnail {
-	width: 100%;
-	height: auto;
+    margin: 20px;
 }
 
 .eddri-addon a.button {

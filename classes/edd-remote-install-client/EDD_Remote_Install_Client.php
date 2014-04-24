@@ -4,14 +4,14 @@
  * Allows plugins to install new plugins or upgrades
  *
  * @author Mindshare Studios, Inc.
- * @version 1.7
- * @updates Austin Passy
+ * @version 1.7.1
  */
-class Extendd_Remote_Install_Client {
-	private $api_url = '';
+
+class EDDSample_Remote_Install_Client {
+	private $api_url  = '';
 	private $options = array(
-		'skipplugincheck' => false
-	);
+			'skipplugincheck'	=> false
+		);
 
 	/**
 	 * Class constructor.
@@ -23,7 +23,7 @@ class Extendd_Remote_Install_Client {
 	 * @return void
 	 */
 	function __construct( $_api_url, $page, $options = array() ) {
-		$this->api_url = trailingslashit( $_api_url );
+		$this->api_url  = trailingslashit( $_api_url );
 
 		if(isset($options['skipplugincheck']) && $options['skipplugincheck'] == true) {
 			$this->options['skipplugincheck'] = true;
@@ -32,7 +32,7 @@ class Extendd_Remote_Install_Client {
 		$options['page'] = $page;
 		$this->options = $options;
 
-		add_action('load-' . $page, array($this, 'register_scripts' ));
+		add_action( 'load-' . $page, array($this, 'register_scripts' ));
 
 		add_action('wp_ajax_edd-activate-plugin-' . $page, array($this, 'activate_plugin'));
 		add_action('wp_ajax_edd-deactivate-plugin-' . $page, array($this, 'deactivate_plugin'));
@@ -41,7 +41,7 @@ class Extendd_Remote_Install_Client {
 		add_action('wp_ajax_edd-do-remote-install-' . $page, array($this, 'do_remote_install'));
 
 		add_action('wp_ajax_edd-do-manual-install-' . $page, array($this, 'do_manual_install'));
-		add_action('plugins_api', array($this, 'plugins_api'), 100, 3 );
+		add_action( 'plugins_api', array($this, 'plugins_api'), 100, 3 );
 
 		add_action('eddri-install-complete-' . $page, array($this, 'install_complete'), 0, 1);
 	}
@@ -52,30 +52,12 @@ class Extendd_Remote_Install_Client {
 	 * @param $str Download name
 	 * @return $str Slug
 	 */
+
 	private function slug($str) {
-		$str = str_replace( array('WordPress C', 'WordPress', 'WP.'), array('C', 'WP', 'WP-'), $str );
 		$str = strtolower( $str );
 		$str = preg_replace("/[\s_]/", "-", $str);
 
 		return $str;
-	}
-	
-	/**
-	 * Helper function to get plugin file by folder.
-	 *
-	 * @param $plugin_folder Folder name
-	 * @return $plugin File name
-	 */
-	private function get_file_name($plugin_folder = '', $strip_php = false) {
-		if ( !function_exists( 'get_plugins' ) )
-			include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-		
-		$plugin_file = '';
-		$plugins = get_plugins('/'.$plugin_folder);
-		foreach( $plugins as $key => $data )
-			$plugin_file = $key;
-		
-		return $strip_php ? str_replace( '.php', '', $plugin_file ) : $plugin_file;
 	}
 
 	/**
@@ -85,10 +67,10 @@ class Extendd_Remote_Install_Client {
 	 */
 
 	public function register_scripts() {
-		wp_enqueue_script('edd-remote-install-script', trailingslashit( plugin_dir_url( __FILE__ ) ) . 'js/edd-remote-install-admin.js', array('jquery'));
-		wp_enqueue_style('edd-remote-install-style', trailingslashit( plugin_dir_url( __FILE__ ) ) . 'css/edd-remote-install-admin.css');
+		wp_enqueue_script('edd-remote-install-script', plugin_dir_url( __FILE__ ) . '/js/edd-remote-install-admin.js', array('jquery'));
+		wp_enqueue_style('edd-remote-install-style', plugin_dir_url( __FILE__ ) . '/css/edd-remote-install-admin.css');
 
-		wp_localize_script('edd-remote-install-script', 'edd_ri_options', $this->options );
+		wp_localize_script( 'edd-remote-install-script', 'edd_ri_options', $this->options );
 	}
 
 	/**
@@ -180,12 +162,10 @@ class Extendd_Remote_Install_Client {
 	public function check_plugin_status() {
 		
 		$plugin = $this->slug($_POST['download']);
-		$file = $this->get_file_name($plugin, true);
-		$file = !empty( $file ) ? $file : $plugin;
 
-		if (is_plugin_active($plugin . '/' . $file . '.php')) {
+		if (is_plugin_active($plugin . '/' . $plugin . '.php')) {
 			die("active");
-		} elseif (file_exists(WP_PLUGIN_DIR . '/' . $plugin . '/' . $file . '.php')) {
+		} elseif (file_exists(WP_PLUGIN_DIR . '/' . $plugin . '/' . $plugin . '.php')) {
 			die("installed");
 		} {
 			die(false);
@@ -217,11 +197,11 @@ class Extendd_Remote_Install_Client {
 			$request = json_decode( wp_remote_retrieve_body( $request ) );
 			$request = maybe_unserialize( $request );
 
-			if(isset($request->download) && $request->download == "free") {
+			if($request->download == "free") {
 				
 				$response = "0";
 
-			} else if (isset($request->download) && $request->download == "not-free") {
+			} else if ($request->download == "not-free") {
 
 				$response = "1";
 
@@ -252,13 +232,10 @@ class Extendd_Remote_Install_Client {
 	public function activate_plugin() {
 
 		$slug = $this->slug($_POST['download']);
-		$file = $this->get_file_name($slug, true);
-		$file = !empty( $file ) ? $file : $slug;
-		
-		$path = WP_PLUGIN_DIR . "/" . $slug . "/" . $file . ".php";
+		$path = WP_PLUGIN_DIR . "/" . $slug . "/" . $slug . ".php";
 		activate_plugin( $path );
 
-		if(is_plugin_active( $slug . '/' . $file . '.php' )) {
+		if(is_plugin_active( $slug . '/' . $slug . '.php' )) {
 			die('activated');
 		} else {
 			die('error');
@@ -278,13 +255,10 @@ class Extendd_Remote_Install_Client {
 	public function deactivate_plugin() {
 
 		$slug = $this->slug($_POST['download']);
-		$file = $this->get_file_name($slug, true);
-		$file = !empty( $file ) ? $file : $slug;
-		
-		$path = WP_PLUGIN_DIR . "/" . $slug . "/" . $file . ".php";
+		$path = WP_PLUGIN_DIR . "/" . $slug . "/" . $slug . ".php";
 		deactivate_plugins( $path );
 
-		if(!is_plugin_active( $slug . '/' . $file . '.php' )) {
+		if(!is_plugin_active( $slug . '/' . $slug . '.php' )) {
 			die('deactivated');
 		} else {
 			die('error');
@@ -369,15 +343,11 @@ class Extendd_Remote_Install_Client {
 
 		if($result == 1) {
 			$slug = $this->slug($download);
-			$file = $this->get_file_name($slug, true);
-			$file = !empty( $file ) ? $file : $slug;
-			
-			$path = WP_PLUGIN_DIR . "/" . $slug . "/" . $file . ".php";
+			$path = WP_PLUGIN_DIR . "/" . $slug . "/" . $slug . ".php";
 			$result = activate_plugin( $path );
 
 			$args['slug'] = $slug;
 			$args['license'] = $license;
-			$args['license_active']	= isset( $license_data ) ? trim( $license_data->license ) : '';
 			do_action('eddri-install-complete-' . $this->options['page'], $args);
 		}
 
