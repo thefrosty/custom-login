@@ -7,7 +7,7 @@
  * @version 1.7.1
  */
 
-class EDDSample_Remote_Install_Client {
+class Extendd_Remote_Install_Client {
 	private $api_url  = '';
 	private $options = array(
 			'skipplugincheck'	=> false
