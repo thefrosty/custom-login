@@ -104,7 +104,7 @@ Screenshots of working example in our [Flickr group](http://flickr.com/groups/cu
 
 = Version 2.3.7 (7/7/14) =
 
-* Fixes CSS issue on lost password page. Issue [<a href="https://github.com/thefrosty/custom-login/issues/1#issue-37305001">#1].
+* Fixes CSS issue on lost password page. Issue [<a href="https://github.com/thefrosty/custom-login/issues/1#issue-37305001">#1</a>].
 
 = Version 2.3.6 (6/23/14) =
 
