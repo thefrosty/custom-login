@@ -67,8 +67,8 @@ class Extendd_Remote_Install_Client {
 	 */
 
 	public function register_scripts() {
-		wp_enqueue_script('edd-remote-install-script', plugin_dir_url( __FILE__ ) . '/js/edd-remote-install-admin.js', array('jquery'));
-		wp_enqueue_style('edd-remote-install-style', plugin_dir_url( __FILE__ ) . '/css/edd-remote-install-admin.css');
+		wp_enqueue_script('edd-remote-install-script', plugin_dir_url( __FILE__ ) . 'js/edd-remote-install-admin.js', array('jquery'), '1.7.1');
+		wp_enqueue_style('edd-remote-install-style', plugin_dir_url( __FILE__ ) . 'css/edd-remote-install-admin.css', null, '1.7.1');
 
 		wp_localize_script( 'edd-remote-install-script', 'edd_ri_options', $this->options );
 	}

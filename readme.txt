@@ -3,7 +3,7 @@ Contributors: austyfrosty
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290
 Tags: admin, branding, customization, custom login, login, logo, error, login error, custom login pro
 Requires at least: 3.5
-Tested up to: 3.9
+Tested up to: 4.0
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -16,7 +16,7 @@ Use this plugin to customize your login screen, great for client sites!
 
 Join in on the [conversation](http://austin.passy.co/wordpress-plugins/custom-login) on my personal blog.
 
-You can find Custom Login [PRO](http://extendd.com/plugin/custom-login-pro/)  on [Extendd.com](http://extendd.com): A plugin marketplace. New features include faster login loading (no database access), Custom Post Types (for multiple designs) and four default CSS designs. **Custom Login Pro is a completly different plugin than Custom Login**.
+You can find Custom Login [PRO](https://extendd.com/plugin/custom-login-pro/)  on [Extendd.com](https://extendd.com): A plugin marketplace. New features include faster login loading (no database access), Custom Post Types (for multiple designs) and four default CSS designs. **Custom Login Pro is a completly different plugin than Custom Login**.
 
 http://www.youtube.com/watch?v=XOZwaLwpjNo
 
@@ -27,9 +27,9 @@ Custom Login 2.0 now has many extensions to make your login page better!
 **Available Now**
 
 * *In Custom Login > version 2.2 you can auto-install all extensions within the settings page with an active licence key.*
-* <a href="http://extendd.com/plugin/custom-login-stealth-login?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=freemium" title="Custom Login Stealth Login">Stealth Login</a> - obscure your login URL.
-* <a href="http://extendd.com/plugin/custom-login-page-template?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=freemium" title="Custom Login Page Template">Page Template</a> - add a login form to any WordPress page. 
-* **NEW** <a href="http://extendd.com/plugin/wordpress-login-redirects?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=freemium" title="Custom Login Redirects">Login Redirects</a> - Manage login redirects. 
+* <a href="https://extendd.com/plugin/custom-login-stealth-login?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=freemium" title="Custom Login Stealth Login">Stealth Login</a> - obscure your login URL.
+* <a href="https://extendd.com/plugin/custom-login-page-template?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=freemium" title="Custom Login Page Template">Page Template</a> - add a login form to any WordPress page. 
+* **NEW** <a href="https://extendd.com/plugin/wordpress-login-redirects?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=freemium" title="Custom Login Redirects">Login Redirects</a> - Manage login redirects. 
 
 **In Development**
 
@@ -53,7 +53,7 @@ Now featureing a HTML, CSS &amp; jQuery box for advanced users to up the customi
 
 = links =
 
-* Plugin Marketplace: [Extendd.com](http://extendd.com/ "WordPress plugin markeetplace")
+* Plugin Marketplace: [Extendd.com](https://extendd.com/ "WordPress plugin markeetplace")
 * My Blog: [http:/austin.passy.co/](http://austin.passy.co/ "Austin Passy's blog")
 * Follow me on Twitter: @[TheFrosty](https:/twitter.com/TheFrosty "Austin TheFrosty' Passy on Twitter")
 * Follow Extendd Twitter: @[Extendd](https:/twitter.com/WPExtendd "Extendd on Twitter")
@@ -75,16 +75,16 @@ Follow the steps below to install the plugin.
 == Frequently Asked Questions ==
 
 = What are extensions? =
-They are additional plugins that add functionality to the Custom Login plugin. Depending of what the extension does. You can find all Custom Login extensions on [extendd.com](http://extendd.com).
+They are additional plugins that add functionality to the Custom Login plugin. Depending of what the extension does. You can find all Custom Login extensions on [extendd.com](https://extendd.com).
 
 = My new settings aren't showing up =
 This plugin caches all settings in a transient, try clicking the new 'Update stylesheet' button to delete and refresh the cache.
 
 = Is there a PRO version? =
-Why yes there is, you can purchase the [PRO](http://extendd.com/plugin/custom-login-pro/) version on [http://extendd.com](http://extendd.com). Note that since Custom Login 2.0, Custom Login PRO is a completely different plugin.
+Why yes there is, you can purchase the [PRO](https://extendd.com/plugin/custom-login-pro/) version on [https://extendd.com](https://extendd.com). Note that since Custom Login 2.0, Custom Login PRO is a completely different plugin.
 
 = Why create this plugin? =
-I created this plugin to allow for custom login of any WordPress login screen. See working example on: [Extendd.com](http://extendd.com/wp-login.php?action=login).
+I created this plugin to allow for custom login of any WordPress login screen. See working example on: [Extendd.com](https://extendd.com/wp-login.php?action=login).
 
 = Where can I upload and share my cool login screen? =
 Check out the newly created [Flickr group](http://flickr.com/groups/custom-login/)! Upload and add it to our pool!
@@ -101,6 +101,32 @@ Screenshots of working example in our [Flickr group](http://flickr.com/groups/cu
 2. Example of a custom login page using the nyan.cat as a animated background! [see user generated designs](http://flickr.com/groups/custom-login/).
 
 == Changelog ==
+
+= Version 2.3.7 (7/7/14) =
+
+* Fixes CSS issue on lost password page. Issue [<a href="https://github.com/thefrosty/custom-login/issues/1#issue-37305001">#1].
+
+= Version 2.3.6 (6/23/14) =
+
+* Update Chosen.js to 1.1.0
+* Update admin.css 
+* Fix opacity select options from being hidden when opacity is checked (on).
+
+= Version 2.3.5 (6/18/14) =
+
+* Update all extendd URLs to https.
+
+= Version 2.3.4 (6/3/14) =
+
+* Added `do_action( 'custom_login_admin_enqueue_scripts' )` for extenstions to hook into settings page `admin_enqueue_scripts`.
+
+= Version 2.3.3 (5/14/14) =
+
+* Attempt to fix `Fatal error: Call to a member function set_sections() on a non-object`.
+
+= Version 2.3.2 (4/24/14) =
+
+* Fixed Fatal Error. Sorry.
 
 = Version 2.3.1 (4/24/14) =
 

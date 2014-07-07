@@ -1,3 +1,13 @@
+
+Version 1.0.17 (6/23/14)
+Fix opacity select options from not showing when selected.
+
+Version 1.0.15 (6/3/14)			
+Added do_action( 'custom_login_admin_enqueue_scripts' ) for extenstions to hook into settings page scripts.
+
+Version 1.0.14 (5/14/14)
+One instance.
+
 Version 1.0.13 (1/28/14)
 Added image preview on files.
 

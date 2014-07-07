@@ -29,7 +29,7 @@ if ( false === ( $js = get_transient( $login->id . '_script' ) ) ) :
 	 * Plugin URI	: http://austin.passy.co/wordpress-plugins/custom-login
 	 * Version		: $version
 	 * Author URI	: http://austin.passy.co
-	 * Pro Version	: http://extendd.com/plugin/custom-login-pro
+	 * Pro Version	: https://extendd.com/plugin/custom-login-pro
 	 */\n\n";
 	 
 	$js .= 'jQuery(document).ready(function($) {';

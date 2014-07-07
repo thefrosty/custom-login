@@ -51,11 +51,40 @@
     -moz-box-shadow: 0 0 5px rgba(0,0,0,0.25);
     -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
-    width: 300px;
+    width: auto;
+	margin-bottom: 10px;
 }
 
 .eddri-addon .eddri-addon-container {
-    margin: 20px;
+	margin: 5px;
+}
+
+.eddri-addon .eddri-img-wrap {
+	border: 1px solid #efefef;
+	overflow: hidden;
+	position: relative;
+}
+.eddri-addon .eddri-img-wrap > p {
+	background: #fff;
+	bottom: 0;
+	margin: 0 0 -25px 0;
+	padding: 10px;
+	position: absolute;
+	opacity: 0.1;
+	
+	-webkit-transition: all 0.15s linear;
+	-moz-transition: all 0.15s linear;
+	-o-transition: all 0.15s linear;
+	transition: all 0.15s linear;
+}
+.eddri-addon .eddri-img-wrap:hover > p {
+	margin: 0;
+	opacity: 0.98;
+}
+
+.eddri-addon .eddri-thumbnail {
+	width: 100%;
+	height: auto;
 }
 
 .eddri-addon a.button {

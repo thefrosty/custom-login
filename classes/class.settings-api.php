@@ -14,7 +14,7 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 	/**
 	 * Version
 	 */
-	var $api_version = '1.0.13';
+	var $api_version = '1.0.17';
 
     /**
      * settings sections array
@@ -64,12 +64,28 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
      * @var object
      */
     private static $_instance;
+
+	/**
+	 * Main Instance
+	 *
+	 * @staticvar 	array 	$instance
+	 * @return 		The one true instance
+	 */
+	public static function instance() {
+		if ( ! isset( self::$_instance ) ) {
+			self::$_instance = new self;
+			self::$_instance->init();
+		}
+		return self::$_instance;
+	}
+	
+    function __construct() {}
 	
 	/**
 	 * Fire
 	 *
 	 */
-    public function __construct() {
+    function init() {
         add_action( 'admin_enqueue_scripts',	array( $this, 'admin_enqueue_scripts' ) );
 		add_action( 'init',						array( $this, 'late_init' ), 89 );
     }
@@ -89,6 +105,7 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 		
 		add_action( 'admin_notices',			array( $this, 'show_notifications' ) );
 		add_action( 'admin_init',				array( $this, 'notification_ignore' ) );
+		add_action( 'admin_menu',				array( $this, 'modify_transient' ) );
 	}
 	
 	/**
@@ -143,6 +160,8 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 		
 		/* Genericons */
 		wp_enqueue_style( 'genericons', plugins_url( 'assets/css/genericons.css', CUSTOM_LOGIN_FILE ), false, '3.0.3', 'screen' );
+			
+		do_action( 'custom_login_admin_enqueue_scripts' );
     }
 
     /**
@@ -340,11 +359,12 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
     function callback_colorpicker( $args ) {
 		static $counter = 0;
 		
-        $value	 = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
-		$check	 = esc_attr( $this->get_option( $args['id'] . '_checkbox', $args['section'], $args['std'] ) );
-        $opacity = esc_attr( $this->get_option( $args['id'] . '_opacity', $args['section'], $args['std'] ) );
-        $size	 = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'small';
+		$value	 	= esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
+		$check	 	= esc_attr( $this->get_option( $args['id'] . '_checkbox', $args['section'], $args['std'] ) );
+		$opacity 	= esc_attr( $this->get_option( $args['id'] . '_opacity', $args['section'], $args['std'] ) );
+		$size	 	= isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'small';
 		$opaque_options = array( '1', '0.9', '0.8', '0.7', '0.6', '0.5', '0.4', '0.3', '0.2', '0.1', '0', );
+		$class		= 'on' != $check ? ' hidden' : '';
 		
 		/* Color */
         $html  = sprintf( '<input type="text" class="%1$s-text" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s" style="float:left"/>', $size, $args['section'], $args['id'], $value );
@@ -358,7 +378,7 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 		
 		/* Opacity */
        // $html .= sprintf( '<input type="text" class="%1$s-text" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s" style="margin-left:70px;%5$s" />', $size, $args['section'], $args['id'] . '_opacity', $opacity, ( 'on' !== $check ? 'display:none;' : '' ) );
-	   $html .= sprintf( '<select class="%1$s%4$s" name="%2$s[%3$s]" id="%2$s[%3$s]" style="margin-left:70px;">', $size, $args['section'], $args['id'] . '_opacity', ( 'on' !== $check ? ' hidden' : '' ) );
+	   $html .= sprintf( '<select class="%1$s%4$s" name="%2$s[%3$s]" id="%2$s[%3$s]" style="margin-left:70px;">', $size, $args['section'], $args['id'] . '_opacity', $class );
         foreach ( $opaque_options as $key ) {
             $html .= sprintf( '<option value="%s"%s>%s</option>', $key, selected( $opacity, $key, false ), $key );
         }
@@ -384,13 +404,17 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 			};
 			$('input[name="<?php echo $args['section'] . '[' . $args['id'] . ']'; ?>"]').wpColorPicker();
 		   
-		    $('select[name="<?php echo $args['section'] . '[' . $args['id'] . '_opacity]'; ?>"]').removeClass('hidden').chosen().addClass('hidden');
 			if ( $('select[name="<?php echo $args['section'] . '[' . $args['id'] . '_opacity]'; ?>"]').hasClass('hidden') ) {
-		    	$('#<?php echo str_replace( '[', '_', $args['section'] . '[' . $args['id'] . '_opacity' ); ?>__chosen').hide();
+				$('select[name="<?php echo $args['section'] . '[' . $args['id'] . '_opacity]'; ?>"]').removeClass('hidden').chosen().addClass('hidden');
+			} else {
+				$('select[name="<?php echo $args['section'] . '[' . $args['id'] . '_opacity]'; ?>"]').chosen();
+			}
+			
+			if ( $('select[name="<?php echo $args['section'] . '[' . $args['id'] . '_opacity]'; ?>"]').hasClass('hidden') ) {
+				$('#<?php echo str_replace( '[', '_', $args['section'] . '[' . $args['id'] . '_opacity' ); ?>__chosen').hide();
 			}
 			
 		    $('input[name="<?php echo $args['section'] . '[' . $args['id'] . '_checkbox]'; ?>"]').on('change', function() {
-		    	//$('select[name="<?php echo $args['section'] . '[' . $args['id'] . '_opacity]'; ?>"]').toggle();
 		    	$('#<?php echo str_replace( '[', '_', $args['section'] . '[' . $args['id'] . '_opacity' ); ?>__chosen').toggle();
 			});
 		});
@@ -398,7 +422,8 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 		$html .= 1 === $counter ? ob_get_clean() : '';
 		
 		/* Description */
-        $html .= sprintf( '<span class="description"> %s</span>', $args['desc'] );
+		if ( !empty( $args['desc'] ) )
+			$html .= sprintf( '<span class="description"> %s</span>', $args['desc'] );
 
         echo $html;
     }
@@ -868,6 +893,38 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 		/* If user clicks to ignore the notice, add that to their user meta */
 		add_user_meta( get_current_user_id(), $ignore, 1, true );
 	}
+	
+	/**
+	 */
+	function load_edd_add_ons_page() {
+		if ( ! class_exists( 'Easy_Digital_Downloads' ) )
+			return;
+			
+		global $edd_add_ons_page;
+		add_action( 'load-' . $edd_add_ons_page, array( $this, 'modify_transient' ), 11 );
+	}
+	
+	/**
+	 */
+	function modify_transient() {
+			
+		if ( false !== ( $cache = get_transient( 'easydigitaldownloads_add_ons_feed' ) ) ) {
+			
+			if ( false === ( $cl = get_transient( 'custom_login_edd_add_ons_feed' ) ) ) {
+				// Replace ?utm_* link
+				//$cache	= preg_replace( '/(\?|\&|&#038;)utm_[a-z]+=[a-zA-Z0-9-]+/', '', $cache );				
+				//var_dump( $cache ); exit;				
+				// Replace 'ref=1' on "Get the Add On" link.
+				$cache	= preg_replace( '/ref=(\d+)/i', 'ref=116', $cache );				
+				//echo( $cache ); exit;
+				delete_transient( 'easydigitaldownloads_add_ons_feed' );
+				set_transient( 'easydigitaldownloads_add_ons_feed', $cache, WEEK_IN_SECONDS * 2 );
+				set_transient( 'custom_login_edd_add_ons_feed', '1', WEEK_IN_SECONDS * 2 );
+				echo 'fart';
+			}
+		}
+	
+	}
 
     /**
      * Show the section settings forms
@@ -1018,7 +1075,7 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 		
 		$defaults = array(
 			'items' => 6,
-			'feed' 	=> 'http://extendd.com/feed/?post_type=download',
+			'feed' 	=> 'https://extendd.com/feed/?post_type=download',
 		);
 		
 		$args = wp_parse_args( $args, $defaults );
@@ -1039,7 +1096,7 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 		$content .= '</ul>';
 		$content .= '<ul class="social">';
 		$content .= '<li class="facebook"><span class="genericon genericon-facebook"></span><a href="https://www.facebook.com/WPExtendd">' . __( 'Like Extendd on Facebook', $this->domain ) . '</a></li>';
-		$content .= '<li class="twitter"><span class="genericon genericon-twitter"></span><a href="http://twitter.com/WPExtendd">' . __( 'Follow Extendd on Twitter', $this->domain ) . '</a></li>';
+		$content .= '<li class="twitter"><span class="genericon genericon-twitter"></span><a href="https://twitter.com/WPExtendd">' . __( 'Follow Extendd on Twitter', $this->domain ) . '</a></li>';
 		$content .= '<li class="twitter"><span class="genericon genericon-twitter"></span><a href="http://twitter.com/TheFrosty">' . __( 'Follow Austin on Twitter', $this->domain ) . '</a></li>';
 		$content .= '<li class="googleplus"><span class="genericon genericon-googleplus"></span><a href="https://plus.google.com/113609352601311785002/">' . __( 'Circle Extendd on Google+', $this->domain ) . '</a></li>';
 		$content .= '<li class="email"><span class="genericons genericons-mail"></span><a href="http://eepurl.com/vi0bz">' . __( 'Subscribe via email', $this->domain ) . '</a></li>';
@@ -1050,3 +1107,20 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 
 }
 endif;
+
+/**
+ * The main function responsible for returning the one true
+ * Instance to functions everywhere.
+ *
+ * Use this function like you would a global variable, except without needing
+ * to declare the global.
+ *
+ * Example: <?php $custom_login = CUSTOMLOGIN(); ?>
+ *
+ * @return The one true Instance
+ */
+if ( !function_exists( 'EXTENDD_PLUGIN_SETTINGS_API' ) ) {
+	function EXTENDD_PLUGIN_SETTINGS_API() {
+		return Extendd_Plugin_Settings_API::instance();
+	}
+}
