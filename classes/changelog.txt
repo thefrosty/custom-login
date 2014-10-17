@@ -1,3 +1,4 @@
+Version 1.0.17 (6/23/14)
 
 Version 1.0.17 (6/23/14)
 Fix opacity select options from not showing when selected.

@@ -1,5 +1,5 @@
 # Custom Login #
-**Contributors:** <a href="http://profiles.wordpress.org/austyfrosty">austyfrosty</a>
+**Contributors:** austyfrosty  
 **Donate link:** https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290  
 **Tags:** admin, branding, customization, custom login, login, logo, error, login error, custom login pro  
 **Requires at least:** 3.5  
@@ -8,9 +8,9 @@
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
-## Description ##
+**Use this plugin to customize your login screen, great for client sites!**
 
-*Use this plugin to customize your login screen, great for client sites*!
+## Description ##
 
 **Version 2.0** is now 140% faster in the admin and uses a lot less resources! Minimum WordPress version 3.5.
 
@@ -27,9 +27,9 @@ Custom Login 2.0 now has many extensions to make your login page better!
 **Available Now**
 
 * *In Custom Login > version 2.2 you can auto-install all extensions within the settings page with an active licence key.*
-* <a href="https://extendd.com/plugin/custom-login-stealth-login?utm_source=github&utm_medium=custom-login&utm_campaign=freemium" title="Custom Login Stealth Login">Stealth Login</a> - obscure your login URL.
-* <a href="https://extendd.com/plugin/custom-login-page-template?utm_source=github&utm_medium=custom-login&utm_campaign=freemium" title="Custom Login Page Template">Page Template</a> - add a login form to any WordPress page. 
-* **NEW** <a href="https://extendd.com/plugin/wordpress-login-redirects?utm_source=github&utm_medium=custom-login&utm_campaign=freemium" title="Custom Login Redirects">Login Redirects</a> - Manage login redirects. 
+* <a href="https://extendd.com/plugin/custom-login-stealth-login?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=freemium" title="Custom Login Stealth Login">Stealth Login</a> - obscure your login URL.
+* <a href="https://extendd.com/plugin/custom-login-page-template?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=freemium" title="Custom Login Page Template">Page Template</a> - add a login form to any WordPress page. 
+* **NEW** <a href="https://extendd.com/plugin/wordpress-login-redirects?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=freemium" title="Custom Login Redirects">Login Redirects</a> - Manage login redirects. 
 
 **In Development**
 
@@ -107,6 +107,12 @@ Screenshots of working example in our [Flickr group](http://flickr.com/groups/cu
 
 
 ## Changelog ##
+
+### Version 2.3.8 (10/17/14) ###
+
+* Updated admin.js bug.
+* Update settings page.
+* Working on extensions auto install fix...
 
 ### Version 2.3.7 (7/7/14) ###
 

@@ -102,6 +102,12 @@ Screenshots of working example in our [Flickr group](http://flickr.com/groups/cu
 
 == Changelog ==
 
+= Version 2.3.8 (10/17/14) =
+
+* Updated admin.js bug.
+* Update settings page.
+* Working on extensions auto install fix...
+
 = Version 2.3.7 (7/7/14) =
 
 * Fixes CSS issue on lost password page. Issue [<a href="https://github.com/thefrosty/custom-login/issues/1#issue-37305001">#1</a>].

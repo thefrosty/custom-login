@@ -920,7 +920,6 @@ if ( !class_exists( 'Extendd_Plugin_Settings_API' ) ):
 				delete_transient( 'easydigitaldownloads_add_ons_feed' );
 				set_transient( 'easydigitaldownloads_add_ons_feed', $cache, WEEK_IN_SECONDS * 2 );
 				set_transient( 'custom_login_edd_add_ons_feed', '1', WEEK_IN_SECONDS * 2 );
-				echo 'fart';
 			}
 		}
 	

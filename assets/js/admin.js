@@ -33,14 +33,14 @@ jQuery(document).ready(function($) {
 		$('div.img').each(function() {
 			var $size = $(this).parent().width();
 			$(this).css({
-				'max-width'	: $size,
+				'max-width': $size,
 				'width'		: $size
 			}).slideDown('fast');
 		});
 	}
 	
 	// Remote API helper
-	$('#custom_login a[data-toggle]').on('click',function(e) {
+	$('#custom_login_extensions a[data-toggle]').on('click',function(e) {
 		e.preventDefault();
 		$('#' + $(this).data('toggle')).toggle();
 	});
