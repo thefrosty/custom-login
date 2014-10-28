@@ -4,7 +4,7 @@
  * Plugin Name: Custom Login
  * Plugin URI: https://extendd.com/plugin/custom-login
  * Description: A simple way to customize your WordPress <code>wp-login.php</code> screen! Use the built in, easy to use <a href="./options-general.php?page=custom-login">settings</a> page to do the work for you. Share you designs on <a href="http://flickr.com/groups/custom-login/">Flickr</a> or get Custom Login extensions at <a href="https://extendd.com/plugins/tag/custom-login-extension">Extendd.com</a>.
- * Version: 2.3.8
+ * Version: 2.3.9
  * Author: Austin Passy
  * Author URI: http://austin.passy.co
  * Text Domain: custom-login
@@ -31,7 +31,7 @@ class Custom_Login {
 	 * Plugin vars
 	 * @return string
 	 */
-	var $version = '2.3.8',
+	var $version = '2.3.9',
 		$domain,
 		$id;
 	
@@ -180,7 +180,7 @@ class Custom_Login {
 		
 		// Plugin version
 		if ( ! defined( 'EXTENDD_API_URL' ) )
-			define( 'EXTENDD_API_URL', 'https://extendd.com' );
+			define( 'EXTENDD_API_URL', 'http://extendd.com' );
 	}
 	
 	/**
@@ -274,7 +274,7 @@ class Custom_Login {
 			// Extensions install API
 			if ( $this->class_exists_require( 'Extendd_Remote_Install_Client', 'edd-remote-install-client/EDD_Remote_Install_Client.php' ) ) {
 				$this->remote_install = new Extendd_Remote_Install_Client( EXTENDD_API_URL, 'settings_page_' . $this->domain,
-					array( 'skipplugincheck' => false, )
+					array( 'skipplugincheck' => true, 'url' => home_url() )
 				);
 				add_action( 'eddri-install-complete-settings_page_' . $this->domain, array( $this, 'custom_login_extension_install_complete' ), 10, 1 );
 			}
@@ -322,7 +322,7 @@ class Custom_Login {
 	 *
 	 */
 	function login_shortcode( $atts ) {
-		return false;
+		return '';
 	}
 	
 	/**
@@ -715,11 +715,11 @@ class Custom_Login {
         );
 		
         //set sections and fields
-        $this->settings_api->set_sections( $this->sections );
+		$this->settings_api->set_sections( $this->sections );
 		$this->settings_api->set_fields( $fields );
 
-        //initialize them
-        $this->settings_api->admin_init();
+		//initialize them
+		$this->settings_api->admin_init();
 		
 		add_action( $this->id . '_settings_sidebars', array( $this, 'sidebar' ), 1 );
 		add_action( $this->id . '_settings_sidebars', array( $this, 'extensions' ), 12 );
@@ -892,7 +892,7 @@ class Custom_Login {
 		$extensions = $this->settings_api->wp_remote_get_set_transient( 'https://raw.github.com/thefrosty/custom-login/master/extensions.json', $transient, 'html' );		
 		if ( false === $extensions ) {
 			// FIND THIS CODE in wp.dev (mu-plugins)
-			$content .= '<div class="eddri-addon"> <div class="eddri-addon-container"> <div class="eddri-img-wrap"> <a href="http://extendd.com/plugin/custom-login-stealth-login/?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=eddri" target="_blank"><img class="eddri-thumbnail" src="https://i.imgur.com/mhuymPG.jpg"></a> <p>Protect your wp-login.php page from brute force attacks.</p> </div> <h3>Stealth Login</h3> <span class="eddri-status">Not Installed</span> <a class="button" data-edd-install="Custom Login Stealth Login">Install</a> <a class="button show-if-not-purchased" data-toggle="purchase-links-1" style="display:none">Purchase License</a> <div id="purchase-links-1" style="display:none"> <ul> <li><a href="http://extendd.com/checkout?edd_action=straight_to_gateway&download_id=7819&edd_options[price_id]=0">Single site license ($25)</a></li> <li><a href="http://extendd.com/checkout?edd_action=straight_to_gateway&download_id=7819&edd_options[price_id]=1">Up to 5 site licenses ($70)</a></li> <li><a href="http://extendd.com/checkout?edd_action=straight_to_gateway&download_id=7819&edd_options[price_id]=2">Unlimited site licenses ($100)</a></li> </ul> </div> </div> </div><div class="eddri-addon"> <div class="eddri-addon-container"> <div class="eddri-img-wrap"> <a href="http://extendd.com/plugin/custom-login-page-template/?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=eddri" target="_blank"><img class="eddri-thumbnail" src="https://i.imgur.com/A0rzS9q.jpg"></a> <p>Add a login form to any WordPress page.</p> </div> <h3>Page Template</h3> <span class="eddri-status">Not Installed</span> <a class="button" data-edd-install="Custom Login Page Template">Install</a> <a class="button show-if-not-purchased" data-toggle="purchase-links-2" style="display:none">Purchase License</a> <div id="purchase-links-2" style="display:none"> <ul> <li><a href="http://extendd.com/checkout?edd_action=straight_to_gateway&download_id=13528">One price! ($35)</a></li> </ul> </div> </div> </div><div class="eddri-addon"> <div class="eddri-addon-container"> <div class="eddri-img-wrap"> <a href="http://extendd.com/plugin/wordpress-login-redirects/?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=eddri" target="_blank"><img class="eddri-thumbnail" src="https://i.imgur.com/aNGoyAa.jpg"></a> <p>Manage redirects after logging in.</p> </div> <h3>Login Redirects</h3> <span class="eddri-status">Not Installed</span> <a class="button" data-edd-install="WordPress Login Redirects">Install</a> <a class="button show-if-not-purchased" data-toggle="purchase-links-3" style="display:none">Purchase License</a> <div id="purchase-links3" style="display:none"> <ul> <li><a href="http://extendd.com/checkout?edd_action=straight_to_gateway&download_id=14333&edd_options[price_id]=0">Single site license ($30)</a></li> <li><a href="http://extendd.com/checkout?edd_action=straight_to_gateway&download_id=14333&edd_options[price_id]=1">Up to 5 site licenses ($70)</a></li> <li><a href="http://extendd.com/checkout?edd_action=straight_to_gateway&download_id=14333&edd_options[price_id]=2">Unlimited site licenses ($150)</a></li> </ul> </div> </div> </div>';
+			$content .= '<div class="eddri-addon"> <div class="eddri-addon-container"> <div class="eddri-img-wrap"> <a href="http://extendd.com/plugin/custom-login-stealth-login/?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=eddri" target="_blank"><img class="eddri-thumbnail" src="https://i.imgur.com/mhuymPG.jpg"></a> <p>Protect your wp-login.php page from brute force attacks.</p> </div> <h3>Stealth Login</h3> <span class="eddri-status">Not Installed</span> <a class="button" data-edd-install="Custom Login Stealth Login">Install</a> <a class="button show-if-not-purchased" data-toggle="purchase-links-1" style="display:none">Purchase License</a> <div id="purchase-links-1" style="display:none"> <ul> <li><a href="http://extendd.com/checkout?edd_action=straight_to_gateway&download_id=7819&edd_options[price_id]=0">Single site license ($25)</a></li> <li><a href="http://extendd.com/checkout?edd_action=straight_to_gateway&download_id=7819&edd_options[price_id]=1">Up to 5 site licenses ($70)</a></li> <li><a href="http://extendd.com/checkout?edd_action=straight_to_gateway&download_id=7819&edd_options[price_id]=2">Unlimited site licenses ($100)</a></li> </ul> </div> </div> </div><div class="eddri-addon"> <div class="eddri-addon-container"> <div class="eddri-img-wrap"> <a href="http://extendd.com/plugin/custom-login-page-template/?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=eddri" target="_blank"><img class="eddri-thumbnail" src="https://i.imgur.com/A0rzS9q.jpg"></a> <p>Add a login form to any WordPress page.</p> </div> <h3>Page Template</h3> <span class="eddri-status">Not Installed</span> <a class="button" data-edd-install="Custom Login Page Template">Install</a> <a class="button show-if-not-purchased" data-toggle="purchase-links-2" style="display:none">Purchase License</a> <div id="purchase-links-2" style="display:none"> <ul> <li><a href="http://extendd.com/checkout?edd_action=straight_to_gateway&download_id=13528">One price! ($35)</a></li> </ul> </div> </div> </div><div class="eddri-addon"> <div class="eddri-addon-container"> <div class="eddri-img-wrap"> <a href="http://extendd.com/plugin/wordpress-login-redirects/?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=eddri" target="_blank"><img class="eddri-thumbnail" src="https://i.imgur.com/aNGoyAa.jpg"></a> <p>Manage redirects after logging in.</p> </div> <h3>Login Redirects</h3> <span class="eddri-status">Not Installed</span> <a class="button" data-edd-install="WordPress Login Redirects">Install</a> <a class="button show-if-not-purchased" data-toggle="purchase-links-3" style="display:none">Purchase License</a> <div id="purchase-links-3" style="display:none"> <ul> <li><a href="http://extendd.com/checkout?edd_action=straight_to_gateway&download_id=14333&edd_options[price_id]=0">Single site license ($30)</a></li> <li><a href="http://extendd.com/checkout?edd_action=straight_to_gateway&download_id=14333&edd_options[price_id]=1">Up to 5 site licenses ($70)</a></li> <li><a href="http://extendd.com/checkout?edd_action=straight_to_gateway&download_id=14333&edd_options[price_id]=2">Unlimited site licenses ($150)</a></li> </ul> </div> </div> </div>';
 		}
 		else {
 			$content .= $extensions->html;

@@ -4,7 +4,7 @@
  * Allows plugins to install new plugins or upgrades
  *
  * @author Mindshare Studios, Inc.
- * @version 1.7.1
+ * @version 1.7.2 (FROSTY HACK)
  */
 
 class Extendd_Remote_Install_Client {
@@ -67,8 +67,8 @@ class Extendd_Remote_Install_Client {
 	 */
 
 	public function register_scripts() {
-		wp_enqueue_script('edd-remote-install-script', plugin_dir_url( __FILE__ ) . 'js/edd-remote-install-admin.js', array('jquery'), '1.7.1');
-		wp_enqueue_style('edd-remote-install-style', plugin_dir_url( __FILE__ ) . 'css/edd-remote-install-admin.css', null, '1.7.1');
+		wp_enqueue_script('edd-remote-install-script', plugin_dir_url( __FILE__ ) . '/js/edd-remote-install-admin.js', array('jquery'));
+		wp_enqueue_style('edd-remote-install-style', plugin_dir_url( __FILE__ ) . '/css/edd-remote-install-admin.css');
 
 		wp_localize_script( 'edd-remote-install-script', 'edd_ri_options', $this->options );
 	}
@@ -124,6 +124,11 @@ class Extendd_Remote_Install_Client {
 				);
 
 				$download_link = add_query_arg($api_params, $this->api_url);
+				
+				///////////// NEW /////////////////
+				$download_id = $this->get_remote_download_id( $_GET['name'] );				
+				$download_link = $this->get_encoded_download_package_url( $download_id, $_GET['license'] );
+				///////////// NEW /////////////////
 
 			    $api = new stdClass();
 		        $api->name = $args->slug;
@@ -332,8 +337,14 @@ class Extendd_Remote_Install_Client {
 			'item_name'  => urlencode( $download ),
 			'license'	 => urlencode( $license )
 		);
-
-		$download_link = add_query_arg($api_params, $this->api_url);
+		
+		//$download_link = add_query_arg($api_params, $this->api_url);
+		
+		// decode the license data
+		$download_id = $this->get_remote_download_id( $download );
+		
+		$download_link = $this->get_encoded_download_package_url( $download_id, $license );
+		//var_dump( $download_link ); exit;
 
 		include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php'; //for plugins_api..
 
@@ -352,5 +363,33 @@ class Extendd_Remote_Install_Client {
 		}
 
 		die();
+	}
+	
+	private function get_remote_download_id( $download_title, $download_id = null ) {
+
+		$api_params = array(
+			'edd_action' => 'get_download_id',
+			'item_name'  => urlencode( $download_title )
+		);
+
+		$response = wp_remote_get( add_query_arg( $api_params, $this->api_url ), array( 'timeout' => 15, 'sslverify' => false ) );
+
+		if ( !is_wp_error( $response ) )
+			$download_id = json_decode( wp_remote_retrieve_body( $response ) );
+			
+		return $download_id;
+	}
+	
+	private function get_encoded_download_package_url( $download_id, $license ) {
+
+		$package_url = add_query_arg( array(
+			'edd_action' 	=> 'package_download',
+			'id' 			=> $download_id,
+			'key' 			=> $license,
+			'expires'		=> rawurlencode( base64_encode( strtotime( '+1 hour' ) ) )
+		 ), $this->api_url );
+
+		return apply_filters( 'edd_sl_encoded_package_url', $package_url );
+
 	}
 }

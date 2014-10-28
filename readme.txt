@@ -102,6 +102,11 @@ Screenshots of working example in our [Flickr group](http://flickr.com/groups/cu
 
 == Changelog ==
 
+= Version 2.3.9 (10/27/14) =
+
+* Fixed missing dash in ID for update API.
+* Removed install button for Custom Login Extensions. Please manually login to [Your Account](http://extendd.com/my-account) to download.
+
 = Version 2.3.8 (10/17/14) =
 
 * Updated admin.js bug.
