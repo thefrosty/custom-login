@@ -1,0 +1,210 @@
+.edd-remote-install {
+    display: inline-block;
+    font-size:14px;
+    color:#fff !important;
+    text-decoration: none !important;
+    padding:14px 60px;
+    line-height:1;
+    overflow: hidden;
+    position:relative;
+
+    box-shadow:0 1px 1px #ccc;
+    border-radius:2px;
+
+    background-color: #21759b;
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#2a95c5),to(#21759b));
+    background-image: -webkit-linear-gradient(top,#2a95c5,#21759b);
+    background-image: -moz-linear-gradient(top,#2a95c5,#21759b);
+    background-image: -ms-linear-gradient(top,#2a95c5,#21759b);
+    background-image: -o-linear-gradient(top,#2a95c5,#21759b);
+    background-image: linear-gradient(to bottom,#2a95c5,#21759b);
+    border: 1px solid #21759b;
+    border-bottom-color: #1e6a8d;
+    border-radius: 3px;
+    -webkit-box-shadow: inset 0 1px 0 rgba(120,200,230,0.5);
+    box-shadow: inset 0 1px 0 rgba(120,200,230,0.5);
+    text-decoration: none;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.1);
+
+    cursor: pointer;
+
+}
+
+.edd-remote-install.disabled {
+    pointer-events: none;
+    cursor: default;
+    background-color: #9c9c9c;
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#c4c4c4),to(#9c9c9c));
+    background-image: -webkit-linear-gradient(top,#c4c4c4,#9c9c9c);
+    background-image: -moz-linear-gradient(top,#c4c4c4,#9c9c9c);
+    background-image: -ms-linear-gradient(top,#c4c4c4,#9c9c9c);
+    background-image: -o-linear-gradient(top,#c4c4c4,#9c9c9c);
+    background-image: linear-gradient(to bottom,#c4c4c4,#9c9c9c);
+    border: 1px solid #9c9c9c;
+    border-bottom-color: #8c8c8c;
+    box-shadow: inset 0 1px 0 rgba(0,0,0,0.2);
+}
+
+.eddri-addon {
+    vertical-align: top;
+    border: 1px solid #CCC;
+}
+
+.eddri-addon .eddri-addon-container {
+	margin: 5px;
+}
+
+.eddri-addon .eddri-img-wrap {
+	border: 1px solid #efefef;
+	overflow: hidden;
+	position: relative;
+}
+.eddri-addon .eddri-img-wrap > p {
+	background: #fff;
+	bottom: 0;
+	margin: 0 0 -25px 0;
+	padding: 10px;
+	position: absolute;
+	opacity: 0.1;
+	
+	-webkit-transition: all 0.15s linear;
+	-moz-transition: all 0.15s linear;
+	-o-transition: all 0.15s linear;
+	transition: all 0.15s linear;
+}
+.eddri-addon .eddri-img-wrap:hover > p {
+	margin: 0;
+	opacity: 0.98;
+}
+
+.eddri-addon .eddri-thumbnail {
+	width: 100%;
+	height: auto;
+}
+
+.eddri-addon h3 {
+    line-height: 1.4em !important;
+    min-height: 60px;
+}
+
+.eddri-addon a.button {
+    margin-top: 12px;
+}
+
+.eddri-addon span.eddri-status {
+    background-color: #EEE;
+    border: 1px solid #DADADA;
+    padding: 6px;
+    display: block;
+    position: relative;
+    font-weight: bold;
+    color: #424242;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.eddri-addon span.eddri-status.eddri-inactive {
+    background-color: #FFFBCC;
+    border: 1px solid #E6DB55;
+}
+
+.eddri-addon span.eddri-status.eddri-active {
+    background-color: #CBECA0;
+    border: 1px solid #97B48A;
+    color: #2D5312;
+}
+
+.eddri-addon span.eddri-status.eddri-error {
+    color: #A94442;
+    background-color: #F2DEDE;
+    border: 1px solid #EBCCD1;
+}
+
+.eddri-status.in-progress {
+    cursor: progress;
+    background-color: #D9EDF7 !important;
+}
+
+.eddri-status.stopped {
+    cursor: pointer;
+    background-color: #D9EDF7 !important;
+}
+
+.eddri-status.success {
+    background-color: #D9EDF7 !important;
+}
+
+.eddri-status.failure {
+
+}
+/* Hide the original text of the button. Then the loading or finished
+   text will be shown in the :after element above it. */
+
+.eddri-status.in-progress,
+.eddri-status.finished{
+    color:transparent !important;
+    text-shadow: none;
+}
+
+.eddri-status.in-progress:after,
+.eddri-status.finished:after{
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    top: 6px;
+    left: 6px;
+    color: #424242;
+}
+
+/* If the .in-progress class is set on the button, show the
+   contents of the data-loading attribute on the butotn */
+
+.eddri-status.in-progress:after{
+    content:attr(data-loading);
+}
+
+/* The same goes for the .finished class */
+
+.eddri-status.finished:after{
+    content:attr(data-finished);
+}
+
+.eddri-status.eddri-error:after{
+    color: #A94442;
+}
+
+/* The colorful bar that grows depending on the progress */
+
+.eddri-status .tz-bar{
+    background-color: #428BCA;
+    height:3px;
+    bottom:0;
+    left:0;
+    width:0;
+    position:absolute;
+    z-index:1;
+
+    border-radius:0 0 2px 2px;
+
+    -webkit-transition: width 0.5s, height 0.5s;
+    -moz-transition: width 0.5s, height 0.5s;
+    transition: width 0.5s, height 0.5s;
+}
+
+/* The bar can be either horizontal, or vertical */
+
+.eddri-status .tz-bar.background-horizontal{
+    height:100%;
+    border-radius:2px;
+}
+
+#license-input {
+    display: block;
+    position: relative;
+    margin-top: 4px;
+    outline: none;
+    width: 100%;
+    line-height: 18px;
+}

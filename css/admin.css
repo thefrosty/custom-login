@@ -1,0 +1,315 @@
+
+.cl-container {
+	background-color: #f5f5f5;
+	background-image: -moz-linear-gradient(center top , #f2f2f2 0px, #f5f5f5 100%);
+	background-repeat: repeat-x;
+	border: 1px solid #dedede;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+	margin-top: 5px;
+	overflow: hidden;
+}
+
+.cl-container * {
+	transition: all 0.5s ease-in-out;
+}
+[class^="chosen-"], [class^="chosen-"] * {
+	transition: none;
+}
+
+.cl-container .cl-header {
+	box-sizing: border-box;
+	float: none !important;
+	position: relative !important;
+	width: 100% !important;
+}
+
+.cl-header h2,
+.cl-header h3 {
+	display: inline-block;
+	padding-right: 5px;
+}
+.cl-header a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.cl-container .cl-header, .cl-container .cl-footer {
+	padding: 6px 10px;
+}
+
+/************ NOTICES *************/
+#cl-notices {
+}
+#cl-notices h2 {
+	display: none;
+}
+
+#cl-notices div.updated,
+#cl-notices div.error {
+	background-color: transparent;
+	margin: 0;
+}
+
+/************ STICKY *************/
+#cl-sticky {
+	background: #f3f3f3;
+	box-shadow: 0 1px 0 #dedede inset;
+	padding: 0;
+	position: relative;
+	z-index: 19;
+}
+#cl-sticky .wrap {
+	margin: 0;
+	padding: 4px 15px;
+}
+.is-sticky > #cl-sticky {
+	bottom: 0;
+	border-top: 1px solid #dedede;
+	box-shadow: 0 1px 0 #fcfcfc inset;
+	top: auto !important;
+}
+
+#sticky-admin-notice {
+	display: inline-block;
+}
+
+#sticky-admin-notice ul.social {
+	display: none;
+	margin: 5px 0 0 0;
+}
+.is-sticky #sticky-admin-notice ul.social {
+	display: inline-block;
+}
+#sticky-admin-notice ul li {
+	display: inline;
+	margin-right: 8px;
+}
+#sticky-admin-notice ul li a {
+	color: #898989;
+	text-decoration: none;
+}
+#sticky-admin-notice ul li a:hover {
+	text-decoration: underline;
+}
+
+/*******SIDEBAR/MAIN *************/
+.cl-container .cl-sidebar, .cl-container .cl-main {
+	min-height: 850px;
+}
+
+/************ SIDEBAR ************/
+.cl-sidebar {
+	float: left;
+	width: 222px;
+}
+#wpbody-content .cl-sidebar .metabox-holder {
+	padding-top: 0;
+}
+
+.cl-sections-menu {
+	border-top: 1px solid #dedede;
+	margin-top: 0;
+}
+.cl-sections-menu li {
+}
+.cl-sections-menu li > a {
+	border-bottom: 1px solid #dedede;
+	box-shadow: 0 1px 0 #fff;
+	color: #555;
+	display: block;
+	padding: 10px 15px;
+	text-decoration: none;
+}
+.cl-sections-menu li > a:hover {
+	color: #222;
+	padding-left: 20px;
+}
+.cl-sections-menu li > a.active {
+	background-color: #0074a2;
+	color: #efefef;
+}
+/* Addons */
+.cl-sections-menu li > a[href="#custom_login_extensions"] {
+	background-color: #e7ecef;
+	color: #474747;
+	font-weight: bold;
+}
+.cl-sections-menu li > a.active[href="#custom_login_extensions"] {
+}
+
+.cl-sidebar .postbox {
+	border-right: none;
+	border-left: none;
+	font-size: 80%;
+	min-width: 222px; /* Same as .cl-sidebar width */
+	margin-bottom: -1px;
+}
+
+/************ MAIN ***************/
+.cl-main {
+	background: none repeat scroll 0 0 #fcfcfc;
+	border-top: 1px solid #dedede;
+	border-left: 1px solid #d8d8d8;
+	box-shadow: 0 1px 0 #fff inset;
+	margin-left: 221px;
+	padding: 10px 20px;
+	position: relative;
+	z-index: 1;
+}
+
+.cl-main > .group {
+	display: none;
+}
+.no-js .cl-main > .group {
+	display: block;
+}
+
+.cl-container .cl-main h3 {
+    border-bottom: 1px solid #e7e7e7;
+    line-height: 2em;
+    margin-top: 0;
+}
+.cl-main .form-table {
+    clear: none;
+    margin-top: 0 !important;
+}
+.cl-main .form-table th {
+	font-weight: 400;
+	width: 33%;
+}
+.cl-main .form-table th h4 {
+	font-weight: 600;
+	font-size: 1.25em;
+	margin: 0.95em 0;
+}
+
+/* CALLBACKS */
+.cl-main .checkbox-wrap {
+	display: inline-block;
+	float: left;
+	margin: 0 35px 0 0;
+	position: relative;
+}
+
+.cl-main .cl-colorpicker-wrap {
+	position: relative;
+}
+.cl-main .cl-colorpicker-wrap * {
+	transition: none;
+}
+
+.cl-main .wp-picker-container {
+	float: left;
+	margin-right: 10px;
+}
+
+.cl-main .cl-colorpicker-wrap .checkbox-wrap {
+	float: left;
+}
+.cl-main .cl-colorpicker-wrap .checkbox-wrap > input {
+	float: none;
+}
+
+.cl-container select {
+	min-width: 120px;
+}
+
+.cl-main .img-wrapper {
+	height: auto;
+	margin: 10px 0;
+	width: 100%;
+}
+.cl-main .img-wrapper img {
+	border: 1px solid #aaa;
+	box-shadow: 0 0 2px 0 #BFBFBF;
+	height: auto;
+	width: 250px;
+}
+.cl-main .img-wrapper a {
+	display: block;
+}
+
+/* ACE */
+div[id$="_ace"] {
+	min-height: 150px;
+	position: relative;
+}
+div[id$="_ace"] * {
+	transition: none;
+}
+
+/* EDDRI */
+.eddri-addon-container {
+	padding: 1%;
+}
+
+@media screen and (max-width: 600px) {
+	.cl-sidebar {
+		float: none;
+		width: 100%;
+	}
+	.cl-main {
+		float: none;
+		margin-left: 0;
+	}
+}
+
+/* SECTIONS  */
+.section {
+	clear: both;
+	padding: 0px;
+	margin: 0px;
+}
+.section * {
+	box-sizing: border-box;
+}
+
+/* COLUMN SETUP  */
+.col {
+	display: block;
+	float: left;
+	margin: 1% 0 1% 1.6%;
+}
+.col:nth-child(3n+1) { margin-left: 0; }
+
+/* GRID OF TWO */
+.span_2_of_2 {
+	width: 100%;
+}
+.span_1_of_2 {
+	width: 50%;
+}
+
+/*  GRID OF THREE  */
+.span_3_of_3 {
+	width: 100%;
+}
+.span_2_of_3 {
+	width: 66.1%;
+}
+.span_1_of_3 {
+	width: 32.2%;
+}
+
+/* GO FULL WIDTH AT LESS THAN 480 PIXELS */
+@media only screen and (max-width: 762px) {
+	.col { 
+		margin: 1% 0 1em;
+	}
+}
+
+/*  GO FULL WIDTH AT LESS THAN 480 PIXELS */
+@media only screen and (max-width: 480px) {
+	.span_1_of_2 {
+		width: 100%; 
+	}
+	.span_3_of_3 {
+		width: 100%; 
+	}
+	.span_2_of_3 {
+		width: 100%; 
+	}
+	.span_1_of_3 {
+		width: 100%;
+	}
+}
