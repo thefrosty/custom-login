@@ -588,7 +588,7 @@ class CL_Settings_API {
 				<h3><?php _e( 'Custom Login', $this->settings['domain'] ); ?></h3>
 				<span><?php echo $this->settings['version']; ?></span>
 				<div>
-					<?php echo sprintf( __( 'a %s plugin', $this->settings['domain'] ), '<a href="https://frosty.media/">Frosty Media</a>' ); ?>
+					<?php echo sprintf( __( 'A %s plugin', $this->settings['domain'] ), '<strong><a href="https://frosty.media/" target="_blank">Frosty Media</a></strong>' ); ?>
 					&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://twitter.com/FrostyMediaWP"><span class="dashicons dashicons-twitter"></span></a>
 				</div>
 			</div><!-- #cl-header -->
@@ -718,7 +718,7 @@ class CL_Settings_API {
 	 */
 	function cl_extensions( $args ) {
 		
-		$content = sprintf( 'Install Custom Login extensions on <a href="%s">this page</a> with a valid license key. <small>Purchase your license key by clicking the appropriate link below</small>.', sprintf( admin_url( 'options-general.php?page=%s-extensions' ), CUSTOM_LOGIN_DIRNAME ) );
+		$content = sprintf( __( 'Install Custom Login extensions on <a href="%s">this page</a> with a valid license key. <small>Purchase your license key by clicking the appropriate link below</small>.', $this->settings['domain'] ), sprintf( admin_url( 'options-general.php?page=%s-extensions' ), CUSTOM_LOGIN_DIRNAME ) );
 		
 		$this->postbox( 'custom-login-extensions', __( 'Extensions Installer', $this->settings['domain'] ), $content );
 	}
@@ -728,13 +728,26 @@ class CL_Settings_API {
 	 */
 	function about_the_author( $args ) {
 		
-		$content  = '<ul>';
-		$content .= '<li><strong>Austin Passy</strong></li>';
-		$content .= '<li>Blog: <a href="https://austin.passy.co">austin.passy.co</a></li>';
-		$content .= '<li>Twitter: <a href="https://twitter.com/TheFrosty">TheFrosty</a></li>';
+		$content  = sprintf( '%s: <a href="https://wordpress.org/support/view/plugin-reviews/custom-login" class="star-rating">
+			<i class="dashicons dashicons-star-filled"></i>
+			<i class="dashicons dashicons-star-filled"></i>
+			<i class="dashicons dashicons-star-filled"></i>
+			<i class="dashicons dashicons-star-filled"></i>
+			<i class="dashicons dashicons-star-filled"></i>
+			</a>', _x( 'Rate', 'rate; as in rate this plugin', $this->settings['domain'] ) );
+		
+		$content .= '<ul>';
+		$content .= sprintf( '<li>%s: <a href="https://austin.passy.co">Austin Passy</a></li>', _x( 'Author', 'the author of this plugin', $this->settings['domain'] ) );
+		$content .= sprintf( '<li>%s: <a href="https://twitter.com/TheFrosty">TheFrosty</a></li>', __( 'Twitter', $this->settings['domain'] ) );
 		$content .= '</ul>';
 		
-		$this->postbox( 'frosty-media-author', __( 'Author info', $this->settings['domain'] ), $content );
+		$content .= sprintf( __( '<small>If you have suggestions for a new add-on, feel free to open a support request on <a href="%s">GitHub</a>. Want regular updates? Follow me on <a href="%s">Twitter</a> or visit my <a href="%s">blog</a>.</small>' ),
+			'https://github.com/thefrosty/custom-login/issues',
+			'https://twitter.com/TheFrosty',
+			'https://austin.passy.co'
+		);
+		
+		$this->postbox( 'frosty-media-author', __( 'Custom Login', $this->settings['domain'] ), $content );
 	}
 
 	/**

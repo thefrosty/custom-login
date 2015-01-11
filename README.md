@@ -1,16 +1,24 @@
-=== Custom Login ===
-Contributors: austyfrosty, frostymedia
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290
-Tags: admin, branding, customization, custom login, login, logo, error, login error, custom login pro
-Requires at least: 4.0
-Tested up to: 4.1
-Stable tag: trunk
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+# Custom Login #
+**Contributors:** austyfrosty, frostymedia
+  
+**Donate link:** https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290
+  
+**Tags:** admin, branding, customization, custom login, login, logo, error, login error, custom login pro
+  
+**Requires at least:** 4.0
+  
+**Tested up to:** 4.1
+  
+**Stable tag:** trunk
+  
+**License:** GPLv2 or later
+  
+**License URI:** http://www.gnu.org/licenses/gpl-2.0.html
+  
 
 Custin Login allows you to easily customize your admin login page, works great for client sites!
 
-== Description ==
+## Description ##
 
 Custom Login 2.0 was 140% faster than version 1.0, and version 3.0 is now even better! *Minimum WordPress version is 4.0*
 
@@ -24,11 +32,11 @@ For more information visit the official [Custom Login](http://frosty.media/plugi
 > <strong>Bug Reports</strong><br>
 > Bug reports for Custom Login are [welcomed on GitHub](https://github.com/thefrosty/custom-login). 
 
-= Video =
+### Video ###
 
 http://www.youtube.com/watch?v=XOZwaLwpjNo
 
-= Extensions =
+### Extensions ###
 
 There are currently 4 premium extensions available, with more coming (suggestions welcome - and *will be offered for free to said user*).
 
@@ -48,7 +56,7 @@ There are currently 4 premium extensions available, with more coming (suggestion
 * Submit button styles!
 * Custom Login pre made settings templates.
 
-= More info =
+### More info ###
 
 Activate the plugin and customize your WordPress login screen. It's as easy as modifying a few settings, there is no need to understand CSS at all. Custom Login even has a HTML, CSS &amp; jQuery textarea for more advanced customizations.
 
@@ -57,7 +65,7 @@ Activate the plugin and customize your WordPress login screen. It's as easy as m
 
 **For those looking to showoff your login screen, check out the [Flickr group](http://flickr.com/groups/custom-login/)! Share you designs with the community!**
 
-= links =
+### links ###
 
 * Premium Plugins: [Frosty.Media/plugin](http://frosty.media/ "Premium WordPress Plugins by Frosty")
 * Austins Blog: [http:/austin.passy.co/](http://austin.passy.co/ "Austin Passy's blog")
@@ -65,11 +73,11 @@ Activate the plugin and customize your WordPress login screen. It's as easy as m
 * Frosty Media on Twitter: @[FrostyMediaWP](https:/twitter.com/FrostyMediaWP "Extendd on Twitter")
 * **Development welcomed on [GitHub](https://github.com/thefrosty/custom-login)**
 
-= Hooks and Filters =
+### Hooks and Filters ###
 
 Coming Soon.
 
-== Installation ==
+## Installation ##
 
 Follow the steps below to install the plugin.
 
@@ -79,56 +87,57 @@ Follow the steps below to install the plugin.
 4. Design away.
 5. Activate the settings by checking "Enable" in the "General Settings" tab.
 
-== Frequently Asked Questions ==
+## Frequently Asked Questions ##
 
-= What are extensions? =
+### What are extensions? ###
 They are additional plugins that add/extend functionality to the Custom Login plugin. You can find all Custom Login extensions on [Frosty.Media](http://frosty.media).
 
-= My new settings aren't showing up =
+### My new settings aren't showing up ###
 This plugin caches all settings in a transient, try clicking the new 'Update stylesheet' button to delete and refresh the cache. *This applys to versions < 3.0*.
 
-= Is there a PRO version? =
+### Is there a PRO version? ###
 Well, yes and no. Since version 3.0 of Custom Login the [PRO](http://frosty.media/plugins/custom-login-pro/) version is a completely different plugin. Instead of settings to manage your login design there is a new post type where you can create unlimited "designs" and activate each one as needed. Since version 3.0 all Custom Login extensions no longer work with Custom Login Pro, but will be merged into it in the future.
 
-= Why create this plugin? =
+### Why create this plugin? ###
 I created this plugin to allow for custom login of any WordPress login screen. See working example on: [Frosty.Media/login](http://frosty.media/wp-login.php).
 
-= Where can I upload and share my cool login screen? =
+### Where can I upload and share my cool login screen? ###
 Check out the [Flickr group](http://flickr.com/groups/custom-login/)! Upload and add it to our pool!
 
-= I think i want to uninstall =
+### I think i want to uninstall ###
 Just deactive it. Sad panda is sad.
 
-== Screenshots ==
+## Screenshots ##
 
-Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-login/).
+Screenshots of working examples in our [Flickr group](http://flickr.com/groups/custom-login/)
 
-1. Custom Login v3 Design Settings part 1.
+###1. Custom Login Settings page (as of v 2.0).
+###
+![Custom Login Settings page (as of v 2.0).
+](https://s.w.org/plugins/custom-login/screenshot-1.png)
 
-2. Custom Login v3 Design Settings part 2.
 
-3. Custom Login v3 General Settings.
+###2. Example of a custom login page using the nyan.cat as a animated background! [see user generated designs](http://flickr.com/groups/custom-login/).
+###
+![Example of a custom login page using the nyan.cat as a animated background! [see user generated designs](http://flickr.com/groups/custom-login/).
+](https://s.w.org/plugins/custom-login/screenshot-2.png)
 
-4. Custom Login Extensions Installer (an active license key is required).
 
-== Changelog ==
+## Changelog ##
 
-= Version 3.0.1 (12/11/14) =
+### Version 3.0.1 (12/10/14) ###
 
-New: Add force width option to force width on h1 logo wrapper.
-Bug: Change sanitization of all integer fields to 'int' vs 'absint' to allow empty or no value.
-Bug: Remove is_int function on Logo width and height style output.
-Tweak: On Logo upload and "insert" update the width and height input settings fields for logo with the image size.
-Tweak: Change CSS rule(s) from `#login h1 a` to `.login h1 a`.
+Update: readme.txt
 
-= Version 3.0.0 (12/01/14) =
+### Version 3.0.0 (12/01/14) ###
 
-New: Complete rewrite.
-New: Settings page UI update, now matches WordPress color.
-New: Extensions installer moved to sparate settings page (hidden).
-New: Removed version [2.x changelog](http://plugins.svn.wordpress.org/custom-login/tags/2.4/readme.txt).
+Complete rewrite of all code.
+Loading a speed improvements.
+Redesigned settings page.
+Additional extensions.
+For version 2.x.x changelog see [2.4 readme](http://plugins.svn.wordpress.org/custom-login/tags/2.4/readme.txt).
 
-== Upgrade Notice ==
+## Upgrade Notice ##
 
-= 3.0.1 =
+### 3.0.1 ###
 Complete rewrite of Custom Login, be sure to run the update script to keep your settings.

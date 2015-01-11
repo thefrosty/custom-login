@@ -98,9 +98,15 @@ $fields	[CUSTOM_LOGIN_OPTION . '_design'] = array(
 	/** BREAK **/
 	
 	array(
+		'name'		=> 'logo_force_form_max_width',
+		'label'		=> __( 'Force max-width', CUSTOM_LOGIN_DIRNAME ),
+		'desc'		=> __( 'If checked and the login form width (set below) is not empty, a CSS rule of <code>width</code> will be applied on the logo wrapper element <code>.login h1</code>.', CUSTOM_LOGIN_DIRNAME ),
+		'type'		=> 'checkbox'
+	),
+	array(
 		'name' 		=> 'logo_background_url',
 		'label' 	=> __( 'Image', CUSTOM_LOGIN_DIRNAME ),
-		'desc' 		=> '',
+		'desc' 		=> __( 'The default form width is 320px, so an image <strong>should</strong> be the same. You can always modify the form width (below).', CUSTOM_LOGIN_DIRNAME ),
 		'type' 		=> 'file',
 		'default' 	=> '',
 		'size'		=> 'large',
@@ -109,20 +115,20 @@ $fields	[CUSTOM_LOGIN_OPTION . '_design'] = array(
 	array(
 		'name' 		=> 'logo_background_size_width',
 		'label' 	=> __( 'Image width', CUSTOM_LOGIN_DIRNAME ),
-		'desc' 		=> __( 'Enter your image size in "pixels" without the "px"', CUSTOM_LOGIN_DIRNAME ),
+		'desc' 		=> __( 'Enter your desired image height (All not integers will be removed).', CUSTOM_LOGIN_DIRNAME ),
 		'type' 		=> 'text',
 		'size'		=> 'small',
 		'default' 	=> '',
-		'sanitize' => 'absint',
+		'sanitize' => 'int',
 	),
 	array(
 		'name' 		=> 'logo_background_size_height',
 		'label' 	=> __( 'Image height', CUSTOM_LOGIN_DIRNAME ),
-		'desc' 		=> __( 'Enter your image size in "pixels" without the "px"', CUSTOM_LOGIN_DIRNAME ),
+		'desc' 		=> __( 'Enter your desired image height (All not integers will be removed).', CUSTOM_LOGIN_DIRNAME ),
 		'type' 		=> 'text',
 		'size'		=> 'small',
 		'default' 	=> '',
-		'sanitize' => 'absint',
+		'sanitize' => 'int',
 	),
 	array(
 		'name' 		=> 'logo_background_position',
@@ -182,7 +188,7 @@ $fields	[CUSTOM_LOGIN_OPTION . '_design'] = array(
 		'type' 		=> 'text',
 		'size'		=> 'small',
 		'default' 	=> '',
-		'sanitize' => 'absint',
+		'sanitize' => 'int',
 	),
 	array(
 		'name' 		=> 'login_form_background_color',
@@ -194,7 +200,7 @@ $fields	[CUSTOM_LOGIN_OPTION . '_design'] = array(
 	array(
 		'name' 		=> 'login_form_background_url',
 		'label' 	=> __( 'Background URL', CUSTOM_LOGIN_DIRNAME ),
-		'desc' 		=> __( 'Add an image to the form (optional).', CUSTOM_LOGIN_DIRNAME ),
+		'desc' 		=> __( 'Add a background image to the login form.', CUSTOM_LOGIN_DIRNAME ),
 		'type' 		=> 'file',
 		'default' 	=> '',
 		'size'		=> 'large',
@@ -248,7 +254,7 @@ $fields	[CUSTOM_LOGIN_OPTION . '_design'] = array(
 		'type' 		=> 'text',
 		'size'		=> 'small',
 		'default' 	=> '',
-		'sanitize' => 'absint',
+		'sanitize' => 'int',
 	),
 	array(
 		'name' 		=> 'login_form_border_size',
@@ -257,7 +263,7 @@ $fields	[CUSTOM_LOGIN_OPTION . '_design'] = array(
 		'type' 		=> 'text',
 		'size'		=> 'small',
 		'default' 	=> '',
-		'sanitize' => 'absint',
+		'sanitize' => 'int',
 	),
 	array(
 		'name' 		=> 'login_form_border_color',
@@ -473,7 +479,7 @@ $fields	[CUSTOM_LOGIN_OPTION . '_general'] = array(
 		'type' 		=> 'text',
 		'size'		=> 'small',
 		'default' 	=> '10',
-		'sanitize' => 'absint',
+		'sanitize' => 'int',
 	),
 	array(
 		'name'		=> 'lostpassword_text',

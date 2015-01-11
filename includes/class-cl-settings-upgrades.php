@@ -283,6 +283,7 @@ class CL_Settings_Upgrade {
 		$design_settings['html_background_repeat'] = $this->get_old_setting( $old_settings, 'html_background_repeat' );
 		$design_settings['html_background_size'] = $this->get_old_setting( $old_settings, 'html_background_size' );
 		
+		$design_settings['logo_force_form_max_width'] = 'off'; // New
 		$design_settings['logo_background_url'] = $this->get_old_setting( $old_settings, 'logo_background_url' );
 		$design_settings['logo_background_size_width'] = ''; // New
 		$design_settings['logo_background_size_height'] = ''; // New

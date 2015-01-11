@@ -248,9 +248,17 @@
 					// When an image is selected, run a callback.
 					file_frame.on( 'insert', function() {	
 						var attachment = file_frame.state().get('selection').first().toJSON();
-					
+						
+					//	console.log(attachment);
+					//	console.log(window.formfield);
+						
 						window.formfield.find('input[type="text"]').val(attachment.url);
 						window.formfield.find('#' + value.id + '_preview').html('<div class="img-wrapper" style="width:250px"><img src="' + attachment.url + '" alt="" ><a href="#" class="remove_file_button" rel="' + value.id + '">Remove Image</a></div>');
+						
+						// @since	3.0.1
+						window.formfield.parents('table').find('input[name="custom_login_design[logo_background_size_width]"]').val(attachment.width);
+						window.formfield.parents('table').find('input[name="custom_login_design[logo_background_size_height]"]').val(attachment.height);
+						
 					});
 		
 					// Finally, open the modal

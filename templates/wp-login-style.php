@@ -161,19 +161,34 @@ if ( false === ( $css = get_transient( $trans_key ) ) ) :
 	$css .= $close_rule;
 	
 	/**
+	 * Open login h1
+	 *
+	 * @rule	.login h1
+	 */
+	if ( 'on' === $logo_force_form_max_width && !empty( $login_form_width ) ) {
+		
+		$css .= CL_Scripts_Styles::cssrule( '.login h1' );	
+		$css .= CL_Scripts_Styles::trailingsemicolonit( "width: {$login_form_width}px" );
+		
+		/* CLOSE login */
+		$css .= $close_rule;
+	}
+	
+	/**
 	 * Open login h1 a
 	 *
-	 * @rule	#login h1 a
+	 * @rule	.login h1 a
 	 */
 	if ( !empty( $logo_background_url ) ) {
 	
-		$css .= CL_Scripts_Styles::cssrule( '#login h1 a' );
-	
-		if ( !empty( $logo_background_size_height ) && is_int( $logo_background_size_height ) )
-			$css .= CL_Scripts_Styles::trailingsemicolonit( "height: {$logo_background_size_height}px !important" );
-			
-		if ( !empty( $logo_background_size_width ) && is_int( $logo_background_size_width ) )
+		$css .= CL_Scripts_Styles::cssrule( '.login h1 a' );
+		
+		
+		if ( !empty( $logo_background_size_width ) )
 			$css .= CL_Scripts_Styles::trailingsemicolonit( "width: {$logo_background_size_width}px !important" );
+	
+		if ( !empty( $logo_background_size_height ) )
+			$css .= CL_Scripts_Styles::trailingsemicolonit( "height: {$logo_background_size_height}px !important" );
 		
 		$css .= CL_Scripts_Styles::trailingsemicolonit( "background-image: url('{$logo_background_url}')" );
 		$css .= CL_Scripts_Styles::trailingsemicolonit( "background-position: {$logo_background_position}" );
@@ -287,7 +302,7 @@ if ( false === ( $css = get_transient( $trans_key ) ) ) :
 	}
 	
 	/* WP Magic */
-	set_transient( $trans_key, $css, YEAR_IN_SECONDS/2 ); // Cache for six months
+//	set_transient( $trans_key, $css, YEAR_IN_SECONDS/2 ); // Cache for six months
 endif;
 
 /* Out of the frying pan, and into the fire! */

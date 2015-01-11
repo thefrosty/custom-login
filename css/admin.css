@@ -145,6 +145,13 @@
 	margin-bottom: -1px;
 }
 
+.cl-sidebar .star-rating {
+	text-decoration: none;
+}
+.cl-sidebar .star-rating i {
+	color: #fddb5a;
+}
+
 /************ MAIN ***************/
 .cl-main {
 	background: none repeat scroll 0 0 #fcfcfc;
