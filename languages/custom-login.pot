@@ -1,0 +1,399 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Custom Login 2.0\n"
+"POT-Creation-Date: 2013-04-15 22:01-0800\n"
+"PO-Revision-Date: 2013-04-15 22:03-0800\n"
+"Last-Translator: Austin Passy <austin@thefrosty.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e;_x\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: custom-login.php:319 custom-login.php:630 functions/install.php:32
+#: functions/install.php:40
+msgid "Custom Login Settings"
+msgstr ""
+
+#: custom-login.php:324
+msgid "General Settings"
+msgstr ""
+
+#: custom-login.php:332
+msgid "Activate"
+msgstr ""
+
+#: custom-login.php:333
+msgid "Toggle this plugin on &amp; off."
+msgstr ""
+
+#: custom-login.php:339
+msgid "<h4><abbr title=\"Hyper Text Markup Language\">HTML</abbr></h4>"
+msgstr ""
+
+#: custom-login.php:346
+msgid "HTML Background Color"
+msgstr ""
+
+#: custom-login.php:353
+msgid "HTML Background Image"
+msgstr ""
+
+#: custom-login.php:354
+msgid "Upload an image or a repeating pattern (optional)."
+msgstr ""
+
+#: custom-login.php:361
+msgid "HTML Background Position"
+msgstr ""
+
+#: custom-login.php:362 custom-login.php:410 custom-login.php:465
+msgid ""
+"Allowed strings <code>left, top, center, right, bottom</code>. No more than "
+"two combined! Space delimiter."
+msgstr ""
+
+#: custom-login.php:369
+msgid "HTML Background repeat"
+msgstr ""
+
+#: custom-login.php:381
+msgid "HTML Background size"
+msgstr ""
+
+#: custom-login.php:394
+msgid "<h4>Logo</h4>"
+msgstr ""
+
+#: custom-login.php:401
+msgid "Logo"
+msgstr ""
+
+#: custom-login.php:402
+msgid "Replace the WordPress logo (optional)."
+msgstr ""
+
+#: custom-login.php:409
+msgid "Logo Background Position"
+msgstr ""
+
+#: custom-login.php:417
+msgid "Logo Background repeat"
+msgstr ""
+
+#: custom-login.php:429
+msgid "Logo Background size"
+msgstr ""
+
+#: custom-login.php:442
+msgid "<h4>Login form</h4>"
+msgstr ""
+
+#: custom-login.php:449
+msgid "Login Form Background Color"
+msgstr ""
+
+#: custom-login.php:456
+msgid "Login Form Background URL"
+msgstr ""
+
+#: custom-login.php:457
+msgid "Add an image to the form (optional)."
+msgstr ""
+
+#: custom-login.php:464
+msgid "Login Form Background Position"
+msgstr ""
+
+#: custom-login.php:472
+msgid "Login Form Background repeat"
+msgstr ""
+
+#: custom-login.php:484
+msgid "Login Form Background size"
+msgstr ""
+
+#: custom-login.php:496
+msgid "Login Form Border Radius"
+msgstr ""
+
+#: custom-login.php:504
+msgid "Login Form Border Size"
+msgstr ""
+
+#: custom-login.php:512
+msgid "Login Form Border Color"
+msgstr ""
+
+#: custom-login.php:519
+msgid "Login Form Box Shadow"
+msgstr ""
+
+#: custom-login.php:520
+#, php-format
+msgid "Use <a href=\"%s\">box shadow</a> syntax w/ out color. <code>%s</code>"
+msgstr ""
+
+#: custom-login.php:527
+msgid "Login Form Box Shadow Color"
+msgstr ""
+
+#: custom-login.php:535
+msgid "<h4>Misc.</h4>"
+msgstr ""
+
+#: custom-login.php:542
+msgid "Login Form Label Color"
+msgstr ""
+
+#: custom-login.php:550
+msgid "<h4>Below form anchor</h4>"
+msgstr ""
+
+#: custom-login.php:557
+msgid "Below form nav color"
+msgstr ""
+
+#: custom-login.php:564
+msgid "Below form nav text-shadow color"
+msgstr ""
+
+#: custom-login.php:571
+msgid "Below form nav color hover"
+msgstr ""
+
+#: custom-login.php:578
+msgid "Below form nav text-shadow hover"
+msgstr ""
+
+#: custom-login.php:586
+msgid "<h4>Custom HTML/CSS &amp; jQuery</h4>"
+msgstr ""
+
+#: custom-login.php:593
+msgid "Custom CSS"
+msgstr ""
+
+#: custom-login.php:599
+msgid "Custom HTML"
+msgstr ""
+
+#: custom-login.php:606
+msgid "Custom jQuery"
+msgstr ""
+
+#: custom-login.php:630 functions/post-types.php:37
+msgid "Custom Login"
+msgstr ""
+
+#: custom-login.php:640
+msgid "Settings"
+msgstr ""
+
+#: custom-login.php:672
+msgid "Support this plugin and buy me a beer"
+msgstr ""
+
+#: custom-login.php:673
+msgid "Rate this plugin on WordPress.org"
+msgstr ""
+
+#: custom-login.php:674
+msgid ""
+"Share your designs on <strong style=\"color:#0066DC;\">Flick</strong><strong "
+"style=\"color:#ff0084;\">r</strong>"
+msgstr ""
+
+#: custom-login.php:675
+msgid "Get support on WordPress.org"
+msgstr ""
+
+#: custom-login.php:676
+msgid "Contribute development on GitHub"
+msgstr ""
+
+#: custom-login.php:677
+msgid "Get Custom Login Add-ons"
+msgstr ""
+
+#: custom-login.php:683
+#, php-format
+msgid "<a href=\"%s\">%s</a> | <code>version %s</code>"
+msgstr ""
+
+#: classes/class.settings-api.php:745
+#, php-format
+msgid "%1$s | <a href=\"%2$s\">Dismiss notice</a>"
+msgstr ""
+
+#: classes/class.settings-api.php:930
+msgid "Error fetching feed"
+msgstr ""
+
+#: classes/class.settings-api.php:941
+msgid "Like Extendd on Facebook"
+msgstr ""
+
+#: classes/class.settings-api.php:942
+msgid "Follow Extendd on Twitter"
+msgstr ""
+
+#: classes/class.settings-api.php:943
+msgid "Follow Austin on Twitter"
+msgstr ""
+
+#: classes/class.settings-api.php:944
+msgid "Circle Extendd on Google+"
+msgstr ""
+
+#: classes/class.settings-api.php:945
+msgid "Subscribe via email"
+msgstr ""
+
+#: classes/class.settings-api.php:948
+msgid "Latest plugins from Extendd.com"
+msgstr ""
+
+#: functions/post-types.php:25
+msgid "Logins"
+msgstr ""
+
+#: functions/post-types.php:26
+msgid "Login"
+msgstr ""
+
+#: functions/post-types.php:27
+msgid "Add New"
+msgstr ""
+
+#: functions/post-types.php:28
+msgid "Add New Login"
+msgstr ""
+
+#: functions/post-types.php:29
+msgid "Edit Login"
+msgstr ""
+
+#: functions/post-types.php:30
+msgid "New Login"
+msgstr ""
+
+#: functions/post-types.php:31
+msgid "All Logins"
+msgstr ""
+
+#: functions/post-types.php:32
+msgid "View Login"
+msgstr ""
+
+#: functions/post-types.php:33
+msgid "Search Logins"
+msgstr ""
+
+#: functions/post-types.php:34
+msgid "No Logins found"
+msgstr ""
+
+#: functions/post-types.php:35
+msgid "No Logins found in Trash"
+msgstr ""
+
+#: functions/welcome.php:56 functions/welcome.php:57
+msgid "Welcome to Custom Login"
+msgstr ""
+
+#: functions/welcome.php:111
+#, php-format
+msgid "Welcome to Custom Login %s"
+msgstr ""
+
+#: functions/welcome.php:112
+#, php-format
+msgid ""
+"Thank you for updating to the latest version! Custom Login %s is ready to "
+"make your login page better!"
+msgstr ""
+
+#: functions/welcome.php:113
+#, php-format
+msgid "Version %s"
+msgstr ""
+
+#: functions/welcome.php:117
+msgid "What's New"
+msgstr ""
+
+#: functions/welcome.php:122
+msgid "Improved Settings"
+msgstr ""
+
+#: functions/welcome.php:126
+msgid "Load times"
+msgstr ""
+
+#: functions/welcome.php:127
+msgid ""
+"There were issues in the past version that had the plugin loading on pages "
+"it wasn't supposted to. <strong>CL</strong> now caches all queries and "
+"database calls."
+msgstr ""
+
+#: functions/welcome.php:129
+msgid "Better features"
+msgstr ""
+
+#: functions/welcome.php:130
+#, php-format
+msgid ""
+"With a complete rewrite of the plugin, I have to ability to build custom add-"
+"ons (think extensions), like stealth login, email logins and 2-step "
+"authentication to name a few of the add-ons you can find on %sExtendd.com%s "
+"in the future."
+msgstr ""
+
+#: functions/welcome.php:136
+msgid "Under the Hood"
+msgstr ""
+
+#: functions/welcome.php:140
+msgid "Settings Class"
+msgstr ""
+
+#: functions/welcome.php:141
+#, php-format
+msgid ""
+"The new settings class allows to add your own add-ons! Documentation can be "
+"found on the %sExtendd.com%s site."
+msgstr ""
+
+#: functions/welcome.php:145
+msgid "Templates"
+msgstr ""
+
+#: functions/welcome.php:146
+#, php-format
+msgid ""
+"Custom login %stemplates%s can be created in your theme using the new login "
+"template add-on (coming soon)."
+msgstr ""
+
+#: functions/welcome.php:156
+msgid "Go to Custom Login Settings"
+msgstr ""
+
+#: functions/upgrades/upgrades.php:25
+msgid "Custom Login - Upgrades"
+msgstr ""
+
+#: functions/upgrades/upgrades.php:28
+msgid ""
+"The upgrade process has started, please be patient. This could take several "
+"minutes. You will be automatically redirected when the upgrade is finished."
+msgstr ""
+
+#: functions/upgrades/upgrades.php:59
+msgid "Custom Login Upgrades"
+msgstr ""
