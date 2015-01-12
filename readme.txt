@@ -115,8 +115,8 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 = Version 3.0.2 (12/12/14) =
 
-Fix: Logo background size width &amp; height settings not transfering over in upgrade process.
-Fix: Checking "Remove lost password text" removes the text instead of the other way around. [forum](https://wordpress.org/support/topic/lost-your-password-1) 
+* Fix: Logo background size width &amp; height settings not transfering over in upgrade process.
+* Fix: Checking "Remove lost password text" removes the text instead of the other way around. [forum](https://wordpress.org/support/topic/lost-your-password-1) 
 
 = Version 3.0.1 (12/11/14) =
 
