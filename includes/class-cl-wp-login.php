@@ -199,7 +199,7 @@ class CL_WP_Login {
 		
 		if ( 'wp-login.php' == $pagenow ) {
 		
-			if ( 'on' !== CL_Common::get_option( 'lostpassword_text', 'general' ) ) {
+			if ( 'off' !== CL_Common::get_option( 'lostpassword_text', 'general' ) ) {
 				//make the changes to the text
 				switch( $untranslated_text ) {
 				

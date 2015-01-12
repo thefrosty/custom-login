@@ -59,8 +59,8 @@ Activate the plugin and customize your WordPress login screen. It's as easy as m
 
 = links =
 
-* Premium Plugins: [Frosty.Media/plugin](http://frosty.media/ "Premium WordPress Plugins by Frosty")
-* Austins Blog: [http:/austin.passy.co/](http://austin.passy.co/ "Austin Passy's blog")
+* Premium Plugins: [https://frosty.media/plugins](https://frosty.media/plugins/ "Premium WordPress Plugins by Frosty")
+* Austins Blog: [https:/austin.passy.co/](https://austin.passy.co/ "Austin Passy's blog")
 * Austin on Twitter: @[TheFrosty](https:/twitter.com/TheFrosty "Austin TheFrosty' Passy on Twitter")
 * Frosty Media on Twitter: @[FrostyMediaWP](https:/twitter.com/FrostyMediaWP "Extendd on Twitter")
 * **Development welcomed on [GitHub](https://github.com/thefrosty/custom-login)**
@@ -113,22 +113,29 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 == Changelog ==
 
+= Version 3.0.2 (12/12/14) =
+
+Fix: Logo background size width &amp; height settings not transfering over in upgrade process.
+Fix: Checking "Remove lost password text" removes the text instead of the other way around. [forum](https://wordpress.org/support/topic/lost-your-password-1) 
+
 = Version 3.0.1 (12/11/14) =
 
-New: Add force width option to force width on h1 logo wrapper.
-Bug: Change sanitization of all integer fields to 'int' vs 'absint' to allow empty or no value.
-Bug: Remove is_int function on Logo width and height style output.
-Tweak: On Logo upload and "insert" update the width and height input settings fields for logo with the image size.
-Tweak: Change CSS rule(s) from `#login h1 a` to `.login h1 a`.
+* New: Add force width option to force width on h1 logo wrapper.
+* Bug: Change sanitization of all integer fields to 'int' vs 'absint' to allow empty or no value.
+* Bug: Remove is_int function on Logo width and height style output.
+* Tweak: On Logo upload and "insert" update the width and height input settings fields for logo with the image size.
+* Tweak: Change CSS rule(s) from `#login h1 a` to `.login h1 a`.
 
 = Version 3.0.0 (12/01/14) =
 
-New: Complete rewrite.
-New: Settings page UI update, now matches WordPress color.
-New: Extensions installer moved to sparate settings page (hidden).
-New: Removed version [2.x changelog](http://plugins.svn.wordpress.org/custom-login/tags/2.4/readme.txt).
+_REQUIRES WordPress 3.9 or later_
+
+* New: Complete rewrite.
+* New: Settings page UI update, now matches WordPress color.
+* New: Extensions installer moved to sparate settings page (hidden).
+* New: Removed version [2.x changelog](http://plugins.svn.wordpress.org/custom-login/tags/2.4/readme.txt).
 
 == Upgrade Notice ==
 
-= 3.0.1 =
+= 3.0.2 =
 Complete rewrite of Custom Login, be sure to run the update script to keep your settings.

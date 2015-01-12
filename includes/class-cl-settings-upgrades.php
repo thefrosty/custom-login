@@ -285,8 +285,8 @@ class CL_Settings_Upgrade {
 		
 		$design_settings['logo_force_form_max_width'] = 'off'; // New
 		$design_settings['logo_background_url'] = $this->get_old_setting( $old_settings, 'logo_background_url' );
-		$design_settings['logo_background_size_width'] = ''; // New
-		$design_settings['logo_background_size_height'] = ''; // New
+		$design_settings['logo_background_size_width'] = $this->get_old_setting( $old_settings, 'logo_background_size_width' );
+		$design_settings['logo_background_size_height'] = $this->get_old_setting( $old_settings, 'logo_background_size_height' );
 		$design_settings['logo_background_position'] = $this->get_old_setting( $old_settings, 'logo_background_position' );
 		$design_settings['logo_background_repeat'] = $this->get_old_setting( $old_settings, 'logo_background_repeat' );
 		$design_settings['logo_background_size'] = $this->get_old_setting( $old_settings, 'logo_background_size' );
