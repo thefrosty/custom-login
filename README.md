@@ -34,7 +34,7 @@ For more information visit the official [Custom Login](http://frosty.media/plugi
 
 ### Video ###
 
-http://www.youtube.com/watch?v=XOZwaLwpjNo
+http://www.youtube.com/watch?v=hZkc-t36xYQ
 
 ### Extensions ###
 
