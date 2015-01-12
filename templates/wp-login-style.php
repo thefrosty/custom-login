@@ -27,7 +27,7 @@ if ( false === ( $css = get_transient( $trans_key ) ) ) :
  *
  * Plugin URI  : https://frosty.media/plugins/custom-login/
  * Version     : $version
- * Author URI  : http://austin.passy.co
+ * Author URI  : https://austin.passy.co/
  * Extensions  : https://frosty.media/plugin/tag/custom-login-extension/
  */\n\n";
 	
@@ -163,9 +163,23 @@ if ( false === ( $css = get_transient( $trans_key ) ) ) :
 	/**
 	 * Open login h1
 	 *
+	 * @rule	#login h1
+	 */
+	if ( ( !empty( $hide_wp_logo ) && 'on' === $hide_wp_logo ) && empty( $logo_background_url ) ) {
+		
+		$css .= CL_Scripts_Styles::cssrule( '#login h1' );	
+		$css .= CL_Scripts_Styles::trailingsemicolonit( "display: none" );
+	
+		/* CLOSE login h1 */
+		$css .= $close_rule;
+	}
+	
+	/**
+	 * Open login h1
+	 *
 	 * @rule	.login h1
 	 */
-	if ( 'on' === $logo_force_form_max_width && !empty( $login_form_width ) ) {
+	if ( ( !empty( $logo_force_form_max_width ) && 'on' === $logo_force_form_max_width ) && !empty( $login_form_width ) ) {
 		
 		$css .= CL_Scripts_Styles::cssrule( '.login h1' );	
 		$css .= CL_Scripts_Styles::trailingsemicolonit( "width: {$login_form_width}px" );

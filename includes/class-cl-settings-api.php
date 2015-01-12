@@ -73,8 +73,8 @@ class CL_Settings_API {
 		wp_enqueue_style( 'wp-color-picker' );
 		
 		/* jQuery Chosen */
-		wp_enqueue_script( 'chosen', plugins_url( 'js/chosen.jquery.min.js', $this->settings['file'] ), array( 'jquery' ), '1.2.0', true );
-		wp_enqueue_style( 'chosen', plugins_url( 'css/chosen/chosen.min.css', $this->settings['file'] ), null, '1.2.0', 'screen' );
+		wp_enqueue_script( 'chosen', plugins_url( 'js/chosen.jquery.min.js', $this->settings['file'] ), array( 'jquery' ), '1.3.0', true );
+		wp_enqueue_style( 'chosen', plugins_url( 'css/chosen/chosen.min.css', $this->settings['file'] ), null, '1.3.0', 'screen' );
 		
 		/* jQuery Sticky */
 		wp_enqueue_script( 'sticky', plugins_url( 'js/jquery.sticky.js', $this->settings['file'] ), array( 'jquery' ), '1.0.0', true );

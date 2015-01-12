@@ -113,6 +113,14 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 == Changelog ==
 
+= Version 3.0.3 (12/12/14) =
+
+* Fix: Add missing "Remove WP Logo" setting.
+* Fix: When "activate" isn't checked disable settings output.
+* Fix: foreach error. When `get_editable_roles` fails to return an array. [forum](https://wordpress.org/support/topic/invalid-argument-supplied-for-foreach-error-line-in-wp-dashboard?replies=2#post-6427631)
+* Fix: On Logo "insert" getting called on background image insert.
+* Tweak: Update chosen JS to version 1.3.0.
+
 = Version 3.0.2 (12/12/14) =
 
 * Fix: Logo background size width &amp; height settings not transfering over in upgrade process.

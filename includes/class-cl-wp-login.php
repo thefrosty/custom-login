@@ -24,13 +24,22 @@ class CL_WP_Login {
 	public static function instance() {
 		if ( ! isset( self::$instance ) ) {
 			self::$instance = new self;
-			self::$instance->actions();
-			self::$instance->filters();
+			self::$instance->init();
 		}
 		return self::$instance;
 	}
 	
+	private function init() {
+		
+		if ( 'off' === CL_Common::get_option( 'active', 'general', 'off' ) )
+			return;
+		
+		$this->actions();
+		$this->filters();
+	}
+	
 	private function actions() {
+			
 		add_action( 'login_enqueue_scripts',				array( $this, 'login_enqueue_scripts' ) );
 		add_action( 'login_footer',						array( $this, 'login_footer_html' ), 8 );
 		add_action( 'login_footer',						array( $this, 'login_footer_jquery' ), 19 );
@@ -42,6 +51,7 @@ class CL_WP_Login {
 	}
 	
 	private function filters() {
+		
 		add_filter( 'allow_password_reset',				array( $this, 'allow_password_reset' ) );
 		add_filter( 'gettext',							array( $this, 'remove_lostpassword_text' ), 20, 2 );
 	}

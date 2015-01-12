@@ -250,14 +250,17 @@
 						var attachment = file_frame.state().get('selection').first().toJSON();
 						
 					//	console.log(attachment);
-					//	console.log(window.formfield);
+					//	console.log(window.formfield.find('input[type="text"]').attr('id'));
 						
 						window.formfield.find('input[type="text"]').val(attachment.url);
 						window.formfield.find('#' + value.id + '_preview').html('<div class="img-wrapper" style="width:250px"><img src="' + attachment.url + '" alt="" ><a href="#" class="remove_file_button" rel="' + value.id + '">Remove Image</a></div>');
 						
-						// @since	3.0.1
-						window.formfield.parents('table').find('input[name="custom_login_design[logo_background_size_width]"]').val(attachment.width);
-						window.formfield.parents('table').find('input[name="custom_login_design[logo_background_size_height]"]').val(attachment.height);
+						// @since		3.0.1
+						// @updated	3.0.3
+						if ( window.formfield.find('input[type="text"]').attr('id') == 'custom_login_design[logo_background_url]' ) {
+							window.formfield.parents('table').find('input[name="custom_login_design[logo_background_size_width]"]').val(attachment.width);
+							window.formfield.parents('table').find('input[name="custom_login_design[logo_background_size_height]"]').val(attachment.height);
+						}
 						
 					});
 		

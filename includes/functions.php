@@ -13,7 +13,11 @@ function custom_login_get_editable_roles() {
 	
 	$roles = array();
 	foreach ( get_editable_roles() as $role_name => $role ) :
-	
+		
+		// https://wordpress.org/support/topic/invalid-argument-supplied-for-foreach-error-line-in-wp-dashboard?replies=2#post-6427631
+		if ( !is_array( $role['capabilities'] ) )
+			break;
+			
 		foreach ( $role['capabilities'] as $capability => $array ) :
 			
 			// Remove the (deprecated) capabilities from the array

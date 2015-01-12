@@ -284,6 +284,7 @@ class CL_Settings_Upgrade {
 		$design_settings['html_background_size'] = $this->get_old_setting( $old_settings, 'html_background_size' );
 		
 		$design_settings['logo_force_form_max_width'] = 'off'; // New
+		$design_settings['hide_wp_logo'] = $this->get_old_setting( $old_settings, 'hide_wp_logo' );
 		$design_settings['logo_background_url'] = $this->get_old_setting( $old_settings, 'logo_background_url' );
 		$design_settings['logo_background_size_width'] = $this->get_old_setting( $old_settings, 'logo_background_size_width' );
 		$design_settings['logo_background_size_height'] = $this->get_old_setting( $old_settings, 'logo_background_size_height' );

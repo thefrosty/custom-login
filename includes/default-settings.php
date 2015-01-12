@@ -98,9 +98,9 @@ $fields	[CUSTOM_LOGIN_OPTION . '_design'] = array(
 	/** BREAK **/
 	
 	array(
-		'name'		=> 'logo_force_form_max_width',
-		'label'		=> __( 'Force max-width', CUSTOM_LOGIN_DIRNAME ),
-		'desc'		=> __( 'If checked and the login form width (set below) is not empty, a CSS rule of <code>width</code> will be applied on the logo wrapper element <code>.login h1</code>.', CUSTOM_LOGIN_DIRNAME ),
+		'name'		=> 'hide_wp_logo',
+		'label'		=> __( 'Hide the WP logo', CUSTOM_LOGIN_DIRNAME ),
+		'desc'		=> __( 'If you have no logo set, and you don\'t want the WordPress logo.', CUSTOM_LOGIN_DIRNAME ),
 		'type'		=> 'checkbox'
 	),
 	array(
@@ -181,6 +181,12 @@ $fields	[CUSTOM_LOGIN_OPTION . '_design'] = array(
 	),
 	/** BREAK **/
 	
+	array(
+		'name'		=> 'logo_force_form_max_width',
+		'label'		=> __( 'Force max-width', CUSTOM_LOGIN_DIRNAME ),
+		'desc'		=> __( 'If checked and the login form width (set below) is not empty, a CSS rule of <code>width</code> will be applied on the logo wrapper element <code>.login h1</code>. This settings applies to the Logo image (when background size is used).', CUSTOM_LOGIN_DIRNAME ),
+		'type'		=> 'checkbox'
+	),
 	array(
 		'name' 		=> 'login_form_width',
 		'label' 	=> __( 'Width', CUSTOM_LOGIN_DIRNAME ),
