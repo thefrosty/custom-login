@@ -109,33 +109,48 @@ Just deactive it. Sad panda is sad.
 
 ## Screenshots ##
 
-Screenshots of working examples in our [Flickr group](http://flickr.com/groups/custom-login/)
+Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-login/).
 
-###1. Custom Login Settings page (as of v 2.0).
+###1. Custom Login v3 Design Settings part 1.
 ###
-![Custom Login Settings page (as of v 2.0).
-](https://s.w.org/plugins/custom-login/screenshot-1.png)
+![Custom Login v3 Design Settings part 1.
+](https://ps.w.org/custom-login/assets/screenshot-1.png)
 
 
-###2. Example of a custom login page using the nyan.cat as a animated background! [see user generated designs](http://flickr.com/groups/custom-login/).
+###2. Custom Login v3 Design Settings part 2.
 ###
-![Example of a custom login page using the nyan.cat as a animated background! [see user generated designs](http://flickr.com/groups/custom-login/).
-](https://s.w.org/plugins/custom-login/screenshot-2.png)
+![Custom Login v3 Design Settings part 2.
+](https://ps.w.org/custom-login/assets/screenshot-2.png)
+
+
+###3. Custom Login v3 General Settings.
+###
+![Custom Login v3 General Settings.
+](https://ps.w.org/custom-login/assets/screenshot-3.png)
+
+
+###4. Custom Login Extensions Installer (an active license key is required).
+###
+![Custom Login Extensions Installer (an active license key is required).
+](https://ps.w.org/custom-login/assets/screenshot-4.png)
 
 
 ## Changelog ##
 
-### Version 3.0.1 (12/10/14) ###
+### Version 3.0.1 (12/11/14) ###
 
-Update: readme.txt
+New: Add force width option to force width on h1 logo wrapper.
+Bug: Change sanitization of all integer fields to 'int' vs 'absint' to allow empty or no value.
+Bug: Remove is_int function on Logo width and height style output.
+Tweak: On Logo upload and "insert" update the width and height input settings fields for logo with the image size.
+Tweak: Change CSS rule(s) from `#login h1 a` to `.login h1 a`.
 
 ### Version 3.0.0 (12/01/14) ###
 
-Complete rewrite of all code.
-Loading a speed improvements.
-Redesigned settings page.
-Additional extensions.
-For version 2.x.x changelog see [2.4 readme](http://plugins.svn.wordpress.org/custom-login/tags/2.4/readme.txt).
+New: Complete rewrite.
+New: Settings page UI update, now matches WordPress color.
+New: Extensions installer moved to sparate settings page (hidden).
+New: Removed version [2.x changelog](http://plugins.svn.wordpress.org/custom-login/tags/2.4/readme.txt).
 
 ## Upgrade Notice ##
 
