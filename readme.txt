@@ -17,9 +17,9 @@ Custom Login 2.0 was 140% faster than version 1.0, and version 3.0 is now even b
 For more information visit the official [Custom Login](http://frosty.media/plugins/custom-login/) page.
 
 > <strong>Support</strong><br>
-> [Austin](http://austin.passy.co) and the [Frosty Media](http://frosty.media/) team will always try our best to support the Custom Login plugin on the WordPress.org forum, but please note that we can not garuntee a response in a timely manner. If you have an issue we would appriciate you using GitHub or purchasing priority support on our site.
+> [Austin](http://austin.passy.co) and the [Frosty Media](http://frosty.media/) team will always try our best to support the Custom Login plugin on the WordPress.org forum, but please note that we can not guarantee a response in a timely manner. If you have an issue we would appriciate you using GitHub or purchasing priority support on our site.
 >
-> Any extensions purchased on [Frosty Media](http://frosty.media/) (not hosted on WordPress.org) will not be supported on the WordPress.org forum. You can always browse our *small* but growing [documentation](http://frosty.media/docs) for further assistance. You need a valid license key to make support submissions. We thank you in advance. 
+> Any extensions purchased on [Frosty Media](http://frosty.media/) (not hosted on WordPress.org) will not be supported on the WordPress.org forum. You can always browse our *small* but growing [documentation](http://frosty.media/docs) for further assistance. You need a valid license key to make support submissions *on our site*. We thank you in advance. 
 
 > <strong>Bug Reports</strong><br>
 > Bug reports for Custom Login are [welcomed on GitHub](https://github.com/thefrosty/custom-login). 
@@ -145,5 +145,5 @@ _REQUIRES WordPress 3.9 or later_
 
 == Upgrade Notice ==
 
-= 3.0.2 =
-Complete rewrite of Custom Login, be sure to run the update script to keep your settings.
+= 3.0.3 =
+Complete rewrite of Custom Login, be sure to run the update script to keep your old settings.
