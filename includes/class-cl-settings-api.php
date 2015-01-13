@@ -11,7 +11,7 @@ class CL_Settings_API {
 	/**
 	 * Version
 	 */
-	var $api_version = '2.0.1';
+	var $api_version = '2.0.2';
 	
 	/**
 	 * @var array
@@ -41,9 +41,9 @@ class CL_Settings_API {
 			$this->set_fields( $fields );
 		}
 		
-		add_action( 'load-' . $this->settings['menu_page'],		array( $this, 'init' ), 89 );
-		add_action( 'admin_enqueue_scripts',						array( $this, 'admin_enqueue_scripts' ) );
-		add_action( 'admin_footer',								array( $this, 'wp_localize_script' ), 99 );
+		add_action( 'load-' . $this->settings['menu_page'],					array( $this, 'init' ), 89 );
+		add_action( 'admin_enqueue_scripts',									array( $this, 'admin_enqueue_scripts' ) );
+		add_action( 'admin_footer',											array( $this, 'wp_localize_script' ), 99 );
 		add_action( 'wp_ajax_' . $this->settings['prefix'] . '_get_form',	array( $this, 'get_form' ), 99 );
     }
 	
@@ -223,16 +223,30 @@ class CL_Settings_API {
      * Displays a text field for a settings field
      *
      * @param array   $args settings field args
+	 * @updated	2.0.2
      */
     function callback_text( $args ) {
 
 		$value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['default'] ) );
 		$size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
+		$type  = isset( $args['type'] ) && !is_null( $args['type'] ) ? $args['type'] : 'text';
 		
-		$html  = sprintf( '<input type="text" class="%1$s-text" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s">', $size, $args['section'], $args['id'], $value );
+		$html  = sprintf( '<input type="%1$s" class="%2$s-text" id="%3$s[%4$s]" name="%3$s[%4$s]" value="%5$s">', $type, $size, $args['section'], $args['id'], $value );
 		$html .= !empty( $args['desc'] ) ? sprintf( '<span class="description"> %s</span>', $args['desc'] ) : '';
 		
 		echo $html;
+    }
+
+    /**
+     * Displays a text field for a settings field
+     *
+     * @param array   $args settings field args
+	 * @since		2.0.2
+     */
+    function callback_text_number( $args ) {
+		
+		$args['type'] = 'number';
+		$this->callback_text( $args );
     }
 
     /**
@@ -658,6 +672,7 @@ class CL_Settings_API {
 				<?php if ( isset( $form['submit'] ) && $form['submit'] ) submit_button( ); ?>
 			</form>
 			</div><?php
+		#	var_dump( $form_id, get_option( $form_id ) );
 		}
     }
 
@@ -803,9 +818,10 @@ class CL_Settings_API {
 			$show_upgrade_notice = true;	
 		}
 		
-		if ( $show_upgrade_notice && ( false === get_option( CUSTOM_LOGIN_OPTION . '_general', false ) ) ) {
+		if ( $show_upgrade_notice && ( '' === get_option( CUSTOM_LOGIN_OPTION . '_general', '' ) ) ) {
+			remove_action( 'admin_notice', array( CL_Settings_Upgrade::instance(), 'upgrade_notices' ) );
 			printf(
-				'<div class="error"><p>' . esc_html__( 'It seems you\'ve got old settings in place, click %shere%s to migrate them to the new settings.', CUSTOM_LOGIN_DIRNAME ) . '</p></div>',
+				'<div class="error"><p>' . esc_html__( 'Custom Login has detected old settings. If you wish to use them please run %sthis%s script before making any changes below.', CUSTOM_LOGIN_DIRNAME ) . '</p></div>',
 				'<a href="' . esc_url( admin_url( 'options.php?page=custom-login-upgrades' ) ) . '">',
 				'</a>'
 			);

@@ -14,12 +14,12 @@ Custin Login allows you to easily customize your admin login page, works great f
 
 Custom Login 2.0 was 140% faster than version 1.0, and version 3.0 is now even better! *Minimum WordPress version is 4.0*
 
-For more information visit the official [Custom Login](http://frosty.media/plugins/custom-login/) page.
+For more information visit the official [Custom Login](https://frosty.media/plugins/custom-login/) page.
 
 > <strong>Support</strong><br>
-> [Austin](http://austin.passy.co) and the [Frosty Media](http://frosty.media/) team will always try our best to support the Custom Login plugin on the WordPress.org forum, but please note that we can not guarantee a response in a timely manner. If you have an issue we would appriciate you using GitHub or purchasing priority support on our site.
+> [Austin](https://austin.passy.co) and the [Frosty Media](https://frosty.media/) team will always try our best to support the Custom Login plugin on the WordPress.org forum, but please note that we can not guarantee a response in a timely manner. If you have an issue we would appriciate you using GitHub or purchasing priority support on our site.
 >
-> Any extensions purchased on [Frosty Media](http://frosty.media/) (not hosted on WordPress.org) will not be supported on the WordPress.org forum. You can always browse our *small* but growing [documentation](http://frosty.media/docs) for further assistance. You need a valid license key to make support submissions *on our site*. We thank you in advance. 
+> Any extensions purchased on [Frosty Media](https://frosty.media/) (not hosted on WordPress.org) will not be supported on the WordPress.org forum. You can always browse our *small* but growing [documentation](https://frosty.media/docs) for further assistance. You need a valid license key to make support submissions *on our site*. We thank you in advance. 
 
 > <strong>Bug Reports</strong><br>
 > Bug reports for Custom Login are [welcomed on GitHub](https://github.com/thefrosty/custom-login). 
@@ -34,10 +34,10 @@ There are currently 4 premium extensions available, with more coming (suggestion
 
 **Extensions available now**
 
-* <a href="http://frosty.media/plugins/custom-login-stealth-login/?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt" title="Custom Login Stealth Login">Stealth Login</a> - obscure your login URL.
-* <a href="http://frosty.media/plugins/custom-login-page-template/?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt" title="Custom Login Page Template">Page Template</a> - add a login form to any WordPress page.
-* <a href="http://frosty.media/plugins/custom-login-redirects/?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt" title="Custom Login Redirects">Login Redirects</a> - Manage login redirects.
-* <a href="http://frosty.media/plugins/custom-login-no-password-login/?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt" title="Custom Login No Password logins">No Password</a> - allow users to login without a password. 
+* <a href="https://frosty.media/plugins/custom-login-stealth-login/?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt" title="Custom Login Stealth Login">Stealth Login</a> - obscure your login URL.
+* <a href="https://frosty.media/plugins/custom-login-page-template/?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt" title="Custom Login Page Template">Page Template</a> - add a login form to any WordPress page.
+* <a href="https://frosty.media/plugins/custom-login-redirects/?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt" title="Custom Login Redirects">Login Redirects</a> - Manage login redirects.
+* <a href="https://frosty.media/plugins/custom-login-no-password-login/?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt" title="Custom Login No Password logins">No Password</a> - allow users to login without a password. 
 
 **Extensions in development/extension ideas**
 
@@ -113,12 +113,24 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 == Changelog ==
 
-= Version 3.0.4 (12/12/14) =
+= Version 3.0.5 (01/13/15) =
+
+* Add: Update uninstall.php with all options to delete.
+* Add: Disable lost password reset function option.
+* Update: Settings prefix with global definition.
+* Update: Add missing auth expiration function for setting.
+* Fix: Hide tracking notice globaly if admin notices are turned off.
+* Tweak: Update the hide_wp_logo description since Custom Login removes the WP logo by default.
+* Tweak: Better output of update notification on settings page.
+* Tweak: Update input fields that are integers to a 'number' input type.
+* Tweak: Update readme dates to 2015. :)
+
+= Version 3.0.4 (01/12/15) =
 
 * Tweak: Add manual update link on settings page if new settings are empty and old settings exist.
 * Fix: Make sure tracking is set to "on" before sending.
 
-= Version 3.0.3 (12/12/14) =
+= Version 3.0.3 (01/12/15) =
 
 * Fix: Add missing "Remove WP Logo" setting.
 * Fix: When "activate" isn't checked disable settings output.
@@ -126,12 +138,12 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 * Fix: On Logo "insert" getting called on background image insert.
 * Tweak: Update chosen JS to version 1.3.0.
 
-= Version 3.0.2 (12/12/14) =
+= Version 3.0.2 (01/12/15) =
 
 * Fix: Logo background size width &amp; height settings not transfering over in upgrade process.
 * Fix: Checking "Remove lost password text" removes the text instead of the other way around. [forum](https://wordpress.org/support/topic/lost-your-password-1) 
 
-= Version 3.0.1 (12/11/14) =
+= Version 3.0.1 (01/11/15) =
 
 * New: Add force width option to force width on h1 logo wrapper.
 * Bug: Change sanitization of all integer fields to 'int' vs 'absint' to allow empty or no value.
@@ -144,11 +156,11 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 _REQUIRES WordPress 3.9 or later_
 
 * New: Complete rewrite.
-* New: Settings page UI update, now matches WordPress color.
+* New: Settings page UI update, now matches your WordPress admin color scheme.
 * New: Extensions installer moved to sparate settings page (hidden).
 * New: Removed version [2.x changelog](http://plugins.svn.wordpress.org/custom-login/tags/2.4/readme.txt).
 
 == Upgrade Notice ==
 
-= 3.0.3 =
+= 3.0.5 =
 Complete rewrite of Custom Login, be sure to run the update script to keep your old settings.

@@ -247,7 +247,11 @@ class CL_Tracking {
 
 		if ( $hide_notice ) return;
 
-	//	if ( isset( $options['tracking'] ) ) return;
+		if ( isset( $options['admin_notices'] ) && 'off' === $options['admin_notices'] )
+			return;
+
+		if ( isset( $options['tracking'] ) && 'on' === $options['tracking'] )
+			return;
 
 		if ( ! current_user_can( 'manage_options' ) )
 			return;

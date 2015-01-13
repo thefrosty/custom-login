@@ -3,7 +3,7 @@
  * @package     CustomLogin
  * @subpackage  Classes/CL_Settings_Upgrade
  * @author      Austin Passy <http://austin.passy.co>
- * @copyright   Copyright (c) 2014, Austin Passy
+ * @copyright   Copyright (c) 2014-2015, Austin Passy
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
@@ -48,10 +48,10 @@ class CL_Settings_Upgrade {
 	 */
 	public function upgrade_notices() {
 		
-		if ( isset( $_GET['page'] ) && $_GET['page'] == 'custom-login-upgrades' )
+		if ( isset( $_GET['page'] ) && $_GET['page'] == ( 'custom-login-upgrades' || 'custom-login' ) )
 			return; // Don't show notices on the upgrades page
 		
-		$cl_version = get_option( 'custom_login_version' );
+		$cl_version = get_option( CUSTOM_LOGIN_OPTION . '_version' );
 	
 		if ( ! $cl_version ) {
 			// 2.0 is the first version to use this option so we must add it
@@ -271,8 +271,8 @@ class CL_Settings_Upgrade {
 	private function cl_v30_upgrades() {
 		
 		$old_settings		= get_option( 'custom_login', array() );
-		$design_settings	= get_option( 'custom_login_design', array() );
-		$general_settings	= get_option( 'custom_login_general', array() );
+		$design_settings	= get_option( CUSTOM_LOGIN_OPTION . '_design', array() );
+		$general_settings	= get_option( CUSTOM_LOGIN_OPTION . '_general', array() );
 		
 		/** Design */
 		$design_settings['html_background_color'] = $this->get_old_setting( $old_settings, 'html_background_color' );
@@ -342,11 +342,12 @@ class CL_Settings_Upgrade {
 		$general_settings['remove_login_css'] = 'off'; // New
 		$general_settings['post_password_expires'] = '10'; // New
 		$general_settings['lostpassword_text'] = 'off'; // New
+		$general_settings['allow_password_reset'] = 'off'; // New
 		
 		
-		update_option( 'custom_login_design', $design_settings );
-		update_option( 'custom_login_general', $general_settings );
-		update_option( 'custom_login_version', CUSTOM_LOGIN_VERSION );
+		update_option( CUSTOM_LOGIN_OPTION . '_design', $design_settings );
+		update_option( CUSTOM_LOGIN_OPTION . '_general', $general_settings );
+		update_option( CUSTOM_LOGIN_OPTION . '_version', CUSTOM_LOGIN_VERSION );
 		delete_option( 'custom_login' );
 		return true;
 	}

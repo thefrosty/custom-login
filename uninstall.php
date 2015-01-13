@@ -21,6 +21,11 @@ foreach ( $sections as $section ) {
 	delete_option( $section['id'] );
 }
 
+delete_option( CUSTOM_LOGIN_OPTION . '_announcement_message' );
+delete_option( CUSTOM_LOGIN_OPTION . '_version' );
+delete_option( 'cl_tracking_last_send' );
+delete_option( 'cl_tracking_notice' );
+
 /** Cleanup Cron Events */
 wp_clear_scheduled_hook( 'cl_daily_scheduled_events' );
 wp_clear_scheduled_hook( 'cl_weekly_scheduled_events' );

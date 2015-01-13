@@ -3,7 +3,7 @@
  * @package     CustomLogin
  * @subpackage  Classes/CL_Common
  * @author      Austin Passy <http://austin.passy.co>
- * @copyright   Copyright (c) 2014, Austin Passy
+ * @copyright   Copyright (c) 2014-2015, Austin Passy
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
@@ -52,6 +52,7 @@ class CL_WP_Login {
 	
 	private function filters() {
 		
+		add_filter( 'auth_cookie_expiration',			array( $this, 'auth_cookie_expiration' ), 10, 3 );
 		add_filter( 'allow_password_reset',				array( $this, 'allow_password_reset' ) );
 		add_filter( 'gettext',							array( $this, 'remove_lostpassword_text' ), 20, 2 );
 	}
@@ -197,8 +198,32 @@ class CL_WP_Login {
 	 ****************  FILTERS  **********************************
 	 *************************************************************
 	 */
+	
+	/**
+	 * Allow password reset.
+	 *
+	 * @added		3.0.5
+	 */
+	public function auth_cookie_expiration( $expiration, $user_id, $remember ) {
+		
+		$_expiration = CL_Common::get_option( 'post_password_expires', 'general', '' );
+		
+		if ( !empty( $_expiration ) )
+			$expiration = ( $_expiration * DAY_IN_SECONDS );
+			
+		return $experation;
+	}
 	 
-	public function allow_password_reset() {
+	/**
+	 * Allow password reset.
+	 *
+	 * @updated	3.0.5
+	 */
+	public function allow_password_reset( $user_id ) {
+		if ( 'on' === CL_Common::get_option( 'allow_password_reset', 'general', 'off' ) )
+			return false;
+			
+		return true;
 	}
 	
 	/**

@@ -100,7 +100,7 @@ $fields	[CUSTOM_LOGIN_OPTION . '_design'] = array(
 	array(
 		'name'		=> 'hide_wp_logo',
 		'label'		=> __( 'Hide the WP logo', CUSTOM_LOGIN_DIRNAME ),
-		'desc'		=> __( 'If you have no logo set, and you don\'t want the WordPress logo.', CUSTOM_LOGIN_DIRNAME ),
+		'desc'		=> __( 'By default Custom Login removes the WP login from the login screen. This setting hides the h1 element.', CUSTOM_LOGIN_DIRNAME ),
 		'type'		=> 'checkbox'
 	),
 	array(
@@ -116,7 +116,7 @@ $fields	[CUSTOM_LOGIN_OPTION . '_design'] = array(
 		'name' 		=> 'logo_background_size_width',
 		'label' 	=> __( 'Image width', CUSTOM_LOGIN_DIRNAME ),
 		'desc' 		=> __( 'Enter your desired image height (All not integers will be removed).', CUSTOM_LOGIN_DIRNAME ),
-		'type' 		=> 'text',
+		'type' 		=> 'text_number',
 		'size'		=> 'small',
 		'default' 	=> '',
 		'sanitize' => 'int',
@@ -125,7 +125,7 @@ $fields	[CUSTOM_LOGIN_OPTION . '_design'] = array(
 		'name' 		=> 'logo_background_size_height',
 		'label' 	=> __( 'Image height', CUSTOM_LOGIN_DIRNAME ),
 		'desc' 		=> __( 'Enter your desired image height (All not integers will be removed).', CUSTOM_LOGIN_DIRNAME ),
-		'type' 		=> 'text',
+		'type' 		=> 'text_number',
 		'size'		=> 'small',
 		'default' 	=> '',
 		'sanitize' => 'int',
@@ -191,7 +191,7 @@ $fields	[CUSTOM_LOGIN_OPTION . '_design'] = array(
 		'name' 		=> 'login_form_width',
 		'label' 	=> __( 'Width', CUSTOM_LOGIN_DIRNAME ),
 		'desc' 		=> __( 'Set a different width in pixel value.', CUSTOM_LOGIN_DIRNAME ),
-		'type' 		=> 'text',
+		'type' 		=> 'text_number',
 		'size'		=> 'small',
 		'default' 	=> '',
 		'sanitize' => 'int',
@@ -257,7 +257,7 @@ $fields	[CUSTOM_LOGIN_OPTION . '_design'] = array(
 		'name' 		=> 'login_form_border_radius',
 		'label' 	=> __( 'Border radius', CUSTOM_LOGIN_DIRNAME ),
 		'desc' 		=> '',
-		'type' 		=> 'text',
+		'type' 		=> 'text_number',
 		'size'		=> 'small',
 		'default' 	=> '',
 		'sanitize' => 'int',
@@ -266,7 +266,7 @@ $fields	[CUSTOM_LOGIN_OPTION . '_design'] = array(
 		'name' 		=> 'login_form_border_size',
 		'label' 	=> __( 'Border size', CUSTOM_LOGIN_DIRNAME ),
 		'desc' 		=> '',
-		'type' 		=> 'text',
+		'type' 		=> 'text_number',
 		'size'		=> 'small',
 		'default' 	=> '',
 		'sanitize' => 'int',
@@ -481,8 +481,8 @@ $fields	[CUSTOM_LOGIN_OPTION . '_general'] = array(
 	array(
 		'name'		=> 'post_password_expires',
 		'label'		=> __( 'Login expiration days', CUSTOM_LOGIN_DIRNAME ),
-		'desc'		=> __( 'By default, the cookie expires 10 days from creation. To turn this into a session cookie, set to "0".', CUSTOM_LOGIN_DIRNAME ),
-		'type' 		=> 'text',
+		'desc'		=> __( 'The default WordPress behavior for logging a user out is to make a login session cookie that expires in 48 hours or when the browser is closed. If the "Remember Me" box is checked, WordPress will give you 14 days before forcing you to authenticate again. To turn this into a session cookie, set to "0".', CUSTOM_LOGIN_DIRNAME ),
+		'type' 		=> 'text_number',
 		'size'		=> 'small',
 		'default' 	=> '10',
 		'sanitize' => 'int',
@@ -491,6 +491,12 @@ $fields	[CUSTOM_LOGIN_OPTION . '_general'] = array(
 		'name'		=> 'lostpassword_text',
 		'label'		=> __( 'Remove lost password text', CUSTOM_LOGIN_DIRNAME ),
 		'desc'		=> __( 'Remove the "Lost Password?" text. This does <strong>not<strong> disable the lost password function.', CUSTOM_LOGIN_DIRNAME ),
+		'type'		=> 'checkbox'
+	),
+	array(
+		'name'		=> 'allow_password_reset',
+		'label'		=> __( 'Disable lost password', CUSTOM_LOGIN_DIRNAME ),
+		'desc'		=> __( 'Disable the lost password reset function.', CUSTOM_LOGIN_DIRNAME ),
 		'type'		=> 'checkbox'
 	),
 );
