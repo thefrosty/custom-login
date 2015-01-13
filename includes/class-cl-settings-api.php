@@ -821,7 +821,7 @@ class CL_Settings_API {
 		$content .= '<li><a href="https://www.facebook.com/FrostyMediaWP"><span class="dashicons dashicons-facebook"></span></a></li>';
 		$content .= '<li><a href="https://twitter.com/FrostyMediaWP"><span class="dashicons dashicons-twitter"></span></a></li>';
 		$content .= '<li><a href="https://plus.google.com/+FrostyMedia/"><span class="dashicons dashicons-googleplus"></span></a></li>';
-		$content .= '<li><a href="http://eepurl.com/9Zp8L"><span class="dashicons dashicons-email"></span></a></li>';
+		$content .= '<li><a href="http://eepurl.com/bbj0bD"><span class="dashicons dashicons-email"></span></a></li>';
 		$content .= '</ul>';
 		
 		echo $content;
