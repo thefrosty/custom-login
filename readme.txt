@@ -113,6 +113,10 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 == Changelog ==
 
+= Version 3.0.6 (01/13/15) =
+
+* Bug: Misspelled variable returned on `auth_cookie_expiration` caused instant user logout.
+
 = Version 3.0.5 (01/13/15) =
 
 * Add: Update uninstall.php with all options to delete.
@@ -161,6 +165,9 @@ _REQUIRES WordPress 3.9 or later_
 * New: Removed version [2.x changelog](http://plugins.svn.wordpress.org/custom-login/tags/2.4/readme.txt).
 
 == Upgrade Notice ==
+
+= 3.0.6 =
+Fixes unable to login to admin site.
 
 = 3.0.5 =
 Complete rewrite of Custom Login, be sure to run the update script to keep your old settings.

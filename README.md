@@ -137,6 +137,10 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 ## Changelog ##
 
+### Version 3.0.6 (01/13/15) ###
+
+* Bug: Misspelled variable returned on `auth_cookie_expiration` caused instant user logout.
+
 ### Version 3.0.5 (01/13/15) ###
 
 * Add: Update uninstall.php with all options to delete.

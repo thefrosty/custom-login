@@ -211,7 +211,7 @@ class CL_WP_Login {
 		if ( !empty( $_expiration ) )
 			$expiration = ( $_expiration * DAY_IN_SECONDS );
 			
-		return $experation;
+		return $expiration;
 	}
 	 
 	/**
