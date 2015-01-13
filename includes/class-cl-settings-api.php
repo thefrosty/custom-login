@@ -54,6 +54,7 @@ class CL_Settings_API {
 	 */
 	public function init() {
 		
+		add_action( 'admin_notices',											array( $this, 'upgrade_notices' ) );
 		add_action( $this->settings['prefix'] . '_sticky_admin_notice',	array( $this, 'sticky_admin_notice_social_links' ), 10 );
 		add_action( $this->settings['prefix'] . '_settings_sidebars',		array( $this, 'about_the_author' ), 19 );
 		add_action( $this->settings['prefix'] . '_settings_sidebars',		array( $this, 'cl_extensions' ), 20 );
@@ -779,6 +780,36 @@ class CL_Settings_API {
 		$content .= '</ul>';
 		
 		$this->postbox( 'custom-login-extensions', sprintf( __( 'Custom Login Extensions %s', $this->settings['domain'] ), '<small class="dashicons dashicons-external"></small>' ), $content );
+	}
+
+	/**
+	 * Display Upgrade Notices
+	 *
+	 * @access      private
+	 * @since       3.0.3
+	 * @return      void
+	 */
+	public function upgrade_notices() {
+		
+		$show_upgrade_notice = false;
+		
+		// Version < 2.0
+		if ( false !== get_option( 'custom_login_settings', false ) ) {
+			$show_upgrade_notice = true;	
+		}
+		
+		// Version > 2.0
+		if ( false !== get_option( 'custom_login', false ) ) {
+			$show_upgrade_notice = true;	
+		}
+		
+		if ( $show_upgrade_notice && ( false === get_option( CUSTOM_LOGIN_OPTION . '_general', false ) ) ) {
+			printf(
+				'<div class="error"><p>' . esc_html__( 'It seems you\'ve got old settings in place, click %shere%s to migrate them to the new settings.', CUSTOM_LOGIN_DIRNAME ) . '</p></div>',
+				'<a href="' . esc_url( admin_url( 'options.php?page=custom-login-upgrades' ) ) . '">',
+				'</a>'
+			);
+		}
 	}
 	
 	/**

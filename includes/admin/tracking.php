@@ -56,7 +56,7 @@ class CL_Tracking {
 	 * @return		void
 	 */
 	function activate() {		
-		$this->send_checkin( true, $on_activation_hook = 'yes' );
+		$this->send_checkin( true, array( 'on_activation' => 'yes' ) );
 	}
 
 	/**
@@ -66,7 +66,7 @@ class CL_Tracking {
 	 * @return bool
 	 */
 	private function tracking_allowed() {
-		$tracking = CL_Common::get_option( 'tracking', 'general', false );
+		$tracking = CL_Common::get_option( 'tracking', 'general', 'off' );
 		
 		if ( 'on' === $tracking )
 			return true;
@@ -80,7 +80,7 @@ class CL_Tracking {
 	 * @access private
 	 * @return void
 	 */
-	private function setup_data( $on_activation_hook = 'no' ) {
+	private function setup_data( $extra_data = array() ) {
 
 		$data = array();
 
@@ -110,7 +110,12 @@ class CL_Tracking {
 		$data['active_plugins']	= $active_plugins;
 		$data['inactive_plugins']	= $plugins;
 		$data['post_count']		= wp_count_posts( 'post' )->publish;
-		$data['on_activation']	= $on_activation_hook;
+		
+		if ( is_array( $extra_data ) && !empty( $extra_data ) ) {
+			foreach( $extra_data as $key => $value ) {
+				$data[$key]		= $value;
+			}
+		}
 
 		$this->data = $data;
 	}
@@ -121,7 +126,7 @@ class CL_Tracking {
 	 * @access private
 	 * @return void
 	 */
-	public function send_checkin( $override = false, $on_activation = 'no' ) {
+	public function send_checkin( $override = false, $extra_data = array() ) {
 		
 		if ( ! $this->tracking_allowed() && ! $override )
 			return;
@@ -131,7 +136,7 @@ class CL_Tracking {
 		if ( $last_send && $last_send > strtotime( '-1 week' ) )
 			return;
 
-		$this->setup_data();
+		$this->setup_data( $extra_data );
 
 		$response = wp_remote_post( $this->api, array(
 			'method'      => 'POST',
@@ -158,8 +163,8 @@ class CL_Tracking {
 	public function check_for_settings_optin( $input ) {
 		
 		// Send an intial check in on settings save
-		if ( isset( $input['tracking'] ) ) {
-			$this->send_checkin( true );
+		if ( isset( $input['tracking'] ) && 'on' === $input['tracking'] ) {
+			$this->send_checkin( true, array( 'on_activation' => 'settings', 'mailchimp_sub' => 'yes' ) );
 		}
 
 		return $input;
@@ -175,14 +180,17 @@ class CL_Tracking {
 	public function check_for_optin( $data ) {
 		
 		$options = get_option( $this->option, array() );
+		
+		#var_dump( $options ); exit;
+		
 		$options['tracking'] = 'on';
-
 		update_option( $this->option, $options );
-
-		$this->send_checkin( true );
-
 		update_option( 'cl_tracking_notice', '1' );
-
+		
+		$this->send_checkin( true, array( 'on_activation' => 'admin notice', 'mailchimp_sub' => 'yes' ) );
+		
+		wp_redirect( remove_query_arg( 'action' ) );
+		exit;
 	}
 
 	/**
@@ -195,11 +203,10 @@ class CL_Tracking {
 		
 		$options = get_option( $this->option, array() );
 		
-		if ( isset( $options['tracking'] ) ) {
-			$options['tracking'] = 'off';
-			update_option( $this->option, $options );
-		}
-
+		#var_dump( $options ); exit;
+		
+		$options['tracking'] = 'off';
+		update_option( $this->option, $options );
 		update_option( 'cl_tracking_notice', '1' );
 
 		wp_redirect( remove_query_arg( 'action' ) );
@@ -238,11 +245,9 @@ class CL_Tracking {
 		$options = get_option( $this->option, array() );
 		$hide_notice = get_option( 'cl_tracking_notice' );
 
-		if ( $hide_notice )
-			return;
+		if ( $hide_notice ) return;
 
-		if ( isset( $options['tracking'] ) )
-			return;
+	//	if ( isset( $options['tracking'] ) ) return;
 
 		if ( ! current_user_can( 'manage_options' ) )
 			return;
@@ -252,16 +257,19 @@ class CL_Tracking {
 			stristr( network_site_url( '/' ), 'localhost' ) !== false ||
 			stristr( network_site_url( '/' ), ':8888'     ) !== false // This is common with MAMP on OS X
 		) {
-			update_option( 'cl_tracking_notice', '1' );
-		} else {
+			update_option( 'cl_tracking_notice', '1' ); // Don't update the notice in case someone pushes local to live? Maybe return.
+		}
+		else {
 			$admin_url  = admin_url( 'admin.php' );
 			$optin_url  = add_query_arg( 'action', 'cl_opt_into_tracking' );
 			$optout_url = add_query_arg( 'action', 'cl_opt_out_of_tracking' );
 
 			echo '<div class="updated"><p>';
-				echo __( 'Allow Custom Login to anonymously track how this plugin is used and help us make the plugin better? Opt-in and receive a 20% discount code for any plugin on our <a href="https://frosty.media/plugins" target="_blank">site</a>. No sensitive data is tracked.', CUSTOM_LOGIN_DIRNAME );
-				echo '&nbsp;<a href="' . esc_url( $optin_url ) . '" class="button-secondary">' . __( 'Allow', CUSTOM_LOGIN_DIRNAME ) . '</a>';
-				echo '&nbsp;<a href="' . esc_url( $optout_url ) . '" class="button-secondary">' . __( 'Do not allow', CUSTOM_LOGIN_DIRNAME ) . '</a>';
+				echo __( 'Allow Custom Login to anonymously track how this plugin is used and help us make the plugin better?<br>Opt-in and receive a 20% discount code for any plugin on our <a href="https://frosty.media/plugins" target="_blank">site</a>. No sensitive data is tracked.', CUSTOM_LOGIN_DIRNAME );
+				echo '<span class="alignright">';
+				echo '<a href="' . esc_url( $optin_url ) . '" class="">' . __( 'Allow', CUSTOM_LOGIN_DIRNAME ) . '</a> | ';
+				echo '&nbsp;<a href="' . esc_url( $optout_url ) . '" class="">' . __( 'Do not allow', CUSTOM_LOGIN_DIRNAME ) . '</a>';
+				echo '</span>';
 			echo '</p></div>';
 		}
 	}

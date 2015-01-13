@@ -113,6 +113,11 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 == Changelog ==
 
+= Version 3.0.4 (12/12/14) =
+
+* Tweak: Add manual update link on settings page if new settings are empty and old settings exist.
+* Fix: Make sure tracking is set to "on" before sending.
+
 = Version 3.0.3 (12/12/14) =
 
 * Fix: Add missing "Remove WP Logo" setting.
