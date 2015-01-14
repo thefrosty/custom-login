@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Custom Login 3.0\n"
-"POT-Creation-Date: 2015-01-12 09:45-0800\n"
-"PO-Revision-Date: 2015-01-12 09:47-0800\n"
+"POT-Creation-Date: 2015-01-13 18:54-0800\n"
+"PO-Revision-Date: 2015-01-13 18:55-0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -16,33 +16,50 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPath-1: ..\n"
 
-#: ../custom-login.php:186
+#: ../custom-login.php:187
 msgid "Custom Login Settings"
 msgstr ""
 
-#: ../custom-login.php:187 ../includes/class-cl-settings-api.php:588
-#: ../includes/class-cl-settings-api.php:750
+#: ../custom-login.php:188 ../includes/class-cl-settings-api.php:610
+#: ../includes/class-cl-settings-api.php:763
 msgid "Custom Login"
 msgstr ""
 
-#: ../custom-login.php:289
+#: ../custom-login.php:299
 msgid "Dismiss"
 msgstr ""
 
-#: ../includes/admin/tracking.php:262
+#: ../includes/admin/import-export.php:64
+msgid "Coming in version 3.1"
+msgstr ""
+
+#: ../includes/admin/import-export.php:68
+#, php-format
+msgid "<li><a href=\"%s\">Import</a></li>"
+msgstr ""
+
+#: ../includes/admin/import-export.php:69
+msgid "<li><textarea></textarea></li>"
+msgstr ""
+
+#: ../includes/admin/import-export.php:74
+msgid "Settings Import/Export"
+msgstr ""
+
+#: ../includes/admin/tracking.php:271
 #, php-format
 msgid ""
 "Allow Custom Login to anonymously track how this plugin is used and help us "
-"make the plugin better? Opt-in and receive a 20% discount code for any "
+"make the plugin better?<br>Opt-in and receive a 20% discount code for any "
 "plugin on our <a href=\"https://frosty.media/plugins\" target=\"_blank"
 "\">site</a>. No sensitive data is tracked."
 msgstr ""
 
-#: ../includes/admin/tracking.php:263
+#: ../includes/admin/tracking.php:273
 msgid "Allow"
 msgstr ""
 
-#: ../includes/admin/tracking.php:264
+#: ../includes/admin/tracking.php:274
 msgid "Do not allow"
 msgstr ""
 
@@ -50,33 +67,7 @@ msgstr ""
 msgid "Once Weekly"
 msgstr ""
 
-#: ../includes/class-cl-extensions.php:32
-msgid "Custom Login Extensions"
-msgstr ""
-
-#: ../includes/class-cl-extensions.php:33
-msgid "Custom Login Extentions"
-msgstr ""
-
-#: ../includes/class-cl-extensions.php:196
-msgid "Available Custom Login Extensions"
-msgstr ""
-
-#: ../includes/class-cl-settings-api.php:297
-#, php-format
-msgid "<label for=\"%1$s[%2$s]\">Opacity</label>"
-msgstr ""
-
-#: ../includes/class-cl-settings-api.php:591
-#, php-format
-msgid "A %s plugin"
-msgstr ""
-
-#: ../includes/class-cl-settings-api.php:607
-msgid "Save Changes"
-msgstr ""
-
-#: ../includes/class-cl-settings-api.php:721
+#: ../includes/class-cl-extensions.php:35
 #, php-format
 msgid ""
 "Install Custom Login extensions on <a href=\"%s\">this page</a> with a valid "
@@ -84,23 +75,49 @@ msgid ""
 "link below</small>."
 msgstr ""
 
-#: ../includes/class-cl-settings-api.php:723
+#: ../includes/class-cl-extensions.php:37
 msgid "Extensions Installer"
 msgstr ""
 
-#: ../includes/class-cl-settings-api.php:737
+#: ../includes/class-cl-extensions.php:43
+msgid "Custom Login Extensions"
+msgstr ""
+
+#: ../includes/class-cl-extensions.php:44
+msgid "Custom Login Extentions"
+msgstr ""
+
+#: ../includes/class-cl-extensions.php:207
+msgid "Available Custom Login Extensions"
+msgstr ""
+
+#: ../includes/class-cl-settings-api.php:311
+#, php-format
+msgid "<label for=\"%1$s[%2$s]\">Opacity</label>"
+msgstr ""
+
+#: ../includes/class-cl-settings-api.php:613
+#, php-format
+msgid "A %s plugin"
+msgstr ""
+
+#: ../includes/class-cl-settings-api.php:629
+msgid "Save Changes"
+msgstr ""
+
+#: ../includes/class-cl-settings-api.php:750
 msgid "Rate"
 msgstr ""
 
-#: ../includes/class-cl-settings-api.php:740
+#: ../includes/class-cl-settings-api.php:753
 msgid "Author"
 msgstr ""
 
-#: ../includes/class-cl-settings-api.php:741
+#: ../includes/class-cl-settings-api.php:754
 msgid "Twitter"
 msgstr ""
 
-#: ../includes/class-cl-settings-api.php:744
+#: ../includes/class-cl-settings-api.php:757
 #, php-format
 msgid ""
 "<small>If you have suggestions for a new add-on, feel free to open a support "
@@ -108,11 +125,11 @@ msgid ""
 "href=\"%s\">Twitter</a> or visit my <a href=\"%s\">blog</a>.</small>"
 msgstr ""
 
-#: ../includes/class-cl-settings-api.php:769
+#: ../includes/class-cl-settings-api.php:782
 msgid "Error fetching feed"
 msgstr ""
 
-#: ../includes/class-cl-settings-api.php:781
+#: ../includes/class-cl-settings-api.php:794
 #, php-format
 msgid "Custom Login Extensions %s"
 msgstr ""
@@ -144,7 +161,7 @@ msgstr ""
 msgid "<abbr title=\"Hyper Text Markup Language\">HTML</abbr>"
 msgstr ""
 
-#: ../includes/default-settings.php:35 ../includes/default-settings.php:195
+#: ../includes/default-settings.php:35 ../includes/default-settings.php:201
 msgid "Background color"
 msgstr ""
 
@@ -153,22 +170,22 @@ msgid "Background image"
 msgstr ""
 
 #: ../includes/default-settings.php:51 ../includes/default-settings.php:135
-#: ../includes/default-settings.php:211
+#: ../includes/default-settings.php:217
 msgid "Background position"
 msgstr ""
 
 #: ../includes/default-settings.php:52 ../includes/default-settings.php:136
-#: ../includes/default-settings.php:212
+#: ../includes/default-settings.php:218
 msgid "html background position"
 msgstr ""
 
 #: ../includes/default-settings.php:68 ../includes/default-settings.php:152
-#: ../includes/default-settings.php:228
+#: ../includes/default-settings.php:234
 msgid "Background repeat"
 msgstr ""
 
 #: ../includes/default-settings.php:80 ../includes/default-settings.php:164
-#: ../includes/default-settings.php:240
+#: ../includes/default-settings.php:246
 msgid "Background size"
 msgstr ""
 
@@ -177,14 +194,13 @@ msgid "Logo"
 msgstr ""
 
 #: ../includes/default-settings.php:102
-msgid "Force max-width"
+msgid "Hide the WP logo"
 msgstr ""
 
 #: ../includes/default-settings.php:103
 msgid ""
-"If checked and the login form width (set below) is not empty, a CSS rule of "
-"<code>width</code> will be applied on the logo wrapper element <code>.login "
-"h1</code>."
+"By default Custom Login removes the WP login from the login screen. This "
+"setting hides the h1 element."
 msgstr ""
 
 #: ../includes/default-settings.php:108
@@ -214,120 +230,132 @@ msgid "Login Form"
 msgstr ""
 
 #: ../includes/default-settings.php:186
-msgid "Width"
+msgid "Force max-width"
 msgstr ""
 
 #: ../includes/default-settings.php:187
+msgid ""
+"If checked and the login form width (set below) is not empty, a CSS rule of "
+"<code>width</code> will be applied on the logo wrapper element <code>.login "
+"h1</code>. This settings applies to the Logo image (when background size is "
+"used)."
+msgstr ""
+
+#: ../includes/default-settings.php:192
+msgid "Width"
+msgstr ""
+
+#: ../includes/default-settings.php:193
 msgid "Set a different width in pixel value."
 msgstr ""
 
-#: ../includes/default-settings.php:202
+#: ../includes/default-settings.php:208
 msgid "Background URL"
 msgstr ""
 
-#: ../includes/default-settings.php:203
+#: ../includes/default-settings.php:209
 msgid "Add a background image to the login form."
 msgstr ""
 
-#: ../includes/default-settings.php:252
+#: ../includes/default-settings.php:258
 msgid "Border radius"
 msgstr ""
 
-#: ../includes/default-settings.php:261
+#: ../includes/default-settings.php:267
 msgid "Border size"
 msgstr ""
 
-#: ../includes/default-settings.php:270
+#: ../includes/default-settings.php:276
 msgid "Border color"
 msgstr ""
 
-#: ../includes/default-settings.php:277
+#: ../includes/default-settings.php:283
 msgid "Box shadow"
 msgstr ""
 
-#: ../includes/default-settings.php:278
+#: ../includes/default-settings.php:284
 #, php-format
 msgid ""
 "Use <a href=\"%s\" target=\"_blank\">box shadow</a> syntax w/ out color. "
 "<code>inset h-shadow v-shadow blur spread</code>"
 msgstr ""
 
-#: ../includes/default-settings.php:285
+#: ../includes/default-settings.php:291
 msgid "Box shadow color"
 msgstr ""
 
-#: ../includes/default-settings.php:294
+#: ../includes/default-settings.php:300
 msgid "Miscellaneous"
 msgstr ""
 
-#: ../includes/default-settings.php:302
+#: ../includes/default-settings.php:308
 msgid "Label color"
 msgstr ""
 
-#: ../includes/default-settings.php:311
+#: ../includes/default-settings.php:317
 msgid "Below Form anchor"
 msgstr ""
 
-#: ../includes/default-settings.php:319
+#: ../includes/default-settings.php:325
 msgid "Nav color"
 msgstr ""
 
-#: ../includes/default-settings.php:326
+#: ../includes/default-settings.php:332
 msgid "Nav text-shadow color"
 msgstr ""
 
-#: ../includes/default-settings.php:333
+#: ../includes/default-settings.php:339
 msgid "Nav color hover"
 msgstr ""
 
-#: ../includes/default-settings.php:340
+#: ../includes/default-settings.php:346
 msgid "Nav text-shadow hover"
 msgstr ""
 
-#: ../includes/default-settings.php:349
+#: ../includes/default-settings.php:355
 msgid "Custom CSS"
 msgstr ""
 
-#: ../includes/default-settings.php:358
+#: ../includes/default-settings.php:364
 msgid "Allowed variables:"
 msgstr ""
 
-#: ../includes/default-settings.php:369
+#: ../includes/default-settings.php:375
 msgid "Custom HTML"
 msgstr ""
 
-#: ../includes/default-settings.php:386
+#: ../includes/default-settings.php:392
 msgid "Custom jQuery"
 msgstr ""
 
-#: ../includes/default-settings.php:408
+#: ../includes/default-settings.php:414
 msgid "Activate"
 msgstr ""
 
-#: ../includes/default-settings.php:409
+#: ../includes/default-settings.php:415
 msgid "Allow Custom Login to hook into WordPress."
 msgstr ""
 
-#: ../includes/default-settings.php:414
+#: ../includes/default-settings.php:420
 msgid "Capability"
 msgstr ""
 
-#: ../includes/default-settings.php:415
+#: ../includes/default-settings.php:421
 #, php-format
 msgid ""
 "Set the minimum user capability to manage these settings. The default "
 "capability is <code>%s</code>"
 msgstr ""
 
-#: ../includes/default-settings.php:425
+#: ../includes/default-settings.php:431
 msgid "Tracking Settings"
 msgstr ""
 
-#: ../includes/default-settings.php:433
+#: ../includes/default-settings.php:439
 msgid "Allow usage tracking?"
 msgstr ""
 
-#: ../includes/default-settings.php:434
+#: ../includes/default-settings.php:440
 #, php-format
 msgid ""
 "Allow Frosty Media to anonymously track how this plugin is used and help us "
@@ -336,58 +364,68 @@ msgid ""
 "you."
 msgstr ""
 
-#: ../includes/default-settings.php:441
+#: ../includes/default-settings.php:447
 msgid "Notices"
 msgstr ""
 
-#: ../includes/default-settings.php:449
+#: ../includes/default-settings.php:455
 msgid "Allow admin notices?"
 msgstr ""
 
-#: ../includes/default-settings.php:450
+#: ../includes/default-settings.php:456
 msgid ""
 "Allow admin notices everywhere in WordPress. Leave unchecked to disable "
 "global notices."
 msgstr ""
 
-#: ../includes/default-settings.php:457
+#: ../includes/default-settings.php:463
 msgid "Login functions"
 msgstr ""
 
-#: ../includes/default-settings.php:465
+#: ../includes/default-settings.php:471
 msgid "Login shake"
 msgstr ""
 
-#: ../includes/default-settings.php:466
+#: ../includes/default-settings.php:472
 msgid "Disable the login form animated \"shake\" on error."
 msgstr ""
 
-#: ../includes/default-settings.php:471
+#: ../includes/default-settings.php:477
 msgid "Remove login CSS"
 msgstr ""
 
-#: ../includes/default-settings.php:472
+#: ../includes/default-settings.php:478
 msgid ""
 "Remove WordPress' login CSS. Warning: You'll have to add aditional syles not "
 "set by this plugin."
 msgstr ""
 
-#: ../includes/default-settings.php:477
+#: ../includes/default-settings.php:483
 msgid "Login expiration days"
 msgstr ""
 
-#: ../includes/default-settings.php:478
+#: ../includes/default-settings.php:484
 msgid ""
-"By default, the cookie expires 10 days from creation. To turn this into a "
-"session cookie, set to \"0\"."
+"The default WordPress behavior for logging a user out is to make a login "
+"session cookie that expires in 48 hours or when the browser is closed. If "
+"the \"Remember Me\" box is checked, WordPress will give you 14 days before "
+"forcing you to authenticate again. Never set below \"0\"."
 msgstr ""
 
-#: ../includes/default-settings.php:486
+#: ../includes/default-settings.php:492
 msgid "Remove lost password text"
 msgstr ""
 
-#: ../includes/default-settings.php:487
+#: ../includes/default-settings.php:493
 msgid ""
 "Remove the \"Lost Password?\" text. This does <strong>not<strong> disable "
 "the lost password function."
+msgstr ""
+
+#: ../includes/default-settings.php:498
+msgid "Disable lost password"
+msgstr ""
+
+#: ../includes/default-settings.php:499
+msgid "Disable the lost password reset function."
 msgstr ""
