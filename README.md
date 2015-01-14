@@ -1,20 +1,12 @@
 # Custom Login #
-**Contributors:** austyfrosty, frostymedia
-  
-**Donate link:** https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290
-  
-**Tags:** admin, branding, customization, custom login, login, logo, error, login error, custom login pro
-  
-**Requires at least:** 4.0
-  
-**Tested up to:** 4.1
-  
-**Stable tag:** trunk
-  
-**License:** GPLv2 or later
-  
-**License URI:** http://www.gnu.org/licenses/gpl-2.0.html
-  
+**Contributors:** austyfrosty, frostymedia  
+**Donate link:** https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290  
+**Tags:** admin, branding, customization, custom login, login, logo, error, login error, custom login pro  
+**Requires at least:** 4.0  
+**Tested up to:** 4.1  
+**Stable tag:** trunk  
+**License:** GPLv2 or later  
+**License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
 Custin Login allows you to easily customize your admin login page, works great for client sites!
 
@@ -136,6 +128,15 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 
 ## Changelog ##
+
+### Version 3.0.7 (01/13/15) ###
+
+* Update: ace.js to build `20.12.14`.
+* Update: admin.css.
+* Update: Extenstions HTML and settings page location.
+* Update: Sanatize the `auth_cookie_expiration` setting with a positive integer.
+* Tweak: Remove false positive files from malware scanners; ace editor php.js [forum](https://wordpress.org/support/topic/wordfence-alerta?).
+* Tweak: Make sure `auth_cookie_expiration` is greater than 0.
 
 ### Version 3.0.6 (01/13/15) ###
 
