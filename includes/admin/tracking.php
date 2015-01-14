@@ -3,7 +3,7 @@
  * @package     CustomLogin
  * @subpackage  Classes/CL_Common
  * @author      Austin Passy <http://austin.passy.co>
- * @copyright   Copyright (c) 2014, Austin Passy
+ * @copyright   Copyright (c) 2014-2015, Austin Passy
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
@@ -15,7 +15,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * Usage tracking
  *
  * @access public
- * @since  1.8.2
+ * @since  3.0.0
  * @return void
  */
 class CL_Tracking {
@@ -168,7 +168,6 @@ class CL_Tracking {
 		}
 
 		return $input;
-
 	}
 
 	/**

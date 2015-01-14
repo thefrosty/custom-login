@@ -121,6 +121,7 @@ class CL_Common {
 		
 		$expiration = null !== $expiration ? $expiration : WEEK_IN_SECONDS;
 		
+	#	delete_transient( $transient_key );
 		if ( false === ( $json = get_transient( $transient_key ) ) ) {
 			
 			$response = wp_remote_get(

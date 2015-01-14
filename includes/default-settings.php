@@ -481,11 +481,11 @@ $fields	[CUSTOM_LOGIN_OPTION . '_general'] = array(
 	array(
 		'name'		=> 'post_password_expires',
 		'label'		=> __( 'Login expiration days', CUSTOM_LOGIN_DIRNAME ),
-		'desc'		=> __( 'The default WordPress behavior for logging a user out is to make a login session cookie that expires in 48 hours or when the browser is closed. If the "Remember Me" box is checked, WordPress will give you 14 days before forcing you to authenticate again. To turn this into a session cookie, set to "0".', CUSTOM_LOGIN_DIRNAME ),
+		'desc'		=> __( 'The default WordPress behavior for logging a user out is to make a login session cookie that expires in 48 hours or when the browser is closed. If the "Remember Me" box is checked, WordPress will give you 14 days before forcing you to authenticate again. Never set below "0".', CUSTOM_LOGIN_DIRNAME ),
 		'type' 		=> 'text_number',
 		'size'		=> 'small',
 		'default' 	=> '10',
-		'sanitize' => 'int',
+		'sanitize' => 'absint',
 	),
 	array(
 		'name'		=> 'lostpassword_text',

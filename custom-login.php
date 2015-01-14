@@ -3,7 +3,7 @@
  * Plugin Name: Custom Login
  * Plugin URI: https://frosty.media/plugins/custom-login
  * Description: A simple way to customize your WordPress <code>wp-login.php</code> screen! A <a href="https://frosty.media/">Frosty Media</a> plugin.
- * Version: 3.0.6
+ * Version: 3.0.7
  * Author: Austin Passy
  * Author URI: https://austin.passy.co
  * Text Domain: custom-login
@@ -38,14 +38,14 @@ final class Custom_Login {
 	 * Plugin vars
 	 * @return string
 	 */
-	var	$version = '3.0.6',
+	var	$version = '3.0.7',
 		$menu_page,
 		$prefix;
 	
 	/**
 	 * Private settings
 	 */
-	private $settings_api;
+	public $settings_api;
 
 	/**
 	 * Main Instance
@@ -142,6 +142,7 @@ final class Custom_Login {
 		
 		if ( is_admin() ) {
 			require_once( trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/admin/plugins.php' );
+			require_once( trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/admin/import-export.php' );
 			require_once( trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/admin/tracking.php' );
 		}
 	}
@@ -260,22 +261,31 @@ final class Custom_Login {
 		if ( !$is_cl_screen ) {
 			
 			// Global notifications
-			if ( 'off' === CL_Common::get_option( 'admin_notices', 'general', 'on' ) ) return;
+			if ( 'off' === CL_Common::get_option( 'admin_notices', 'general', 'on' ) )
+				return;
 			
 			// Make sure 'Frosty_Media_Notifications' isn't activated
-			if ( class_exists( 'Frosty_Media_Notifications' ) ) return;
+			if ( class_exists( 'Frosty_Media_Notifications' ) )
+				return;
 		}
 		
-		$message_url  = add_query_arg( array( 'edd_action' => 'cl_announcements' ), trailingslashit( CUSTOM_LOGIN_API_URL ) . 'cl-checkin-api/' ); // https://raw.github.com/thefrosty/custom-login/master/extensions.json
+		// https://raw.github.com/thefrosty/custom-login/master/extensions.json
+		$message_url  = add_query_arg( array( 'edd_action' => 'cl_announcements' ), trailingslashit( CUSTOM_LOGIN_API_URL ) . 'cl-checkin-api/' );
+		
 		$announcement = CL_Common::wp_remote_get(
 			$message_url,
 			$transient_key,
 			DAY_IN_SECONDS,
-			'CustomLogin'
+			'CustomLogin' // We need our custom $user_agent
 		);
 		
-		// Bail if false
-		if ( false === $announcement ) return;
+		// Bail if errors
+		if ( is_wp_error( $announcement ) )
+			return;
+		
+		// Bail if false or empty
+		if ( !$announcement || empty( $announcement ) )
+			return;
 			
 		if ( trim( $old_message ) !== trim( $announcement->message ) && !empty( $old_message ) ) {
 			delete_user_meta( get_current_user_id(), $ignore_key, 1 );

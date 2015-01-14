@@ -42,7 +42,7 @@ function custom_login_plugin_row_meta( $input, $file ) {
 		return $input;
 
 	$links = array(
-		'<a href="' . sprintf( admin_url( 'options-general.php?page=%s-extensions' ), CUSTOM_LOGIN_DIRNAME ) . '">' . esc_html__( 'Extension Installer', CUSTOM_LOGIN_DIRNAME ) . '</a>',
+		'<a href="' . sprintf( admin_url( 'options-general.php?page=%s/extensions' ), CUSTOM_LOGIN_DIRNAME ) . '">' . esc_html__( 'Extension Installer', CUSTOM_LOGIN_DIRNAME ) . '</a>',
 		'<a href="https://frosty.media/plugin/tag/custom-login-extension/" target="_blank">' . esc_html__( 'Add Ons', CUSTOM_LOGIN_DIRNAME ) . '</a>',
 	);
 

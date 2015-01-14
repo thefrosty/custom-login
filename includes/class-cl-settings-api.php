@@ -57,7 +57,6 @@ class CL_Settings_API {
 		add_action( 'admin_notices',											array( $this, 'upgrade_notices' ) );
 		add_action( $this->settings['prefix'] . '_sticky_admin_notice',	array( $this, 'sticky_admin_notice_social_links' ), 10 );
 		add_action( $this->settings['prefix'] . '_settings_sidebars',		array( $this, 'about_the_author' ), 19 );
-		add_action( $this->settings['prefix'] . '_settings_sidebars',		array( $this, 'cl_extensions' ), 20 );
 		add_action( $this->settings['prefix'] . '_settings_sidebars',		array( $this, 'sidebar_feed' ), 20 );
 	}
 
@@ -81,7 +80,7 @@ class CL_Settings_API {
 		wp_enqueue_script( 'sticky', plugins_url( 'js/jquery.sticky.js', $this->settings['file'] ), array( 'jquery' ), '1.0.0', true );
 		
 		/* Ace */
-		wp_enqueue_script( 'ace', plugins_url( 'js/ace/src-min-noconflict/ace.js', $this->settings['file'] ), null, '08.11.14', true );
+		wp_enqueue_script( 'ace', plugins_url( 'js/ace/src-min-noconflict/ace.js', $this->settings['file'] ), null, '20.12.14', true );
 		
 		/* Dashicons */
 		wp_enqueue_style( 'dashicons' );
@@ -183,7 +182,7 @@ class CL_Settings_API {
 		
 		//register settings sections
 		foreach ( $this->settings_sections as $section ) {
-			if ( false == get_option( $section['id'] ) ) {
+			if ( false == get_option( $section['id'] ) && ( isset( $section['option'] ) && false !== $section['option'] ) ) {
 				add_option( $section['id'] );
 			}
 		
@@ -428,10 +427,18 @@ class CL_Settings_API {
      */
     function callback_textarea( $args ) {
 
-		$value = esc_textarea( $this->get_option( $args['id'], $args['section'], $args['default'] ) );
-		$size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
+		$value	= esc_textarea( $this->get_option( $args['id'], $args['section'], $args['default'] ) );
+		$size	= isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
+		$extra	= isset( $args['extra'] ) && is_array( $args['extra'] ) ? $args['extra'] : null;
+		$param	= '';
 		
-		$html  = sprintf( '<textarea rows="5" cols="55" class="%1$s-text" id="%2$s[%3$s]" name="%2$s[%3$s]">%4$s</textarea>', $size, $args['section'], $args['id'], stripslashes( $value ) );
+		if ( null !== $extra ) {
+			foreach( $extra as $p_key => $p_value ) {
+				$param .= $p_key . '="' . $p_value . '"';
+			}
+		}
+		
+		$html  = sprintf( '<textarea rows="5" cols="55" class="%1$s-text" id="%2$s[%3$s]" name="%2$s[%3$s]"%5$s>%4$s</textarea>', $size, $args['section'], $args['id'], stripslashes( $value ), $param );
 		$html .= !empty( $args['desc'] ) ? sprintf( '<span class="description"> %s</span>', $args['desc'] ) : '';
 		
 		echo $html;
@@ -727,16 +734,6 @@ class CL_Settings_API {
 			<div class="inside"><?php echo $content; ?></div>
 			</div>
 		</div><?php
-	}
-	
-	/**
-	 * Box with latest plugins from Extendd.com for sidebar
-	 */
-	function cl_extensions( $args ) {
-		
-		$content = sprintf( __( 'Install Custom Login extensions on <a href="%s">this page</a> with a valid license key. <small>Purchase your license key by clicking the appropriate link below</small>.', $this->settings['domain'] ), sprintf( admin_url( 'options-general.php?page=%s-extensions' ), CUSTOM_LOGIN_DIRNAME ) );
-		
-		$this->postbox( 'custom-login-extensions', __( 'Extensions Installer', $this->settings['domain'] ), $content );
 	}
 	
 	/**

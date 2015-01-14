@@ -20,10 +20,21 @@ class CL_Extensions {
 		
 		$this->checkout_url = CUSTOM_LOGIN_API_URL . 'checkout/';
 		
-		add_action( 'admin_menu',		array( $this, 'admin_menu' ), 10 );
-		add_action( 'admin_init',		array( $this, 'remote_install_client' ), 10 );
+		add_action( CUSTOM_LOGIN_OPTION . '_settings_sidebars',	array( $this, 'settings_sidebar' ), 20 );
+		add_action( 'admin_menu',										array( $this, 'admin_menu' ), 10 );
+		add_action( 'admin_init',										array( $this, 'remote_install_client' ), 10 );
 		
 		$this->get_extensions();
+	}
+	
+	/**
+	 * Box with a link to the extensions page.
+	 */
+	function settings_sidebar( $args ) {
+		
+		$content = sprintf( __( 'Install Custom Login extensions on <a href="%s">this page</a> with a valid license key. <small>Purchase your license key by clicking the appropriate link below</small>.', CUSTOM_LOGIN_DIRNAME ), sprintf( admin_url( 'options-general.php?page=%s/extensions' ), CUSTOM_LOGIN_DIRNAME ) );
+		
+		CUSTOMLOGIN()->settings_api->postbox( 'custom-login-extensions', __( 'Extensions Installer', CUSTOM_LOGIN_DIRNAME ), $content );
 	}
 	
 	public function admin_menu() {
@@ -32,11 +43,11 @@ class CL_Extensions {
 			__( 'Custom Login Extensions', CUSTOM_LOGIN_DIRNAME ),
 			__( 'Custom Login Extentions', CUSTOM_LOGIN_DIRNAME ),
 			'install_plugins',
-			sprintf( '%s-extensions', CUSTOM_LOGIN_DIRNAME ),
+			sprintf( '%s/extensions', CUSTOM_LOGIN_DIRNAME ),
 			array( $this, 'html' )
 		);
 		
-		remove_submenu_page( 'options-general.php', sprintf( '%s-extensions', CUSTOM_LOGIN_DIRNAME ) );
+		remove_submenu_page( 'options-general.php', sprintf( '%s/extensions', CUSTOM_LOGIN_DIRNAME ) );
 		
 		add_action( 'load-' . $this->menu_page, array( $this, 'load' ) );
 	}
@@ -59,7 +70,7 @@ class CL_Extensions {
 		
 		$cl_remote_install_client = new CL_Remote_Install_Client(
 			trailingslashit( CUSTOM_LOGIN_API_URL ) . 'edd-sl-api/',
-			'settings_page_custom-login-extensions', // HARD CODE IT!!! 
+			'settings_page_custom-login/extensions', // HARD CODE IT!!! Get is with var_dump( get_current_screen() );
 			array( 'skipplugincheck' => 0, 'url' => home_url() )
 		);
 	}
@@ -85,19 +96,19 @@ class CL_Extensions {
 					array( 
 						'description'	=> 'Personal',
 						'download_id'	=> '108',
-						'price_id'		=> '0',
+						'price_id'		=> '1',
 						'price'			=> '$35',
 					),
 					array( 
 						'description'	=> 'Plus',
 						'download_id'	=> '108',
-						'price_id'		=> '1',
+						'price_id'		=> '2',
 						'price'			=> '$95',
 					),
 					array( 
 						'description'	=> 'Professional',
 						'download_id'	=> '108',
-						'price_id'		=> '2',
+						'price_id'		=> '3',
 						'price'			=> '$195',
 					),
 				),
@@ -113,19 +124,19 @@ class CL_Extensions {
 					array( 
 						'description'	=> 'Personal',
 						'download_id'	=> '120',
-						'price_id'		=> '0',
+						'price_id'		=> '1',
 						'price'			=> '$35',
 					),
 					array( 
 						'description'	=> 'Plus',
 						'download_id'	=> '120',
-						'price_id'		=> '1',
+						'price_id'		=> '2',
 						'price'			=> '$95',
 					),
 					array( 
 						'description'	=> 'Professional',
 						'download_id'	=> '120',
-						'price_id'		=> '2',
+						'price_id'		=> '3',
 						'price'			=> '$195',
 					),
 				),
@@ -141,19 +152,19 @@ class CL_Extensions {
 					array( 
 						'description'	=> 'Personal',
 						'download_id'	=> '124',
-						'price_id'		=> '0',
+						'price_id'		=> '1',
 						'price'			=> '$35',
 					),
 					array( 
 						'description'	=> 'Plus',
 						'download_id'	=> '124',
-						'price_id'		=> '1',
+						'price_id'		=> '2',
 						'price'			=> '$95',
 					),
 					array( 
 						'description'	=> 'Professional',
 						'download_id'	=> '124',
-						'price_id'		=> '2',
+						'price_id'		=> '3',
 						'price'			=> '$195',
 					),
 				),
@@ -169,19 +180,19 @@ class CL_Extensions {
 					array( 
 						'description'	=> 'Personal',
 						'download_id'	=> '128',
-						'price_id'		=> '0',
+						'price_id'		=> '1',
 						'price'			=> '$35',
 					),
 					array( 
 						'description'	=> 'Plus',
 						'download_id'	=> '128',
-						'price_id'		=> '1',
+						'price_id'		=> '2',
 						'price'			=> '$95',
 					),
 					array( 
 						'description'	=> 'Professional',
 						'download_id'	=> '128',
-						'price_id'		=> '2',
+						'price_id'		=> '3',
 						'price'			=> '$195',
 					),
 				),
@@ -209,11 +220,15 @@ class CL_Extensions {
 					$html .= '<span class="eddri-status">Not Installed</span>';
 					$html .= '<a class="button" data-edd-install="' . $extension['title'] . '">Install</a>';
 					$html .= '<a class="button show-if-not-purchased" data-toggle="purchase-links-' . $key . '" style="display:none">Purchase License</a>';
-					$html .= '<div id="purchase-links-1" style="display:none">';
+					$html .= '<div id="purchase-links-' . $key . '" style="display:none">';
 					
 						$html .= '<ul>';						
 						foreach( $extension['links'] as $link ) {
-							$html .= '<li><a href="' . add_query_arg( array( 'edd_action' => 'straight_to_gateway', 'download_id' => $link['download_id'], 'edd_options[price_id]' => $link['price_id'] ), $this->checkout_url ) . '">' . $link['description'] . '(' . $link['price'] . ')</a></li>';
+							$html .= '<li>';
+							$html .= $link['description'] . ' (' . $link['price'] . '): <a href="' . add_query_arg( array( 'edd_action' => 'straight_to_gateway', 'download_id' => $link['download_id'], 'edd_options[price_id]' => $link['price_id'] ), $this->checkout_url ) . '">PayPal</a>';
+							$html .= ' | ';
+							$html .= '<a href="' . add_query_arg( array( 'edd_action' => 'add_to_cart', 'download_id' => $link['download_id'], 'edd_options[price_id]' => $link['price_id'] ), $this->checkout_url ) . '">Credit Card</a>';
+							$html .= '</li>';
 						}						
 						$html .= '</ul>';
 						
@@ -224,9 +239,38 @@ class CL_Extensions {
 		
 		$html .= '</div>';
 		$html .= '</form>';
+		$html .= $this->footer_script();
 		$html .= '</div>';
 		
 		echo $html;
+	}
+	
+	function footer_script() {
+		ob_start(); ?>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		
+		setTimeout( function() {			
+			// Remote API helper
+			$('a[data-toggle]').on('click',function(e) {
+				e.preventDefault();
+				$('#' + $(this).data('toggle')).toggle();
+			});
+			
+			// Show Purchase button
+			$('a[data-edd-install]').each(function() {
+				var $this = $(this);
+				setTimeout( function() {
+					if ( $this.prev('.eddri-status').text() === 'Not Installed' ) {
+						$this.closest( $this.parent() ).children('a.button').hide();
+						$this.closest( $this.parent() ).children('a.button.show-if-not-purchased').show();
+					}
+				}, 500 );
+			});
+			
+		}, 1000 );
+	});
+</script><?php return ob_get_clean();
 	}
 	
 }

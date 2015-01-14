@@ -277,7 +277,7 @@ div[id$="_ace"] * {
 	float: left;
 	margin: 1% 0 1% 1.6%;
 }
-.col:nth-child(3n+1) { margin-left: 0; }
+.col:nth-child(3n+1) { clear: both; margin-left: 0; }
 
 /* GRID OF TWO */
 .span_2_of_2 {

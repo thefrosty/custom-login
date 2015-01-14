@@ -113,6 +113,15 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 == Changelog ==
 
+= Version 3.0.7 (01/13/15) =
+
+* Update: ace.js to build `20.12.14`.
+* Update: admin.css.
+* Update: Extenstions HTML and settings page location.
+* Update: Sanatize the `auth_cookie_expiration` setting with a positive integer.
+* Tweak: Remove false positive files from malware scanners; ace editor php.js [forum](https://wordpress.org/support/topic/wordfence-alerta?).
+* Tweak: Make sure `auth_cookie_expiration` is greater than 0.
+
 = Version 3.0.6 (01/13/15) =
 
 * Bug: Misspelled variable returned on `auth_cookie_expiration` caused instant user logout.

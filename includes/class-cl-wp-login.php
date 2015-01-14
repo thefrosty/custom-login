@@ -203,13 +203,19 @@ class CL_WP_Login {
 	 * Allow password reset.
 	 *
 	 * @added		3.0.5
+	 * @updated	3.0.7
 	 */
 	public function auth_cookie_expiration( $expiration, $user_id, $remember ) {
 		
 		$_expiration = CL_Common::get_option( 'post_password_expires', 'general', '' );
 		
-		if ( !empty( $_expiration ) )
+		if ( !empty( $_expiration ) ) {
+			
+			if ( (int) $_expiration < 1 )
+				$_expiration = 1;
+				
 			$expiration = ( $_expiration * DAY_IN_SECONDS );
+		}
 			
 		return $expiration;
 	}
