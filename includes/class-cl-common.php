@@ -112,12 +112,20 @@ class CL_Common {
 	/**
      * Helper function to make remote calls
 	 *
-	 * @since 1.0.0
+	 * @since		3.0.0
+	 * @updated	3.0.8
      */
     public static function wp_remote_get( $url = false, $transient_key, $expiration = null, $user_agent = 'WordPress' ) {
-		global $wp_version;
 		
 		if ( !$url ) return false;
+		
+		if ( 'WordPress' == $user_agent ) {
+			global $wp_version;
+			$_version = $wp_version; 
+		}
+		else {
+			$_version = CUSTOM_LOGIN_VERSION; 
+		}
 		
 		$expiration = null !== $expiration ? $expiration : WEEK_IN_SECONDS;
 		
@@ -127,9 +135,9 @@ class CL_Common {
 			$response = wp_remote_get(
 				esc_url( $url ),
 				array(
-					'timeout'		=> 15,
+					'timeout'		=> apply_filters( 'cl_wp_remote_get_timeout', (int) 15 ),
 					'sslverify'	=> false,
-					'user-agent'	=> $user_agent . '/' . $wp_version . '; ' . get_bloginfo( 'url' ),
+					'user-agent'	=> $user_agent . '/' . $_version . '; ' . get_bloginfo( 'url' ),
 				)
 			);
 			

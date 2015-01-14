@@ -113,6 +113,14 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 == Changelog ==
 
+= Version 3.0.8 (01/14/15) =
+
+* Add: Auth timout setting when remember me is checked and not.
+* Add: filter to wp_remote_get timeout. Use: `cl_wp_remote_get_timeout` to return (int) value, defaults to 15.
+* Update: `auth_cookie_expiration` function.
+* Update: Removed `post_password_expires` setting in favor of `auth_timeout` &amp; `auth_timeout_remember`.
+* Fix: Possible white screen issue, for users who updated to 3.0.7 before a file was uploaded. (version bump).
+
 = Version 3.0.7 (01/13/15) =
 
 * Update: ace.js to build `20.12.14`.

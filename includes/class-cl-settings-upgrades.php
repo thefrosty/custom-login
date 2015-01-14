@@ -340,9 +340,10 @@ class CL_Settings_Upgrade {
 		$general_settings['admin_notices'] = 'on'; // New
 		$general_settings['wp_shake_js'] = 'off'; // New
 		$general_settings['remove_login_css'] = 'off'; // New
-		$general_settings['post_password_expires'] = '10'; // New
 		$general_settings['lostpassword_text'] = 'off'; // New
 		$general_settings['allow_password_reset'] = 'off'; // New
+		$general_settings['auth_timeout'] = '2'; // New
+		$general_settings['auth_timeout_remember'] = '14'; // New
 		
 		
 		update_option( CUSTOM_LOGIN_OPTION . '_design', $design_settings );

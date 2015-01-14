@@ -52,7 +52,7 @@ class CL_WP_Login {
 	
 	private function filters() {
 		
-		add_filter( 'auth_cookie_expiration',			array( $this, 'auth_cookie_expiration' ), 10, 3 );
+		add_filter( 'auth_cookie_expiration',			array( $this, 'auth_cookie_expiration' ), 99, 3 );
 		add_filter( 'allow_password_reset',				array( $this, 'allow_password_reset' ) );
 		add_filter( 'gettext',							array( $this, 'remove_lostpassword_text' ), 20, 2 );
 	}
@@ -203,21 +203,30 @@ class CL_WP_Login {
 	 * Allow password reset.
 	 *
 	 * @added		3.0.5
-	 * @updated	3.0.7
+	 * @updated	3.0.8
+	 * @ref			https://wordpress.org/plugins/configure-login-timeout/
 	 */
-	public function auth_cookie_expiration( $expiration, $user_id, $remember ) {
+	public function auth_cookie_expiration( $seconds, $user_id, $remember ) {
 		
-		$_expiration = CL_Common::get_option( 'post_password_expires', 'general', '' );
+		$expire_in = 0;
 		
-		if ( !empty( $_expiration ) ) {
-			
-			if ( (int) $_expiration < 1 )
-				$_expiration = 1;
-				
-			$expiration = ( $_expiration * DAY_IN_SECONDS );
+		if ( $remember ) {
+			$expire_in = (int) CL_Common::get_option( 'auth_timeout_remember', 'general', 14 * DAY_IN_SECONDS );
+			if ( $expire_in <= 0 )
+				$expire_in = 14 * DAY_IN_SECONDS;
 		}
-			
-		return $expiration;
+		else {
+			$expire_in = (int) CL_Common::get_option( 'auth_timeout', 'general', 2 * DAY_IN_SECONDS );
+			if ( $expire_in <= 0 )
+				$expire_in = 2 * DAY_IN_SECONDS;
+		}
+		
+		// check for Year 2038 problem - http://en.wikipedia.org/wiki/Year_2038_problem
+		if ( PHP_INT_MAX - time() < $expire_in ) {
+			$expire_in = PHP_INT_MAX - time() - 5;
+		}
+		
+		return $expire_in;
 	}
 	 
 	/**

@@ -479,15 +479,6 @@ $fields	[CUSTOM_LOGIN_OPTION . '_general'] = array(
 		'type'		=> 'checkbox'
 	),
 	array(
-		'name'		=> 'post_password_expires',
-		'label'		=> __( 'Login expiration days', CUSTOM_LOGIN_DIRNAME ),
-		'desc'		=> __( 'The default WordPress behavior for logging a user out is to make a login session cookie that expires in 48 hours or when the browser is closed. If the "Remember Me" box is checked, WordPress will give you 14 days before forcing you to authenticate again. Never set below "0".', CUSTOM_LOGIN_DIRNAME ),
-		'type' 		=> 'text_number',
-		'size'		=> 'small',
-		'default' 	=> '10',
-		'sanitize' => 'absint',
-	),
-	array(
 		'name'		=> 'lostpassword_text',
 		'label'		=> __( 'Remove lost password text', CUSTOM_LOGIN_DIRNAME ),
 		'desc'		=> __( 'Remove the "Lost Password?" text. This does <strong>not<strong> disable the lost password function.', CUSTOM_LOGIN_DIRNAME ),
@@ -498,5 +489,39 @@ $fields	[CUSTOM_LOGIN_OPTION . '_general'] = array(
 		'label'		=> __( 'Disable lost password', CUSTOM_LOGIN_DIRNAME ),
 		'desc'		=> __( 'Disable the lost password reset function.', CUSTOM_LOGIN_DIRNAME ),
 		'type'		=> 'checkbox'
+	),
+	
+	/** BREAK **/		
+	array(
+		'name' 		=> 'break_4',
+		'label'		=> sprintf( '<h4>%s</h4>', __( 'Sessions', CUSTOM_LOGIN_DIRNAME ) ),
+		'desc' 		=> '',
+		'type' 		=> 'html',
+	),
+	/** BREAK **/
+	
+	array(
+		'name'		=> 'auth_timeout',
+		'label'		=> __( 'Auth timeout', CUSTOM_LOGIN_DIRNAME ),
+		'desc'		=> __( 'Authentication timeout <strong>without</strong> "remember me" checked at login.', CUSTOM_LOGIN_DIRNAME ),
+		'type' 		=> 'text_number',
+		'size'		=> 'small',
+		'default' 	=> '2',
+		'sanitize' => 'absint',
+	),
+	array(
+		'name'		=> 'auth_timeout_remember',
+		'label'		=> __( 'Auth timeout', CUSTOM_LOGIN_DIRNAME ),
+		'desc'		=> __( 'Authentication timeout <strong>with</strong> "remember me" checked at login.', CUSTOM_LOGIN_DIRNAME ),
+		'type' 		=> 'text_number',
+		'size'		=> 'small',
+		'default' 	=> '14',
+		'sanitize' => 'absint',
+	),
+	array(
+		'name' 		=> 'break_5',
+		'label'		=> '',
+		'desc' 		=> sprintf( '<small>%s</small>', __( 'The default WordPress behavior for logging a user out is to make a login session cookie that expires in 48 hours or when the browser is closed. If the "Remember Me" box is checked, WordPress will give you 14 days before forcing you to authenticate again. Never set below "0".', CUSTOM_LOGIN_DIRNAME ) ),
+		'type' 		=> 'html',
 	),
 );
