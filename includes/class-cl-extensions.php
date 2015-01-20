@@ -60,10 +60,15 @@ class CL_Extensions {
 		wp_enqueue_style( CUSTOM_LOGIN_DIRNAME, plugins_url( 'css/admin.css', CUSTOM_LOGIN_FILE ), false, CUSTOM_LOGIN_VERSION, 'screen' );
 	}
 	
-    /**
-	 * Load the remote installer
+	/**
+	 * Load the remote installer on our setting page only.
+	 *
+	 * @updated	3.1
 	 */
 	public function remote_install_client() {
+		
+		if ( !CL_Common::is_settings_page() )
+			return;
 		
 		if ( !class_exists( 'CL_Remote_Install_Client' ) )
 			require_once( trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/libraries/edd-remote-install-client/EDD_Remote_Install_Client.php' );

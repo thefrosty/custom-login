@@ -95,12 +95,12 @@ class CL_Common {
     }
 
     /**
-     * Get all values of a settings section
-     *
-     * @param string  $subsection the section name this field belongs to
+	 * Get all values of a settings section
 	 *
-     * @return array
-     */
+	 * @param string  $subsection the section name this field belongs to
+	 *
+	 * @return array
+	 */
     public static function get_options( $subsection = 'design' ) {
 		
 		$section  = CUSTOM_LOGIN_OPTION . '_' . $subsection;
@@ -110,11 +110,11 @@ class CL_Common {
     }
 	
 	/**
-     * Helper function to make remote calls
+	 * Helper function to make remote calls
 	 *
 	 * @since		3.0.0
 	 * @updated	3.0.8
-     */
+	 */
     public static function wp_remote_get( $url = false, $transient_key, $expiration = null, $user_agent = 'WordPress' ) {
 		
 		if ( !$url ) return false;
@@ -164,6 +164,34 @@ class CL_Common {
 		}
 		
 		return $json;		
+	}
+	
+	/**
+	 * Helper function check if we're on our settings page.
+	 *
+	 * @since		3.0.9
+	 */
+	public static function is_settings_page( $page = '' ) {
+		
+		$return = true;
+		$screen = get_current_screen();
+		
+		if ( null !== $screen ) {
+			
+			if ( $screen->id != ( CUSTOMLOGIN()->menu_page ) )
+				$return = false;
+		}
+		else {
+			global $pagenow;
+			
+			if ( 'options-general.php' != $pagenow )
+				$return = false;
+				
+			if ( !isset( $_GET['page'] ) || CUSTOM_LOGIN_DIRNAME != $_GET['page'] )
+				$return = false;
+		}
+		
+		return $return;
 	}
 	
 }

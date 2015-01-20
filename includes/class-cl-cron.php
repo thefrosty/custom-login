@@ -3,7 +3,7 @@
  * @package     CustomLogin
  * @subpackage  Classes/CL_Cron
  * @author      Austin Passy <http://austin.passy.co>
- * @copyright   Copyright (c) 2014, Austin Passy
+ * @copyright   Copyright (c) 2014-2015, Austin Passy
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
@@ -67,8 +67,8 @@ class CL_Cron {
 	 * @return void
 	 */
 	private function weekly_events() {
-		if ( ! wp_next_scheduled( 'cl_weekly_scheduled_events' ) ) {
-			wp_schedule_event( current_time( 'timestamp' ), 'weekly', 'cl_weekly_scheduled_events' );
+		if ( ! wp_next_scheduled( 'custom_login_weekly_scheduled_events' ) ) {
+			wp_schedule_event( current_time( 'timestamp' ), 'weekly', 'custom_login_weekly_scheduled_events' );
 		}
 	}
 
@@ -80,8 +80,8 @@ class CL_Cron {
 	 * @return void
 	 */
 	private function daily_events() {
-		if ( ! wp_next_scheduled( 'cl_daily_scheduled_events' ) ) {
-			wp_schedule_event( current_time( 'timestamp' ), 'daily', 'cl_daily_scheduled_events' );
+		if ( ! wp_next_scheduled( 'custom_login_daily_scheduled_events' ) ) {
+			wp_schedule_event( current_time( 'timestamp' ), 'daily', 'custom_login_daily_scheduled_events' );
 		}
 	}
 

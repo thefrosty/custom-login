@@ -15,7 +15,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * Usage tracking
  *
  * @access public
- * @since  3.0.7
+ * @since  3.1
  * @return void
  */
 class CL_Import_Export {
@@ -25,7 +25,8 @@ class CL_Import_Export {
 	 *
 	 * @access private
 	 */
-	private $menu_page;
+	private $settings_api;
+	private $settings_id;
 
 	/**
 	 * Get things going
@@ -34,10 +35,102 @@ class CL_Import_Export {
 	 * @return void
 	 */
 	public function __construct() {
-	
+				
+		add_action( 'admin_init',														array( $this, 'admin_init' ) );
 		add_action( CUSTOM_LOGIN_OPTION . '_settings_sidebars',					array( $this, 'settings_sidebar' ), 30 );
-		add_action( 'admin_action_' . CUSTOM_LOGIN_OPTION . '_import_settings',	array( $this, 'import_settings' ) );
-		add_action( 'admin_action_' . CUSTOM_LOGIN_OPTION . '_export_settings',	array( $this, 'export_settings' ) );
+		add_action( CUSTOM_LOGIN_OPTION . '_after_settings_sections_form',		array( $this, 'after_settings_sections_form' ), 11 );
+		add_action( 'admin_action_' . CUSTOM_LOGIN_OPTION . '_download_export',	array( $this, 'download_export' ) );
+	}
+	
+	/**
+	 * Set our settings fields
+	 *
+	 * @access private
+	 */
+	private function settings_fields() {
+		
+		$fields	[ $this->settings_id ] = array(
+			array(
+				'name' 		=> 'import',
+				'label' 	=> __( 'Import', CUSTOM_LOGIN_DIRNAME ),
+				'desc' 		=> '',
+				'type' 		=> 'textarea',
+				'sanitize' => '__return_empty_string',
+			),
+			
+			array(
+				'name' 		=> 'export',
+				'label' 	=> __( 'Export', CUSTOM_LOGIN_DIRNAME ),
+				'desc' 		=> sprintf( __( 'This textarea is always pre-filled with the current settings. Copy these settings for import at a later time, or <a href="%s">download</a> them.', CUSTOM_LOGIN_DIRNAME ),
+					wp_nonce_url(
+						add_query_arg( array( 'action' => CUSTOM_LOGIN_OPTION . '_download_export' ),
+							''
+						),
+						'export',
+						'cl_nonce'
+					)
+				),
+				'default'	=> $this->get_custom_login_settings(),
+				'type' 		=> 'textarea',
+				'extra'		=> array(
+					'readonly'	=> 'readonly'
+				),
+				'sanitize' => '__return_empty_string',
+			),
+
+		);
+		
+		return $fields;
+	}
+	
+	/**
+	 * Return the full array of settings
+	 *
+	 * @access private
+	 */
+	private function get_custom_login_settings() {
+		
+		$settings = array();
+		include( trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/default-settings.php' );
+		
+		foreach ( $sections as $section ) {
+			$settings[ $section['id'] ] = get_option( $section['id'] );
+		}
+		
+		return base64_encode( maybe_serialize( $settings ) );
+		
+	#	var_dump( $settings ); exit;
+	}
+	
+	public function admin_init() {
+		
+		$this->settings_api	= CUSTOMLOGIN()->settings_api;
+		$this->settings_id		= CUSTOM_LOGIN_OPTION . '_import_export';
+		
+		add_settings_section( $this->settings_id, __( 'Import/Export Custom Login Settings', CUSTOM_LOGIN_DIRNAME ), '__return_false', $this->settings_id );
+		
+		foreach( $this->settings_fields() as $section => $field ) {
+			foreach ( $field as $option ) {
+
+				$type = isset( $option['type'] ) ? $option['type'] : 'text';
+				
+				$args = array(
+					'id'			=> $option['name'],
+					'desc' 			=> isset( $option['desc'] ) ? $option['desc'] : '',
+					'name' 			=> $option['label'],
+					'section' 		=> $section,
+					'size' 			=> isset( $option['size'] ) ? $option['size'] : null,
+					'options' 		=> isset( $option['options'] ) ? $option['options'] : '',
+					'default'		=> isset( $option['default'] ) ? $option['default'] : '',
+					'sanitize'		=> isset( $option['sanitize'] ) ? $option['sanitize'] : '',
+				);
+				$args = wp_parse_args( $args, $option );
+				
+				add_settings_field( $section . '[' . $option['name'] . ']', $option['label'], array( $this->settings_api, 'callback_' . $type ), $section, $section, $args );
+			}
+		}
+				
+		register_setting( $this->settings_id, $this->settings_id, array( $this, 'sanitize_options' ) );
 	}
 	
 	/**
@@ -45,63 +138,141 @@ class CL_Import_Export {
 	 */
 	function settings_sidebar( $args ) {
 		
-		$import_url = wp_nonce_url(
-			add_query_arg( array( 'action' => CUSTOM_LOGIN_OPTION . '_import_settings' ),
-				admin_url( 'admin.php' )
-			),
-			'import',
-			'cl_nonce'
-		);
-		$export_url = wp_nonce_url(
-			add_query_arg( array( 'action' => CUSTOM_LOGIN_OPTION . '_export_settings' ),
-				admin_url( 'admin.php' )
-			),
-			'export',
-			'cl_nonce'
-		);
+		$html  = '<ul class="cl-sections-menu">';
+		$html .= sprintf( '<li><a href="#%1$s">%2$s</a></li>', $this->settings_id, __( 'Import/Export Settings' ) );
+		$html .= '</ul>';
 		
-		if ( CUSTOM_LOGIN_VERSION < '3.1.0' ) {
-			$content  = __( 'Coming in version 3.1', CUSTOM_LOGIN_DIRNAME );
+		echo $html;
+	}
+
+    /**
+     * Show the import/export settings form.
+     */
+    function after_settings_sections_form() {
+		?>
+		<div id="<?php echo $this->settings_id; ?>" class="group">
+		<form action="options.php" id="<?php echo $this->settings_id; ?>form" method="post" >
+			<?php settings_fields( $this->settings_id ); ?>
+			<?php do_settings_sections( $this->settings_id ); ?>
+			<?php submit_button(); ?>
+		</form>
+		</div><?php
+    }
+
+	/**
+	 * Sanitize callback for Settings API before input into database.
+	 *
+	 * @ref		http://stackoverflow.com/a/10797086/558561
+	 */ 
+    private function maybe_import_settings( $options ) {
+		
+		if ( !empty( $options['import'] ) && ( base64_encode( base64_decode( $options['import'], true ) ) === $options['import'] ) ) {
+			$import = maybe_unserialize( base64_decode( $options['import'] ) );
+		#	var_dump( $import ); exit;
+			if ( is_array( $import ) ) {
+				foreach( $import as $setting_key => $settings ) {
+					if ( false !== $settings ) {
+						if ( update_option( $setting_key, $settings ) ) {
+							add_settings_error(
+								$this->settings_id	,
+								esc_attr( 'settings_updated' ),
+								__( 'Custom Login settings successfully imported', CUSTOM_LOGIN_DIRNAME ),
+								'updated'
+							);
+						}
+					}
+				}
+			}
 		}
-		else {
-			$content  = '<ul>';
-			$content .= sprintf( __( '<li><a href="%s">Import</a></li>', CUSTOM_LOGIN_DIRNAME ), esc_url( $import_url ) );
-			$content .= sprintf( __( '<li><textarea></textarea></li>', CUSTOM_LOGIN_DIRNAME ), esc_url( $import_url ) );
-			$content .= '</ul>';
-			$content .= '<div id="import-export-wrapper"></div>';
+    }
+	
+    /**
+     * Sanitize callback for Settings API
+     */ 
+    function sanitize_options( $options ) {
+		
+		$this->maybe_import_settings( $options );
+		
+		foreach( $options as $option_slug => $option_value ) {
+			$sanitize_callback = $this->get_sanitize_callback( $option_slug );
+		
+			// If callback is set, call it
+			if ( $sanitize_callback ) {
+				$options[ $option_slug ] = call_user_func( $sanitize_callback, $option_value );
+				continue;
+			}
+		
+			// Treat everything that's not an array as a string
+			if ( !is_array( $option_value ) ) {
+				$options[ $option_slug ] = sanitize_text_field( $option_value );
+				continue;
+			}
 		}
 		
-		CUSTOMLOGIN()->settings_api->postbox( 'custom-login-import-export', __( 'Settings Import/Export', CUSTOM_LOGIN_DIRNAME ), $content );
+		$options = $this->after_sanitize_options( $options );
+		
+		return $options;
+    }
+        
+    /**
+     * Get sanitization callback for given option slug
+     * 
+     * @param string $slug option slug
+     * 
+     * @return mixed string or bool false
+     */ 
+    function get_sanitize_callback( $slug = '' ) {
+        
+		if ( empty( $slug ) )
+			return false;
+			
+		// Iterate over registered fields and see if we can find proper callback
+		foreach( $this->settings_fields() as $section => $options ) {
+			foreach ( $options as $option ) {
+				if ( $option['name'] != $slug )
+					continue;
+				// Return the callback name 
+				return isset( $option['sanitize'] ) && is_callable( $option['sanitize'] ) ? $option['sanitize'] : false;
+			}
+		}
+		return false; 
+    }
+	
+    function after_sanitize_options( $options ) {
+		
+		foreach( $this->settings_fields() as $section => $field ) {
+			foreach ( $field as $option ) {
+				unset( $options[ $option['name'] ] );
+			}
+		}
+		
+		return $options;
 	}
 	
 	/**
-	 * Import some settings into Custom Login.
+	 * Export the settings.
 	 *
-	 * @access public
-	 * @return array
-	 */
-	function import_settings() {
+	 * @ref		http://stackoverflow.com/a/16440501/558561
+	 */ 
+	function download_export() {
 		
-		if ( !isset( $_GET['cl_nonce']) || !wp_verify_nonce( $_GET['cl_nonce'], 'import' ) ) {
+		if ( !isset( $_GET['cl_nonce']) || !wp_verify_nonce( $_GET['cl_nonce'], 'export' ) ) {
+			wp_redirect( remove_query_arg( array( 'action', 'cl_nonce' ) ) );
+			exit;
 		}
-		
-		wp_redirect( remove_query_arg( array( 'action', 'cl_nonce' ) ) );
-		exit;
-	}
 
-	/**
-	 * Export Custom Logins settings.
-	 *
-	 * @access public
-	 * @return void
-	 */
-	function export_settings() {
+		$month = date( 'n' );
+		$year  = date( 'Y' );
 		
-		if ( !isset( $_GET['cl_nonce']) || !wp_verify_nonce( $_GET['cl_nonce'], 'import' ) ) {
-		}
+		ignore_user_abort(true);
 		
-		wp_redirect( remove_query_arg( array( 'action', 'cl_nonce' ) ) );
-		exit;
+		nocache_headers();
+		header( 'Content-type: text/plain; charset=utf-8' );
+		header( 'Content-Disposition: attachment; filename=cl-export-' . $month . '-' . $year . '.txt' );
+		header( 'Expires: 0' );
+		
+		echo $this->get_custom_login_settings();
+		exit;		
 	}
 
 }

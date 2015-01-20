@@ -50,30 +50,30 @@ if ( false === ( $css = get_transient( $trans_key ) ) ) :
 	 * Open html
 	 *
 	 * @rule	html
-	 */
+	 */		
 	$css .= CL_Scripts_Styles::cssrule( 'html' );
+	
+	if ( !empty( $html_background_color ) && 'on' === $html_background_color_checkbox ) {
 		
-		if ( !empty( $html_background_color ) && 'on' === $html_background_color_checkbox ) {
-			
-			$color = CL_Scripts_Styles::hex2rgb( $html_background_color );
-			$css .= CL_Scripts_Styles::trailingsemicolonit( "background-color: rgba({$color['red']},{$color['green']},{$color['blue']},{$html_background_color_opacity})" );			
-		}
-		elseif ( !empty( $html_background_color ) ) {
-			
-			$css .= CL_Scripts_Styles::trailingsemicolonit( "background-color: {$html_background_color}" );			
-		}
-			
-		if ( !empty( $html_background_url ) ) {
-			
-			$css .= CL_Scripts_Styles::trailingsemicolonit( "background-image: url('{$html_background_url}')" );
-			$css .= CL_Scripts_Styles::trailingsemicolonit( "background-position: {$html_background_position}" );
-			$css .= CL_Scripts_Styles::trailingsemicolonit( "background-repeat: {$html_background_repeat}" );
+		$color = CL_Scripts_Styles::hex2rgb( $html_background_color );
+		$css .= CL_Scripts_Styles::trailingsemicolonit( "background-color: rgba({$color['red']},{$color['green']},{$color['blue']},{$html_background_color_opacity})" );			
+	}
+	elseif ( !empty( $html_background_color ) ) {
 		
-			if ( !empty( $html_background_size ) && 'none' !== $html_background_size ) {
-				
-				$css .= CL_Scripts_Styles::prefixit( 'background-size', $html_background_size );				
-			}
+		$css .= CL_Scripts_Styles::trailingsemicolonit( "background-color: {$html_background_color}" );			
+	}
+		
+	if ( !empty( $html_background_url ) ) {
+		
+		$css .= CL_Scripts_Styles::trailingsemicolonit( "background-image: url('{$html_background_url}')" );
+		$css .= CL_Scripts_Styles::trailingsemicolonit( "background-position: {$html_background_position}" );
+		$css .= CL_Scripts_Styles::trailingsemicolonit( "background-repeat: {$html_background_repeat}" );
+	
+		if ( !empty( $html_background_size ) && 'none' !== $html_background_size ) {
+			
+			$css .= CL_Scripts_Styles::prefixit( 'background-size', $html_background_size );				
 		}
+	}
 	
 	/* CLOSE html */
 	$css .= $close_rule;
@@ -114,48 +114,48 @@ if ( false === ( $css = get_transient( $trans_key ) ) ) :
 	 * @rule	#login form
 	 */
 	$css .= CL_Scripts_Styles::cssrule( '#login form' );
+		
+	if ( !empty( $login_form_background_color ) && 'on' === $login_form_background_color_checkbox ) {
+		
+		$color = CL_Scripts_Styles::hex2rgb( $login_form_background_color );
+		$css .= CL_Scripts_Styles::trailingsemicolonit( "background-color: rgba({$color['red']},{$color['green']},{$color['blue']},{$login_form_background_color_opacity})" );			
+	}
+	elseif( !empty( $login_form_background_color ) ) {
+		
+		$css .= CL_Scripts_Styles::trailingsemicolonit( "background-color: {$login_form_background_color}" );			
+	}
 	
-		if ( !empty( $login_form_background_color ) && 'on' === $login_form_background_color_checkbox ) {
+	if ( !empty( $login_form_background_url ) ) {
+		
+		$css .= CL_Scripts_Styles::trailingsemicolonit( "background-image: url('{$login_form_background_url}')" );
+		$css .= CL_Scripts_Styles::trailingsemicolonit( "background-position: {$login_form_background_position}" );
+		$css .= CL_Scripts_Styles::trailingsemicolonit( "background-repeat: {$login_form_background_repeat}" );
+	
+		if ( !empty( $login_form_background_size ) && 'none' != $login_form_background_size ) {
 			
-			$color = CL_Scripts_Styles::hex2rgb( $login_form_background_color );
-			$css .= CL_Scripts_Styles::trailingsemicolonit( "background-color: rgba({$color['red']},{$color['green']},{$color['blue']},{$login_form_background_color_opacity})" );			
-		}
-		elseif( !empty( $login_form_background_color ) ) {
-			
-			$css .= CL_Scripts_Styles::trailingsemicolonit( "background-color: {$login_form_background_color}" );			
+			$login_form_background_size = ( 'flex' != $login_form_background_size ) ? $login_form_background_size : '100% auto';
+			$css .= CL_Scripts_Styles::prefixit( 'background-size', $login_form_background_size );				
 		}
 		
-		if ( !empty( $login_form_background_url ) ) {
-			
-			$css .= CL_Scripts_Styles::trailingsemicolonit( "background-image: url('{$login_form_background_url}')" );
-			$css .= CL_Scripts_Styles::trailingsemicolonit( "background-position: {$login_form_background_position}" );
-			$css .= CL_Scripts_Styles::trailingsemicolonit( "background-repeat: {$login_form_background_repeat}" );
+	}
+	
+	if ( !empty( $login_form_border_size ) && !empty( $login_form_border_color ) ) {
 		
-			if ( !empty( $login_form_background_size ) && 'none' != $login_form_background_size ) {
-				
-				$login_form_background_size = ( 'flex' != $login_form_background_size ) ? $login_form_background_size : '100% auto';
-				$css .= CL_Scripts_Styles::prefixit( 'background-size', $login_form_background_size );				
-			}
-			
-		}
+		$login_form_border_size = rtrim( $login_form_border_size, 'px' );
+		$css .= CL_Scripts_Styles::trailingsemicolonit( "border: {$login_form_border_size}px solid {$login_form_border_color}" );			
+	}
+	
+	if ( !empty( $login_form_border_radius ) ) {
 		
-		if ( !empty( $login_form_border_size ) && !empty( $login_form_border_color ) ) {
-			
-			$login_form_border_size = rtrim( $login_form_border_size, 'px' );
-			$css .= CL_Scripts_Styles::trailingsemicolonit( "border: {$login_form_border_size}px solid {$login_form_border_color}" );			
-		}
+		$login_form_border_radius = rtrim( $login_form_border_radius, 'px' ) . 'px';
+		$css .= CL_Scripts_Styles::prefixit( 'border-radius', $login_form_border_radius );			
+	}
+	
+	if ( !empty( $login_form_box_shadow ) ) {
 		
-		if ( !empty( $login_form_border_radius ) ) {
-			
-			$login_form_border_radius = rtrim( $login_form_border_radius, 'px' ) . 'px';
-			$css .= CL_Scripts_Styles::prefixit( 'border-radius', $login_form_border_radius );			
-		}
-		
-		if ( !empty( $login_form_box_shadow ) ) {
-			
-			$box_shadow = $login_form_box_shadow . ' ' . $login_form_box_shadow_color;	
-			$css .= CL_Scripts_Styles::prefixit( 'box-shadow', trim( $box_shadow ) );			
-		}
+		$box_shadow = $login_form_box_shadow . ' ' . $login_form_box_shadow_color;	
+		$css .= CL_Scripts_Styles::prefixit( 'box-shadow', trim( $box_shadow ) );			
+	}
 	
 	/* CLOSE login form */
 	$css .= $close_rule;

@@ -356,7 +356,7 @@
 			}
 			
 		} // get_setting()
-			
+					
 	}); // (document)
 	
 	/**

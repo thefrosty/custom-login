@@ -2,17 +2,22 @@
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
+
+$strings = array(
+	'checked'		=> ' ' . __( 'Checked equals "on" (allow).', CUSTOM_LOGIN_DIRNAME ),
+	'unchecked'		=> ' ' . __( 'Unchecked equals "off" (do not allow).', CUSTOM_LOGIN_DIRNAME ),
+);
 				
 $sections	= array(
 	array(
-		'id'		=> CUSTOM_LOGIN_OPTION . '_design',
+		'id'			=> CUSTOM_LOGIN_OPTION . '_design',
 		'title'		=> __( 'Design Settings', CUSTOM_LOGIN_DIRNAME ),
-		'submit'	=> true,
+		'submit'		=> true,
 	),
 	array(
-		'id'		=> CUSTOM_LOGIN_OPTION . '_general',
+		'id'			=> CUSTOM_LOGIN_OPTION . '_general',
 		'title'		=> __( 'General Settings', CUSTOM_LOGIN_DIRNAME ),
-		'submit'	=> true,
+		'submit'		=> true,
 	),
 );
 
@@ -100,13 +105,13 @@ $fields	[CUSTOM_LOGIN_OPTION . '_design'] = array(
 	array(
 		'name'		=> 'hide_wp_logo',
 		'label'		=> __( 'Hide the WP logo', CUSTOM_LOGIN_DIRNAME ),
-		'desc'		=> __( 'By default Custom Login removes the WP login from the login screen. This setting hides the h1 element.', CUSTOM_LOGIN_DIRNAME ),
+		'desc'		=> __( 'This setting hides the h1 element.', CUSTOM_LOGIN_DIRNAME ),
 		'type'		=> 'checkbox'
 	),
 	array(
 		'name' 		=> 'logo_background_url',
 		'label' 	=> __( 'Image', CUSTOM_LOGIN_DIRNAME ),
-		'desc' 		=> __( 'The default form width is 320px, so an image <strong>should</strong> be the same. You can always modify the form width (below).', CUSTOM_LOGIN_DIRNAME ),
+		'desc' 		=> __( 'I would suggest a max width of 320px, the default form width. You can widen the width (setting below).', CUSTOM_LOGIN_DIRNAME ),
 		'type' 		=> 'file',
 		'default' 	=> '',
 		'size'		=> 'large',
@@ -190,10 +195,10 @@ $fields	[CUSTOM_LOGIN_OPTION . '_design'] = array(
 	array(
 		'name' 		=> 'login_form_width',
 		'label' 	=> __( 'Width', CUSTOM_LOGIN_DIRNAME ),
-		'desc' 		=> __( 'Set a different width in pixel value.', CUSTOM_LOGIN_DIRNAME ),
+		'desc' 		=> __( 'Change the default width of the login form.', CUSTOM_LOGIN_DIRNAME ),
 		'type' 		=> 'text_number',
 		'size'		=> 'small',
-		'default' 	=> '',
+		'default' 	=> '320',
 		'sanitize' => 'int',
 	),
 	array(
@@ -436,8 +441,8 @@ $fields	[CUSTOM_LOGIN_OPTION . '_general'] = array(
 	
 	array(
 		'name'		=> 'tracking',
-		'label'		=> __( 'Allow usage tracking?', CUSTOM_LOGIN_DIRNAME ),
-		'desc'		=> __( 'Allow Frosty Media to anonymously track how this plugin is used and help us make the plugin better. Opt-in and receive a 20% discount code for any purchase from the Frosty Media store. Your discount code will be emailed to you.', CUSTOM_LOGIN_DIRNAME ),
+		'label'		=> __( 'Usage tracking', CUSTOM_LOGIN_DIRNAME ),
+		'desc'		=> __( 'Allow Frosty Media to anonymously track how this plugin is used (and help us make the plugin better). Opt-in and receive a 20% discount code for all Custom Login extensions. Get your coupon code <a href="http://frosty.media/?p=21442">here</a>.', CUSTOM_LOGIN_DIRNAME ),
 		'type'		=> 'checkbox'
 	),
 	
@@ -452,8 +457,14 @@ $fields	[CUSTOM_LOGIN_OPTION . '_general'] = array(
 	
 	array(
 		'name'		=> 'admin_notices',
-		'label'		=> __( 'Allow admin notices?', CUSTOM_LOGIN_DIRNAME ),
-		'desc'		=> __( 'Allow admin notices everywhere in WordPress. Leave unchecked to disable global notices.', CUSTOM_LOGIN_DIRNAME ),
+		'label'		=> __( 'Admin notices', CUSTOM_LOGIN_DIRNAME ),
+		'desc'		=> __( 'Allow admin notices everywhere in WordPress.', CUSTOM_LOGIN_DIRNAME ) . $strings['unchecked'],
+		'type'		=> 'checkbox'
+	),
+	array(
+		'name'		=> 'dashboard_widget',
+		'label'		=> __( 'Dashboard widget', CUSTOM_LOGIN_DIRNAME ),
+		'desc'		=> __( 'Show a dashboard widget, like WordPress news for Frosty Media.', CUSTOM_LOGIN_DIRNAME ) . $strings['unchecked'],
 		'type'		=> 'checkbox'
 	),
 	
@@ -468,8 +479,8 @@ $fields	[CUSTOM_LOGIN_OPTION . '_general'] = array(
 	
 	array(
 		'name'		=> 'wp_shake_js',
-		'label'		=> __( 'Login shake', CUSTOM_LOGIN_DIRNAME ),
-		'desc'		=> __( 'Disable the login form animated "shake" on error.', CUSTOM_LOGIN_DIRNAME ),
+		'label'		=> __( 'Disable Login shake', CUSTOM_LOGIN_DIRNAME ),
+		'desc'		=> __( 'Disable the login forms animated "shake" on error.', CUSTOM_LOGIN_DIRNAME ),
 		'type'		=> 'checkbox'
 	),
 	array(
@@ -481,47 +492,7 @@ $fields	[CUSTOM_LOGIN_OPTION . '_general'] = array(
 	array(
 		'name'		=> 'lostpassword_text',
 		'label'		=> __( 'Remove lost password text', CUSTOM_LOGIN_DIRNAME ),
-		'desc'		=> __( 'Remove the "Lost Password?" text. This does <strong>not<strong> disable the lost password function.', CUSTOM_LOGIN_DIRNAME ),
+		'desc'		=> __( 'Remove the "Lost Password?" text. This does <strong>not</strong> disable the lost password function.', CUSTOM_LOGIN_DIRNAME ),
 		'type'		=> 'checkbox'
-	),
-	array(
-		'name'		=> 'allow_password_reset',
-		'label'		=> __( 'Disable lost password', CUSTOM_LOGIN_DIRNAME ),
-		'desc'		=> __( 'Disable the lost password reset function.', CUSTOM_LOGIN_DIRNAME ),
-		'type'		=> 'checkbox'
-	),
-	
-	/** BREAK **/		
-	array(
-		'name' 		=> 'break_4',
-		'label'		=> sprintf( '<h4>%s</h4>', __( 'Sessions', CUSTOM_LOGIN_DIRNAME ) ),
-		'desc' 		=> '',
-		'type' 		=> 'html',
-	),
-	/** BREAK **/
-	
-	array(
-		'name'		=> 'auth_timeout',
-		'label'		=> __( 'Auth timeout', CUSTOM_LOGIN_DIRNAME ),
-		'desc'		=> __( 'Authentication timeout <strong>without</strong> "remember me" checked at login.', CUSTOM_LOGIN_DIRNAME ),
-		'type' 		=> 'text_number',
-		'size'		=> 'small',
-		'default' 	=> '2',
-		'sanitize' => 'absint',
-	),
-	array(
-		'name'		=> 'auth_timeout_remember',
-		'label'		=> __( 'Auth timeout', CUSTOM_LOGIN_DIRNAME ),
-		'desc'		=> __( 'Authentication timeout <strong>with</strong> "remember me" checked at login.', CUSTOM_LOGIN_DIRNAME ),
-		'type' 		=> 'text_number',
-		'size'		=> 'small',
-		'default' 	=> '14',
-		'sanitize' => 'absint',
-	),
-	array(
-		'name' 		=> 'break_5',
-		'label'		=> '',
-		'desc' 		=> sprintf( '<small>%s</small>', __( 'The default WordPress behavior for logging a user out is to make a login session cookie that expires in 48 hours or when the browser is closed. If the "Remember Me" box is checked, WordPress will give you 14 days before forcing you to authenticate again. Never set below "0".', CUSTOM_LOGIN_DIRNAME ) ),
-		'type' 		=> 'html',
 	),
 );

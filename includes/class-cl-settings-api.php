@@ -69,8 +69,8 @@ class CL_Settings_API {
 			
 		/* Core */
 		wp_enqueue_media();
-		wp_enqueue_script( 'wp-color-picker' );
-		wp_enqueue_style( 'wp-color-picker' );
+		wp_enqueue_script( array( 'wp-color-picker', 'plugin-install' ) );
+		wp_enqueue_style( array( 'wp-color-picker', 'thickbox', 'plugin-install' ) );
 		
 		/* jQuery Chosen */
 		wp_enqueue_script( 'chosen', plugins_url( 'js/chosen.jquery.min.js', $this->settings['file'] ), array( 'jquery' ), '1.3.0', true );
@@ -551,7 +551,7 @@ class CL_Settings_API {
      */ 
     function sanitize_options( $options ) {
 		
-		do_action( $this->settings['prefix'] . '_before_sanatize_options', $options );
+		do_action( $this->settings['prefix'] . '_before_sanitize_options', $options );
 		
 		foreach( $options as $option_slug => $option_value ) {
 			$sanitize_callback = $this->get_sanitize_callback( $option_slug );
@@ -569,7 +569,7 @@ class CL_Settings_API {
 			}
 		}
 		
-		do_action( $this->settings['prefix'] . '_after_sanatize_options', $options );
+		do_action( $this->settings['prefix'] . '_after_sanitize_options', $options );
 		
 		return $options;
     }
@@ -676,11 +676,12 @@ class CL_Settings_API {
 				<?php settings_fields( $form['id'] ); ?>
 				<?php do_settings_sections( $form['id'] ); ?>
 				<?php do_action( $this->settings['prefix'] . '_form_bottom_' . $form['id'], $form ); ?>
-				<?php if ( isset( $form['submit'] ) && $form['submit'] ) submit_button( ); ?>
+				<?php if ( isset( $form['submit'] ) && $form['submit'] ) submit_button(); ?>
 			</form>
 			</div><?php
 		#	var_dump( $form_id, get_option( $form_id ) );
 		}
+		do_action( $this->settings['prefix'] . '_after_settings_sections_form' );
     }
 
     /**
@@ -741,7 +742,7 @@ class CL_Settings_API {
 	 */
 	function about_the_author( $args ) {
 		
-		$content  = sprintf( '%s: <a href="https://wordpress.org/support/view/plugin-reviews/custom-login" class="star-rating">
+		$content  = sprintf( '%s: <a href="https://wordpress.org/support/view/plugin-reviews/custom-login" class="star-rating" target="_blank">
 			<i class="dashicons dashicons-star-filled"></i>
 			<i class="dashicons dashicons-star-filled"></i>
 			<i class="dashicons dashicons-star-filled"></i>
@@ -750,11 +751,11 @@ class CL_Settings_API {
 			</a>', _x( 'Rate', 'rate; as in rate this plugin', $this->settings['domain'] ) );
 		
 		$content .= '<ul>';
-		$content .= sprintf( '<li>%s: <a href="https://austin.passy.co">Austin Passy</a></li>', _x( 'Author', 'the author of this plugin', $this->settings['domain'] ) );
-		$content .= sprintf( '<li>%s: <a href="https://twitter.com/TheFrosty">TheFrosty</a></li>', __( 'Twitter', $this->settings['domain'] ) );
+		$content .= sprintf( '<li>%s: <a href="https://austin.passy.co" target="_blank">Austin Passy</a></li>', _x( 'Author', 'the author of this plugin', $this->settings['domain'] ) );
+		$content .= sprintf( '<li>%s: <a href="https://twitter.com/TheFrosty" target="_blank">TheFrosty</a></li>', __( 'Twitter', $this->settings['domain'] ) );
 		$content .= '</ul>';
 		
-		$content .= sprintf( __( '<small>If you have suggestions for a new add-on, feel free to open a support request on <a href="%s">GitHub</a>. Want regular updates? Follow me on <a href="%s">Twitter</a> or visit my <a href="%s">blog</a>.</small>' ),
+		$content .= sprintf( __( '<small>If you have suggestions for a new add-on, feel free to open a support request on <a href="%s" target="_blank">GitHub</a>. Want regular updates? Follow me on <a href="%s" target="_blank">Twitter</a> or visit my <a href="%s" target="_blank">blog</a>.</small>' ),
 			'https://github.com/thefrosty/custom-login/issues',
 			'https://twitter.com/TheFrosty',
 			'https://austin.passy.co'
@@ -831,10 +832,10 @@ class CL_Settings_API {
 	public function sticky_admin_notice_social_links() {
 		
 		$content  = '<ul class="social">';
-		$content .= '<li><a href="https://www.facebook.com/FrostyMediaWP"><span class="dashicons dashicons-facebook"></span></a></li>';
-		$content .= '<li><a href="https://twitter.com/FrostyMediaWP"><span class="dashicons dashicons-twitter"></span></a></li>';
-		$content .= '<li><a href="https://plus.google.com/+FrostyMedia/"><span class="dashicons dashicons-googleplus"></span></a></li>';
-		$content .= '<li><a href="http://eepurl.com/bbj0bD"><span class="dashicons dashicons-email"></span></a></li>';
+		$content .= '<li><a href="https://www.facebook.com/FrostyMediaWP" target="_blank"><span class="dashicons dashicons-facebook"></span></a></li>';
+		$content .= '<li><a href="https://twitter.com/FrostyMediaWP" target="_blank"><span class="dashicons dashicons-twitter"></span></a></li>';
+		$content .= '<li><a href="https://plus.google.com/+FrostyMedia/" target="_blank"><span class="dashicons dashicons-googleplus"></span></a></li>';
+		$content .= '<li><a href="http://eepurl.com/bbj0bD" target="_blank"><span class="dashicons dashicons-email"></span></a></li>';
 		$content .= '</ul>';
 		
 		echo $content;

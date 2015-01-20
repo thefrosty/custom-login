@@ -35,8 +35,8 @@ class CL_Settings_Upgrade {
 	private function actions() {
 		
 		add_action( 'admin_notices',								array( $this, 'upgrade_notices' ) );
-		add_action( 'admin_menu',									array( $this, 'add_submenu_page' ) );
-		add_action( 'wp_ajax_custom_login_trigger_upgrades',	array( $this, 'trigger_upgrades' ) );
+		add_action( 'admin_menu',								array( $this, 'add_submenu_page' ) );
+		add_action( 'wp_ajax_custom_login_trigger_upgrades',		array( $this, 'trigger_upgrades' ) );
 	}
 
 	/**
@@ -60,7 +60,7 @@ class CL_Settings_Upgrade {
 		
 		$cl_version = preg_replace( '/[^0-9.].*/', '', $cl_version );
 		
-		// Version less than 2.0
+		// Version less than 2.0 (settings exist)
 		if ( false !== ( $old_settings = get_option( 'custom_login_settings', false ) ) ) {
 		
 			// New install
@@ -73,25 +73,31 @@ class CL_Settings_Upgrade {
 			// Versions less than 2.0
 			if ( version_compare( $cl_version, '2.0', '<' ) ) {
 				printf(
-					'<div class="updated"><p>' . esc_html__( 'Custom Login needs to be upgraded, please click %shere%s to start the upgrade.', CUSTOM_LOGIN_DIRNAME ) . '</p></div>',
-					'<a href="' . esc_url( admin_url( 'options.php?page=custom-login-upgrades' ) ) . '">',
-					'</a>'
+					'<div class="updated"><p>' . __( 'Custom Login needs to upgrade the settings, please click <a href="%s">here</a> to start the upgrade.', CUSTOM_LOGIN_DIRNAME ) . '</p></div>',
+					add_query_arg( array( 'ver' => '2.0' ), admin_url( 'options.php?page=custom-login-upgrades' ) )
 				);
 			}
 		} // 2.0
 		
-		// Version less than 2.0
+		// Version less than 3.0 (settings exist)
 		if ( false !== ( $old_settings = get_option( 'custom_login', false ) ) ) {
 			
-			// Versions less than 2.0
+			// Versions less than 3.0
 			if ( version_compare( $cl_version, '3.0', '<' ) ) {
 				printf(
-					'<div class="updated"><p>' . esc_html__( 'Custom Login needs to be upgraded, please click %shere%s to start the upgrade.', CUSTOM_LOGIN_DIRNAME ) . '</p></div>',
-					'<a href="' . esc_url( admin_url( 'options.php?page=custom-login-upgrades' ) ) . '">',
-					'</a>'
+					'<div class="updated"><p>' . __( 'Custom Login needs to upgrade the settings database, please click <a href="%s">here</a> to start the upgrade.', CUSTOM_LOGIN_DIRNAME ) . '</p></div>',
+					add_query_arg( array( 'ver' => '3.0' ), admin_url( 'options.php?page=custom-login-upgrades' ) )
 				);
 			}
-		} // 2.0
+		} // 3.0
+		
+		// Version less than 3.1
+		if ( version_compare( $cl_version, '3.1', '<' ) ) {
+			printf(
+				'<div class="updated"><p>' . __( 'Custom Login needs to upgrade the database, please click <a href="%s">here</a> to start the upgrade.', CUSTOM_LOGIN_DIRNAME ) . '</p></div>',
+				add_query_arg( array( 'ver' => '3.1' ), admin_url( 'options.php?page=custom-login-upgrades' ) )
+			);
+		} // 3.1
 	}
 	
 	/**
@@ -161,6 +167,14 @@ class CL_Settings_Upgrade {
 		
 		check_ajax_referer( 'CL_Settings_Upgrade' . basename( __FILE__ ), 'nonce' );
 		
+		$cl_version = get_option( CUSTOM_LOGIN_OPTION . '_version' );
+	
+		if ( ! $cl_version ) {
+			// 2.0 is the first version to use this option so we must add it
+			$cl_version = '2.0';
+			add_option( CUSTOM_LOGIN_OPTION . '_version', $cl_version );
+		}
+		
 		// Version less than 2.0
 		if ( false !== ( $old_settings = get_option( 'custom_login_settings', false ) ) ) {
 					
@@ -188,10 +202,16 @@ class CL_Settings_Upgrade {
 			}
 			
 		} // 3.0
+	
+		// Version less than 3.1
+		if ( version_compare( $cl_version, '3.1', '<' ) ) {
+			$this->cl_v31_upgrades();
+		} // 3.1
+		
+		update_option( CUSTOM_LOGIN_OPTION . '_version', CUSTOM_LOGIN_VERSION );
 		
 		if ( DOING_AJAX ) {
-			echo 'complete';
-			die();
+			die( 'complete' );
 		}
 	}
 	
@@ -337,19 +357,50 @@ class CL_Settings_Upgrade {
 		$general_settings['active'] = $this->get_old_setting( $old_settings, 'active' );
 		$general_settings['capability'] = 'manage_options'; // New
 		$general_settings['tracking'] = 'off'; // New
-		$general_settings['admin_notices'] = 'on'; // New
+		$general_settings['admin_notices'] = 'off'; // New
 		$general_settings['wp_shake_js'] = 'off'; // New
 		$general_settings['remove_login_css'] = 'off'; // New
 		$general_settings['lostpassword_text'] = 'off'; // New
-		$general_settings['allow_password_reset'] = 'off'; // New
-		$general_settings['auth_timeout'] = '2'; // New
-		$general_settings['auth_timeout_remember'] = '14'; // New
 		
 		
 		update_option( CUSTOM_LOGIN_OPTION . '_design', $design_settings );
 		update_option( CUSTOM_LOGIN_OPTION . '_general', $general_settings );
-		update_option( CUSTOM_LOGIN_OPTION . '_version', CUSTOM_LOGIN_VERSION );
 		delete_option( 'custom_login' );
+		return true;
+	}
+	
+	/**
+	 * Upgrade routine for v3.1
+	 *
+	 * @access      private
+	 * @since       3.1
+	 * @return      void
+	 */
+	private function cl_v31_upgrades() {
+		
+		$general_settings = get_option( CUSTOM_LOGIN_OPTION . '_general', array() );
+		
+		// Remove old settings 
+		unset( $general_settings['allow_password_reset'] );
+		unset( $general_settings['auth_timeout'] );
+		unset( $general_settings['auth_timeout_remember'] );
+		
+		// New settings
+		$general_settings['dashboard_widget'] = 'off';
+		
+		update_option( CUSTOM_LOGIN_OPTION . '_general', $general_settings );
+		
+		// Update tracking options name
+		update_option( CUSTOM_LOGIN_OPTION . '_tracking_last_send', get_option( 'cl_tracking_last_send' ) );
+		update_option( CUSTOM_LOGIN_OPTION . '_tracking_notice', get_option( 'cl_tracking_notice' ) );
+		delete_option( 'cl_tracking_last_send' );
+		delete_option( 'cl_tracking_notice' );
+		
+		delete_option( CUSTOM_LOGIN_OPTION . '_announcement_message' );
+		
+		/** Cleanup Cron Events */
+		wp_clear_scheduled_hook( 'cl_daily_scheduled_events' );
+		wp_clear_scheduled_hook( 'cl_weekly_scheduled_events' );
 		return true;
 	}
 	

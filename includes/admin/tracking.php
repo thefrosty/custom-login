@@ -38,15 +38,20 @@ class CL_Tracking {
 	public function __construct() {
 		
 		$this->option	= CUSTOM_LOGIN_OPTION . '_general';
-		$this->api 	= defined( 'WP_LOCAL_DEV' ) ? 'http://frosty.media.dev/cl-checkin-api/?edd_action=cl_checkin' : CUSTOM_LOGIN_API_URL . 'cl-checkin-api/?edd_action=cl_checkin';
+		$this->api 		= CUSTOM_LOGIN_API_URL . 'cl-checkin-api/?edd_action=cl_checkin';
+		
+		if ( defined( 'WP_LOCAL_DEV' ) && WP_LOCAL_DEV ) {
+			$this->api	= str_replace( CUSTOM_LOGIN_API_URL, 'http://frosty.media.dev/', $this->api );
+		}
+		
 		$this->schedule_send();
 		
-		add_action( CUSTOM_LOGIN_OPTION . '_after_sanatize_options',	array( $this, 'check_for_settings_optin' ) );
-		add_action( 'admin_action_cl_opt_into_tracking',				array( $this, 'check_for_optin' ) );
-		add_action( 'admin_action_cl_opt_out_of_tracking',				array( $this, 'check_for_optout' ) );
-		add_action( 'admin_notices',										array( $this, 'admin_notice' ) );
-		
 		register_activation_hook( CUSTOM_LOGIN_FILE,					array( $this, 'activate' ) );
+		
+		add_action( CUSTOM_LOGIN_OPTION . '_after_sanitize_options',	array( $this, 'check_for_settings_optin' ) );
+		add_action( 'admin_action_cl_opt_into_tracking',				array( $this, 'check_for_optin' ) );
+		add_action( 'admin_action_cl_opt_out_of_tracking',			array( $this, 'check_for_optout' ) );
+	#	add_action( 'admin_notices',								array( $this, 'admin_notice' ) );
 	}
 	
 	/**
@@ -85,19 +90,19 @@ class CL_Tracking {
 		$data = array();
 
 		$theme_data		= wp_get_theme();
-		$theme				= $theme_data->Name . ' ' . $theme_data->Version;
+		$theme			= $theme_data->Name . ' ' . $theme_data->Version;
 
 		$data['url']		= home_url();
 		$data['version']	= get_bloginfo( 'version' );
-		$data['theme']		= $theme;
-		$data['email']		= get_bloginfo( 'admin_email' );
+		$data['theme']	= $theme;
+		$data['email']	= get_bloginfo( 'admin_email' );
 
 		// Retrieve current plugin information
 		if ( ! function_exists( 'get_plugins' ) ) {
 			include ABSPATH . '/wp-admin/includes/plugin.php';
 		}
 
-		$plugins			= array_keys( get_plugins() );
+		$plugins		= array_keys( get_plugins() );
 		$active_plugins	= get_option( 'active_plugins', array() );
 
 		foreach ( $plugins as $key => $plugin ) {
@@ -107,13 +112,13 @@ class CL_Tracking {
 			}
 		}
 
-		$data['active_plugins']	= $active_plugins;
+		$data['active_plugins']		= $active_plugins;
 		$data['inactive_plugins']	= $plugins;
-		$data['post_count']		= wp_count_posts( 'post' )->publish;
+		$data['post_count']			= wp_count_posts( 'post' )->publish;
 		
 		if ( is_array( $extra_data ) && !empty( $extra_data ) ) {
 			foreach( $extra_data as $key => $value ) {
-				$data[$key]		= $value;
+				$data[$key] = $value;
 			}
 		}
 
@@ -140,14 +145,14 @@ class CL_Tracking {
 
 		$response = wp_remote_post( $this->api, array(
 			'method'      => 'POST',
-			'timeout'     => 20,
+			'timeout'     => apply_filters( 'cl_wp_remote_post_timeout', (int) 15 ),
 			'redirection' => 5,
 			'body'        => $this->data,
 			'user-agent'  => 'CustomLogin/' . CUSTOM_LOGIN_VERSION . '; ' . get_bloginfo( 'url' )
 		) );
 		
 		if ( !is_wp_error( $response ) ) {
-			update_option( 'cl_tracking_last_send', time() );
+			update_option( 'custom_login_tracking_last_send', time() );
 		}
 
 	}
@@ -184,7 +189,7 @@ class CL_Tracking {
 		
 		$options['tracking'] = 'on';
 		update_option( $this->option, $options );
-		update_option( 'cl_tracking_notice', '1' );
+		update_option( 'custom_login_hide_tracking_notice', '1' );
 		
 		$this->send_checkin( true, array( 'on_activation' => 'admin notice', 'mailchimp_sub' => 'yes' ) );
 		
@@ -206,7 +211,7 @@ class CL_Tracking {
 		
 		$options['tracking'] = 'off';
 		update_option( $this->option, $options );
-		update_option( 'cl_tracking_notice', '1' );
+		update_option( 'custom_login_hide_tracking_notice', '1' );
 
 		wp_redirect( remove_query_arg( 'action' ) );
 		exit;
@@ -219,7 +224,7 @@ class CL_Tracking {
 	 * @return false/string
 	 */
 	private function get_last_send() {
-		return get_option( 'cl_tracking_last_send' );
+		return get_option( 'custom_login_tracking_last_send' );
 	}
 
 	/**
@@ -230,7 +235,7 @@ class CL_Tracking {
 	 */
 	private function schedule_send() {
 		// We send once a week (while tracking is allowed) to check in, which can be used to determine active sites
-		add_action( 'cl_weekly_scheduled_events', array( $this, 'send_checkin' ) );
+		add_action( 'custom_login_weekly_scheduled_events', array( $this, 'send_checkin' ) );
 	}
 
 	/**
@@ -241,15 +246,16 @@ class CL_Tracking {
 	 */
 	public function admin_notice() {
 
-		$options = get_option( $this->option, array() );
-		$hide_notice = get_option( 'cl_tracking_notice' );
+		$options		= get_option( $this->option, array() );
+		$hide_notice	= get_option( 'custom_login_hide_tracking_notice' );
 
-		if ( $hide_notice ) return;
+		if ( $hide_notice )
+			return;
 
 		if ( isset( $options['admin_notices'] ) && 'off' === $options['admin_notices'] )
 			return;
 
-		if ( isset( $options['tracking'] ) && 'on' === $options['tracking'] )
+		if ( isset( $options['tracking'] ) )
 			return;
 
 		if ( ! current_user_can( 'manage_options' ) )
@@ -260,7 +266,7 @@ class CL_Tracking {
 			stristr( network_site_url( '/' ), 'localhost' ) !== false ||
 			stristr( network_site_url( '/' ), ':8888'     ) !== false // This is common with MAMP on OS X
 		) {
-			update_option( 'cl_tracking_notice', '1' ); // Don't update the notice in case someone pushes local to live? Maybe return.
+			update_option( 'custom_login_hide_tracking_notice', '1' ); // Don't update the notice in case someone pushes local to live? Maybe return.
 		}
 		else {
 			$admin_url  = admin_url( 'admin.php' );

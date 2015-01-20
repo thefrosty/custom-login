@@ -129,6 +129,16 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 ## Changelog ##
 
+### Version 3.1 (01/20/15) ###
+
+* Update: Disable auth cookie expiration function.
+* Update: All prefixed 'cl_'  to 'custom_login_'.
+* Update: Spelling error 'sanitize'.
+* Update: login.css uses core stylesheet to avoid possible conflicts with checkboxes and browser support.
+* Tweak: Speed imporovments.
+* Add: CL_Common::is_settings_page().
+* Add: Dashboard widget (off be default).
+
 ### Version 3.0.8 (01/14/15) ###
 
 * Add: Auth timout setting when remember me is checked and not.

@@ -1,7 +1,7 @@
 <?php
 /**
  * @package     CustomLogin
- * @subpackage  Classes/CL_Common
+ * @subpackage  Classes/CL_WP_Login
  * @author      Austin Passy <http://austin.passy.co>
  * @copyright   Copyright (c) 2014-2015, Austin Passy
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
@@ -45,15 +45,15 @@ class CL_WP_Login {
 		add_action( 'login_footer',						array( $this, 'login_footer_jquery' ), 19 );
 		
 		add_action( 'init',								array( $this, 'login_remove_scripts' ) );
-		add_action( 'login_head',							array( $this, 'login_head' ), 10 );
+		add_action( 'login_head',						array( $this, 'login_head' ), 10 );
 		add_filter( 'login_headerurl',					array( $this, 'login_headerurl' ) );
 		add_filter( 'login_headertitle',					array( $this, 'login_headertitle' ) );
 	}
 	
 	private function filters() {
 		
-		add_filter( 'auth_cookie_expiration',			array( $this, 'auth_cookie_expiration' ), 99, 3 );
-		add_filter( 'allow_password_reset',				array( $this, 'allow_password_reset' ) );
+	#	add_filter( 'auth_cookie_expiration',			array( $this, 'auth_cookie_expiration' ), 99, 3 ); // @removed 3.1
+	#	add_filter( 'allow_password_reset',				array( $this, 'allow_password_reset' ) ); // @removed 3.1
 		add_filter( 'gettext',							array( $this, 'remove_lostpassword_text' ), 20, 2 );
 	}
 	
@@ -73,7 +73,7 @@ class CL_WP_Login {
 		global $cl_css_atts;
 
 		$cl_css_atts = array(
-			'version'		=> CUSTOM_LOGIN_VERSION,
+			'version'	=> CUSTOM_LOGIN_VERSION,
 			'trans_key'	=> CL_Common::get_transient_key( 'style' ),
 		);
 		$cl_css_atts = wp_parse_args( CL_Common::get_options( 'design' ), $cl_css_atts );
@@ -124,7 +124,7 @@ class CL_WP_Login {
 			global $cl_js_atts;
 		
 			$cl_js_atts = array(
-				'version'		=> CUSTOM_LOGIN_VERSION,
+				'version'	=> CUSTOM_LOGIN_VERSION,
 				'trans_key'	=> CL_Common::get_transient_key( 'script' ),
 			);
 			$cl_js_atts = wp_parse_args( CL_Common::get_options( 'design' ), $cl_js_atts );
@@ -153,11 +153,20 @@ class CL_WP_Login {
 		
 		if ( 'wp-login.php' == $pagenow ) {
 			
-			$suffix = is_rtl() ? '-rtl' : '';
-			$suffix .= defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+			$suffix  = is_rtl() ? '-rtl' : '';
+			$suffix .= defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min'; // Don't have minified version in place.
 			
+			/**
+			 * User reports on messed up checkboxes
+			 *
+			 * Probobly easier to use WordPress login CSS
+			 *	
 			wp_deregister_style( array( 'login' ) );
-			wp_register_style( 'login', plugins_url( "css/login/login.css", CUSTOM_LOGIN_FILE ), array( 'buttons' ), CUSTOM_LOGIN_VERSION, 'all' );
+			
+			wp_enqueue_style( 'forms', get_admin_url( get_current_blog_id(), "css/forms{$suffix}.css", 'admin' ), null, CUSTOM_LOGIN_VERSION, 'screen' );
+			wp_enqueue_style( 'l10n', get_admin_url( get_current_blog_id(), "css/l10n{$suffix}.css", 'admin' ), null, CUSTOM_LOGIN_VERSION, 'screen' );
+			wp_register_style( 'login', plugins_url( "css/login/login{$suffix}.css", CUSTOM_LOGIN_FILE ), array( 'buttons' ), CUSTOM_LOGIN_VERSION, 'all' );
+			 */
 			
 			if ( 'on' === CL_Common::get_option( 'remove_login_css', 'general' ) ) {
 				add_filter( 'wp_admin_css', '__return_false' );
@@ -204,7 +213,9 @@ class CL_WP_Login {
 	 *
 	 * @added		3.0.5
 	 * @updated	3.0.8
+	 * @disabled	3.1.0
 	 * @ref			https://wordpress.org/plugins/configure-login-timeout/
+	 * @removed	3.1
 	 */
 	public function auth_cookie_expiration( $seconds, $user_id, $remember ) {
 		
@@ -232,7 +243,10 @@ class CL_WP_Login {
 	/**
 	 * Allow password reset.
 	 *
+	 * 'on' equals don't allow. :/
+	 *
 	 * @updated	3.0.5
+	 * @removed	3.1
 	 */
 	public function allow_password_reset( $user_id ) {
 		if ( 'on' === CL_Common::get_option( 'allow_password_reset', 'general', 'off' ) )
