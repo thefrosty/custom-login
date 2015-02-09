@@ -21,8 +21,8 @@ class CL_Extensions {
 		$this->checkout_url = CUSTOM_LOGIN_API_URL . 'checkout/';
 		
 		add_action( CUSTOM_LOGIN_OPTION . '_settings_sidebars',	array( $this, 'settings_sidebar' ), 20 );
-		add_action( 'admin_menu',										array( $this, 'admin_menu' ), 10 );
-		add_action( 'admin_init',										array( $this, 'remote_install_client' ), 10 );
+		add_action( 'admin_menu',								array( $this, 'admin_menu' ), 10 );
+		add_action( 'admin_init',								array( $this, 'remote_install_client' ), 10 );
 		
 		$this->get_extensions();
 	}

@@ -153,7 +153,19 @@ if ( false === ( $css = get_transient( $trans_key ) ) ) :
 	
 	if ( !empty( $login_form_box_shadow ) ) {
 		
-		$box_shadow = $login_form_box_shadow . ' ' . $login_form_box_shadow_color;	
+		if ( empty( $login_form_box_shadow_color ) ) {
+			$login_form_box_shadow_color = '#121212';
+		}
+		
+		if ( 'on' === $login_form_box_shadow_color_checkbox ) {
+			
+			$color = CL_Scripts_Styles::hex2rgb( $login_form_box_shadow_color );
+			$box_shadow = "{$login_form_box_shadow} rgba({$color['red']},{$color['green']},{$color['blue']},{$login_form_box_shadow_color_opacity})";
+		}
+		else {
+			$box_shadow = $login_form_box_shadow . ' ' . $login_form_box_shadow_color;	
+		}
+		
 		$css .= CL_Scripts_Styles::prefixit( 'box-shadow', trim( $box_shadow ) );			
 	}
 	
@@ -316,7 +328,7 @@ if ( false === ( $css = get_transient( $trans_key ) ) ) :
 	}
 	
 	/* WP Magic */
-//	set_transient( $trans_key, $css, YEAR_IN_SECONDS/2 ); // Cache for six months
+	set_transient( $trans_key, $css, YEAR_IN_SECONDS/2 ); // Cache for six months
 endif;
 
 /* Out of the frying pan, and into the fire! */

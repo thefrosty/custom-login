@@ -164,7 +164,7 @@ class CL_Dashboard {
 		$content .= '<ul class="social">';
 			$content .= '<li>';
 			$content .= '<a href="https://www.facebook.com/FrostyMediaWP"><span class="dashicons dashicons-facebook"></span>/FrostyMediaWP</a> | ';
-			$content .= '<a href="https://twitter.com/FrostyMediaWP"><span class="dashicons dashicons-twitter"></span>/FrostyMediaWP</a> | ';			
+			$content .= '<a href="https://twitter.com/Frosty_Media"><span class="dashicons dashicons-twitter"></span>/Frosty_Media</a> | ';			
 			$content .= '<a href="https://twitter.com/TheFrosty"><span class="dashicons dashicons-twitter"></span>/TheFrosty</a>';
 			$content .= '</li>';
 		$content .= '</ul>';
@@ -183,8 +183,10 @@ class CL_Dashboard {
 		if ( isset( $_GET[ $this->id ] ) && intval( $_GET[ $this->id ] ) === 1 ) {
 			
 			if ( isset( $_GET['type'] ) && $_GET['type'] === 'css' ) {
-			
-				header("content-type:text/css");
+				
+				if ( !headers_sent() ) {
+					header("content-type:text/css");
+				}
 				ob_start();
 				str_replace( ob_end_clean(), '', ob_end_clean() );
 				$this->CSS();
@@ -193,7 +195,9 @@ class CL_Dashboard {
 			}
 			elseif ( isset( $_GET['type'] ) && $_GET['type'] === 'js' ) {
 			
-				header("content-type:application/x-javascript");
+				if ( !headers_sent() ) {
+					header("content-type:application/x-javascript");
+				}
 				ob_start();
 				str_replace( ob_end_clean(), '', ob_end_clean() );
 				$this->jQuery();
@@ -209,8 +213,8 @@ class CL_Dashboard {
 	private function add_query_arg( $type = 'js' ) {
 		$url = add_query_arg(
 			array(
-				$this->id => '1',
-				'type' => $type
+				$this->id	=> '1',
+				'type'		=> $type
 			),
 			trailingslashit( admin_url() )
 		);
@@ -268,4 +272,6 @@ jQuery(document).ready(function($) {
 	}
 	
 }
+
+// Only load on the WordPress Dashboard (index.php) page.
 add_action( 'load-index.php', array( 'CL_Dashboard', 'instance' ) );

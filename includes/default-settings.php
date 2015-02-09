@@ -365,13 +365,20 @@ $fields	[CUSTOM_LOGIN_OPTION . '_design'] = array(
 	
 	array(
 		'name' 		=> 'custom_css',
-		'label' 	=> '',
+		'label' 		=> '',
 		'desc' 		=> sprintf( '%s %s', __( 'Allowed variables:', CUSTOM_LOGIN_DIRNAME ), '<ul>
 			<li>{BSLASH} = "\" (backslash)</li>
 			<li><a href="http://wordpress.org/support/topic/quotes-in-custom-css-gets-replaced-with-useless-quote?replies=4">Request others</a></li>
 			</ul>' ),
 		'type' 		=> 'textarea',
-		'sanitize' => 'wp_filter_nohtml_kses',
+		'sanitize'	=> 'wp_filter_nohtml_kses',
+	),
+	array(
+		'name'		=> 'animate.css',
+		'label'		=> __( 'Animate', CUSTOM_LOGIN_DIRNAME ),
+		'desc'		=> __( 'Include <a href="http://daneden.github.io/animate.css/">animate.css</a>?', CUSTOM_LOGIN_DIRNAME ),
+		'type'		=> 'checkbox',
+		'default'	=> 'off',
 	),
 	
 	/** BREAK **/
@@ -385,10 +392,10 @@ $fields	[CUSTOM_LOGIN_OPTION . '_design'] = array(
 	
 	array(
 		'name' 		=> 'custom_html',
-		'label' 	=> '',
+		'label' 		=> '',
 		'desc' 		=> '',
 		'type' 		=> 'textarea',
-		'sanitize' => 'wp_kses_post', //Allow HTML
+		'sanitize'	=> 'wp_kses_post', //Allow HTML
 	),
 	
 	/** BREAK **/
@@ -402,10 +409,10 @@ $fields	[CUSTOM_LOGIN_OPTION . '_design'] = array(
 	
 	array(
 		'name' 		=> 'custom_jquery',
-		'label' 	=> '',
-		'desc' 		=> '',
+		'label' 		=> '',
+		'desc' 		=> '<code>(function($) { "use strict";</code> ' . __( '** Your custom jQuery will output here **.', CUSTOM_LOGIN_DIRNAME ) . ' <code>}(jQuery));</code><br>',
 		'type' 		=> 'textarea',
-		'sanitize' => 'wp_specialchars_decode',
+		'sanitize'	=> 'wp_specialchars_decode',
 	),
 );
 
@@ -418,7 +425,8 @@ $fields	[CUSTOM_LOGIN_OPTION . '_general'] = array(
 		'name'		=> 'active',
 		'label'		=> __( 'Activate', CUSTOM_LOGIN_DIRNAME ),
 		'desc'		=> __( 'Allow Custom Login to hook into WordPress.', CUSTOM_LOGIN_DIRNAME ),
-		'type'		=> 'checkbox'
+		'type'		=> 'checkbox',
+		'default'	=> 'on',
 	),
 	array(
 		'name'		=> 'capability',

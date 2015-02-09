@@ -67,7 +67,7 @@ class CL_WP_Login {
 	 * Enqueue additional scripts.
 	 *
 	 * @since		2.0
-	 * @updated	3.0
+	 * @updated		3.2
 	 */
 	function login_enqueue_scripts() {		
 		global $cl_css_atts;
@@ -84,9 +84,18 @@ class CL_WP_Login {
 			echo "\n</style>\n";
 		echo ob_get_clean();
 		
+		/**
+		 * Animate.css
+		 * @ref		https://github.com/daneden/animate.css/blob/master/animate.min.css
+		 */
+		$animate_css = CL_Common::get_option( 'animate.css', 'design', 'off' );
+		if ( 'on' == $animate_css ) {
+			wp_enqueue_style( 'animate.css', plugins_url( 'css/animate.min.css', CUSTOM_LOGIN_FILE ), array( 'login' ), '08112014', 'screen' );
+		}
+		
 		/* Custom jQuery */
-		$jquery = CL_Common::get_option( 'custom_jquery', 'design', false );
-		if ( $jquery ) {
+		$jquery = CL_Common::get_option( 'custom_jquery', 'design', '' );
+		if ( '' != $jquery ) {
 			wp_enqueue_script( array( 'jquery' ) );
 		}
 	}
@@ -117,9 +126,9 @@ class CL_WP_Login {
 	 */
 	public function login_footer_jquery() {
 		
-		$jquery = CL_Common::get_option( 'custom_jquery', 'design', false );
+		$jquery = CL_Common::get_option( 'custom_jquery', 'design', '' );
 		
-		if ( $jquery ) {
+		if ( '' != $jquery ) {
 					
 			global $cl_js_atts;
 		
@@ -212,10 +221,10 @@ class CL_WP_Login {
 	 * Allow password reset.
 	 *
 	 * @added		3.0.5
-	 * @updated	3.0.8
+	 * @updated		3.0.8
 	 * @disabled	3.1.0
 	 * @ref			https://wordpress.org/plugins/configure-login-timeout/
-	 * @removed	3.1
+	 * @removed		3.1
 	 */
 	public function auth_cookie_expiration( $seconds, $user_id, $remember ) {
 		

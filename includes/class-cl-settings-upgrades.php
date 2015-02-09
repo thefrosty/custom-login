@@ -350,18 +350,18 @@ class CL_Settings_Upgrade {
 		$design_settings['nav_text_shadow_hover_color_opacity'] = $this->get_old_setting( $old_settings, 'nav_text_shadow_hover_color_opacity' );
 		
 		$design_settings['custom_css'] = wp_filter_nohtml_kses( $this->get_old_setting( $old_settings, 'custom_css' ) );
+		$design_settings['animate.css'] = 'off'; // New
 		$design_settings['custom_html'] = wp_kses_post( $this->get_old_setting( $old_settings, 'custom_html' ) );
 		$design_settings['custom_jquery'] = wp_specialchars_decode( stripslashes( $this->get_old_setting( $old_settings, 'custom_jquery' ) ), 1, 0, 1 );
 		
 		/** General */
-		$general_settings['active'] = $this->get_old_setting( $old_settings, 'active' );
+		$general_settings['active'] = $this->get_old_setting( $old_settings, 'active', 'on' );
 		$general_settings['capability'] = 'manage_options'; // New
 		$general_settings['tracking'] = 'off'; // New
 		$general_settings['admin_notices'] = 'off'; // New
 		$general_settings['wp_shake_js'] = 'off'; // New
 		$general_settings['remove_login_css'] = 'off'; // New
-		$general_settings['lostpassword_text'] = 'off'; // New
-		
+		$general_settings['lostpassword_text'] = 'off'; // New		
 		
 		update_option( CUSTOM_LOGIN_OPTION . '_design', $design_settings );
 		update_option( CUSTOM_LOGIN_OPTION . '_general', $general_settings );
@@ -384,6 +384,9 @@ class CL_Settings_Upgrade {
 		unset( $general_settings['allow_password_reset'] );
 		unset( $general_settings['auth_timeout'] );
 		unset( $general_settings['auth_timeout_remember'] );
+		
+		// Leave
+		$general_settings['active'] = $this->get_old_setting( $general_settings, 'active', 'on' );
 		
 		// New settings
 		$general_settings['dashboard_widget'] = 'off';

@@ -11,7 +11,7 @@ class CL_Settings_API {
 	/**
 	 * Version
 	 */
-	var $api_version = '2.0.2';
+	var $api_version = '2.0.3';
 	
 	/**
 	 * @var array
@@ -44,7 +44,7 @@ class CL_Settings_API {
 		add_action( 'load-' . $this->settings['menu_page'],					array( $this, 'init' ), 89 );
 		add_action( 'admin_enqueue_scripts',									array( $this, 'admin_enqueue_scripts' ) );
 		add_action( 'admin_footer',											array( $this, 'wp_localize_script' ), 99 );
-		add_action( 'wp_ajax_' . $this->settings['prefix'] . '_get_form',	array( $this, 'get_form' ), 99 );
+		add_action( 'wp_ajax_' . $this->settings['prefix'] . '_get_form',		array( $this, 'get_form' ), 99 );
     }
 	
 	/**
@@ -55,7 +55,8 @@ class CL_Settings_API {
 	public function init() {
 		
 		add_action( 'admin_notices',											array( $this, 'upgrade_notices' ) );
-		add_action( $this->settings['prefix'] . '_sticky_admin_notice',	array( $this, 'sticky_admin_notice_social_links' ), 10 );
+		add_action( $this->settings['prefix'] . '_sticky_admin_notice',		array( $this, 'sticky_admin_notice_social_links' ), 10 );
+		add_action( $this->settings['prefix'] . '_before_submit_button',		array( $this, 'is_active_toggle' ), 10 );
 		add_action( $this->settings['prefix'] . '_settings_sidebars',		array( $this, 'about_the_author' ), 19 );
 		add_action( $this->settings['prefix'] . '_settings_sidebars',		array( $this, 'sidebar_feed' ), 20 );
 	}
@@ -551,6 +552,9 @@ class CL_Settings_API {
      */ 
     function sanitize_options( $options ) {
 		
+		if ( is_null( $options ) )
+			return $options;
+		
 		do_action( $this->settings['prefix'] . '_before_sanitize_options', $options );
 		
 		foreach( $options as $option_slug => $option_value ) {
@@ -611,7 +615,7 @@ class CL_Settings_API {
 				<span><?php echo $this->settings['version']; ?></span>
 				<div>
 					<?php echo sprintf( __( 'A %s plugin', $this->settings['domain'] ), '<strong><a href="https://frosty.media/" target="_blank">Frosty Media</a></strong>' ); ?>
-					&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://twitter.com/FrostyMediaWP"><span class="dashicons dashicons-twitter"></span></a>
+					&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://twitter.com/Frosty_Media"><span class="dashicons dashicons-twitter"></span></a>
 				</div>
 			</div><!-- #cl-header -->
 		
@@ -672,11 +676,12 @@ class CL_Settings_API {
 			$form_id = $form['id']; ?>
 			<div id="<?php echo $form_id; ?>" class="group">
 			<form action="options.php" id="<?php echo $form_id; ?>form" method="post" >
-				<?php do_action( $this->settings['prefix'] . '_form_top_' . $form['id'], $form ); ?>
-				<?php settings_fields( $form['id'] ); ?>
-				<?php do_settings_sections( $form['id'] ); ?>
-				<?php do_action( $this->settings['prefix'] . '_form_bottom_' . $form['id'], $form ); ?>
-				<?php if ( isset( $form['submit'] ) && $form['submit'] ) submit_button(); ?>
+				<?php do_action( $this->settings['prefix'] . '_form_top_' . $form_id, $form ); ?>
+				<?php settings_fields( $form_id ); ?>
+				<?php do_settings_sections( $form_id ); ?>
+				<?php do_action( $this->settings['prefix'] . '_form_bottom_' . $form_id, $form ); ?>
+				<?php if ( isset( $form['submit'] ) && $form['submit'] )
+					submit_button( sprintf( __( 'Save %s', $this->settings['domain'] ), $form['title'] ) ); ?>
 			</form>
 			</div><?php
 		#	var_dump( $form_id, get_option( $form_id ) );
@@ -708,7 +713,7 @@ class CL_Settings_API {
 					<?php settings_fields( $form['id'] ); ?>
 					<?php do_settings_sections( $form['id'] ); ?>
 					<?php do_action( $this->settings['prefix'] . '_form_bottom_' . $form['id'], $form ); ?>
-					<?php submit_button( ); ?>
+					<?php submit_button( sprintf( __( 'Save %s Changes', $this->settings['domain'] ), $form_id ) ); ?>
 				</form><?php
 				$setting_form['error'] = 0;
 				$setting_form['html'] = ob_get_clean();
@@ -735,6 +740,24 @@ class CL_Settings_API {
 			<div class="inside"><?php echo $content; ?></div>
 			</div>
 		</div><?php
+	}
+	
+	/**
+	 * Global 'active' checkbox notification.
+	 *
+	 * @ref	http://codepen.io/pklada/pen/jEGwMB
+	 */
+	function is_active_toggle() { ?>
+	<label class="tgl">
+		<span class="tgl_input"></span>
+		<span class="tgl_body">
+			<span class="tgl_switch"></span>
+			<span class="tgl_track">
+				<span class="tgl_bgd"></span>
+				<span class="tgl_bgd tgl_bgd-negative"></span>
+			</span>
+		</span>
+	</label><?php
 	}
 	
 	/**
@@ -833,7 +856,7 @@ class CL_Settings_API {
 		
 		$content  = '<ul class="social">';
 		$content .= '<li><a href="https://www.facebook.com/FrostyMediaWP" target="_blank"><span class="dashicons dashicons-facebook"></span></a></li>';
-		$content .= '<li><a href="https://twitter.com/FrostyMediaWP" target="_blank"><span class="dashicons dashicons-twitter"></span></a></li>';
+		$content .= '<li><a href="https://twitter.com/Frosty_Media" target="_blank"><span class="dashicons dashicons-twitter"></span></a></li>';
 		$content .= '<li><a href="https://plus.google.com/+FrostyMedia/" target="_blank"><span class="dashicons dashicons-googleplus"></span></a></li>';
 		$content .= '<li><a href="http://eepurl.com/bbj0bD" target="_blank"><span class="dashicons dashicons-email"></span></a></li>';
 		$content .= '</ul>';

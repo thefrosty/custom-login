@@ -3,7 +3,7 @@
  * Plugin Name: Custom Login
  * Plugin URI: https://frosty.media/plugins/custom-login
  * Description: A simple way to customize your WordPress <code>wp-login.php</code> screen! A <a href="https://frosty.media/">Frosty Media</a> plugin.
- * Version: 3.1
+ * Version: 3.2
  * Author: Austin Passy
  * Author URI: https://austin.passy.co
  * Text Domain: custom-login
@@ -38,7 +38,7 @@ final class Custom_Login {
 	 * Plugin vars
 	 * @return string
 	 */
-	var	$version = '3.1',
+	var	$version = '3.2',
 		$menu_page,
 		$prefix;
 	
@@ -145,6 +145,7 @@ final class Custom_Login {
 			require_once( trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/admin/plugins.php' );
 			require_once( trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/admin/import-export.php' );
 			require_once( trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/admin/tracking.php' );
+		//	require_once( trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/admin/roost.php' ); // Not enabled until global domains available.
 		}
 	}
 

@@ -3,7 +3,7 @@
  * @package     CustomLogin
  * @subpackage  Classes/CL_Common
  * @author      Austin Passy <http://austin.passy.co>
- * @copyright   Copyright (c) 2014, Austin Passy
+ * @copyright   Copyright (c) 2014-2015, Austin Passy
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
@@ -136,7 +136,7 @@ class CL_Common {
 				esc_url( $url ),
 				array(
 					'timeout'		=> apply_filters( 'cl_wp_remote_get_timeout', (int) 15 ),
-					'sslverify'	=> false,
+					'sslverify'		=> false,
 					'user-agent'	=> $user_agent . '/' . $_version . '; ' . get_bloginfo( 'url' ),
 				)
 			);

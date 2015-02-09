@@ -1,7 +1,7 @@
 <?php
 /**
  * @package     CustomLogin
- * @subpackage  Classes/CL_Common
+ * @subpackage  Classes/CL_Tracking
  * @author      Austin Passy <http://austin.passy.co>
  * @copyright   Copyright (c) 2014-2015, Austin Passy
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
@@ -115,6 +115,7 @@ class CL_Tracking {
 		$data['active_plugins']		= $active_plugins;
 		$data['inactive_plugins']	= $plugins;
 		$data['post_count']			= wp_count_posts( 'post' )->publish;
+		$data['cl_version']			= CUSTOM_LOGIN_VERSION;
 		
 		if ( is_array( $extra_data ) && !empty( $extra_data ) ) {
 			foreach( $extra_data as $key => $value ) {

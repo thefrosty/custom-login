@@ -20,6 +20,9 @@ if ( !defined( 'ABSPATH' ) ) exit;
  */
 class CL_Import_Export {
 
+	/** Singleton *************************************************************/
+	private static $instance;
+
 	/**
 	 * The menu
 	 *
@@ -29,14 +32,28 @@ class CL_Import_Export {
 	private $settings_id;
 
 	/**
+	 * Main Instance
+	 *
+	 * @staticvar 	array 	$instance
+	 * @return 		The one true instance
+	 */
+	public static function instance() {
+		if ( ! isset( self::$instance ) ) {
+			self::$instance = new self;
+			self::$instance->init();
+		}
+		return self::$instance;
+	}
+
+	/**
 	 * Get things going
 	 *
 	 * @access public
 	 * @return void
 	 */
-	public function __construct() {
-				
-		add_action( 'admin_init',														array( $this, 'admin_init' ) );
+	public function init() {
+		
+		add_action( 'admin_init',												array( $this, 'admin_init' ) );
 		add_action( CUSTOM_LOGIN_OPTION . '_settings_sidebars',					array( $this, 'settings_sidebar' ), 30 );
 		add_action( CUSTOM_LOGIN_OPTION . '_after_settings_sections_form',		array( $this, 'after_settings_sections_form' ), 11 );
 		add_action( 'admin_action_' . CUSTOM_LOGIN_OPTION . '_download_export',	array( $this, 'download_export' ) );
@@ -52,15 +69,15 @@ class CL_Import_Export {
 		$fields	[ $this->settings_id ] = array(
 			array(
 				'name' 		=> 'import',
-				'label' 	=> __( 'Import', CUSTOM_LOGIN_DIRNAME ),
+				'label' 		=> __( 'Import', CUSTOM_LOGIN_DIRNAME ),
 				'desc' 		=> '',
 				'type' 		=> 'textarea',
-				'sanitize' => '__return_empty_string',
+				'sanitize'	=> '__return_empty_string',
 			),
 			
 			array(
 				'name' 		=> 'export',
-				'label' 	=> __( 'Export', CUSTOM_LOGIN_DIRNAME ),
+				'label'		=> __( 'Export', CUSTOM_LOGIN_DIRNAME ),
 				'desc' 		=> sprintf( __( 'This textarea is always pre-filled with the current settings. Copy these settings for import at a later time, or <a href="%s">download</a> them.', CUSTOM_LOGIN_DIRNAME ),
 					wp_nonce_url(
 						add_query_arg( array( 'action' => CUSTOM_LOGIN_OPTION . '_download_export' ),
@@ -73,7 +90,7 @@ class CL_Import_Export {
 				'default'	=> $this->get_custom_login_settings(),
 				'type' 		=> 'textarea',
 				'extra'		=> array(
-					'readonly'	=> 'readonly'
+				'readonly'	=> 'readonly'
 				),
 				'sanitize' => '__return_empty_string',
 			),
@@ -105,7 +122,7 @@ class CL_Import_Export {
 	public function admin_init() {
 		
 		$this->settings_api	= CUSTOMLOGIN()->settings_api;
-		$this->settings_id		= CUSTOM_LOGIN_OPTION . '_import_export';
+		$this->settings_id	= CUSTOM_LOGIN_OPTION . '_import_export';
 		
 		add_settings_section( $this->settings_id, __( 'Import/Export Custom Login Settings', CUSTOM_LOGIN_DIRNAME ), '__return_false', $this->settings_id );
 		
@@ -164,7 +181,7 @@ class CL_Import_Export {
 	 *
 	 * @ref		http://stackoverflow.com/a/10797086/558561
 	 */ 
-    private function maybe_import_settings( $options ) {
+    public function maybe_import_settings( $options ) {
 		
 		if ( !empty( $options['import'] ) && ( base64_encode( base64_decode( $options['import'], true ) ) === $options['import'] ) ) {
 			$import = maybe_unserialize( base64_decode( $options['import'] ) );
@@ -276,4 +293,4 @@ class CL_Import_Export {
 	}
 
 }
-$GLOBALS['cl_import_export'] = new CL_Import_Export;
+$GLOBALS['cl_import_export'] = CL_Import_Export::instance();

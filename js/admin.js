@@ -29,6 +29,18 @@
 		$('.cl-header').contrastColor();
 			
 		/**
+		 *** Active *************************
+		 ************************************
+		 ************************************
+		 */
+		$('span.tgl_input').replaceWith( $('input[id="custom_login_general[active]"]').clone() );
+		
+		$(document).on('click change', 'input[id="custom_login_general[active]"]', function() {
+		//	console.log(this.checked);
+			$('input[id="custom_login_general[active]"]').prop('checked', this.checked);
+		});
+			
+		/**
 		 *** Sidebar Nav + Main Group *******
 		 ************************************
 		 ************************************
@@ -40,10 +52,12 @@
 		}
 		if (activetab != '' && $(activetab).length ) {
 			$(activetab).fadeIn();
+			$('input[id="cl_save"]').val( 'Save ' + $('a[href="' + activetab + '"]').text() );
 		}
 		else {
-			var first_group = $('.cl-main .group:first')
+			var first_group = $('.cl-main .group:first');
 			first_group.fadeIn();
+			$('input[id="cl_save"]').val( 'Save ' + $('.cl-sidebar .cl-sections-menu li:first a').text() );
 		}
 
 		if (activetab != '' && $('.cl-sections-menu a[href="' + activetab + '"]').length ) {
@@ -57,6 +71,8 @@
 			$this = $(this);
 			clicked_group = $this.attr('href');
 			
+			$('input[id="cl_save"]').val( 'Save ' + $('a[href="' + clicked_group + '"]').text() );
+			
 			$('.cl-sections-menu a').removeClass('active');
 			$this.addClass('active').blur();
 			if (typeof(localStorage) != 'undefined' ) {
@@ -64,7 +80,7 @@
 			}
 			
 			$('[class^="chosen-"]').each(function(index, element) {
-				if ( $(this).css('width') == '0px' ) $(this).css('width','120px');
+				if ( $(this).css('width') == '0px' ) $(this).css('width','220px');
 			});
 			
 			$('.cl-main .group').hide();
@@ -291,6 +307,10 @@
 				custom_css_textarea.parents('tr').find('th').remove();
 			$('<div id="custom_login[custom_css]_ace"/>').insertAfter(custom_css_textarea);
 			var custom_css = ace.edit("custom_login[custom_css]_ace");
+			custom_css.setOptions({
+				maxLines: 30,
+				autoScrollEditorIntoView: true
+			});
 			custom_css.getSession().setMode("ace/mode/css");
 			custom_css.setTheme("ace/theme/github");
 			custom_css_textarea.hide();
@@ -307,6 +327,10 @@
 				custom_html_textarea.parents('tr').find('th').remove();
 			$('<div id="custom_login[custom_html]_ace"/>').insertAfter(custom_html_textarea);
 			var custom_html = ace.edit("custom_login[custom_html]_ace");
+			custom_html.setOptions({
+				maxLines: 30,
+				autoScrollEditorIntoView: true
+			});
 			custom_html.getSession().setMode("ace/mode/html");
 			custom_html.setTheme("ace/theme/github");
 			custom_html_textarea.hide();
@@ -323,6 +347,10 @@
 				custom_js_textarea.parents('tr').find('th').remove();
 			$('<div id="custom_login[custom_jquery]_ace"/>').insertAfter(custom_js_textarea);
 			var custom_js = ace.edit("custom_login[custom_jquery]_ace");
+			custom_js.setOptions({
+				maxLines: 30,
+				autoScrollEditorIntoView: true
+			});
 			custom_js.getSession().setMode("ace/mode/javascript");
 			custom_js.setTheme("ace/theme/github");
 			custom_js_textarea.hide();
