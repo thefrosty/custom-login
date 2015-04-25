@@ -99,7 +99,7 @@ class CL_Dashboard {
 		$rss_items	= $this->get_feed();		
 		$feed_url	= preg_replace( '/#.*/', '', esc_url( $rss_items[ $key ]->get_permalink(), null, 'display' ) );
 		
-		return add_query_arg( array( 'utm_medium' => 'wpadmin_dashboard', 'utm_term' => 'newsitem', 'utm_campaign' => CUSTOM_LOGIN_DIRNAME ), $feed_url );
+		return esc_url( add_query_arg( array( 'utm_medium' => 'wpadmin_dashboard', 'utm_term' => 'newsitem', 'utm_campaign' => CUSTOM_LOGIN_DIRNAME ), $feed_url ) );
 	}
 	
 	private function get_feed_title( $key = 0 ) {
@@ -127,7 +127,7 @@ class CL_Dashboard {
 			foreach ( $rss_items as $key => $item ) {
 				$feed_url = preg_replace( '/#.*/', '', esc_url( $item->get_permalink(), null, 'display' ) );
 				$content .= '<li>';
-				$content .= '<a class="rsswidget" href="' . add_query_arg( array( 'utm_medium' => 'wpadmin_dashboard', 'utm_term' => 'newsitem', 'utm_campaign' => CUSTOM_LOGIN_DIRNAME ), $feed_url ) . '">' .	esc_html( $item->get_title() ) . '</a>';
+				$content .= '<a class="rsswidget" href="' . esc_url( add_query_arg( array( 'utm_medium' => 'wpadmin_dashboard', 'utm_term' => 'newsitem', 'utm_campaign' => CUSTOM_LOGIN_DIRNAME ), $feed_url ) ) . '">' .	esc_html( $item->get_title() ) . '</a>';
 				$content .= $count === 1 ? '&nbsp;&nbsp;&nbsp;<span class="rss-date">' . $item->get_date( get_option( 'date_format' ) ) . '</span>' : '';
 				$content .= $count === 1 ? '<div class="rssSummary">' . strip_tags( wp_trim_words( $item->get_description(), 28 ) ) . '</div>' : '';
 				$content .= '</li>';
@@ -152,7 +152,7 @@ class CL_Dashboard {
 			foreach ( $rss_items as $item ) {
 				$url = preg_replace( '/#.*/', '', esc_url( $item->get_permalink(), null, 'display' ) );
 				$content .= '<li>';
-				$content .= '<a class="rsswidget" href="' . add_query_arg( array( 'utm_medium' => 'wpadmin_dashboard', 'utm_term' => 'newsitem', 'utm_campaign' => CUSTOM_LOGIN_DIRNAME ), $url ) . '">' . esc_html( $item->get_title() ) . '</a>';
+				$content .= '<a class="rsswidget" href="' . esc_url( add_query_arg( array( 'utm_medium' => 'wpadmin_dashboard', 'utm_term' => 'newsitem', 'utm_campaign' => CUSTOM_LOGIN_DIRNAME ), $url ) ) . '">' . esc_html( $item->get_title() ) . '</a>';
 			#	$content .= '<div class="rssSummary">' . strip_tags( wp_trim_words( $item->get_description(), 10 ) ) . '</div>';
 				$content .= '</li>';
 			}
