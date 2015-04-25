@@ -11,7 +11,7 @@ class CL_Settings_API {
 	/**
 	 * Version
 	 */
-	var $api_version = '2.0.3';
+	var $api_version = '2.0.4';
 	
 	/**
 	 * @var array
