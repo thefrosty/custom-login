@@ -3,9 +3,9 @@
  * Plugin Name: Custom Login
  * Plugin URI: https://frosty.media/plugins/custom-login
  * Description: A simple way to customize your WordPress <code>wp-login.php</code> screen! A <a href="https://frosty.media/">Frosty Media</a> plugin.
- * Version: 3.2
+ * Version: 3.2.1
  * Author: Austin Passy
- * Author URI: https://austin.passy.co
+ * Author URI: http://austin.passy.co
  * Text Domain: custom-login
  * GitHub Plugin URI: https://github.com/thefrosty/custom-login
  * GitHub Branch: master
@@ -286,7 +286,7 @@ final class Custom_Login {
 		}
 		
 		// https://raw.github.com/thefrosty/custom-login/master/extensions.json
-		$message_url  = add_query_arg( array( 'edd_action' => 'cl_announcements' ), trailingslashit( CUSTOM_LOGIN_API_URL ) . 'cl-checkin-api/' );
+		$message_url  = esc_url( add_query_arg( array( 'edd_action' => 'cl_announcements' ), trailingslashit( CUSTOM_LOGIN_API_URL ) . 'cl-checkin-api/' ) );
 		
 		$announcement = CL_Common::wp_remote_get(
 			$message_url,
