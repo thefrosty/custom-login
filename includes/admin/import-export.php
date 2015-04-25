@@ -79,13 +79,13 @@ class CL_Import_Export {
 				'name' 		=> 'export',
 				'label'		=> __( 'Export', CUSTOM_LOGIN_DIRNAME ),
 				'desc' 		=> sprintf( __( 'This textarea is always pre-filled with the current settings. Copy these settings for import at a later time, or <a href="%s">download</a> them.', CUSTOM_LOGIN_DIRNAME ),
-					wp_nonce_url(
+					esc_url( wp_nonce_url(
 						add_query_arg( array( 'action' => CUSTOM_LOGIN_OPTION . '_download_export' ),
 							''
 						),
 						'export',
 						'cl_nonce'
-					)
+					) )
 				),
 				'default'	=> $this->get_custom_login_settings(),
 				'type' 		=> 'textarea',

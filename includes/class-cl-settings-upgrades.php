@@ -74,7 +74,7 @@ class CL_Settings_Upgrade {
 			if ( version_compare( $cl_version, '2.0', '<' ) ) {
 				printf(
 					'<div class="updated"><p>' . __( 'Custom Login needs to upgrade the settings, please click <a href="%s">here</a> to start the upgrade.', CUSTOM_LOGIN_DIRNAME ) . '</p></div>',
-					add_query_arg( array( 'ver' => '2.0' ), admin_url( 'options.php?page=custom-login-upgrades' ) )
+					esc_url( add_query_arg( array( 'ver' => '2.0' ), admin_url( 'options.php?page=custom-login-upgrades' ) ) )
 				);
 			}
 		} // 2.0
@@ -95,7 +95,7 @@ class CL_Settings_Upgrade {
 		if ( version_compare( $cl_version, '3.1', '<' ) ) {
 			printf(
 				'<div class="updated"><p>' . __( 'Custom Login needs to upgrade the database, please click <a href="%s">here</a> to start the upgrade.', CUSTOM_LOGIN_DIRNAME ) . '</p></div>',
-				add_query_arg( array( 'ver' => '3.1' ), admin_url( 'options.php?page=custom-login-upgrades' ) )
+				esc_url( add_query_arg( array( 'ver' => '3.1' ), admin_url( 'options.php?page=custom-login-upgrades' ) ) )
 			);
 		} // 3.1
 	}

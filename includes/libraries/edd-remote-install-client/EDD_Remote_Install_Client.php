@@ -124,7 +124,7 @@ class CL_Remote_Install_Client {
 					'license'	 => urlencode( $_GET['license'] )
 				);
 
-				$download_link = add_query_arg($api_params, $this->api_url);
+				$download_link = esc_url( add_query_arg($api_params, $this->api_url) );
 				
 				///////////// NEW /////////////////
 				$download_id = $this->get_remote_download_id( $_GET['name'] );				
@@ -314,7 +314,7 @@ class CL_Remote_Install_Client {
 			);
 			
 			// Call the custom API.
-			$response = wp_remote_get( add_query_arg( $api_params, $this->api_url ), array( 'timeout' => 15, 'sslverify' => false ) );
+			$response = wp_remote_get( esc_url( add_query_arg( $api_params, $this->api_url ) ), array( 'timeout' => 15, 'sslverify' => false ) );
 
 			// make sure the response came back okay
 			if ( is_wp_error( $response ) )
@@ -371,7 +371,7 @@ class CL_Remote_Install_Client {
 			'item_name'  => urlencode( $download_title )
 		);
 
-		$response = wp_remote_get( add_query_arg( $api_params, $this->api_url ), array( 'timeout' => 15, 'sslverify' => false ) );
+		$response = wp_remote_get( esc_url( add_query_arg( $api_params, $this->api_url ) ), array( 'timeout' => 15, 'sslverify' => false ) );
 
 		if ( !is_wp_error( $response ) )
 			$download_id = json_decode( wp_remote_retrieve_body( $response ) );
@@ -388,7 +388,7 @@ class CL_Remote_Install_Client {
 			'expires'		=> rawurlencode( base64_encode( strtotime( '+1 hour' ) ) )
 		 ), $this->api_url );
 
-		return apply_filters( 'edd_sl_encoded_package_url', $package_url );
+		return apply_filters( 'edd_sl_encoded_package_url', esc_url( $package_url ) );
 
 	}
 }

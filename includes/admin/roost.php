@@ -82,7 +82,7 @@ class CL_Roost {
 		if ( !preg_match('/safari/i', $user_agent ) )
 			return;
 		
-		$content = sprintf( __( 'Stay up to date with desktop push notifications: <a href="%s">click here</a>, then click "allow".', CUSTOM_LOGIN_DIRNAME ), add_query_arg( 'action', sprintf( '%s_allow_push', CUSTOM_LOGIN_OPTION ), admin_url() ) );
+		$content = sprintf( __( 'Stay up to date with desktop push notifications: <a href="%s">click here</a>, then click "allow".', CUSTOM_LOGIN_DIRNAME ), esc_url( add_query_arg( 'action', sprintf( '%s_allow_push', CUSTOM_LOGIN_OPTION ), admin_url() ) ) );
 		
 		CUSTOMLOGIN()->settings_api->postbox( 'custom-login-roost', sprintf( __( '%sPush Notifications', CUSTOM_LOGIN_DIRNAME ), '*' ), $content );
 	}
