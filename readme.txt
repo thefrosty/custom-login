@@ -19,10 +19,10 @@ For more information visit the official [Custom Login](https://frosty.media/plug
 > <strong>Support</strong><br>
 > [Austin](http://austin.passy.co) and the [Frosty Media](https://frosty.media/) team will always try our best to support the Custom Login plugin on the WordPress.org forum, but please note that we can not guarantee a response in a timely manner. If you have an issue we would appriciate you using GitHub or purchasing priority support on our site.
 >
-> Any extensions purchased on [Frosty Media](https://frosty.media/) (not hosted on WordPress.org) will not be supported on the WordPress.org forum. You can always browse our *small* but growing [documentation](https://frosty.media/docs) for further assistance. You need a valid license key to make support submissions *on our site*. We thank you in advance. 
+> Any extensions purchased on [Frosty Media](https://frosty.media/) (not hosted on WordPress.org) will not be supported on the WordPress.org forum. You can always browse our *small* but growing [documentation](https://frosty.media/docs) for further assistance. You need a valid license key to make support submissions *on our site*. We thank you in advance.
 
 > <strong>Bug Reports</strong><br>
-> Bug reports for Custom Login are [welcomed on GitHub](https://github.com/thefrosty/custom-login). 
+> Bug reports for Custom Login are [welcomed on GitHub](https://github.com/thefrosty/custom-login).
 
 = Video =
 
@@ -37,8 +37,8 @@ There are currently 5 premium extensions available, with more coming (suggestion
 * [Stealth Login](https://frosty.media/plugins/custom-login-stealth-login/?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt "Custom Login Stealth Login") - obscure your login URL.
 * [Page Template](https://frosty.media/plugins/custom-login-page-template/?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt "Custom Login Page Template") - add a login form to any WordPress page.
 * [Login Redirects](https://frosty.media/plugins/custom-login-redirects/?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt "Custom Login Redirects") - Manage login redirects.
-* [No Password](https://frosty.media/plugins/custom-login-no-password-login/?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt "Custom Login No Password logins") - allow users to login without a password. 
-* [Style Pack #1](https://frosty.media/plugins/custom-login-style-pack-1?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt "Custom Login Style Pack #1") - four pre-designed login styles. 
+* [No Password](https://frosty.media/plugins/custom-login-no-password-login/?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt "Custom Login No Password logins") - allow users to login without a password.
+* [Style Pack #1](https://frosty.media/plugins/custom-login-style-pack-1?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt "Custom Login Style Pack #1") - four pre-designed login styles.
 
 **Extensions in development/extension ideas**
 
@@ -114,6 +114,13 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 4. Custom Login Extensions Installer (an active license key is required).
 
 == Changelog ==
+
+= Version 3.2.2 (04/29/15) =
+
+* Update version number.
+* Fix upgrade notice showing when not needed.
+* Add class 'notice' and 'is-dismissible' to notice.
+* Cleanup admin dashboard empty ob_get_clean() notice.
 
 = Version 3.2.1 (04/20/15) =
 
@@ -194,7 +201,7 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 = Version 3.0.2 (01/12/15) =
 
 * Fix: Logo background size width &amp; height settings not transfering over in upgrade process.
-* Fix: Checking "Remove lost password text" removes the text instead of the other way around. [forum](https://wordpress.org/support/topic/lost-your-password-1) 
+* Fix: Checking "Remove lost password text" removes the text instead of the other way around. [forum](https://wordpress.org/support/topic/lost-your-password-1)
 
 = Version 3.0.1 (01/11/15) =
 
