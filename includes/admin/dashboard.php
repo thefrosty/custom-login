@@ -22,8 +22,10 @@ class CL_Dashboard {
 
 	/** Singleton *************************************************************/
 	private static $instance;
-	
+
 	private $id;
+
+	private static $headers = array();
 
 	/**
 	 * Main Instance
@@ -39,10 +41,11 @@ class CL_Dashboard {
 		}
 		return self::$instance;
 	}
-	
+
 	private function actions() {
-		
-		add_action( 'wp_dashboard_setup',		array( $this, 'add_dashboard_widget' ) );
+
+		add_action( 'wp_dashboard_setup',			array( $this, 'add_dashboard_widget' ) );
+		add_action( 'send_headers',					array( $this, 'set_headers' ) );
 		add_action( 'admin_enqueue_scripts',		array( $this, 'enqueue_scripts' ) );
 		add_action( 'admin_enqueue_scripts',		array( $this, 'inline_scripts' ) );
 	}
@@ -54,34 +57,58 @@ class CL_Dashboard {
 	 * @return bool
 	 */
 	private function dashboard_allowed() {
-		$tracking = CL_Common::get_option( 'dashboard_widget', 'general', 'off' );
-		
-		if ( 'on' === $tracking )
+		$dashboard = CL_Common::get_option( 'dashboard_widget', 'general', 'off' );
+
+		if ( 'on' === $dashboard )
 			return true;
-		
+
 		return false;
 	}
-	
+
 	/**
 	 * Add Dashboard widget
 	 */
 	public function add_dashboard_widget() {
-		
+
 		if ( !$this->dashboard_allowed() )
 			return;
-		
+
 		wp_add_dashboard_widget(
 			$this->id,
 			__( 'Frosty Media', CUSTOM_LOGIN_DIRNAME ),
 			array( $this, 'widget' )
 		);
 	}
-		
+
+	/**
+	 * Set out headers
+	 */
+	public function set_headers() {
+
+		if ( isset( $_GET[ $this->id ] ) && intval( $_GET[ $this->id ] ) === 1 ) {
+
+			if ( !isset( $_GET['type'] ) || headers_sent() )
+				return;
+
+			switch( $_GET['type'] ) {
+
+				case 'css' :
+					self::$header[ $_GET['type'] ] = header("content-type:text/css");
+					break;
+
+				case 'js' :
+					self::$header[ $_GET['type'] ] = header("content-type:application/x-javascript");
+					break;
+			}
+			}
+	}
+
+
 	/**
 	 * Scripts & Styles
 	 */
 	public function enqueue_scripts() {
-		
+
 		if ( $this->dashboard_allowed() ) {
 			wp_enqueue_style( $this->id, $this->add_query_arg( 'css' ), null, null, 'screen' );
 		}
@@ -89,36 +116,36 @@ class CL_Dashboard {
 			wp_enqueue_script( $this->id, $this->add_query_arg( 'js' ), array( 'jquery' ), null, true );
 		}
 	}
-	
+
 	private function get_feed( $count = 1, $feed = 'https://frosty.media/feed/' ) {
 		return CL_Common::fetch_rss_items( $count, $feed );
-	}	
-	
+	}
+
 	private function get_feed_url( $key = 0 ) {
-		
-		$rss_items	= $this->get_feed();		
+
+		$rss_items	= $this->get_feed();
 		$feed_url	= preg_replace( '/#.*/', '', esc_url( $rss_items[ $key ]->get_permalink(), null, 'display' ) );
-		
+
 		return esc_url( add_query_arg( array( 'utm_medium' => 'wpadmin_dashboard', 'utm_term' => 'newsitem', 'utm_campaign' => CUSTOM_LOGIN_DIRNAME ), $feed_url ) );
 	}
-	
+
 	private function get_feed_title( $key = 0 ) {
 		$rss_items = $this->get_feed();
-		
+
 		return esc_html( $rss_items[ $key ]->get_title() );
 	}
-	
+
 	/**
 	 * Dashboard widget
 	 */
 	public function widget() {
-		
-		// FEED		
+
+		// FEED
 		$rss_items = $this->get_feed( 1, 'https://frosty.media/feed/' );
-		
+
 		$content  = '<div class="rss-widget">';
 		$content .= '<ul>';
-		
+
 		if ( !$rss_items ) {
 			$content .= '<li>' . __( 'Error fetching feed', CUSTOM_LOGIN_DIRNAME ) . '</li>';
 		}
@@ -133,18 +160,18 @@ class CL_Dashboard {
 				$content .= '</li>';
 				$count++;
 			}
-		}		
+		}
 		$content .= '</ul>';
 		$content .= '</div>';
-		
-		
-		// Plugins 					
+
+
+		// Plugins
 		$rss_items = CL_Common::fetch_rss_items( 3, 'https://frosty.media/feed/?post_type=plugin&plugin_tag=custom-login-extension' );
-		
+
 		$content .= '<div class="rss-widget">';
 		$content .= '<ul>';
 		//$content .= '<li><strong>' . __( 'Custom Login Extensions:', CUSTOM_LOGIN_DIRNAME ) . '</strong></li>';
-		
+
 		if ( !$rss_items ) {
 			$content .= '<li>' . __( 'Error fetching feed', CUSTOM_LOGIN_DIRNAME ) . '</li>';
 		}
@@ -156,57 +183,61 @@ class CL_Dashboard {
 			#	$content .= '<div class="rssSummary">' . strip_tags( wp_trim_words( $item->get_description(), 10 ) ) . '</div>';
 				$content .= '</li>';
 			}
-		}		
+		}
 		$content .= '</ul>';
 		$content .= '</div>';
-		
+
 		$content .= '<div class="rss-widget">';
 		$content .= '<ul class="social">';
 			$content .= '<li>';
 			$content .= '<a href="https://www.facebook.com/FrostyMediaWP"><span class="dashicons dashicons-facebook"></span>/FrostyMediaWP</a> | ';
-			$content .= '<a href="https://twitter.com/Frosty_Media"><span class="dashicons dashicons-twitter"></span>/Frosty_Media</a> | ';			
+			$content .= '<a href="https://twitter.com/Frosty_Media"><span class="dashicons dashicons-twitter"></span>/Frosty_Media</a> | ';
 			$content .= '<a href="https://twitter.com/TheFrosty"><span class="dashicons dashicons-twitter"></span>/TheFrosty</a>';
 			$content .= '</li>';
 		$content .= '</ul>';
-		
+
 		$content .= '</div>';
-		
+
 		echo $content;
 	}
-	
+
 	/**
 	 * Generate the custom CSS/JS.
 	 *
 	 */
 	public function inline_scripts() {
-		
+
 		if ( isset( $_GET[ $this->id ] ) && intval( $_GET[ $this->id ] ) === 1 ) {
-			
+
 			if ( isset( $_GET['type'] ) && $_GET['type'] === 'css' ) {
-				
+
 				if ( !headers_sent() ) {
 					header("content-type:text/css");
 				}
 				ob_start();
 				str_replace( ob_end_clean(), '', ob_end_clean() );
 				$this->CSS();
-				echo ob_get_clean();
+				if ( ob_get_level() ) echo ob_get_clean();
 				die;
 			}
 			elseif ( isset( $_GET['type'] ) && $_GET['type'] === 'js' ) {
-			
+
 				if ( !headers_sent() ) {
 					header("content-type:application/x-javascript");
 				}
 				ob_start();
 				str_replace( ob_end_clean(), '', ob_end_clean() );
 				$this->jQuery();
-				echo ob_get_clean();
+				if ( ob_get_level() ) echo ob_get_clean();
 				die;
 			}
 		}
 	}
-	
+
+	public function clean_ob_contents( $contents ) {
+		return str_replace( $contents, '', $contents );
+	}
+
 	/**
 	 * Helper function to return the proper query arg.
 	 */
@@ -220,7 +251,7 @@ class CL_Dashboard {
 		);
 		return esc_url( $url );
 	}
-	
+
 	/**
 	 * Create the CSS.
 	 *
@@ -243,7 +274,7 @@ if ( !$remove_wrapper ) { ?>
 </style>
 <?php }
 	}
-	
+
 	/**
 	 * Create the jQuery.
 	 *
@@ -254,23 +285,23 @@ if ( !$remove_wrapper ) { ?>
 <script>
 <?php } ?>
 jQuery(document).ready(function($) {
-	
+
 	var CL_Timeout = 200;
-	
+
 	if ( !$('#dashboard_primary .rss-widget').eq(1).length ) {
 		CL_Timeout = 2500;
 	}
-	
+
 	setTimeout( function() {
 		$('#dashboard_primary .rss-widget:eq(1) ul').append('<a class="rsswidget" href="<?php echo $this->get_feed_url(); ?>">FrostyMedia: <?php echo $this->get_feed_title(); ?></a>');
 	}, CL_Timeout );
-	
+
 });
 <?php if ( !$remove_wrapper ) { ?>
 </script>
 <?php }
 	}
-	
+
 }
 
 // Only load on the WordPress Dashboard (index.php) page.
