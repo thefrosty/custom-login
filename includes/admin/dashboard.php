@@ -26,6 +26,7 @@ class CL_Dashboard {
 	private $id;
 
 	private static $headers = array();
+	private static $scripts = array();
 
 	/**
 	 * Main Instance
@@ -45,9 +46,9 @@ class CL_Dashboard {
 	private function actions() {
 
 		add_action( 'wp_dashboard_setup',			array( $this, 'add_dashboard_widget' ) );
-		add_action( 'send_headers',					array( $this, 'set_headers' ) );
-		add_action( 'admin_enqueue_scripts',		array( $this, 'enqueue_scripts' ) );
+	//	add_action( 'admin_enqueue_scripts',		array( $this, 'enqueue_scripts' ) );
 		add_action( 'admin_enqueue_scripts',		array( $this, 'inline_scripts' ) );
+		add_action( 'admin_footer',					array( $this, 'admin_footer' ) );
 	}
 
 	/**
@@ -80,29 +81,6 @@ class CL_Dashboard {
 		);
 	}
 
-	/**
-	 * Set out headers
-	 */
-	public function set_headers() {
-
-		if ( isset( $_GET[ $this->id ] ) && intval( $_GET[ $this->id ] ) === 1 ) {
-
-			if ( !isset( $_GET['type'] ) || headers_sent() )
-				return;
-
-			switch( $_GET['type'] ) {
-
-				case 'css' :
-					self::$header[ $_GET['type'] ] = header("content-type:text/css");
-					break;
-
-				case 'js' :
-					self::$header[ $_GET['type'] ] = header("content-type:application/x-javascript");
-					break;
-			}
-			}
-	}
-
 
 	/**
 	 * Scripts & Styles
@@ -114,6 +92,15 @@ class CL_Dashboard {
 		}
 		else {
 			wp_enqueue_script( $this->id, $this->add_query_arg( 'js' ), array( 'jquery' ), null, true );
+		}
+	}
+
+	public function admin_footer() {
+		if ( $this->dashboard_allowed() ) {
+			echo $this->CSS( false );
+		}
+		else {
+			echo $this->jQuery( false );
 		}
 	}
 

@@ -115,6 +115,11 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 == Changelog ==
 
+= Version 3.2.2 (05/04/15) =
+
+* May the fourth be with you.
+* Cleaned up dashboard JS errors.
+
 = Version 3.2.2 (04/29/15) =
 
 * Update version number.
