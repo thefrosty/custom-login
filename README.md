@@ -8,7 +8,7 @@
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
-Custin Login allows you to easily customize your admin login page, works great for client sites!
+Custom Login allows you to easily customize your admin login page, works great for client sites!
 
 ## Description ##
 

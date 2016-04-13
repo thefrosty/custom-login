@@ -8,7 +8,7 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Custin Login allows you to easily customize your admin login page, works great for client sites!
+Custom Login allows you to easily customize your admin login page, works great for client sites!
 
 == Description ==
 
@@ -42,7 +42,7 @@ There are currently 5 premium extensions available, with more coming (suggestion
 
 **Extensions in development/extension ideas**
 
-* Email Logins for usernames.
+* -Email Logins for usernames-. (WordPress 4.5)
 * 2-step Authentication.
 * "Super User" only access for client sites.
 * **Added in core as of version 3.0** Remove default WordPress login CSS.
