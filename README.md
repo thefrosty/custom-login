@@ -17,7 +17,7 @@ Custom Login 2.0 was 140% faster than version 1.0, and version 3.0 is now even b
 For more information visit the official [Custom Login](https://frosty.media/plugins/custom-login/) page.
 
 > <strong>Support</strong><br>
-> [Austin](https://austin.passy.co) and the [Frosty Media](https://frosty.media/) team will always try our best to support the Custom Login plugin on the WordPress.org forum, but please note that we can not guarantee a response in a timely manner. If you have an issue we would appriciate you using GitHub or purchasing priority support on our site.
+> [Austin](http://austin.passy.co) and the [Frosty Media](https://frosty.media/) team will always try our best to support the Custom Login plugin on the WordPress.org forum, but please note that we can not guarantee a response in a timely manner. If you have an issue we would appriciate you using GitHub or purchasing priority support on our site.
 >
 > Any extensions purchased on [Frosty Media](https://frosty.media/) (not hosted on WordPress.org) will not be supported on the WordPress.org forum. You can always browse our *small* but growing [documentation](https://frosty.media/docs) for further assistance. You need a valid license key to make support submissions *on our site*. We thank you in advance. 
 
@@ -62,7 +62,7 @@ Activate the plugin and customize your WordPress login screen. It's as easy as m
 ### links ###
 
 * Premium Plugins: [https://frosty.media/plugins](https://frosty.media/plugins/ "Premium WordPress Plugins by Frosty")
-* Austins Blog: [https:/austin.passy.co/](https://austin.passy.co/ "Austin Passy's blog")
+* Austins Blog: [https:/austin.passy.co/](http://austin.passy.co/ "Austin Passy's blog")
 * Austin on Twitter: @[TheFrosty](https:/twitter.com/TheFrosty "Austin TheFrosty' Passy on Twitter")
 * Frosty Media on Twitter: @[Frosty_Media](https:/twitter.com/Frosty_Media "Frosty Media on Twitter")
 * **Development welcomed on [GitHub](https://github.com/thefrosty/custom-login)**
@@ -130,6 +130,11 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 
 ## Changelog ##
+
+### Version 3.2.5 (04/13/16) ###
+
+* WordPress 4.5 compatible update (moves Custom Login css after WordPress' login style sheet).
+* Fix issue where toggling the 'active' checkbox in the header doesn't activate or de-activate the plugin settings (updates via AJAX now).
 
 ### Version 3.2.4 (09/16/15) ###
 

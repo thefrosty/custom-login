@@ -10,7 +10,7 @@ global $cl_js_atts;
 extract( $cl_js_atts, EXTR_SKIP );
 
 /* Cache ALL THE THINGS! */
-if ( false === ( $js = get_transient( $trans_key ) ) ) :
+//if ( false === ( $js = get_transient( $trans_key ) ) ) :
 
 	$js = '';
 	
@@ -33,16 +33,16 @@ if ( false === ( $js = get_transient( $trans_key ) ) ) :
 	if ( !empty( $custom_jquery ) ) {
 		
 		$js .= "\n\n/* Custom JS */\n";
-		$js .= wp_specialchars_decode( stripslashes( $custom_jquery ), 1, 0, 1 );
+		$js .= wp_specialchars_decode( stripslashes( $custom_jquery ) );
 		$js .= "\n\n";
 		
 	}
 	
 	$js .= '}(jQuery));';
 
-	/* WP Magic */
-	set_transient( $trans_key, $js, YEAR_IN_SECONDS/2 ); // Cache for six months
-endif;
+//	/* WP Magic */
+//	set_transient( $trans_key, $js, YEAR_IN_SECONDS/2 ); // Cache for six months
+//endif;
 
 /* Out of the frying pan, and into the fire! */
 echo $js;

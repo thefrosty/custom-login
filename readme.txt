@@ -115,6 +115,11 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 == Changelog ==
 
+= Version 3.2.5 (04/13/16) =
+
+* WordPress 4.5 compatible update (moves Custom Login css after WordPress' login style sheet).
+* Fix issue where toggling the 'active' checkbox in the header doesn't activate or de-activate the plugin settings (updates via AJAX now).
+
 = Version 3.2.4 (09/16/15) =
 
 * Fix PHP Fatal error.
