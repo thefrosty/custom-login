@@ -131,6 +131,28 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 ## Changelog ##
 
+### Version 3.2.4 (09/16/15) ###
+
+* Fix PHP Fatal error.
+** PHP Fatal error: Call to a member function get_permalink() on a non-object in /includes/admin/dashboard.php:114
+
+### Version 3.2.2 (05/04/15) ###
+
+* May the fourth be with you.
+* Cleaned up dashboard JS errors.
+
+### Version 3.2.2 (04/29/15) ###
+
+* Update version number.
+* Fix upgrade notice showing when not needed.
+* Add class 'notice' and 'is-dismissible' to notice.
+* Cleanup admin dashboard empty ob_get_clean() notice.
+
+### Version 3.2.1 (04/20/15) ###
+
+* Fix: XSS security flaw.
+* Fix: Settings page not showing. (Fixes Issue: [#6](https://github.com/thefrosty/custom-login/pull/6) /ht @[DrewAPicture](https://github.com/DrewAPicture).
+
 ### Version 3.2 (02/09/15) ###
 
 * Message: Celebrate 500,000 downloads. Visit the settings page or [this post](https://frosty.media/?p=26056) to get any extension for free! *Restrictions may apply.
