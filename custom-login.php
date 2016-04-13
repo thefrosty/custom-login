@@ -2,15 +2,12 @@
 /**
  * Plugin Name: Custom Login
  * Plugin URI: https://frosty.media/plugins/custom-login
- * Description: A simple way to customize your WordPress <code>wp-login.php</code> screen! A <a href="https://frosty.media/">Frosty Media</a> plugin.
- * Version: 3.2.4
- * Author: Austin Passy
- * Author URI: http://austin.passy.co
- * Text Domain: custom-login
- * GitHub Plugin URI: https://github.com/thefrosty/custom-login
- * GitHub Branch: master
+ * Description: A simple way to customize your WordPress <code>wp-login.php</code> screen! A <a
+ * href="https://frosty.media/">Frosty Media</a> plugin. Version: 3.2.5 Author: Austin Passy Author URI:
+ * http://austin.passy.co Text Domain: custom-login GitHub Plugin URI: https://github.com/thefrosty/custom-login GitHub
+ * Branch: master
  *
- * @copyright 2012 - 2015
+ * @copyright 2012 - 2016
  * @author Austin Passy
  * @link http://austin.passy.co/
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
@@ -22,7 +19,7 @@
  * @class Custom_Login
  */
 
-if ( !class_exists( 'Custom_Login' ) ) :
+if ( ! class_exists( 'Custom_Login' ) ) :
 
     /**
      * Main Custom_Login Class
@@ -36,9 +33,10 @@ if ( !class_exists( 'Custom_Login' ) ) :
 
         /**
          * Plugin vars
+         *
          * @return string
          */
-        var	$version = '3.2.4',
+        var $version = '3.2.5',
             $menu_page,
             $prefix;
 
@@ -50,8 +48,8 @@ if ( !class_exists( 'Custom_Login' ) ) :
         /**
          * Main Instance
          *
-         * @staticvar 	array 	$instance
-         * @return 		Custom_Login The one true instance
+         * @staticvar    array    $instance
+         * @return        Custom_Login The one true instance
          */
         public static function instance() {
             if ( ! isset( self::$instance ) && ! ( self::$instance instanceof Custom_Login ) ) {
@@ -63,15 +61,16 @@ if ( !class_exists( 'Custom_Login' ) ) :
                 self::$instance->includes();
                 self::$instance->actions();
             }
+
             return self::$instance;
         }
 
         /**
          * Setup plugin constants
          *
-         * @access 	private
-         * @since 	3.0
-         * @return 	void
+         * @access    private
+         * @since    3.0
+         * @return    void
          */
         private function setup_constants() {
 
@@ -145,7 +144,6 @@ if ( !class_exists( 'Custom_Login' ) ) :
                 require_once( trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/admin/plugins.php' );
                 require_once( trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/admin/import-export.php' );
                 require_once( trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/admin/tracking.php' );
-                //	require_once( trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/admin/roost.php' ); // Not enabled until global domains available.
             }
         }
 
@@ -156,16 +154,16 @@ if ( !class_exists( 'Custom_Login' ) ) :
 
             $this->prefix = CUSTOM_LOGIN_OPTION;
 
-            register_activation_hook( CUSTOM_LOGIN_FILE,			array( $this, 'activate' ) );
+            register_activation_hook( CUSTOM_LOGIN_FILE, array( $this, 'activate' ) );
 
-            add_action( 'login_head',								array( $this, 'cl_version_in_header' ), 1 );
-            add_action( 'wp_head',									array( $this, 'cl_version_in_header' ) );
-            add_action( 'admin_menu',								array( $this, 'admin_menu' ), 9 );
-            add_action( 'admin_init',								array( $this, 'load_settings' ), 8 );
-            add_action( $this->prefix . '_after_sanitize_options',	array( $this, 'delete_transients' ), 8 );
+            add_action( 'login_head', array( $this, 'cl_version_in_header' ), 1 );
+            add_action( 'wp_head', array( $this, 'cl_version_in_header' ) );
+            add_action( 'admin_menu', array( $this, 'admin_menu' ), 9 );
+            add_action( 'admin_init', array( $this, 'load_settings' ), 8 );
+            add_action( $this->prefix . '_after_sanitize_options', array( $this, 'delete_transients' ), 8 );
 
-            add_action( 'admin_notices',							array( $this, 'show_notifications' ) );
-            add_action( 'admin_init',								array( $this, 'notification_ignore' ) );
+            add_action( 'admin_notices', array( $this, 'show_notifications' ) );
+            add_action( 'admin_init', array( $this, 'notification_ignore' ) );
 
             do_action( $this->prefix . '_actions' );
         }
@@ -173,8 +171,8 @@ if ( !class_exists( 'Custom_Login' ) ) :
         /**
          * Runs on plugin install.
          *
-         * @since		3.1
-         * @return		void
+         * @since        3.1
+         * @return        void
          */
         function activate() {
         }
@@ -182,10 +180,10 @@ if ( !class_exists( 'Custom_Login' ) ) :
         /**
          * Adds CL Version to the <head> tag
          *
-         * @since	3.0.0
-         * @return	void
+         * @since    3.0.0
+         * @return    void
          */
-        function cl_version_in_header(){
+        function cl_version_in_header() {
             echo '<meta name="generator" content="Custom Login v' . CUSTOM_LOGIN_VERSION . '" />' . "\n";
         }
 
@@ -225,14 +223,14 @@ if ( !class_exists( 'Custom_Login' ) ) :
                 $sections,
                 $fields,
                 array(
-                    'option_name'	=> CUSTOM_LOGIN_OPTION,
-                    'option_group'	=> CUSTOM_LOGIN_OPTION . '_group',
-                    'domain'			=> CUSTOM_LOGIN_DIRNAME,
-                    'prefix'			=> $this->prefix,
-                    'version'		=> $this->version,
-                    'menu_page'		=> $this->menu_page,
-                    'nonce'			=> CUSTOM_LOGIN_OPTION . '_nonce_' . CUSTOM_LOGIN_BASENAME,
-                    'file'			=> CUSTOM_LOGIN_FILE,
+                    'option_name'  => CUSTOM_LOGIN_OPTION,
+                    'option_group' => CUSTOM_LOGIN_OPTION . '_group',
+                    'domain'       => CUSTOM_LOGIN_DIRNAME,
+                    'prefix'       => $this->prefix,
+                    'version'      => $this->version,
+                    'menu_page'    => $this->menu_page,
+                    'nonce'        => CUSTOM_LOGIN_OPTION . '_nonce_' . CUSTOM_LOGIN_BASENAME,
+                    'file'         => CUSTOM_LOGIN_FILE,
                 )
             );
             $this->settings_api->admin_init();
@@ -242,7 +240,7 @@ if ( !class_exists( 'Custom_Login' ) ) :
          * Hook into the 'sanitize_options' hook in the Settings API
          * and remove the transient settings for the style and script.
          *
-         * @since	3.0.0
+         * @since    3.0.0
          */
         public function delete_transients() {
             delete_transient( CL_Common::get_transient_key( 'style' ) );
@@ -255,38 +253,41 @@ if ( !class_exists( 'Custom_Login' ) ) :
          */
         function show_notifications() {
 
-            $is_cl_screen	= CL_Common::is_settings_page();
-            $transient_key	= CL_Common::get_transient_key( 'announcement' );
-            $ignore_key		= CUSTOM_LOGIN_OPTION . '_ignore_announcement';
-            $old_message	= get_option( CUSTOM_LOGIN_OPTION . '_announcement_message' );
-            $user_meta		= get_user_meta( get_current_user_id(), $ignore_key, true );
-            $capability		= CL_Common::get_option( 'capability', 'general', 'manage_options' );
+            $is_cl_screen  = CL_Common::is_settings_page();
+            $transient_key = CL_Common::get_transient_key( 'announcement' );
+            $ignore_key    = CUSTOM_LOGIN_OPTION . '_ignore_announcement';
+            $old_message   = get_option( CUSTOM_LOGIN_OPTION . '_announcement_message' );
+            $user_meta     = get_user_meta( get_current_user_id(), $ignore_key, true );
+            $capability    = CL_Common::get_option( 'capability', 'general', 'manage_options' );
 
             /**
-            delete_user_meta( get_current_user_id(), $ignore_key, 1 );
-            delete_transient( $transient_key );
-            update_option( CUSTOM_LOGIN_OPTION . '_announcement_message', '' ); //*/
+             * delete_user_meta( get_current_user_id(), $ignore_key, 1 );
+             * delete_transient( $transient_key );
+             * update_option( CUSTOM_LOGIN_OPTION . '_announcement_message', '' ); //*/
 
             // Current user can't manage options
-            if ( !current_user_can( $capability ) )
+            if ( ! current_user_can( $capability ) ) {
                 return;
+            }
 
-            if ( !$is_cl_screen ) {
+            if ( ! $is_cl_screen ) {
 
                 // Let's not show this at all if not on out menu page. @since 3.1
                 return;
 
                 // Global notifications
-                if ( 'off' === CL_Common::get_option( 'admin_notices', 'general', 'off' ) )
+                if ( 'off' === CL_Common::get_option( 'admin_notices', 'general', 'off' ) ) {
                     return;
+                }
 
                 // Make sure 'Frosty_Media_Notifications' isn't activated
-                if ( class_exists( 'Frosty_Media_Notifications' ) )
+                if ( class_exists( 'Frosty_Media_Notifications' ) ) {
                     return;
+                }
             }
 
             // https://raw.github.com/thefrosty/custom-login/master/extensions.json
-            $message_url  = esc_url( add_query_arg( array( 'edd_action' => 'cl_announcements' ), trailingslashit( CUSTOM_LOGIN_API_URL ) . 'cl-checkin-api/' ) );
+            $message_url = esc_url( add_query_arg( array( 'edd_action' => 'cl_announcements' ), trailingslashit( CUSTOM_LOGIN_API_URL ) . 'cl-checkin-api/' ) );
 
             $announcement = CL_Common::wp_remote_get(
                 $message_url,
@@ -296,21 +297,23 @@ if ( !class_exists( 'Custom_Login' ) ) :
             );
 
             // Bail if errors
-            if ( is_wp_error( $announcement ) )
+            if ( is_wp_error( $announcement ) ) {
                 return;
+            }
 
             // Bail if false or empty
-            if ( !$announcement || empty( $announcement ) )
+            if ( ! $announcement || empty( $announcement ) ) {
                 return;
+            }
 
-            if ( trim( $old_message ) !== trim( $announcement->message ) && !empty( $old_message ) ) {
+            if ( trim( $old_message ) !== trim( $announcement->message ) && ! empty( $old_message ) ) {
                 delete_user_meta( get_current_user_id(), $ignore_key );
                 delete_transient( $transient_key );
                 update_option( CUSTOM_LOGIN_OPTION . '_announcement_message', $announcement->message );
             }
 
-            $html  = '<div class="updated"><p>';
-            $html .= !$is_cl_screen ? // If we're on our settings page let not show the dismiss notice link.
+            $html = '<div class="updated"><p>';
+            $html .= ! $is_cl_screen ? // If we're on our settings page let not show the dismiss notice link.
                 sprintf( '%2$s <span class="alignright">| <a href="%3$s">%1$s</a></span>',
                     __( 'Dismiss', CUSTOM_LOGIN_DIRNAME ),
                     $announcement->message,
@@ -320,8 +323,9 @@ if ( !class_exists( 'Custom_Login' ) ) :
                 sprintf( '%s', $announcement->message );
             $html .= '</p></div>';
 
-            if ( ( !$user_meta && 1 !== $user_meta ) || $is_cl_screen )
+            if ( ( ! $user_meta && 1 !== $user_meta ) || $is_cl_screen ) {
                 echo $html;
+            }
         }
 
         /**
@@ -334,8 +338,9 @@ if ( !class_exists( 'Custom_Login' ) ) :
             $ignore_key = CUSTOM_LOGIN_OPTION . '_ignore_announcement';
 
             // Bail if not set
-            if ( !isset( $_GET[$ignore_key] ) )
+            if ( ! isset( $_GET[ $ignore_key ] ) ) {
                 return;
+            }
 
             // Check nonce
             check_admin_referer( $ignore_key, $ignore_key );
@@ -359,7 +364,7 @@ endif; // End if class_exists check
  *
  * @return Custom_Login
  */
-if ( !function_exists( 'CUSTOMLOGIN' ) ) {
+if ( ! function_exists( 'CUSTOMLOGIN' ) ) {
     function CUSTOMLOGIN() {
         return Custom_Login::instance();
     }
