@@ -144,7 +144,7 @@ class CL_Tracking {
 
 		$this->setup_data( $extra_data );
 
-		$response = wp_remote_post( $this->api, array(
+		$response = wp_remote_post( esc_url_raw( $this->api ), array(
 			'method'      => 'POST',
 			'timeout'     => apply_filters( 'cl_wp_remote_post_timeout', (int) 15 ),
 			'redirection' => 5,
@@ -186,15 +186,13 @@ class CL_Tracking {
 		
 		$options = get_option( $this->option, array() );
 		
-		#var_dump( $options ); exit;
-		
 		$options['tracking'] = 'on';
 		update_option( $this->option, $options );
 		update_option( 'custom_login_hide_tracking_notice', '1' );
 		
 		$this->send_checkin( true, array( 'on_activation' => 'admin notice', 'mailchimp_sub' => 'yes' ) );
 		
-		wp_redirect( remove_query_arg( 'action' ) );
+		wp_redirect( esc_url( remove_query_arg( 'action' ) ) );
 		exit;
 	}
 
@@ -208,13 +206,11 @@ class CL_Tracking {
 		
 		$options = get_option( $this->option, array() );
 		
-		#var_dump( $options ); exit;
-		
 		$options['tracking'] = 'off';
 		update_option( $this->option, $options );
 		update_option( 'custom_login_hide_tracking_notice', '1' );
 
-		wp_redirect( remove_query_arg( 'action' ) );
+        wp_redirect( esc_url( remove_query_arg( 'action' ) ) );
 		exit;
 	}
 
