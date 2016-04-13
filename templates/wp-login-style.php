@@ -11,7 +11,7 @@ global $cl_css_atts;
 extract( $cl_css_atts, EXTR_SKIP );
 
 /* Cache ALL THE THINGS! */
-if ( false === ( $css = get_transient( $trans_key ) ) ) :
+//if ( false === ( $css = get_transient( $trans_key ) ) ) :
 
 	$css = '';
 	$close_rule = "}\n";
@@ -33,7 +33,7 @@ if ( false === ( $css = get_transient( $trans_key ) ) ) :
 	
 	/* Custom user input */
 	if ( !empty( $custom_css ) ) {
-		$custom_css = wp_specialchars_decode( stripslashes( $custom_css ), 1, 0, 1 );
+		$custom_css = wp_specialchars_decode( stripslashes( $custom_css ) );
 		
 		$css .= "/* START Custom CSS */\n";
 		$css .= str_replace(
@@ -327,9 +327,9 @@ if ( false === ( $css = get_transient( $trans_key ) ) ) :
 		
 	}
 	
-	/* WP Magic */
-	set_transient( $trans_key, $css, YEAR_IN_SECONDS/2 ); // Cache for six months
-endif;
+//	/* WP Magic */
+//	set_transient( $trans_key, $css, YEAR_IN_SECONDS/2 ); // Cache for six months
+//endif;
 
 /* Out of the frying pan, and into the fire! */
 echo $css;
