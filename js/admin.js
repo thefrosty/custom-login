@@ -35,9 +35,27 @@
 		 */
 		$('span.tgl_input').replaceWith( $('input[id="custom_login_general[active]"]').clone() );
 		
-		$(document).on('click change', 'input[id="custom_login_general[active]"]', function() {
-		//	console.log(this.checked);
+		$(document).on('change', 'input[id="custom_login_general[active]"]', function() {
 			$('input[id="custom_login_general[active]"]').prop('checked', this.checked);
+      $.ajax({
+          type: "POST",
+          data: {
+            action: cl_settings_api.prefix + '_activate_check',
+            nonce: cl_settings_api.nonce,
+            active_value: this.checked.toString()
+          },
+          dataType: "json",
+          url: ajaxurl
+        })
+        .done(function (response) {
+          if (response.success) {
+          } else {
+            
+          }
+        })
+        .fail(function () {
+          throw new Error('Error');
+        });
 		});
 			
 		/**
