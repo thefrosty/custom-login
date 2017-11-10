@@ -3,7 +3,7 @@ Contributors: austyfrosty, frostymedia
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290
 Tags: admin, branding, customization, custom login, login, logo, error, login error, custom login pro
 Requires at least: 4.0
-Tested up to: 4.5
+Tested up to: 4.9
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -42,7 +42,7 @@ There are currently 5 premium extensions available, with more coming (suggestion
 
 **Extensions in development/extension ideas**
 
-* -Email Logins for usernames-. (WordPress 4.5)
+* Email Logins for usernames.
 * 2-step Authentication.
 * "Super User" only access for client sites.
 * **Added in core as of version 3.0** Remove default WordPress login CSS.
@@ -114,6 +114,11 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 4. Custom Login Extensions Installer (an active license key is required).
 
 == Changelog ==
+
+= Version 3.2.6 (11/10/17) =
+
+* Check compatibility with WordPress 4.9.
+* Update Settings API to fix `Undefined index: active` message.
 
 = Version 3.2.5 (04/13/16) =
 
