@@ -629,7 +629,7 @@ class CL_Settings_API {
     }
 
     /**
-     * Outpute our settings HTML
+     * Output our settings HTML
      *
      */
     public function settings_html() { ?>
@@ -768,7 +768,7 @@ class CL_Settings_API {
         $settings     = CL_Common::get_options( 'general' );
         $active_value = isset( $_POST['active_value'] ) && 'true' == $_POST['active_value'] ? 'on' : 'off';
 
-        if ( $settings['active'] !== $active_value ) {
+        if ( isset( $settings['active'] ) && $settings['active'] !== $active_value ) {
             $settings['active'] = $active_value;
 
             if ( update_option( CUSTOM_LOGIN_OPTION . '_general', $settings ) ) {
