@@ -249,6 +249,9 @@ _REQUIRES WordPress 3.9 or later_
 
 == Upgrade Notice ==
 
+= 3.2.7 =
+Fixes duplicate CSS output in login header. Testing up to WordPress 4.9.
+
 = 3.2 =
 Celebrate 500,000 downloads w/ a FREE extension! Update to version 3.2 for more info.
 
