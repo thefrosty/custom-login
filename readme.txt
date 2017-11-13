@@ -30,7 +30,7 @@ http://www.youtube.com/watch?v=hZkc-t36xYQ
 
 = Extensions =
 
-There are currently 5 premium extensions available, with more coming (suggestions welcome - and *will be offered for free to said user*).
+There are currently 7 premium extensions available, with more coming (suggestions welcome - and *will be offered for free to said user*).
 
 **Extensions available now**
 
@@ -39,6 +39,8 @@ There are currently 5 premium extensions available, with more coming (suggestion
 * [Login Redirects](https://frosty.media/plugins/custom-login-redirects/?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt "Custom Login Redirects") - Manage login redirects.
 * [No Password](https://frosty.media/plugins/custom-login-no-password-login/?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt "Custom Login No Password logins") - allow users to login without a password.
 * [Style Pack #1](https://frosty.media/plugins/custom-login-style-pack-1?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt "Custom Login Style Pack #1") - four pre-designed login styles.
+* [Style Pack #2](https://frosty.media/plugins/custom-login-style-pack-2?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt "Custom Login Style Pack #2") - four pre-designed fun login styles.
+* [Style Pack #3](https://frosty.media/plugins/custom-login-style-pack-3?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt "Custom Login Style Pack #3") - four pre-designed holiday login styles.
 
 **Extensions in development/extension ideas**
 
@@ -114,6 +116,11 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 4. Custom Login Extensions Installer (an active license key is required).
 
 == Changelog ==
+
+= Version 3.2.7 (11/13/17) =
+
+* Fix duplicate CSS output in head bug.
+* Fix empty link URL and title on wp login page when on multisite.
 
 = Version 3.2.6 (11/10/17) =
 
