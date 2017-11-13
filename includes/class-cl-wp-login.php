@@ -70,24 +70,10 @@ class CL_WP_Login {
     /**
      * Enqueue additional scripts.
      *
-     * @since        2.0
-     * @updated        3.2
+     * @since 2.0
+     * @updated 3.2
      */
-    function login_enqueue_scripts() {
-        global $cl_css_atts;
-
-        $cl_css_atts = array(
-            'version'   => CUSTOM_LOGIN_VERSION,
-            'trans_key' => CL_Common::get_transient_key( 'style' ),
-        );
-        $cl_css_atts = wp_parse_args( CL_Common::get_options( 'design' ), $cl_css_atts );
-
-        ob_start();
-        echo "<style type=\"text/css\">\n";
-        CL_Templates::get_template_part( 'wp-login', 'style' );
-        echo "\n</style>\n";
-        echo ob_get_clean();
-
+    public function login_enqueue_scripts() {
         /**
          * Animate.css
          * @ref        https://github.com/daneden/animate.css/blob/master/animate.min.css
@@ -99,8 +85,8 @@ class CL_WP_Login {
 
         /* Custom jQuery */
         $jquery = CL_Common::get_option( 'custom_jquery', 'design', '' );
-        if ( '' != $jquery ) {
-            wp_enqueue_script( array( 'jquery' ) );
+        if ( '' !== $jquery ) {
+            wp_enqueue_script( 'jquery' );
         }
     }
 
@@ -184,7 +170,7 @@ class CL_WP_Login {
 
             if ( 'on' === CL_Common::get_option( 'remove_login_css', 'general' ) ) {
                 add_filter( 'wp_admin_css', '__return_false' );
-                wp_deregister_style( array( 'login' ) );
+                wp_deregister_style( 'login' );
             }
         }
     }
@@ -215,22 +201,32 @@ class CL_WP_Login {
 
     /**
      * Replace the default link to your URL
+     *
+     * @param string $url
+     *
+     * @return string
      */
-    public function login_headerurl() {
-
+    public function login_headerurl( $url ) {
         if ( ! is_multisite() ) {
             return home_url();
         }
+
+        return $url;
     }
 
     /**
      * Replace the default title to your description
+     *
+     * @param string $title
+     *
+     * @return string
      */
-    public function login_headertitle() {
-
+    public function login_headertitle( $title ) {
         if ( ! is_multisite() ) {
             return get_bloginfo( 'description' );
         }
+
+        return $title;
     }
 
     /**
