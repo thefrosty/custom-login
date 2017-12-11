@@ -117,6 +117,10 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 == Changelog ==
 
+= Version 3.2.8 (12/11/17) =
+
+* Update notifications URL to current correct location for admin settings page.
+
 = Version 3.2.7 (11/13/17) =
 
 * Fix duplicate CSS output in head bug.
