@@ -3,7 +3,7 @@
  * Plugin Name: Custom Login
  * Plugin URI: https://frosty.media/plugins/custom-login
  * Description: A simple way to customize your WordPress <code>wp-login.php</code> screen! A <a href="https://frosty.media/">Frosty Media</a> plugin.
- * Version: 3.2.7
+ * Version: 3.2.8
  * Author: Austin Passy
  * Author URI: http://austin.passy.co
  * Text Domain: custom-login
@@ -39,7 +39,7 @@ if ( ! class_exists( 'Custom_Login' ) ) :
          *
          * @return string
          */
-        var $version = '3.2.7',
+        var $version = '3.2.8',
             $menu_page,
             $prefix;
 
@@ -77,7 +77,6 @@ if ( ! class_exists( 'Custom_Login' ) ) :
          * @return    void
          */
         private function setup_constants() {
-
             // API URL
             if ( ! defined( 'CUSTOM_LOGIN_API_URL' ) ) {
                 define( 'CUSTOM_LOGIN_API_URL', 'https://frosty.media/' );
@@ -132,22 +131,21 @@ if ( ! class_exists( 'Custom_Login' ) ) :
          *
          */
         private function includes() {
-
-            require_once( trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/class-cl-common.php' );
-            require_once( trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/class-cl-cron.php' );
-            require_once( trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/class-cl-extensions.php' );
-            require_once( trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/class-cl-templates.php' );
-            require_once( trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/class-cl-scripts-styles.php' );
-            require_once( trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/class-cl-settings-api.php' );
-            require_once( trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/class-cl-settings-upgrades.php' );
-            require_once( trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/class-cl-wp-login.php' );
-            require_once( trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/functions.php' );
+            require_once trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/class-cl-common.php';
+            require_once trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/class-cl-cron.php';
+            require_once trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/class-cl-extensions.php';
+            require_once trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/class-cl-templates.php';
+            require_once trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/class-cl-scripts-styles.php';
+            require_once trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/class-cl-settings-api.php';
+            require_once trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/class-cl-settings-upgrades.php';
+            require_once trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/class-cl-wp-login.php';
+            require_once trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/functions.php';
 
             if ( is_admin() ) {
-                require_once( trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/admin/dashboard.php' );
-                require_once( trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/admin/plugins.php' );
-                require_once( trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/admin/import-export.php' );
-                require_once( trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/admin/tracking.php' );
+                require_once trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/admin/dashboard.php';
+                require_once trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/admin/plugins.php';
+                require_once trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/admin/import-export.php';
+                require_once trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/admin/tracking.php';
             }
         }
 
@@ -155,7 +153,6 @@ if ( ! class_exists( 'Custom_Login' ) ) :
          * To infinity and beyond
          */
         private function actions() {
-
             $this->prefix = CUSTOM_LOGIN_OPTION;
 
             register_activation_hook( CUSTOM_LOGIN_FILE, array( $this, 'activate' ) );
@@ -175,8 +172,7 @@ if ( ! class_exists( 'Custom_Login' ) ) :
         /**
          * Runs on plugin install.
          *
-         * @since        3.1
-         * @return        void
+         * @since 3.1
          */
         function activate() {
         }
@@ -184,8 +180,8 @@ if ( ! class_exists( 'Custom_Login' ) ) :
         /**
          * Adds CL Version to the <head> tag
          *
-         * @since    3.0.0
-         * @return    void
+         * @since 3.0.0
+         * @return void
          */
         function cl_version_in_header() {
             echo '<meta name="generator" content="Custom Login v' . CUSTOM_LOGIN_VERSION . '" />' . "\n";
@@ -195,7 +191,6 @@ if ( ! class_exists( 'Custom_Login' ) ) :
          * Register the plugin page
          */
         public function admin_menu() {
-
             $capability = CL_Common::get_option( 'capability', 'general', 'manage_options' );
 
             $this->menu_page = add_options_page(
@@ -211,7 +206,6 @@ if ( ! class_exists( 'Custom_Login' ) ) :
          * Display the plugin settings options page
          */
         public function settings_page() { ?>
-
             <div class="wrap">
             <?php $this->settings_api->settings_html(); ?>
             </div><?php
@@ -222,7 +216,7 @@ if ( ! class_exists( 'Custom_Login' ) ) :
          */
         public function load_settings() {
 
-            include( trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/default-settings.php' );
+            include trailingslashit( CUSTOM_LOGIN_DIR ) . 'includes/default-settings.php';
             $this->settings_api = new CL_Settings_API(
                 $sections,
                 $fields,
@@ -255,8 +249,7 @@ if ( ! class_exists( 'Custom_Login' ) ) :
          * Show global notifications if they are allowed.
          *
          */
-        function show_notifications() {
-
+        public function show_notifications() {
             $is_cl_screen  = CL_Common::is_settings_page();
             $transient_key = CL_Common::get_transient_key( 'announcement' );
             $ignore_key    = CUSTOM_LOGIN_OPTION . '_ignore_announcement';
@@ -267,7 +260,8 @@ if ( ! class_exists( 'Custom_Login' ) ) :
             /**
              * delete_user_meta( get_current_user_id(), $ignore_key, 1 );
              * delete_transient( $transient_key );
-             * update_option( CUSTOM_LOGIN_OPTION . '_announcement_message', '' ); //*/
+             * update_option( CUSTOM_LOGIN_OPTION . '_announcement_message', '' );
+             */
 
             // Current user can't manage options
             if ( ! current_user_can( $capability ) ) {
@@ -276,28 +270,27 @@ if ( ! class_exists( 'Custom_Login' ) ) :
 
             if ( ! $is_cl_screen ) {
 
-                // Let's not show this at all if not on out menu page. @since 3.1
-                return;
+                // Make sure 'Frosty_Media_Notifications' isn't activated
+                if ( class_exists( 'Frosty_Media_Notifications' ) ) {
+                    return;
+                }
 
                 // Global notifications
                 if ( 'off' === CL_Common::get_option( 'admin_notices', 'general', 'off' ) ) {
                     return;
                 }
 
-                // Make sure 'Frosty_Media_Notifications' isn't activated
-                if ( class_exists( 'Frosty_Media_Notifications' ) ) {
-                    return;
-                }
+                // Let's not show this at all if not on out menu page. @since 3.1
+                return;
             }
 
-            // https://raw.github.com/thefrosty/custom-login/master/extensions.json
-            $message_url = esc_url( add_query_arg( array( 'edd_action' => 'cl_announcements' ), trailingslashit( CUSTOM_LOGIN_API_URL ) . 'cl-checkin-api/' ) );
+            $message_url = esc_url( add_query_arg( array( 'get_notifications' => 'true' ), CUSTOM_LOGIN_API_URL) );
 
             $announcement = CL_Common::wp_remote_get(
                 $message_url,
                 $transient_key,
                 DAY_IN_SECONDS,
-                'CustomLogin' // We need our custom $user_agent
+                'WordPress' // We need our custom $user_agent
             );
 
             // Bail if errors
@@ -306,25 +299,25 @@ if ( ! class_exists( 'Custom_Login' ) ) :
             }
 
             // Bail if false or empty
-            if ( ! $announcement || empty( $announcement ) ) {
+            if ( ! $announcement || empty( $announcement[0] ) ) {
                 return;
             }
 
-            if ( trim( $old_message ) !== trim( $announcement->message ) && ! empty( $old_message ) ) {
+            if ( trim( $old_message ) !== trim( $announcement[0]->message ) && ! empty( $old_message ) ) {
                 delete_user_meta( get_current_user_id(), $ignore_key );
                 delete_transient( $transient_key );
-                update_option( CUSTOM_LOGIN_OPTION . '_announcement_message', $announcement->message );
+                update_option( CUSTOM_LOGIN_OPTION . '_announcement_message', $announcement[0]->message );
             }
 
             $html = '<div class="updated"><p>';
             $html .= ! $is_cl_screen ? // If we're on our settings page let not show the dismiss notice link.
                 sprintf( '%2$s <span class="alignright">| <a href="%3$s">%1$s</a></span>',
                     __( 'Dismiss', CUSTOM_LOGIN_DIRNAME ),
-                    $announcement->message,
+                    $announcement[0]->message,
                     esc_url( add_query_arg( $ignore_key, wp_create_nonce( $ignore_key ), admin_url( 'options-general.php?page=custom-login' ) ) ),
                     esc_url( admin_url( 'options-general.php?page=custom-login#custom_login_general' ) )
                 ) :
-                sprintf( '%s', $announcement->message );
+                sprintf( '%s', $announcement[0]->message );
             $html .= '</p></div>';
 
             if ( ( ! $user_meta && 1 !== $user_meta ) || $is_cl_screen ) {
@@ -337,8 +330,7 @@ if ( ! class_exists( 'Custom_Login' ) ) :
          *
          * @return void
          */
-        function notification_ignore() {
-
+        public function notification_ignore() {
             $ignore_key = CUSTOM_LOGIN_OPTION . '_ignore_announcement';
 
             // Bail if not set
