@@ -2,8 +2,8 @@
 
 [![WordPress plugin](https://img.shields.io/wordpress/plugin/dt/custom-login.svg?style=flat)](https://wordpress.org/plugins/custom-login/) [![WordPress plugin](https://img.shields.io/wordpress/plugin/v/custom-login.svg?style=flat)](https://wordpress.org/plugins/custom-login/) [![WordPress](https://img.shields.io/wordpress/v/custom-login.svg?style=flat)]() [![License](https://img.shields.io/badge/license-GPL--2.0%2B-red.svg)](https://github.com/thefrosty/custom-login/blob/master/license.txt)
 
-**Contributors:** austyfrosty, frostymedia  
-**Donate link:** https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290  
+**Contributors:** [austyfrosty](https://profiles.wordpress.org/austyfrosty), [frostymedia](https://profiles.wordpress.org/frostymedia)  
+**Donate link:** [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290)  
 **Tags:** admin, branding, customization, custom login, login, logo, error, login error, custom login pro  
 **Requires at least:** 4.0  
 **Tested up to:** 4.9
