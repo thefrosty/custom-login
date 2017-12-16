@@ -6,7 +6,7 @@
 **Donate link:** [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290)  
 **Tags:** admin, branding, customization, custom login, login, logo, error, login error, custom login pro  
 **Requires at least:** 4.0  
-**Tested up to:** 4.9
+**Tested up to:** 4.9  
 **Stable tag:** trunk  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
