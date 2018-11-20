@@ -1,0 +1,42 @@
+{
+  "name": "thefrosty/custom-login",
+  "description": ".",
+  "version": "4",
+  "type": "wordpress-plugin",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Austin Passy",
+      "email": "thefrosty@users.noreply.github.com",
+      "homepage": "https://austin.passy.co",
+      "role": "Developer"
+    }
+  ],
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true
+  },
+  "require": {
+    "php": ">=7.1",
+    "composer/installers": "~1.0",
+    "dwnload/wp-settings-api": "2.5.0",
+    "pimple/pimple": "^3.2",
+    "symfony/http-foundation": "^4.1",
+    "thefrosty/wp-utilities": "^1.2"
+  },
+  "require-dev": {
+  },
+  "scripts": {
+  },
+  "autoload": {
+    "psr-4": {
+      "TheFrosty\\CustomLogin\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "TheFrosty\\CustomLogin\\Tests\\": "tests"
+    }
+  }
+}

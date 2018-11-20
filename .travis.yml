@@ -1,0 +1,48 @@
+sudo: false
+dist: trusty
+
+cache:
+  directories:
+    - vendor
+    - $HOME/.composer/cache
+
+language: php
+
+env:
+  global:
+    - WP_FOLDER="/tmp/wordpress"
+    - WP_URL="http://wp.localhost"
+    - WP_DOMAIN="wp.localhost"
+
+  matrix:
+    - WP_VERSION=latest
+
+matrix:
+  fast_finish: true
+  include:
+    - php: 7.2
+    - php: 7.1
+
+branches:
+  only:
+    - master
+    - develop
+
+before_install:
+  - composer self-update
+  # set up folders
+  - mkdir -p $WP_FOLDER
+  - mkdir tools
+  # install wp-cli in the `tools` folder
+  - wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -P $(pwd)/tools/
+  - chmod +x tools/wp-cli.phar && mv tools/wp-cli.phar tools/wp
+  # append the `tools` folder to the PATH
+  - export PATH=$PATH:$(pwd)/tools
+  # prepend the `vendor/bin` folder the PATH
+  - export PATH=vendor/bin:$PATH
+
+install:
+  - composer install --no-interaction
+
+script:
+  - composer phpcs

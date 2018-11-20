@@ -1,0 +1,62 @@
+version: '3.3'
+
+services:
+  mysql:
+    image: mysql:5.7
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - "./data/db:/var/lib/mysql:delegated"
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql_root_password
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress_user
+      MYSQL_PASSWORD: mysql_password
+    restart: always
+
+  mailcatcher:
+    image: schickling/mailcatcher
+    ports:
+      - "1025:1025"
+      - "1080:1080"
+    environment:
+      MAILCATCHER_PORT: 1025
+    restart: always
+
+  phpfpm:
+    image: 10up/phpfpm:7.1
+    depends_on:
+      - mysql
+    environment:
+      WORDPRESS_DB_HOST: db:3307
+      WORDPRESS_DB_USER: wordpress_user
+      WORDPRESS_DB_PASSWORD: mysql_password
+    volumes:
+      - "./wordpress:/var/www/html:rw"
+      - "./custom-login:/var/www/html/wp-content/plugins/custom-login"
+      - "./vendor:/var/www/html/wp-content/plugins/custom-login/vendor"
+      - "./config/php-fpm/php.ini:/usr/local/etc/php/php.ini"
+      - "./config/php-fpm/docker-php-ext-xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini"
+      - "./config/php-fpm/wp-cli.local.yml:/var/www/html/wp-cli.local.yml"
+      - ~/.ssh:/root/.ssh
+    extra_hosts:
+      - "custom-login.test:172.18.0.1"
+    restart: always
+
+  nginx:
+    depends_on:
+      - phpfpm
+    ports:
+      - "8000:80"
+      - "443:443"
+    image: nginx:latest
+    volumes:
+      - "./wordpress:/var/www/html:rw"
+      - "./bin/setup.sh:/usr/local/bin/setup:ro"
+      - "./custom-login:/var/www/html/wp-content/plugins/custom-login"
+      - "./vendor:/var/www/html/wp-content/plugins/custom-login/vendor"
+      - "./config/nginx/default.conf:/etc/nginx/conf.d/default.conf"
+      - "./config/certs:/etc/nginx/certs"
+      - "./logs/nginx:/var/log/nginx"
+    restart: always

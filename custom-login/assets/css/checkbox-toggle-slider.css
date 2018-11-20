@@ -1,0 +1,75 @@
+/** https://codepen.io/AllThingsSmitty/pen/MmxxOz */
+.FieldType_modules ul:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.Module_container {
+    background: #f0f0f0;
+    border: 1px solid #e4e4e4;
+    display: inline-block;
+    float: left;
+    margin: 0 15px 15px;
+    padding: 15px;
+    width: 250px;
+}
+
+.Module_container .Module_label,
+.Module_container .Module_image,
+.Module_container .Module_description {
+    margin-bottom: .8rem;
+}
+
+.Module_container .Module_description {
+    min-height: 65px;
+}
+
+.Module_container .switch {
+    display: inline-block;
+    height: 34px;
+    position: relative;
+    width: 60px;
+}
+
+.Module_container .switch input {
+    display: none;
+}
+
+.Module_container .slider {
+    background-color: #ccc;
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .4s;
+}
+
+.Module_container .slider:before {
+    background-color: #fff;
+    bottom: 4px;
+    content: "";
+    height: 26px;
+    left: 4px;
+    position: absolute;
+    transition: .4s;
+    width: 26px;
+}
+
+.Module_container input:checked + .slider {
+    background-color: #66bb6a;
+}
+
+.Module_container input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.Module_container .slider.round {
+    border-radius: 6px;
+}
+
+.Module_container .slider.round:before {
+    border-radius: 20%;
+}
