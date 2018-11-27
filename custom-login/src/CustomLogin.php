@@ -2,10 +2,12 @@
 
 namespace TheFrosty\CustomLogin;
 
+use Dwnload\WpSettingsApi\App;
 use Dwnload\WpSettingsApi\WpSettingsApi;
 use TheFrosty\CustomLogin\Pro\CustomLoginPro;
 use TheFrosty\CustomLogin\Settings\ActiveModuleSettings;
 use TheFrosty\CustomLogin\Settings\MailSettings;
+use TheFrosty\CustomLogin\Settings\SidebarHooks;
 use TheFrosty\WpUtilities\Plugin\Container;
 use TheFrosty\WpUtilities\Plugin\Plugin;
 use TheFrosty\WpUtilities\Plugin\WpHooksInterface;
@@ -53,6 +55,12 @@ final class CustomLogin implements WpHooksInterface
         if (\is_admin() || \defined('DOING_AJAX') || \defined('DOING_CRON')) {
             $this->plugin
                 ->add(new WpSettingsApi($container->get(ServiceProvider::WP_SETTINGS_API_APP)))
+                ->addOnHook(
+                    SidebarHooks::class, App::ACTION_PREFIX . 'settings_page_loaded',
+                    10,
+                    null,
+                    [$container->get(ServiceProvider::WP_SETTINGS_API_APP)]
+                )
                 ->initialize();
         }
 
