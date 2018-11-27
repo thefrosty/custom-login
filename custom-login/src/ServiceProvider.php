@@ -37,22 +37,8 @@ class ServiceProvider implements ServiceProviderInterface
                 'domain' => SLUG,
                 'file' => __FILE__, // Path to WpSettingsApi file.
                 'menu-slug' => SLUG,
-                'menu-title' => \sprintf(
-                    \esc_html_x(
-                        'Custom Login %s',
-                        'Menu title where %s is "PRO" if this is the pro version.',
-                        'custom-login'
-                    ),
-                    CustomLogin::isPro() ? 'PRO' : ''
-                ),
-                'page-title' => \sprintf(
-                    \esc_html_x(
-                        'Custom Login %s Settings',
-                        'Page title where %s is "PRO" if this is the pro version.',
-                        'custom-login'
-                    ),
-                    CustomLogin::isPro() ? 'PRO' : ''
-                ),
+                'menu-title' => \esc_html__('Custom Login', 'custom-login'),
+                'page-title' => \esc_html__('Custom Login', 'custom-login'),
                 'prefix' => CustomLogin::META_PREFIX,
                 'version' => VERSION,
             ]);
