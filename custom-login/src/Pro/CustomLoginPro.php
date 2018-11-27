@@ -3,6 +3,7 @@
 namespace TheFrosty\CustomLogin\Pro;
 
 use Dwnload\WpSettingsApi\Api\Options;
+use Dwnload\WpSettingsApi\App;
 use TheFrosty\CustomLogin\Pro\Modules\LastLoginColumns;
 use TheFrosty\CustomLogin\Pro\Modules\Module;
 use TheFrosty\CustomLogin\Pro\Modules\WpLogin;

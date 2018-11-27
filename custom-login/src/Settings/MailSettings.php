@@ -122,6 +122,10 @@ class MailSettings implements WpHooksInterface, PluginAwareInterface
         );
     }
 
+    /**
+     * Return the footer default value.
+     * @return string
+     */
     private function getFooterDefault(): string
     {
         ob_start();
