@@ -43,7 +43,6 @@ class CL_WP_Login {
     }
 
     private function actions() {
-
         add_action( 'login_enqueue_scripts', array( $this, 'login_enqueue_scripts' ) );
         add_action( 'login_footer', array( $this, 'login_footer_html' ), 8 );
         add_action( 'login_footer', array( $this, 'login_footer_jquery' ), 19 );
@@ -51,13 +50,14 @@ class CL_WP_Login {
         add_action( 'init', array( $this, 'login_remove_scripts' ) );
         add_action( 'login_head', array( $this, 'login_head' ), 10 );
         add_filter( 'login_headerurl', array( $this, 'login_headerurl' ) );
-        add_filter( 'login_headertitle', array( $this, 'login_headertitle' ) );
+        if (version_compare($GLOBALS['wp_version'],'5.2', '>=')) {
+            add_filter('login_headertext', [$this, 'login_headertitle']);
+        } else {
+            add_filter('login_headertitle', [$this, 'login_headertitle']);
+        }
     }
 
     private function filters() {
-
-        #	add_filter( 'auth_cookie_expiration',			array( $this, 'auth_cookie_expiration' ), 99, 3 ); // @removed 3.1
-        #	add_filter( 'allow_password_reset',				array( $this, 'allow_password_reset' ) ); // @removed 3.1
         add_filter( 'gettext', array( $this, 'remove_lostpassword_text' ), 20, 2 );
     }
 
@@ -234,55 +234,6 @@ class CL_WP_Login {
      ****************  FILTERS  **********************************
      *************************************************************
      */
-
-    /**
-     * Allow password reset.
-     *
-     * @added        3.0.5
-     * @updated        3.0.8
-     * @disabled    3.1.0
-     * @ref            https://wordpress.org/plugins/configure-login-timeout/
-     * @removed        3.1
-     */
-    public function auth_cookie_expiration( $seconds, $user_id, $remember ) {
-
-        $expire_in = 0;
-
-        if ( $remember ) {
-            $expire_in = (int) CL_Common::get_option( 'auth_timeout_remember', 'general', 14 * DAY_IN_SECONDS );
-            if ( $expire_in <= 0 ) {
-                $expire_in = 14 * DAY_IN_SECONDS;
-            }
-        } else {
-            $expire_in = (int) CL_Common::get_option( 'auth_timeout', 'general', 2 * DAY_IN_SECONDS );
-            if ( $expire_in <= 0 ) {
-                $expire_in = 2 * DAY_IN_SECONDS;
-            }
-        }
-
-        // check for Year 2038 problem - http://en.wikipedia.org/wiki/Year_2038_problem
-        if ( PHP_INT_MAX - time() < $expire_in ) {
-            $expire_in = PHP_INT_MAX - time() - 5;
-        }
-
-        return $expire_in;
-    }
-
-    /**
-     * Allow password reset.
-     *
-     * 'on' equals don't allow. :/
-     *
-     * @updated    3.0.5
-     * @removed    3.1
-     */
-    public function allow_password_reset( $user_id ) {
-        if ( 'on' === CL_Common::get_option( 'allow_password_reset', 'general', 'off' ) ) {
-            return false;
-        }
-
-        return true;
-    }
 
     /**
      * Remove the "Lost your password?" text.
