@@ -35,7 +35,8 @@
         $('span.tgl_input').replaceWith($('input[id="custom_login_general[active]"]').clone());
 
         $(document).on('change', 'input[id="custom_login_general[active]"]', function () {
-            $('input[id="custom_login_general[active]"]').prop('checked', this.checked);
+            var checked = this.checked;
+            $('input[id="custom_login_general[active]"]').prop('checked', checked);
             $.ajax({
                 type: "POST",
                 data: {
@@ -47,9 +48,9 @@
                 url: ajaxurl
             })
                 .done(function (response) {
-                    if (response.success) {
-                    } else {
-
+                    if (!response.success) {
+                        $('input[id="custom_login_general[active]"]').prop('checked', !checked);
+                        console.log('Error Updating Option');
                     }
                 })
                 .fail(function () {
@@ -312,6 +313,43 @@
             });
         }
 
+        if (typeof wp.codeEditor !== 'undefined') {
+            var editorSettings;
+            editorSettings = wp.codeEditor.defaultSettings ? _.clone( wp.codeEditor.defaultSettings ) : {};
+            editorSettings.codemirror = _.extend(
+                {},
+                editorSettings.codemirror,
+                {
+                    indentUnit: 2,
+                    tabSize: 2,
+                    mode: 'css',
+                }
+            );
+            wp.codeEditor.initialize($('textarea[id$="custom_css]"]'), editorSettings);
+            editorSettings = wp.codeEditor.defaultSettings ? _.clone( wp.codeEditor.defaultSettings ) : {};
+            editorSettings.codemirror = _.extend(
+                {},
+                editorSettings.codemirror,
+                {
+                    indentUnit: 2,
+                    tabSize: 2,
+                    mode: 'html',
+                }
+            );
+            wp.codeEditor.initialize($('textarea[id$="custom_html]"]'), editorSettings);
+            editorSettings = wp.codeEditor.defaultSettings ? _.clone( wp.codeEditor.defaultSettings ) : {};
+            editorSettings.codemirror = _.extend(
+                {},
+                editorSettings.codemirror,
+                {
+                    indentUnit: 2,
+                    tabSize: 2,
+                    mode: 'javascript',
+                }
+            );
+            wp.codeEditor.initialize($('textarea[id$="custom_jquery]"]'), editorSettings);
+        }
+
         if (typeof ace !== 'undefined') {
 
             /**
@@ -327,7 +365,6 @@
                 autoScrollEditorIntoView: true
             });
             custom_css.getSession().setMode("ace/mode/css");
-            custom_css.setTheme("ace/theme/github");
             custom_css_textarea.hide();
             custom_css.getSession().setValue(custom_css_textarea.val());
             custom_css.getSession().on('change', function () {
@@ -347,7 +384,6 @@
                 autoScrollEditorIntoView: true
             });
             custom_html.getSession().setMode("ace/mode/html");
-            custom_html.setTheme("ace/theme/github");
             custom_html_textarea.hide();
             custom_html.getSession().setValue(custom_html_textarea.val());
             custom_html.getSession().on('change', function () {
@@ -367,7 +403,6 @@
                 autoScrollEditorIntoView: true
             });
             custom_js.getSession().setMode("ace/mode/javascript");
-            custom_js.setTheme("ace/theme/github");
             custom_js_textarea.hide();
             custom_js.getSession().setValue(custom_js_textarea.val());
             custom_js.getSession().on('change', function () {
