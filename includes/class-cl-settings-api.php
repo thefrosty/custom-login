@@ -77,8 +77,11 @@ class CL_Settings_API {
 
         /* Core */
         wp_enqueue_media();
-        wp_enqueue_script( array( 'wp-color-picker', 'plugin-install' ) );
-        wp_enqueue_style( array( 'wp-color-picker', 'thickbox', 'plugin-install' ) );
+        wp_enqueue_script( 'wp-color-picker' );
+        wp_enqueue_script( 'plugin-install');
+        wp_enqueue_style( 'wp-color-picker' );
+        wp_enqueue_style( 'thickbox' );
+        wp_enqueue_style( 'plugin-install' );
 
         /* jQuery Chosen */
         wp_enqueue_script( 'chosen', plugins_url( 'js/chosen.jquery.min.js', $this->settings['file'] ), array( 'jquery' ), '1.3.0', true );
@@ -89,6 +92,7 @@ class CL_Settings_API {
 
         /* Ace */
         wp_enqueue_script( 'ace', plugins_url( 'js/ace/src-min-noconflict/ace.js', $this->settings['file'] ), null, '20.12.14', true );
+//        \wp_enqueue_code_editor(array());
 
         /* Dashicons */
         wp_enqueue_style( 'dashicons' );
@@ -767,18 +771,13 @@ class CL_Settings_API {
 
         $settings     = CL_Common::get_options( 'general' );
         $active_value = isset( $_POST['active_value'] ) && 'true' == $_POST['active_value'] ? 'on' : 'off';
+        $settings['active'] = $active_value;
 
-        if ( isset( $settings['active'] ) && $settings['active'] !== $active_value ) {
-            $settings['active'] = $active_value;
-
-            if ( update_option( CUSTOM_LOGIN_OPTION . '_general', $settings ) ) {
-                wp_send_json_success();
-            } else {
-                wp_send_json_error();
-            }
+        if ( update_option( CUSTOM_LOGIN_OPTION . '_general', $settings ) ) {
+            wp_send_json_success();
         }
 
-        wp_send_json_success();
+        wp_send_json_error();
     }
 
     /**
