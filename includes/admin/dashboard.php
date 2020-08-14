@@ -101,10 +101,10 @@ class CL_Dashboard {
 
     public function admin_footer() {
         if ( $this->dashboard_allowed() ) {
-            echo $this->CSS( false );
+            $this->CSS( false );
         }
         else {
-            echo $this->jQuery( false );
+            $this->jQuery( false );
         }
     }
 
