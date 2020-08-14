@@ -2,8 +2,12 @@
 bin-debug/
 bin-release/
 bower_components/
+data/
 node_modules/
 vendor/
+wordpress/
+
+!data/.gitkeep
 
 # Numerous always-ignore extensions
 *.diff
