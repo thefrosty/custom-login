@@ -2,8 +2,8 @@
 Contributors: austyfrosty, frostymedia
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290
 Tags: admin, branding, customization, custom login, login, logo, error, login error, custom login pro
-Requires at least: 4.8
-Tested up to: 5.2
+Requires at least: 4.9
+Tested up to: 5.5
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -116,6 +116,13 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 4. Custom Login Extensions Installer (an active license key is required).
 
 == Changelog ==
+
+= Version 3.2.10 (2020/08/14) =
+
+* Tested up to WordPress 5.5
+* Fix toggle on/off on settings page, incorrect check in AJAX for new installs.
+* Enable on activation hook fixed.
+* Remove ace.js theme call to non existing theme.
 
 = Version 3.2.9 (2019/05/07) =
 
