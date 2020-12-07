@@ -133,10 +133,16 @@ class CL_Common {
     /**
      * Helper function to make remote calls
      *
-     * @since		3.0.0
+     * @since 3.0.0
      * @updated	3.0.8
+     * @updated	3.2.11 PHP 8 support
+     * @param string $transient_key
+     * @param bool $url
+     * @param string|null $expiration
+     * @param string $user_agent
+     * @return array|false|mixed|object
      */
-    public static function wp_remote_get( $url = false, $transient_key, $expiration = null, $user_agent = 'WordPress' ) {
+    public static function wp_remote_get( $transient_key, $url = false, $expiration = null, $user_agent = 'WordPress' ) {
 
         if ( !$url ) return false;
 

@@ -3,7 +3,7 @@
  * Plugin Name: Custom Login
  * Plugin URI: https://frosty.media/plugins/custom-login
  * Description: A simple way to customize your WordPress <code>wp-login.php</code> screen! A <a href="https://frosty.media/">Frosty Media</a> plugin.
- * Version: 3.2.10
+ * Version: 3.2.11
  * Author: Austin Passy
  * Author URI: https://austin.passy.co
  * Text Domain: custom-login
@@ -39,7 +39,7 @@ if ( ! class_exists( 'Custom_Login' ) ) :
          *
          * @return string
          */
-        var $version = '3.2.10',
+        public $version = '3.2.11',
             $menu_page,
             $prefix;
 
@@ -292,8 +292,8 @@ if ( ! class_exists( 'Custom_Login' ) ) :
             $message_url = esc_url( add_query_arg( array( 'get_notifications' => 'true' ), CUSTOM_LOGIN_API_URL) );
 
             $announcement = CL_Common::wp_remote_get(
-                $message_url,
                 $transient_key,
+                $message_url,
                 DAY_IN_SECONDS,
                 'WordPress' // We need our custom $user_agent
             );
@@ -319,8 +319,8 @@ if ( ! class_exists( 'Custom_Login' ) ) :
                 sprintf( '%2$s <span class="alignright">| <a href="%3$s">%1$s</a></span>',
                     __( 'Dismiss', CUSTOM_LOGIN_DIRNAME ),
                     $announcement[0]->message,
-                    esc_url( add_query_arg( $ignore_key, wp_create_nonce( $ignore_key ), admin_url( 'options-general.php?page=custom-login' ) ) ),
-                    esc_url( admin_url( 'options-general.php?page=custom-login#custom_login_general' ) )
+                    esc_url( add_query_arg( $ignore_key, wp_create_nonce( $ignore_key ), admin_url( 'options-general.php?page=custom-login' ) ) )
+//                    esc_url( admin_url( 'options-general.php?page=custom-login#custom_login_general' ) )
                 ) :
                 sprintf( '%s', $announcement[0]->message );
             $html .= '</p></div>';
