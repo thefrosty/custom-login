@@ -9,7 +9,7 @@
 **Donate link:** [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290)  
 **Tags:** admin, branding, customization, custom login, login, logo, error, login error, custom login pro  
 **Requires at least:** 4.9  
-**Tested up to:** 5.6  
+**Tested up to:** 5.8  
 **Stable tag:** trunk  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
@@ -138,6 +138,11 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 
 ## Changelog ##
+
+### Version 3.2.12 (2021/11/07) ### 
+
+* Change dashboard from RSS feed to REST API endpoint.
+* Fix condition for dashboard widget to use `is_blog_admin`.
 
 ### Version 3.2.11 (2020/12/07) ###
 * PHP 8 compatibility fixes.
