@@ -28,7 +28,7 @@ class CL_Dashboard {
     private static $headers = array();
     private static $scripts = array();
 
-    const FEED_URL = 'https://frosty.media/feed/';
+    const FEED_URL = 'https://frosty.media/wp-json/wp/v2/posts';
 
     /**
      * Main Instance
@@ -47,11 +47,11 @@ class CL_Dashboard {
 
     private function actions() {
 
-        if ( !is_admin() )
+        if (!is_blog_admin()) {
             return;
+        }
 
         add_action( 'wp_dashboard_setup',			array( $this, 'add_dashboard_widget' ) );
-        //	add_action( 'admin_enqueue_scripts',		array( $this, 'enqueue_scripts' ) );
         add_action( 'admin_enqueue_scripts',		array( $this, 'inline_scripts' ) );
         add_action( 'admin_footer',					array( $this, 'admin_footer' ) );
     }
@@ -76,8 +76,9 @@ class CL_Dashboard {
      */
     public function add_dashboard_widget() {
 
-        if ( !$this->dashboard_allowed() )
+        if (!$this->dashboard_allowed()) {
             return;
+        }
 
         wp_add_dashboard_widget(
             $this->id,
@@ -86,41 +87,36 @@ class CL_Dashboard {
         );
     }
 
-    /**
-     * Scripts & Styles
-     */
-    public function enqueue_scripts() {
-
-        if ( $this->dashboard_allowed() ) {
-            wp_enqueue_style( $this->id, $this->add_query_arg( 'css' ), null, null, 'screen' );
-        }
-        else {
-            wp_enqueue_script( $this->id, $this->add_query_arg( 'js' ), array( 'jquery' ), null, true );
-        }
-    }
-
     public function admin_footer() {
         if ( $this->dashboard_allowed() ) {
             $this->CSS( false );
-        }
-        else {
+        } else {
             $this->jQuery( false );
         }
     }
 
+    /**
+     * @param int $count
+     * @param string $feed
+     * @return array|bool
+     */
     private function get_feed( $count = 1, $feed = self::FEED_URL ) {
-        return CL_Common::fetch_rss_items( $count, $feed );
+        return CL_Common::get_posts_via_rest( $feed, $count );
     }
 
     private function get_feed_url() {
-
-        $rss_items	= $this->get_feed();
-
-        if ( false !== $rss_items && isset( $rss_items[0] ) ) {
-
-            $feed_url = preg_replace( '/#.*/', '', esc_url( $rss_items[0]->get_permalink(), null, 'display' ) );
-
-            return esc_url( add_query_arg( array( 'utm_medium' => 'wpadmin_dashboard', 'utm_term' => 'newsitem', 'utm_campaign' => CUSTOM_LOGIN_DIRNAME ), $feed_url ) );
+        $rss_items = $this->get_feed();
+        if (isset($rss_items[0])) {
+            return esc_url(
+                add_query_arg(
+                    [
+                        'utm_medium' => 'wpadmin_dashboard',
+                        'utm_term' => 'newsitem',
+                        'utm_campaign' => CUSTOM_LOGIN_DIRNAME,
+                    ],
+                    array_shift($rss_items)->guid->rendered
+                )
+            );
         }
 
         return esc_url( self::FEED_URL );
@@ -130,31 +126,28 @@ class CL_Dashboard {
 
         $rss_items = $this->get_feed();
 
-        return isset( $rss_items[0] ) ? esc_html( $rss_items[0]->get_title() ) : 'Unknown';
+        return empty( $rss_items ) ? 'Unknown' : esc_html( array_shift($rss_items)->title->rendered );
     }
 
     /**
      * Dashboard widget
      */
     public function widget() {
-
         // FEED
-        $rss_items = $this->get_feed();
+        $posts = $this->get_feed(2);
 
         $content  = '<div class="rss-widget">';
         $content .= '<ul>';
 
-        if ( !$rss_items ) {
+        if ( empty($posts) ) {
             $content .= '<li>' . __( 'Error fetching feed', CUSTOM_LOGIN_DIRNAME ) . '</li>';
-        }
-        else {
+        } else {
             $count = 1;
-            foreach ( $rss_items as $key => $item ) {
-                $feed_url = preg_replace( '/#.*/', '', esc_url( $item->get_permalink(), null, 'display' ) );
+            foreach ( $posts as $item ) {
                 $content .= '<li>';
-                $content .= '<a class="rsswidget" href="' . esc_url( add_query_arg( array( 'utm_medium' => 'wpadmin_dashboard', 'utm_term' => 'newsitem', 'utm_campaign' => CUSTOM_LOGIN_DIRNAME ), $feed_url ) ) . '">' .	esc_html( $item->get_title() ) . '</a>';
-                $content .= $count === 1 ? '&nbsp;&nbsp;&nbsp;<span class="rss-date">' . $item->get_date( get_option( 'date_format' ) ) . '</span>' : '';
-                $content .= $count === 1 ? '<div class="rssSummary">' . strip_tags( wp_trim_words( $item->get_description(), 28 ) ) . '</div>' : '';
+                $content .= '<a class="rsswidget" href="' . esc_url( add_query_arg( array( 'utm_medium' => 'wpadmin_dashboard', 'utm_term' => 'newsitem', 'utm_campaign' => CUSTOM_LOGIN_DIRNAME ), $item->guid->rendered ) ) . '">' .	esc_html( $item->title->rendered ) . '</a>';
+                $content .= $count === 1 ? '&nbsp;&nbsp;&nbsp;<span class="rss-date">' . date_i18n( get_option( 'date_format' ), strtotime( $item->date ) ) . '</span>' : '';
+                $content .= $count === 1 ? '<div class="rssSummary">' . strip_tags( wp_trim_words( $item->content->rendered, 28 ) ) . '</div>' : '';
                 $content .= '</li>';
                 $count++;
             }
@@ -163,32 +156,32 @@ class CL_Dashboard {
         $content .= '</div>';
 
 
-        // Plugins
-        $rss_items = $this->get_feed( 3, sprintf( '%s?post_type=plugin&plugin_tag=custom-login-extension', self::FEED_URL ) );
+        // Plugins (Taxonomy: plugin_tag; Term: custom-login-extension; Term ID: 29)
+        $extensions = $this->get_feed(
+            10,
+            sprintf('%s?plugin_tag=29', str_replace('/posts', '/extensions', self::FEED_URL))
+        );
 
-        $content .= '<div class="rss-widget">';
-        $content .= '<ul>';
-        //$content .= '<li><strong>' . __( 'Custom Login Extensions:', CUSTOM_LOGIN_DIRNAME ) . '</strong></li>';
-
-        if ( !$rss_items ) {
-            $content .= '<li>' . __( 'Error fetching feed', CUSTOM_LOGIN_DIRNAME ) . '</li>';
+        if (!empty($extensions)) {
+            $content .= '<div class="rss-widget">';
+            $content .= '<ul>';
+            $content .= '<li><strong>' . __('Custom Login Extensions:', CUSTOM_LOGIN_DIRNAME) . '</strong></li>';
+            $content .= '<li>';
+            $item = $extensions[array_rand($extensions)];
+            $content .= '<a class="rsswidget" href="' . esc_url(add_query_arg([
+                    'utm_medium' => 'wpadmin_dashboard',
+                    'utm_term' => 'newsitem',
+                    'utm_campaign' => CUSTOM_LOGIN_DIRNAME,
+                ], $item->guid->rendered)) . '">' . esc_html($item->title->rendered) . '</a>';
+//                $content .= '<div class="rssSummary">' . strip_tags( wp_trim_words( $item->content->rendered, 10 ) ) . '</div>';
+            $content .= '</li>';
+            $content .= '</ul>';
+            $content .= '</div>';
         }
-        else {
-            foreach ( $rss_items as $item ) {
-                $url = preg_replace( '/#.*/', '', esc_url( $item->get_permalink(), null, 'display' ) );
-                $content .= '<li>';
-                $content .= '<a class="rsswidget" href="' . esc_url( add_query_arg( array( 'utm_medium' => 'wpadmin_dashboard', 'utm_term' => 'newsitem', 'utm_campaign' => CUSTOM_LOGIN_DIRNAME ), $url ) ) . '">' . esc_html( $item->get_title() ) . '</a>';
-                #	$content .= '<div class="rssSummary">' . strip_tags( wp_trim_words( $item->get_description(), 10 ) ) . '</div>';
-                $content .= '</li>';
-            }
-        }
-        $content .= '</ul>';
-        $content .= '</div>';
 
         $content .= '<div class="rss-widget">';
         $content .= '<ul class="social">';
         $content .= '<li>';
-        $content .= '<a href="https://www.facebook.com/FrostyMediaWP"><span class="dashicons dashicons-facebook"></span>/FrostyMediaWP</a> | ';
         $content .= '<a href="https://twitter.com/Frosty_Media"><span class="dashicons dashicons-twitter"></span>/Frosty_Media</a> | ';
         $content .= '<a href="https://twitter.com/TheFrosty"><span class="dashicons dashicons-twitter"></span>/TheFrosty</a>';
         $content .= '</li>';
@@ -213,18 +206,15 @@ class CL_Dashboard {
                     header("content-type:text/css");
                 }
                 ob_start();
-                str_replace( ob_end_clean(), '', ob_end_clean() );
                 $this->CSS();
                 if ( ob_get_level() ) echo ob_get_clean();
                 die;
-            }
-            elseif ( isset( $_GET['type'] ) && $_GET['type'] === 'js' ) {
+            } elseif ( isset( $_GET['type'] ) && $_GET['type'] === 'js' ) {
 
                 if ( !headers_sent() ) {
                     header("content-type:application/x-javascript");
                 }
                 ob_start();
-                str_replace( ob_end_clean(), '', ob_end_clean() );
                 $this->jQuery();
                 if ( ob_get_level() ) echo ob_get_clean();
                 die;
@@ -259,7 +249,7 @@ class CL_Dashboard {
         if ( !$remove_wrapper ) { ?>
             <style>
         <?php }
-    #<?php echo $this->id; ?> .inside {
+        #<?php echo $this->id; ?> .inside {
         margin: 0;
         padding: 0;
     }
@@ -283,15 +273,18 @@ class CL_Dashboard {
         <script>
             <?php } ?>
             jQuery(document).ready(function($) {
+                if ( !$('div.wordpress-news:visible') ) {
+                    return;
+                }
 
-                var CL_Timeout = 200;
+                let CL_Timeout = 200
 
                 if ( !$('#dashboard_primary .rss-widget').eq(1).length ) {
                     CL_Timeout = 2500;
                 }
 
                 setTimeout( function() {
-                    $('#dashboard_primary .rss-widget:eq(1) ul').append('<a class="rsswidget" href="<?php echo $this->get_feed_url(); ?>">FrostyMedia: <?php echo $this->get_feed_title(); ?></a>');
+                    $('#dashboard_primary .rss-widget:eq(1) ul').append('<li><a class="rsswidget" target="_blank" href="<?php echo $this->get_feed_url(); ?>">Frosty Media: <?php echo $this->get_feed_title(); ?></a></li>');
                 }, CL_Timeout );
 
             });

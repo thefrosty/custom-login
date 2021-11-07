@@ -162,7 +162,7 @@ class CL_Common {
             $response = wp_remote_get(
                 esc_url( $url ),
                 array(
-                    'timeout'		=> apply_filters( 'cl_wp_remote_get_timeout', (int) 15 ),
+                    'timeout'		=> apply_filters( 'cl_wp_remote_get_timeout', 15 ),
                     'sslverify'		=> false,
                     'user-agent'	=> $user_agent . '/' . $_version . '; ' . get_bloginfo( 'url' ),
                 )
@@ -191,6 +191,18 @@ class CL_Common {
         }
 
         return $json;
+    }
+
+    /**
+     * Get posts via REST API.
+     * @param string $url
+     * @param int $per_page
+     * @return array<stdClass>|false
+     */
+    public static function get_posts_via_rest( $url, $per_page = 10 ) {
+        $url = add_query_arg(['per_page' => $per_page], $url);
+
+        return self::wp_remote_get(sprintf('cl_get_posts_via_rest_%s', md5($url)), $url, WEEK_IN_SECONDS);
     }
 
     /**
