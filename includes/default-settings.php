@@ -7,7 +7,7 @@ $strings = array(
 	'checked'		=> ' ' . __( 'Checked equals "on" (allow).', CUSTOM_LOGIN_DIRNAME ),
 	'unchecked'		=> ' ' . __( 'Unchecked equals "off" (do not allow).', CUSTOM_LOGIN_DIRNAME ),
 );
-				
+
 $sections	= array(
 	array(
 		'id'			=> CUSTOM_LOGIN_OPTION . '_design',
@@ -34,7 +34,7 @@ $fields	[CUSTOM_LOGIN_OPTION . '_design'] = array(
 		'type' 		=> 'html',
 	),
 	/** BREAK **/
-	
+
 	array(
 		'name' 		=> 'html_background_color',
 		'label' 	=> __( 'Background color', CUSTOM_LOGIN_DIRNAME ),
@@ -92,7 +92,7 @@ $fields	[CUSTOM_LOGIN_OPTION . '_design'] = array(
 			'flex' 		=> 'flex',
 		)
 	),
-	
+
 	/** BREAK **/
 	array(
 		'name' 		=> 'break_2',
@@ -101,7 +101,7 @@ $fields	[CUSTOM_LOGIN_OPTION . '_design'] = array(
 		'type' 		=> 'html',
 	),
 	/** BREAK **/
-	
+
 	array(
 		'name'		=> 'hide_wp_logo',
 		'label'		=> __( 'Hide the WP logo', CUSTOM_LOGIN_DIRNAME ),
@@ -176,7 +176,7 @@ $fields	[CUSTOM_LOGIN_OPTION . '_design'] = array(
 			'flex' 		=> 'flex',
 		)
 	),
-	
+
 	/** BREAK **/
 	array(
 		'name' 		=> 'break_3',
@@ -185,7 +185,7 @@ $fields	[CUSTOM_LOGIN_OPTION . '_design'] = array(
 		'type' 		=> 'html',
 	),
 	/** BREAK **/
-	
+
 	array(
 		'name'		=> 'logo_force_form_max_width',
 		'label'		=> __( 'Force max-width', CUSTOM_LOGIN_DIRNAME ),
@@ -298,7 +298,7 @@ $fields	[CUSTOM_LOGIN_OPTION . '_design'] = array(
 		'type' 		=> 'colorpicker',
 		'default' 	=> ''
 	),
-	
+
 	/** BREAK **/
 	array(
 		'name' 		=> 'break_4',
@@ -307,7 +307,7 @@ $fields	[CUSTOM_LOGIN_OPTION . '_design'] = array(
 		'type' 		=> 'html',
 	),
 	/** BREAK **/
-	
+
 	array(
 		'name' 		=> 'label_color',
 		'label' 	=> __( 'Label color', CUSTOM_LOGIN_DIRNAME ),
@@ -315,7 +315,7 @@ $fields	[CUSTOM_LOGIN_OPTION . '_design'] = array(
 		'type' 		=> 'colorpicker',
 		'default' 	=> ''
 	),
-	
+
 	/** BREAK **/
 	array(
 		'name' 		=> 'break_5',
@@ -324,7 +324,7 @@ $fields	[CUSTOM_LOGIN_OPTION . '_design'] = array(
 		'type' 		=> 'html',
 	),
 	/** BREAK **/
-	
+
 	array(
 		'name' 		=> 'nav_color',
 		'label' 	=> __( 'Nav color', CUSTOM_LOGIN_DIRNAME ),
@@ -353,7 +353,7 @@ $fields	[CUSTOM_LOGIN_OPTION . '_design'] = array(
 		'type' 		=> 'colorpicker',
 		'default' 	=> '',
 	),
-	
+
 	/** BREAK **/
 	array(
 		'name' 		=> 'break_6',
@@ -362,7 +362,7 @@ $fields	[CUSTOM_LOGIN_OPTION . '_design'] = array(
 		'type' 		=> 'html',
 	),
 	/** BREAK **/
-	
+
 	array(
 		'name' 		=> 'custom_css',
 		'label' 		=> '',
@@ -371,7 +371,9 @@ $fields	[CUSTOM_LOGIN_OPTION . '_design'] = array(
 			<li><a href="http://wordpress.org/support/topic/quotes-in-custom-css-gets-replaced-with-useless-quote?replies=4">Request others</a></li>
 			</ul>' ),
 		'type' 		=> 'textarea',
-		'sanitize'	=> 'wp_filter_nohtml_kses',
+		'sanitize'	=> static function($css) {
+            return wp_specialchars_decode(wp_filter_nohtml_kses($css));
+        },
 	),
 	array(
 		'name'		=> 'animate.css',
@@ -380,7 +382,7 @@ $fields	[CUSTOM_LOGIN_OPTION . '_design'] = array(
 		'type'		=> 'checkbox',
 		'default'	=> 'off',
 	),
-	
+
 	/** BREAK **/
 	array(
 		'name' 		=> 'break_7',
@@ -389,7 +391,7 @@ $fields	[CUSTOM_LOGIN_OPTION . '_design'] = array(
 		'type' 		=> 'html',
 	),
 	/** BREAK **/
-	
+
 	array(
 		'name' 		=> 'custom_html',
 		'label' 		=> '',
@@ -397,7 +399,7 @@ $fields	[CUSTOM_LOGIN_OPTION . '_design'] = array(
 		'type' 		=> 'textarea',
 		'sanitize'	=> 'wp_kses_post', //Allow HTML
 	),
-	
+
 	/** BREAK **/
 	array(
 		'name' 		=> 'break_8',
@@ -406,7 +408,7 @@ $fields	[CUSTOM_LOGIN_OPTION . '_design'] = array(
 		'type' 		=> 'html',
 	),
 	/** BREAK **/
-	
+
 	array(
 		'name' 		=> 'custom_jquery',
 		'label' 		=> '',
@@ -437,7 +439,7 @@ $fields	[CUSTOM_LOGIN_OPTION . '_general'] = array(
 		'default' 	=> 'manage_options',
 		'options' 	=> custom_login_get_editable_roles()
 	),
-	
+
 	/** BREAK **/
 	array(
 		'name' 		=> 'break_1',
@@ -446,15 +448,15 @@ $fields	[CUSTOM_LOGIN_OPTION . '_general'] = array(
 		'type' 		=> 'html',
 	),
 	/** BREAK **/
-	
+
 	array(
 		'name'		=> 'tracking',
 		'label'		=> __( 'Usage tracking', CUSTOM_LOGIN_DIRNAME ),
 		'desc'		=> __( 'Allow Frosty Media to anonymously track how this plugin is used (and help us make the plugin better). Opt-in and receive a 20% discount code for all Custom Login extensions. Get your coupon code <a href="http://frosty.media/?p=21442">here</a>.', CUSTOM_LOGIN_DIRNAME ),
 		'type'		=> 'checkbox'
 	),
-	
-	/** BREAK **/		
+
+	/** BREAK **/
 	array(
 		'name' 		=> 'break_2',
 		'label'		=> sprintf( '<h4>%s</h4>', __( 'Notices', CUSTOM_LOGIN_DIRNAME ) ),
@@ -462,7 +464,7 @@ $fields	[CUSTOM_LOGIN_OPTION . '_general'] = array(
 		'type' 		=> 'html',
 	),
 	/** BREAK **/
-	
+
 	array(
 		'name'		=> 'admin_notices',
 		'label'		=> __( 'Admin notices', CUSTOM_LOGIN_DIRNAME ),
@@ -475,8 +477,8 @@ $fields	[CUSTOM_LOGIN_OPTION . '_general'] = array(
 		'desc'		=> __( 'Show a dashboard widget, like WordPress news for Frosty Media.', CUSTOM_LOGIN_DIRNAME ) . $strings['unchecked'],
 		'type'		=> 'checkbox'
 	),
-	
-	/** BREAK **/		
+
+	/** BREAK **/
 	array(
 		'name' 		=> 'break_3',
 		'label'		=> sprintf( '<h4>%s</h4>', __( 'Login functions', CUSTOM_LOGIN_DIRNAME ) ),
@@ -484,7 +486,7 @@ $fields	[CUSTOM_LOGIN_OPTION . '_general'] = array(
 		'type' 		=> 'html',
 	),
 	/** BREAK **/
-	
+
 	array(
 		'name'		=> 'wp_shake_js',
 		'label'		=> __( 'Disable Login shake', CUSTOM_LOGIN_DIRNAME ),
