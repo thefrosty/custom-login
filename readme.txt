@@ -3,7 +3,7 @@ Contributors: austyfrosty, frostymedia
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290
 Tags: admin, branding, customization, custom login, login, logo, error, login error, custom login pro
 Requires at least: 4.9
-Tested up to: 5.8
+Tested up to: 5.9
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -100,7 +100,7 @@ I created this plugin to allow for custom login of any WordPress login screen. S
 = Where can I upload and share my cool login screen? =
 Check out the [Flickr group](http://flickr.com/groups/custom-login/)! Upload and add it to our pool!
 
-= I think i want to uninstall =
+= I think I want to uninstall =
 Just deactivate it. Sad panda is sad.
 
 == Screenshots ==
@@ -116,6 +116,10 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 4. Custom Login Extensions Installer (an active license key is required).
 
 == Changelog ==
+
+= Version 3.2.13 (2022/01/06) =
+
+* Change custom CSS settings sanitizer in admin to allow for proper HTML CSS attributes like `>`.
 
 = Version 3.2.12 (2021/11/07) =
 
