@@ -4,6 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: admin, branding, customization, custom login, login, logo, error, login error, custom login pro
 Requires at least: 4.9
 Tested up to: 5.9
+Requires PHP: 5.6
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -117,6 +118,11 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 == Changelog ==
 
+= Version 3.2.14 (2022/03/10) =
+
+* Fix settings widget feed for available extensions. Changes from RSS to REST.
+* Add auto deploy to WordPress.org GitHub action.
+
 = Version 3.2.13 (2022/01/06) =
 
 * Change custom CSS settings sanitizer in admin to allow for proper HTML CSS attributes like `>`.
@@ -200,7 +206,7 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 * Update: Allow Custom (CSS/HTML/JS) textareas to expand up to 30 lines.
 * Update: admin.css
 * Update: admin.js
-* Add: animate.css Licened under MIT.
+* Add: animate.css Licensed under MIT.
 * Add: Global 'active' toggle switch.
 
 = Version 3.1 (01/20/15) =
@@ -209,7 +215,7 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 * Update: All prefixed 'cl_'  to 'custom_login_'.
 * Update: Spelling error 'sanitize'.
 * Update: login.css uses core stylesheet to avoid possible conflicts with checkboxes and browser support.
-* Tweak: Speed imporovments.
+* Tweak: Speed improvements.
 * Add: CL_Common::is_settings_page().
 * Add: Dashboard widget (off be default).
 
@@ -282,6 +288,9 @@ _REQUIRES WordPress 3.9 or later_
 * New: Removed version [2.x changelog](http://plugins.svn.wordpress.org/custom-login/tags/2.4/readme.txt).
 
 == Upgrade Notice ==
+
+= 3.2.14 =
+Getting ready for version 4.0.0 which will bump minimum required WordPress version to 5.8 and PHP version to 7.4.
 
 = 3.2.7 =
 Fixes duplicate CSS output in login header. Testing up to WordPress 4.9.

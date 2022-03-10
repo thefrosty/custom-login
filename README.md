@@ -2,7 +2,9 @@
 
 [![WordPress plugin](https://img.shields.io/wordpress/plugin/dt/custom-login.svg?style=flat)](https://wordpress.org/plugins/custom-login/) 
 [![WordPress plugin](https://img.shields.io/wordpress/plugin/v/custom-login.svg?style=flat)](https://wordpress.org/plugins/custom-login/) 
+[![WordPress Plugin: Required WP Version](https://img.shields.io/wordpress/plugin/wp-version/custom-login)]() 
 [![WordPress](https://img.shields.io/wordpress/v/custom-login.svg?style=flat)]() 
+[![WordPress Plugin Required PHP Version](https://img.shields.io/wordpress/plugin/required-php/custom-login)]() 
 [![License](https://img.shields.io/badge/license-GPL--2.0%2B-red.svg)](https://github.com/thefrosty/custom-login/blob/master/license.txt)
 
 **Contributors:** [austyfrosty](https://profiles.wordpress.org/austyfrosty), [frostymedia](https://profiles.wordpress.org/frostymedia)  
@@ -10,6 +12,7 @@
 **Tags:** admin, branding, customization, custom login, login, logo, error, login error, custom login pro  
 **Requires at least:** 4.9  
 **Tested up to:** 5.9  
+**Requires PHP**: 5.6  
 **Stable tag:** trunk  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
@@ -65,7 +68,7 @@ Activate the plugin and customize your WordPress login screen. It's as easy as m
 2. Read more about [Custom Login 3.1](https://frosty.media/2015/custom-login-v3-1-released/)
 2. Read more about [Custom Login 2.0](http://wp.me/pzgsJ-HY)
 
-**For those looking to showoff your login screen, check out the [Flickr group](http://flickr.com/groups/custom-login/)! Share you designs with the community!**
+**For those looking to show off your login screen, check out the [Flickr group](http://flickr.com/groups/custom-login/)! Share you designs with the community!**
 
 ### links ###
 
@@ -219,7 +222,7 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 * Update: Allow Custom (CSS/HTML/JS) textareas to expand up to 30 lines.
 * Update: admin.css
 * Update: admin.js
-* Add: animate.css Licened under MIT.
+* Add: animate.css (licensed under MIT).
 * Add: Global 'active' toggle switch.
 
 ### Version 3.1 (01/20/15) ###
@@ -228,7 +231,7 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 * Update: All prefixed 'cl_'  to 'custom_login_'.
 * Update: Spelling error 'sanitize'.
 * Update: login.css uses core stylesheet to avoid possible conflicts with checkboxes and browser support.
-* Tweak: Speed imporovments.
+* Tweak: Speed improvements.
 * Add: CL_Common::is_settings_page().
 * Add: Dashboard widget (off be default).
 
@@ -244,8 +247,8 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 * Update: ace.js to build `20.12.14`.
 * Update: admin.css.
-* Update: Extenstions HTML and settings page location.
-* Update: Sanatize the `auth_cookie_expiration` setting with a positive integer.
+* Update: Extensions HTML and settings page location.
+* Update: Sanitize the `auth_cookie_expiration` setting with a positive integer.
 * Tweak: Remove false positive files from malware scanners; ace editor php.js [forum](https://wordpress.org/support/topic/wordfence-alerta?).
 * Tweak: Make sure `auth_cookie_expiration` is greater than 0.
 
@@ -259,7 +262,7 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 * Add: Disable lost password reset function option.
 * Update: Settings prefix with global definition.
 * Update: Add missing auth expiration function for setting.
-* Fix: Hide tracking notice globaly if admin notices are turned off.
+* Fix: Hide tracking notice globally if admin notices are turned off.
 * Tweak: Update the hide_wp_logo description since Custom Login removes the WP logo by default.
 * Tweak: Better output of update notification on settings page.
 * Tweak: Update input fields that are integers to a 'number' input type.
