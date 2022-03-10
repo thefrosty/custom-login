@@ -851,12 +851,12 @@ class CL_Settings_API {
 
         $defaults = array(
             'items' => 6,
-            'feed'  => 'https://frosty.media/feed/?post_type=plugin&plugin_tag=custom-login-extension',
+            'feed'  => 'https://frosty.media/wp-json/wp/v2/extensions?plugin_tag=29',
         );
 
         $args = wp_parse_args( $args, $defaults );
 
-        $rss_items = CL_Common::fetch_rss_items( $args['items'], $args['feed'] );
+        $rss_items = CL_Common::get_posts_via_rest( $args['feed'], $args['items'] );
 
         $content = '<ul>';
         if ( ! $rss_items ) {
