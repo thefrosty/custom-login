@@ -23,7 +23,7 @@
   "require": {
     "php": "^7.4 || ^8.0",
     "ext-json": "*",
-    "dwnload/wp-settings-api": "^3.3",
+    "dwnload/wp-settings-api": "^3.4",
     "thefrosty/wp-utilities": "dev-develop as 2.6.1"
   },
   "require-dev": {
@@ -36,6 +36,9 @@
     "yoast/phpunit-polyfills": "^1.0.2"
   },
   "autoload": {
+    "files": [
+      "functions.php"
+    ],
     "psr-4": {
       "TheFrosty\\CustomLogin\\": "src/"
     }
