@@ -1,0 +1,29 @@
+{
+  "name": "custom-login",
+  "version": "4.0.0",
+  "description": "A simple way to customize your WordPress wp-login.php screen!",
+  "author": "Austin Passy",
+  "license": "GPL-2.0-only",
+  "scripts": {
+    "travis": "if [ \"$TRAVIS_COMMIT_RANGE\" ]; then standard $TRAVIS_COMMIT_RANGE; else standard; fi",
+    "eslint": "./vendor/bin/eslint.sh"
+  },
+  "standard": {
+    "globals": [
+      "_",
+      "jQuery",
+      "wp"
+    ]
+  },
+  "devDependencies": {
+    "eslint": "~8.10.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-no-jquery": "^2.7.0",
+    "standard": "^16.0.4"
+  },
+  "dependencies": {
+    "ace-builds": "^1.4.14",
+    "jquery-sticky": "^1.0.4",
+    "select2": "^4.0.13"
+  }
+}
