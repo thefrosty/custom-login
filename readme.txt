@@ -3,7 +3,7 @@ Contributors: austyfrosty, frostymedia
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290
 Tags: admin, branding, customization, custom login, login, logo, error, login error, custom login pro
 Requires at least: 4.9
-Tested up to: 5.9
+Tested up to: 5.9.2
 Requires PHP: 5.6
 Stable tag: trunk
 License: GPLv2 or later
@@ -117,6 +117,10 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 4. Custom Login Extensions Installer (an active license key is required).
 
 == Changelog ==
+
+= Version 3.2.15 (2022/03/11) =
+
+* Fix settings API Settings: Uncaught Error: Call to undefined method stdClass::get_permalink() (#49)
 
 = Version 3.2.14 (2022/03/10) =
 

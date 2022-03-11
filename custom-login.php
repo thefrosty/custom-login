@@ -3,7 +3,7 @@
  * Plugin Name: Custom Login
  * Plugin URI: https://frosty.media/plugins/custom-login
  * Description: A simple way to customize your WordPress <code>wp-login.php</code> screen! A <a href="https://frosty.media/">Frosty Media</a> plugin.
- * Version: 3.2.14
+ * Version: 3.2.15
  * Author: Austin Passy
  * Author URI: https://austin.passy.co
  * Requires PHP: 5.6
@@ -40,7 +40,7 @@ if ( ! class_exists( 'Custom_Login' ) ) :
          *
          * @return string
          */
-        public $version = '3.2.14',
+        public $version = '3.2.15',
             $menu_page,
             $prefix;
 

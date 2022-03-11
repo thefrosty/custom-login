@@ -142,6 +142,15 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 ## Changelog ##
 
+### Version 3.2.15 (2022/03/11) ### 
+
+* Fix settings API Settings: Uncaught Error: Call to undefined method stdClass::get_permalink() (#49)
+
+### Version 3.2.14 (2022/03/10) ### 
+
+* Fix settings widget feed for available extensions. Changes from RSS to REST.
+* Add auto deploy to WordPress.org GitHub action.
+
 ### Version 3.2.13 (2022/01/06) ### 
 
 * Change custom CSS settings sanitizer in admin to allow for proper HTML CSS attributes like `>`.

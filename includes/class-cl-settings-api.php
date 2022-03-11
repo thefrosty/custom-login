@@ -851,7 +851,7 @@ class CL_Settings_API {
 
         $defaults = array(
             'items' => 6,
-            'feed'  => 'https://frosty.media/wp-json/wp/v2/extensions?plugin_tag=29',
+            'feed'  => 'https://frosty.media/wp-json/wp/v2/extensions?plugin_tag=29&per_page=6',
         );
 
         $args = wp_parse_args( $args, $defaults );
@@ -863,9 +863,9 @@ class CL_Settings_API {
             $content .= '<li>' . __( 'Error fetching feed', $this->settings['domain'] ) . '</li>';
         } else {
             foreach ( $rss_items as $item ) {
-                $url = preg_replace( '/#.*/', '', esc_url( $item->get_permalink(), null, 'display' ) );
+                $url = esc_url( $item->link );
                 $content .= '<li>';
-                $content .= '<a href="' . $url . '?utm_source=wpadmin&utm_medium=sidebarwidget&utm_term=newsite&utm_campaign=' . $this->settings['prefix'] . '_settings-api" target="_blank">' . esc_html( $item->get_title() ) . '</a>';
+                $content .= '<a href="' . $url . '?utm_source=wpadmin&utm_medium=sidebarwidget&utm_term=newsite&utm_campaign=' . $this->settings['prefix'] . '_settings-api" target="_blank">' . esc_html( $item->title->rendered ) . '</a>';
                 $content .= '</li>';
             }
         }
