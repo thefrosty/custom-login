@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<ruleset name="Custom-Login" namespace="TheFrosty\CustomLogin">
+
+    <description>Coding Standards for the Custom Login codebase.</description>
+
+    <!-- What to scan -->
+    <file>src</file>
+    <!-- Exclude the tests directory. -->
+    <exclude-pattern>*/tests/*</exclude-pattern>
+    <!-- Third-party code -->
+    <exclude-pattern>*/bower-components/*</exclude-pattern>
+    <exclude-pattern>*/node_modules/*</exclude-pattern>
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <!-- Ensure certain file types aren't sniffed -->
+    <exclude-pattern>*.js</exclude-pattern>
+    <exclude-pattern>*.css</exclude-pattern>
+
+    <!-- How to scan -->
+    <arg value="sp"/> <!-- Show sniff and progress -->
+    <arg name="basepath" value="."/><!-- Strip the file paths down to the relevant bit -->
+    <arg name="colors"/>
+    <arg name="extensions" value="php"/>
+    <arg name="tab-width" value="4"/>
+    <!-- For CI, don't fail on warnings -->
+    <config name="ignore_warnings_on_exit" value="1"/>
+    <config name="minimum_supported_wp_version" value="5.8" />
+
+    <rule ref="PSR12">
+        <exclude name="PSR12.Classes.OpeningBraceSpace.Found"/>
+        <exclude name="PSR12.Files.FileHeader.IncorrectOrder"/>
+        <exclude name="PSR12.Files.FileHeader.SpacingAfterBlock"/>
+        <exclude name="PSR12.Files.OpenTag.NotAlone"/>
+        <exclude name="PSR12.Traits.UseDeclaration.MultipleImport"/>
+        <exclude name="PSR12.Traits.UseDeclaration.UseAfterBrace"/>
+    </rule>
+
+    <!-- Loads the PHP Compatibility ruleset. -->
+    <rule ref="PHPCompatibility" />
+    <!-- Check for cross-version support for PHP 7.4 and higher. -->
+    <config name="testVersion" value="7.4-"/>
+</ruleset>
