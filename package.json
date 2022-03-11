@@ -22,8 +22,6 @@
     "standard": "^16.0.4"
   },
   "dependencies": {
-    "ace-builds": "^1.4.14",
-    "jquery-sticky": "^1.0.4",
-    "select2": "^4.0.13"
+    "jquery-sticky": "^1.0.4"
   }
 }
