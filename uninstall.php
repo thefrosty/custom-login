@@ -3,9 +3,10 @@
  * Uninstall Custom Login
  *
  * @package CustomLogin
- * @copyright Copyright (c) 2014-2015, Austin Passy
- * @license  http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @copyright Copyright (c) 2014-2022, Austin Passy
+ * @license http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since 3.0.0
+ * @since 4.0.0 Utilize all new methods.
  */
 
 // Exit if accessed directly
@@ -15,7 +16,7 @@ if (!defined('WP_UNINSTALL_PLUGIN')) {
 
 // Load Custom Login
 include_once 'custom-login.php';
-$settings = include_once __DIR__ . '/config/settings.php';
+$settings = TheFrosty\CustomLogin\CustomLogin::getSettings();
 
 // Delete all plugin options
 if (!empty($settings['sections'])) {
