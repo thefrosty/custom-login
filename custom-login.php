@@ -24,7 +24,9 @@
 
 
 use Dwnload\WpSettingsApi\WpSettingsApi;
+use TheFrosty\CustomLogin\ServiceProvider;
 use TheFrosty\CustomLogin\Settings\Api\Factory;
+use TheFrosty\CustomLogin\Settings\Settings;
 use TheFrosty\CustomLogin\WpAdmin\Dashboard;
 use TheFrosty\WpUtilities\Plugin\PluginFactory;
 
@@ -33,8 +35,11 @@ if (is_readable(__DIR__ . '/vendor/autoload.php')) {
 }
 
 $plugin = PluginFactory::create('custom-login', __FILE__);
+$container = $plugin->getContainer();
+$container->register(new ServiceProvider());
 $plugin
     ->addOnHook(Dashboard::class, 'load-index.php', 5, true, [Dashboard::getArgs()])
+    ->addOnHook(Settings::class, 'init', 10, true, [$container])
     ->addOnHook(WpSettingsApi::class, 'init', 10, true, [Factory::getPluginSettings($plugin)]);
 
 add_action('plugins_loaded', static function () use ($plugin): void {
