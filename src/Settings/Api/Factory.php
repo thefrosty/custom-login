@@ -4,6 +4,7 @@ namespace TheFrosty\CustomLogin\Settings\Api;
 
 use Dwnload\WpSettingsApi\Api\PluginSettings;
 use Dwnload\WpSettingsApi\SettingsApiFactory;
+use TheFrosty\CustomLogin\CustomLogin;
 use TheFrosty\WpUtilities\Plugin\Plugin;
 
 /**
@@ -14,6 +15,8 @@ class Factory
 {
 
     public const PREFIX = 'custom_login_';
+    public const SECTION_DESIGN = 'design';
+    public const SECTION_GENERAL = 'general';
 
     /**
      * Helper to get the App object.
@@ -29,7 +32,7 @@ class Factory
             'menu-title' => \esc_html__('Custom Login', 'custom-login'),
             'page-title' => \esc_html__('Custom Login', 'custom-login'),
             'prefix' => self::PREFIX,
-            'version' => '4.0.0-20220311',
+            'version' => CustomLogin::VERSION,
         ]);
     }
 }
