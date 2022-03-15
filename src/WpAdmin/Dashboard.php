@@ -56,6 +56,7 @@ class Dashboard extends DashboardWidget
             'https://frosty.media/wp-json/wp/v2/extensions?per_page=1&plugin_tag=29',
             WEEK_IN_SECONDS
         );
+        $renderContent = false;
         include $template;
         echo $div_close;
     }
