@@ -3,6 +3,7 @@
 use Dwnload\WpSettingsApi\Api\SettingField;
 use Dwnload\WpSettingsApi\Api\SettingSection;
 use Dwnload\WpSettingsApi\Settings\FieldTypes;
+use TheFrosty\CustomLogin\Settings\Api\Factory;
 
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
@@ -12,16 +13,16 @@ if (!defined('ABSPATH')) {
 return [
     'sections' => [
         [
-            SettingSection::SECTION_ID => 'custom_login_design',
+            SettingSection::SECTION_ID => Factory::SECTION_DESIGN,
             SettingSection::SECTION_TITLE => __('Design Settings', 'custom-login'),
         ],
         [
-            SettingSection::SECTION_ID => 'custom_login_general',
+            SettingSection::SECTION_ID => Factory::SECTION_GENERAL,
             SettingSection::SECTION_TITLE => __('General Settings', 'custom-login'),
         ],
     ],
     'fields' => [
-        'custom_login_design' => [
+        Factory::SECTION_DESIGN => [
             [
                 SettingField::NAME => 'break_1',
                 SettingField::LABEL => sprintf(
@@ -35,7 +36,7 @@ return [
                 SettingField::NAME => 'html_background_color',
                 SettingField::LABEL => __('Background color', 'custom-login'),
                 SettingField::DESC => '',
-                SettingField::TYPE => FieldTypes::FIELD_TYPE_COLOR,
+                SettingField::TYPE => FieldTypes::FIELD_TYPE_COLOR_ALPHA,
                 SettingField::DEFAULT => '',
             ],
             [
@@ -207,7 +208,7 @@ return [
                 SettingField::NAME => 'login_form_background_color',
                 SettingField::LABEL => __('Background color', 'custom-login'),
                 SettingField::DESC => '',
-                SettingField::TYPE => FieldTypes::FIELD_TYPE_COLOR,
+                SettingField::TYPE => FieldTypes::FIELD_TYPE_COLOR_ALPHA,
                 SettingField::DEFAULT => '',
             ],
             [
@@ -285,7 +286,7 @@ return [
                 SettingField::NAME => 'login_form_border_color',
                 SettingField::LABEL => __('Border color', 'custom-login'),
                 SettingField::DESC => '',
-                SettingField::TYPE => FieldTypes::FIELD_TYPE_COLOR,
+                SettingField::TYPE => FieldTypes::FIELD_TYPE_COLOR_ALPHA,
                 SettingField::DEFAULT => '',
             ],
             [
@@ -306,7 +307,7 @@ return [
                 SettingField::NAME => 'login_form_box_shadow_color',
                 SettingField::LABEL => __('Box shadow color', 'custom-login'),
                 SettingField::DESC => '',
-                SettingField::TYPE => FieldTypes::FIELD_TYPE_COLOR,
+                SettingField::TYPE => FieldTypes::FIELD_TYPE_COLOR_ALPHA,
                 SettingField::DEFAULT => '',
             ],
             [
@@ -319,10 +320,9 @@ return [
                 SettingField::NAME => 'label_color',
                 SettingField::LABEL => __('Label color', 'custom-login'),
                 SettingField::DESC => '',
-                SettingField::TYPE => FieldTypes::FIELD_TYPE_COLOR,
+                SettingField::TYPE => FieldTypes::FIELD_TYPE_COLOR_ALPHA,
                 SettingField::DEFAULT => '',
             ],
-
             [
                 SettingField::NAME => 'break_5',
                 SettingField::LABEL => sprintf('<h4>%s</h4>', __('Below Form anchor', 'custom-login')),
@@ -333,28 +333,28 @@ return [
                 SettingField::NAME => 'nav_color',
                 SettingField::LABEL => __('Nav color', 'custom-login'),
                 SettingField::DESC => '',
-                SettingField::TYPE => FieldTypes::FIELD_TYPE_COLOR,
+                SettingField::TYPE => FieldTypes::FIELD_TYPE_COLOR_ALPHA,
                 SettingField::DEFAULT => '',
             ],
             [
                 SettingField::NAME => 'nav_text_shadow_color',
                 SettingField::LABEL => __('Nav text-shadow color', 'custom-login'),
                 SettingField::DESC => '',
-                SettingField::TYPE => FieldTypes::FIELD_TYPE_COLOR,
+                SettingField::TYPE => FieldTypes::FIELD_TYPE_COLOR_ALPHA,
                 SettingField::DEFAULT => '',
             ],
             [
                 SettingField::NAME => 'nav_hover_color',
                 SettingField::LABEL => __('Nav color hover', 'custom-login'),
                 SettingField::DESC => '',
-                SettingField::TYPE => FieldTypes::FIELD_TYPE_COLOR,
+                SettingField::TYPE => FieldTypes::FIELD_TYPE_COLOR_ALPHA,
                 SettingField::DEFAULT => '',
             ],
             [
                 SettingField::NAME => 'nav_text_shadow_hover_color',
                 SettingField::LABEL => __('Nav text-shadow hover', 'custom-login'),
                 SettingField::DESC => '',
-                SettingField::TYPE => FieldTypes::FIELD_TYPE_COLOR,
+                SettingField::TYPE => FieldTypes::FIELD_TYPE_COLOR_ALPHA,
                 SettingField::DEFAULT => '',
             ],
             [
@@ -427,8 +427,7 @@ return [
                 ],
             ],
         ],
-        /** GENERAL */
-        'custom_login_general' => [
+        Factory::SECTION_GENERAL => [
             [
                 SettingField::NAME => 'active',
                 SettingField::LABEL => __('Activate', 'custom-login'),
