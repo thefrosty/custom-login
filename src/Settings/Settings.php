@@ -30,7 +30,7 @@ use function wp_localize_script;
  * Class Settings
  * @package TheFrosty\CustomLogin\Settings
  */
-class Settings extends AbstractContainerProvider
+class Settings extends AbstractContainerProvider implements OptionKey
 {
 
     use WpRemote;
@@ -86,7 +86,10 @@ class Settings extends AbstractContainerProvider
         }
 
         foreach ($settings['fields'] as $section_id => $fields) {
-            foreach ($fields as $field) {
+            foreach ($fields as $key => $field) {
+                if ($field['name'] === OptionKey::BREAK_S) {
+                    $field['name'] = sprintf($field['name'], $key);
+                }
                 $field_manager->addField(
                     new SettingField(array_merge($field, [SettingField::SECTION_ID => $section_id]))
                 );
