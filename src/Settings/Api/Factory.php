@@ -35,4 +35,14 @@ class Factory
             'version' => CustomLogin::VERSION,
         ]);
     }
+
+    /**
+     * Build the section w/ prefix.
+     * @param string $section
+     * @return string
+     */
+    public static function getSection(string $section): string
+    {
+        return self::PREFIX . $section;
+    }
 }
