@@ -4,27 +4,23 @@ use Dwnload\WpSettingsApi\Api\SettingField;
 use Dwnload\WpSettingsApi\Api\SettingSection;
 use Dwnload\WpSettingsApi\Settings\FieldTypes;
 use TheFrosty\CustomLogin\Settings\Api\Factory;
-
-// Exit if accessed directly
-if (!defined('ABSPATH')) {
-    exit;
-}
+use TheFrosty\CustomLogin\Settings\OptionKey;
 
 return [
     'sections' => [
         [
-            SettingSection::SECTION_ID => Factory::SECTION_DESIGN,
+            SettingSection::SECTION_ID => Factory::getSection(Factory::SECTION_DESIGN),
             SettingSection::SECTION_TITLE => __('Design Settings', 'custom-login'),
         ],
         [
-            SettingSection::SECTION_ID => Factory::SECTION_GENERAL,
+            SettingSection::SECTION_ID => Factory::getSection(Factory::SECTION_GENERAL),
             SettingSection::SECTION_TITLE => __('General Settings', 'custom-login'),
         ],
     ],
     'fields' => [
-        Factory::SECTION_DESIGN => [
+        Factory::getSection(Factory::SECTION_DESIGN) => [
             [
-                SettingField::NAME => 'break_1',
+                SettingField::NAME => OptionKey::BREAK_S,
                 SettingField::LABEL => sprintf(
                     '<h4>%s</h4>',
                     __('<abbr title="Hyper Text Markup Language">HTML</abbr>', 'custom-login')
@@ -33,14 +29,14 @@ return [
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_HTML,
             ],
             [
-                SettingField::NAME => 'html_background_color',
+                SettingField::NAME => OptionKey::HTML_BACKGROUND_COLOR,
                 SettingField::LABEL => __('Background color', 'custom-login'),
                 SettingField::DESC => '',
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_COLOR_ALPHA,
                 SettingField::DEFAULT => '',
             ],
             [
-                SettingField::NAME => 'html_background_url',
+                SettingField::NAME => OptionKey::HTML_BACKGROUND_URL,
                 SettingField::LABEL => __('Background image', 'custom-login'),
                 SettingField::DESC => '',
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_FILE,
@@ -49,7 +45,7 @@ return [
                 SettingField::SANITIZE => 'esc_url',
             ],
             [
-                SettingField::NAME => 'html_background_position',
+                SettingField::NAME => OptionKey::HTML_BACKGROUND_POSITION,
                 SettingField::LABEL => __('Background position', 'custom-login'),
                 SettingField::DESC => sprintf(
                     '<a href="https://www.w3schools.com/cssref/pr_background-position.asp" target="_blank">%s</a>.',
@@ -69,7 +65,7 @@ return [
                 ],
             ],
             [
-                SettingField::NAME => 'html_background_repeat',
+                SettingField::NAME => OptionKey::HTML_BACKGROUND_REPEAT,
                 SettingField::LABEL => __('Background repeat', 'custom-login'),
                 SettingField::DESC => '',
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_SELECT,
@@ -81,7 +77,7 @@ return [
                 ],
             ],
             [
-                SettingField::NAME => 'html_background_size',
+                SettingField::NAME => OptionKey::HTML_BACKGROUND_SIZE,
                 SettingField::LABEL => __('Background size', 'custom-login'),
                 SettingField::DESC => '',
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_SELECT,
@@ -93,19 +89,19 @@ return [
                 ],
             ],
             [
-                SettingField::NAME => 'break_2',
+                SettingField::NAME => OptionKey::BREAK_S,
                 SettingField::LABEL => sprintf('<h4>%s</h4>', __('Logo', 'custom-login')),
                 SettingField::DESC => '',
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_HTML,
             ],
             [
-                SettingField::NAME => 'hide_wp_logo',
+                SettingField::NAME => OptionKey::HIDE_WP_LOGO,
                 SettingField::LABEL => __('Hide the WP logo', 'custom-login'),
                 SettingField::DESC => __('This setting hides the h1 element.', 'custom-login'),
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_CHECKBOX,
             ],
             [
-                SettingField::NAME => 'logo_background_url',
+                SettingField::NAME => OptionKey::LOGO_BACKGROUND_URL,
                 SettingField::LABEL => __('Image', 'custom-login'),
                 SettingField::DESC => __(
                     'I would suggest a max width of 320px, the default form width. You can widen the width (setting below).',
@@ -119,15 +115,17 @@ return [
             [
                 SettingField::NAME => 'logo_background_size_width',
                 SettingField::LABEL => __('Image width', 'custom-login'),
-                SettingField::DESC => __('Enter your desired image height (All not integers will be removed).',
-                    'custom-login'),
+                SettingField::DESC => __(
+                    'Enter your desired image height (All not integers will be removed).',
+                    'custom-login'
+                ),
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_NUMBER,
                 SettingField::SIZE => 'small',
                 SettingField::DEFAULT => '',
                 SettingField::SANITIZE => 'int',
             ],
             [
-                SettingField::NAME => 'logo_background_size_height',
+                SettingField::NAME => OptionKey::LOGO_BACKGROUND_SIZE_HEIGHT,
                 SettingField::LABEL => __('Image height', 'custom-login'),
                 SettingField::DESC => __('Enter your desired image height (All not integers will be removed).',
                     'custom-login'),
@@ -137,7 +135,7 @@ return [
                 SettingField::SANITIZE => 'int',
             ],
             [
-                SettingField::NAME => 'logo_background_position',
+                SettingField::NAME => OptionKey::LOGO_BACKGROUND_POSITION,
                 SettingField::LABEL => __('Background position', 'custom-login'),
                 SettingField::DESC => sprintf(
                     '<a href="https://www.w3schools.com/cssref/pr_background-position.asp" target="_blank">%s</a>',
@@ -157,7 +155,7 @@ return [
                 ],
             ],
             [
-                SettingField::NAME => 'logo_background_repeat',
+                SettingField::NAME => OptionKey::LOGO_BACKGROUND_REPEAT,
                 SettingField::LABEL => __('Background repeat', 'custom-login'),
                 SettingField::DESC => '',
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_SELECT,
@@ -169,7 +167,7 @@ return [
                 ],
             ],
             [
-                SettingField::NAME => 'logo_background_size',
+                SettingField::NAME => OptionKey::LOGO_BACKGROUND_SIZE,
                 SettingField::LABEL => __('Background size', 'custom-login'),
                 SettingField::DESC => '',
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_SELECT,
@@ -181,22 +179,22 @@ return [
                 ],
             ],
             [
-                SettingField::NAME => 'break_3',
+                SettingField::NAME => OptionKey::BREAK_S,
                 SettingField::LABEL => sprintf('<h4>%s</h4>', __('Login Form', 'custom-login')),
                 SettingField::DESC => '',
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_HTML,
             ],
             [
-                SettingField::NAME => 'logo_force_form_max_width',
+                SettingField::NAME => OptionKey::LOGO_FORCE_FORM_MAX_WIDTH,
                 SettingField::LABEL => __('Force max-width', 'custom-login'),
                 SettingField::DESC => __(
-                    'If checked and the login form width (set below) is not empty, a CSS rule of <code>width</code> will be applied on the logo wrapper element <code>.login h1</code>. This settings applies to the Logo image (when background size is used).',
+                    'If checked and the login form width (set below) is not empty, a CSS rule of <code>width</code> will be applied on the logo wrapper element <code>.login h1</code>. These settings apply to the Logo image (when background size is used).',
                     'custom-login'
                 ),
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_CHECKBOX,
             ],
             [
-                SettingField::NAME => 'login_form_width',
+                SettingField::NAME => OptionKey::LOGIN_FORM_WIDTH,
                 SettingField::LABEL => __('Width', 'custom-login'),
                 SettingField::DESC => __('Change the default width of the login form.', 'custom-login'),
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_NUMBER,
@@ -205,14 +203,14 @@ return [
                 SettingField::SANITIZE => 'int',
             ],
             [
-                SettingField::NAME => 'login_form_background_color',
+                SettingField::NAME => OptionKey::LOGIN_FORM_BACKGROUND_COLOR,
                 SettingField::LABEL => __('Background color', 'custom-login'),
                 SettingField::DESC => '',
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_COLOR_ALPHA,
                 SettingField::DEFAULT => '',
             ],
             [
-                SettingField::NAME => 'login_form_background_url',
+                SettingField::NAME => OptionKey::LOGIN_FORM_BACKGROUND_URL,
                 SettingField::LABEL => __('Background URL', 'custom-login'),
                 SettingField::DESC => __('Add a background image to the login form.', 'custom-login'),
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_FILE,
@@ -221,7 +219,7 @@ return [
                 SettingField::SANITIZE => 'esc_url',
             ],
             [
-                SettingField::NAME => 'login_form_background_position',
+                SettingField::NAME => OptionKey::LOGIN_FORM_BACKGROUND_POSITION,
                 SettingField::LABEL => __('Background position', 'custom-login'),
                 SettingField::DESC => sprintf(
                     '<a href="https://www.w3schools.com/cssref/pr_background-position.asp" target="_blank">%s</a>',
@@ -241,7 +239,7 @@ return [
                 ],
             ],
             [
-                SettingField::NAME => 'login_form_background_repeat',
+                SettingField::NAME => OptionKey::LOGIN_FORM_BACKGROUND_REPEAT,
                 SettingField::LABEL => __('Background repeat', 'custom-login'),
                 SettingField::DESC => '',
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_SELECT,
@@ -253,7 +251,7 @@ return [
                 ],
             ],
             [
-                SettingField::NAME => 'login_form_background_size',
+                SettingField::NAME => OptionKey::LOGIN_FORM_BACKGROUND_SIZE,
                 SettingField::LABEL => __('Background size', 'custom-login'),
                 SettingField::DESC => '',
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_SELECT,
@@ -265,7 +263,7 @@ return [
                 ],
             ],
             [
-                SettingField::NAME => 'login_form_border_radius',
+                SettingField::NAME => OptionKey::LOGIN_FORM_BORDER_RADIUS,
                 SettingField::LABEL => __('Border radius', 'custom-login'),
                 SettingField::DESC => '',
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_NUMBER,
@@ -274,7 +272,7 @@ return [
                 SettingField::SANITIZE => 'int',
             ],
             [
-                SettingField::NAME => 'login_form_border_size',
+                SettingField::NAME => OptionKey::LOGIN_FORM_BORDER_SIZE,
                 SettingField::LABEL => __('Border size', 'custom-login'),
                 SettingField::DESC => '',
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_NUMBER,
@@ -283,18 +281,18 @@ return [
                 SettingField::SANITIZE => 'int',
             ],
             [
-                SettingField::NAME => 'login_form_border_color',
+                SettingField::NAME => OptionKey::LOGIN_FORM_BORDER_COLOR,
                 SettingField::LABEL => __('Border color', 'custom-login'),
                 SettingField::DESC => '',
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_COLOR_ALPHA,
                 SettingField::DEFAULT => '',
             ],
             [
-                SettingField::NAME => 'login_form_box_shadow',
+                SettingField::NAME => OptionKey::LOGIN_FORM_BOX_SHADOW,
                 SettingField::LABEL => __('Box shadow', 'custom-login'),
                 SettingField::DESC => sprintf(
                     __(
-                        'Use <a href="%s" target="_blank">box shadow</a> syntax w/ out color. <code>inset h-shadow v-shadow blur spread</code>',
+                        'Use use TheFrosty\CustomLogin\Settings\OptionKey;<a href="%s" target="_blank">box shadow</a> syntax w/ out color. <code>inset h-shadow v-shadow blur spread</code>',
                         'custom-login'
                     ),
                     'https://www.w3schools.com/cssref/css3_pr_box-shadow.asp'
@@ -304,67 +302,67 @@ return [
                 SettingField::DEFAULT => '5px 5px 10px',
             ],
             [
-                SettingField::NAME => 'login_form_box_shadow_color',
+                SettingField::NAME => OptionKey::LOGIN_FORM_BOX_SHADOW_COLOR,
                 SettingField::LABEL => __('Box shadow color', 'custom-login'),
                 SettingField::DESC => '',
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_COLOR_ALPHA,
                 SettingField::DEFAULT => '',
             ],
             [
-                SettingField::NAME => 'break_4',
+                SettingField::NAME => OptionKey::BREAK_S,
                 SettingField::LABEL => sprintf('<h4>%s</h4>', __('Miscellaneous', 'custom-login')),
                 SettingField::DESC => '',
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_HTML,
             ],
             [
-                SettingField::NAME => 'label_color',
+                SettingField::NAME => OptionKey::LABEL_COLOR,
                 SettingField::LABEL => __('Label color', 'custom-login'),
                 SettingField::DESC => '',
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_COLOR_ALPHA,
                 SettingField::DEFAULT => '',
             ],
             [
-                SettingField::NAME => 'break_5',
+                SettingField::NAME => OptionKey::BREAK_S,
                 SettingField::LABEL => sprintf('<h4>%s</h4>', __('Below Form anchor', 'custom-login')),
                 SettingField::DESC => '',
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_HTML,
             ],
             [
-                SettingField::NAME => 'nav_color',
+                SettingField::NAME => OptionKey::NAV_COLOR,
                 SettingField::LABEL => __('Nav color', 'custom-login'),
                 SettingField::DESC => '',
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_COLOR_ALPHA,
                 SettingField::DEFAULT => '',
             ],
             [
-                SettingField::NAME => 'nav_text_shadow_color',
+                SettingField::NAME => OptionKey::NAV_TEXT_SHADOW_COLOR,
                 SettingField::LABEL => __('Nav text-shadow color', 'custom-login'),
                 SettingField::DESC => '',
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_COLOR_ALPHA,
                 SettingField::DEFAULT => '',
             ],
             [
-                SettingField::NAME => 'nav_hover_color',
+                SettingField::NAME => OptionKey::NAV_HOVER_COLOR,
                 SettingField::LABEL => __('Nav color hover', 'custom-login'),
                 SettingField::DESC => '',
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_COLOR_ALPHA,
                 SettingField::DEFAULT => '',
             ],
             [
-                SettingField::NAME => 'nav_text_shadow_hover_color',
+                SettingField::NAME => OptionKey::NAV_TEXT_SHADOW_HOVER_COLOR,
                 SettingField::LABEL => __('Nav text-shadow hover', 'custom-login'),
                 SettingField::DESC => '',
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_COLOR_ALPHA,
                 SettingField::DEFAULT => '',
             ],
             [
-                SettingField::NAME => 'break_6',
+                SettingField::NAME => OptionKey::BREAK_S,
                 SettingField::LABEL => sprintf('<h4>%s</h4>', __('Custom CSS', 'custom-login')),
                 SettingField::DESC => '',
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_HTML,
             ],
             [
-                SettingField::NAME => 'custom_css',
+                SettingField::NAME => OptionKey::CUSTOM_CSS,
                 SettingField::LABEL => '',
                 SettingField::DEFAULT => '',
                 SettingField::DESC => sprintf(
@@ -382,7 +380,7 @@ return [
                 ],
             ],
             [
-                SettingField::NAME => 'animate.css',
+                SettingField::NAME => OptionKey::ANIMATE_CSS,
                 SettingField::LABEL => __('Animate', 'custom-login'),
                 SettingField::DESC => sprintf(
                     __('Include <a href="%s">animate.css</a>?', 'custom-login'),
@@ -392,13 +390,13 @@ return [
                 SettingField::DEFAULT => 'off',
             ],
             [
-                SettingField::NAME => 'break_7',
+                SettingField::NAME => OptionKey::BREAK_S,
                 SettingField::LABEL => sprintf('<h4>%s</h4>', __('Custom HTML', 'custom-login')),
                 SettingField::DESC => '',
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_HTML,
             ],
             [
-                SettingField::NAME => 'custom_html',
+                SettingField::NAME => OptionKey::CUSTOM_HTML,
                 SettingField::LABEL => '',
                 SettingField::DEFAULT => '',
                 SettingField::DESC => '',
@@ -409,13 +407,13 @@ return [
                 ],
             ],
             [
-                SettingField::NAME => 'break_8',
+                SettingField::NAME => OptionKey::BREAK_S,
                 SettingField::LABEL => sprintf('<h4>%s</h4>', __('Custom jQuery', 'custom-login')),
                 SettingField::DESC => '',
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_HTML,
             ],
             [
-                SettingField::NAME => 'custom_jquery',
+                SettingField::NAME => OptionKey::CUSTOM_JQUERY,
                 SettingField::LABEL => '',
                 SettingField::DEFAULT => '',
                 SettingField::DESC => '<code>(function($) { "use strict";</code> ' .
@@ -427,16 +425,16 @@ return [
                 ],
             ],
         ],
-        Factory::SECTION_GENERAL => [
+        Factory::getSection(Factory::SECTION_GENERAL) => [
             [
-                SettingField::NAME => 'active',
+                SettingField::NAME => OptionKey::ACTIVE,
                 SettingField::LABEL => __('Activate', 'custom-login'),
                 SettingField::DESC => __('Allow Custom Login to hook into WordPress.', 'custom-login'),
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_CHECKBOX,
                 SettingField::DEFAULT => 'on',
             ],
             [
-                SettingField::NAME => 'capability',
+                SettingField::NAME => OptionKey::CAPABILITY,
                 SettingField::LABEL => __('Capability', 'custom-login'),
                 SettingField::DESC => sprintf(
                     __(
@@ -451,13 +449,13 @@ return [
                 SettingField::OPTIONS => TheFrosty\CustomLogin\getEditableRoles(),
             ],
             [
-                SettingField::NAME => 'break_1',
+                SettingField::NAME => OptionKey::BREAK_S,
                 SettingField::LABEL => sprintf('<h4>%s</h4>', __('Tracking Settings', 'custom-login')),
                 SettingField::DESC => '',
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_HTML,
             ],
             [
-                SettingField::NAME => 'tracking',
+                SettingField::NAME => OptionKey::TRACKING,
                 SettingField::LABEL => __('Usage tracking', 'custom-login'),
                 SettingField::DESC => __(
                     'Allow Frosty Media to anonymously track how this plugin is used (and help us make the plugin better). Opt-in and receive a 20% discount code for all Custom Login extensions. Get your coupon code <a href="https://frosty.media/?p=21442">here</a>.',
@@ -466,13 +464,13 @@ return [
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_CHECKBOX,
             ],
             [
-                SettingField::NAME => 'break_2',
+                SettingField::NAME => OptionKey::BREAK_S,
                 SettingField::LABEL => sprintf('<h4>%s</h4>', __('Notices', 'custom-login')),
                 SettingField::DESC => '',
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_HTML,
             ],
             [
-                SettingField::NAME => 'admin_notices',
+                SettingField::NAME => OptionKey::ADMIN_NOTICES,
                 SettingField::LABEL => __('Admin notices', 'custom-login'),
                 SettingField::DESC => sprintf(
                     '%s %s',
@@ -482,7 +480,7 @@ return [
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_CHECKBOX,
             ],
             [
-                SettingField::NAME => 'dashboard_widget',
+                SettingField::NAME => OptionKey::DASHBOARD_WIDGET,
                 SettingField::LABEL => __('Dashboard widget', 'custom-login'),
                 SettingField::DESC => sprintf(
                     '%s %s',
@@ -492,19 +490,19 @@ return [
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_CHECKBOX,
             ],
             [
-                SettingField::NAME => 'break_3',
+                SettingField::NAME => OptionKey::BREAK_S,
                 SettingField::LABEL => sprintf('<h4>%s</h4>', __('Login functions', 'custom-login')),
                 SettingField::DESC => '',
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_HTML,
             ],
             [
-                SettingField::NAME => 'wp_shake_js',
+                SettingField::NAME => OptionKey::WP_SHAKE_JS,
                 SettingField::LABEL => __('Disable Login shake', 'custom-login'),
                 SettingField::DESC => __('Disable the login forms animated "shake" on error.', 'custom-login'),
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_CHECKBOX,
             ],
             [
-                SettingField::NAME => 'remove_login_css',
+                SettingField::NAME => OptionKey::REMOVE_LOGIN_CSS,
                 SettingField::LABEL => __('Remove login CSS', 'custom-login'),
                 SettingField::DESC => __(
                     'Remove WordPress\' login CSS. Warning: You\'ll have to add additional styles not set by this plugin.',
@@ -513,7 +511,7 @@ return [
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_CHECKBOX,
             ],
             [
-                SettingField::NAME => 'lostpassword_text',
+                SettingField::NAME => OptionKey::LOSTPASSWORD_TEXT,
                 SettingField::LABEL => __('Remove lost password text', 'custom-login'),
                 SettingField::DESC => __(
                     'Remove the "Lost Password?" text. This does <strong>not</strong> disable the lost password function.',
