@@ -2,9 +2,15 @@
 
 namespace TheFrosty\CustomLogin;
 
+use TheFrosty\CustomLogin\Settings\Api\Factory;
+use function add_action;
 use function function_exists;
+use function get_editable_roles;
 use function is_array;
 use function preg_match;
+use function sanitize_key;
+use function sprintf;
+use const DAY_IN_SECONDS;
 
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
@@ -13,15 +19,34 @@ if (!defined('ABSPATH')) {
 
 /**
  * Return all editable role capabilities.
- * @link http://codex.wordpress.org/Function_Reference/get_editable_roles
- * @return array
+ * @return array<string, string>
  */
-function getEditableRoles(): array
+function getWpRoles(): array
+{
+    $key = sprintf('%1$s%2$s', Factory::PREFIX, sanitize_key(__FUNCTION__));
+    $roles = get_transient($key);
+    if (empty($roles)) {
+        add_action('shutdown', static function () use ($key, &$roles): void {
+            $roles = _getEditableRoles();
+            set_transient($key, $roles, DAY_IN_SECONDS);
+        });
+    }
+
+    return !is_array($roles) ? ['manage_options' => 'manage_options'] : $roles;
+}
+
+/**
+ * Return all editable role capabilities.
+ * @link http://codex.wordpress.org/Function_Reference/get_editable_roles
+ * @access private
+ * @return array<string, string>
+ */
+function _getEditableRoles(): array
 {
     $roles = [];
-    $get_editable_roles = !function_exists('\get_editable_roles') ? null : \get_editable_roles();
+    $get_editable_roles = !function_exists('get_editable_roles') ? null : get_editable_roles();
     if (empty($get_editable_roles)) {
-        return $roles;
+        return ['manage_options' => 'manage_options'];
     }
     foreach ($get_editable_roles as $role) {
         /*
