@@ -41,7 +41,7 @@ return [
                 SettingField::DESC => '',
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_FILE,
                 SettingField::DEFAULT => '',
-                SettingField::SIZE => 'large',
+                SettingField::SIZE => 'medium',
                 SettingField::SANITIZE => 'esc_url',
             ],
             [
@@ -109,7 +109,7 @@ return [
                 ),
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_FILE,
                 SettingField::DEFAULT => '',
-                SettingField::SIZE => 'large',
+                SettingField::SIZE => 'medium',
                 SettingField::SANITIZE => 'esc_url',
             ],
             [
@@ -215,7 +215,7 @@ return [
                 SettingField::DESC => __('Add a background image to the login form.', 'custom-login'),
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_FILE,
                 SettingField::DEFAULT => '',
-                SettingField::SIZE => 'large',
+                SettingField::SIZE => 'medium',
                 SettingField::SANITIZE => 'esc_url',
             ],
             [
@@ -444,9 +444,9 @@ return [
                     'manage_options'
                 ),
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_SELECT,
-                SettingField::SIZE => 'large',
+                SettingField::SIZE => 'medium',
                 SettingField::DEFAULT => 'manage_options',
-                SettingField::OPTIONS => TheFrosty\CustomLogin\getEditableRoles(),
+                SettingField::OPTIONS => TheFrosty\CustomLogin\getWpRoles(),
             ],
             [
                 SettingField::NAME => OptionKey::BREAK_S,
