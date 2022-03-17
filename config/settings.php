@@ -203,6 +203,24 @@ return [
                 SettingField::SANITIZE => 'int',
             ],
             [
+                SettingField::NAME => OptionKey::LOGIN_FORM_WIDTH_UNIT,
+                SettingField::LABEL => __('Width Unit', 'custom-login'),
+                SettingField::DESC => sprintf(
+                    '<a href="https://www.w3schools.com/cssref/css_units.asp" target="_blank">%s</a>',
+                    __('login form width unit value.', 'custom-login')
+                ),
+                SettingField::TYPE => FieldTypes::FIELD_TYPE_SELECT,
+                SettingField::DEFAULT => 'px',
+                SettingField::OPTIONS => [
+                    'px' => 'px',
+                    'em' => 'em',
+                    'rem' => 'rem',
+                    'vw' => 'vw',
+                    'vh' => 'vh',
+                    '%' => '%',
+                ],
+            ],
+            [
                 SettingField::NAME => OptionKey::LOGIN_FORM_BACKGROUND_COLOR,
                 SettingField::LABEL => __('Background color', 'custom-login'),
                 SettingField::DESC => '',
@@ -292,7 +310,7 @@ return [
                 SettingField::LABEL => __('Box shadow', 'custom-login'),
                 SettingField::DESC => sprintf(
                     __(
-                        'Use use TheFrosty\CustomLogin\Settings\OptionKey;<a href="%s" target="_blank">box shadow</a> syntax w/ out color. <code>inset h-shadow v-shadow blur spread</code>',
+                        'Use <a href="%s" target="_blank">box shadow</a> syntax w/ out color. <code>inset h-shadow v-shadow blur spread</code>',
                         'custom-login'
                     ),
                     'https://www.w3schools.com/cssref/css3_pr_box-shadow.asp'
