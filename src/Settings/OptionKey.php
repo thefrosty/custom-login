@@ -3,7 +3,7 @@
 namespace TheFrosty\CustomLogin\Settings;
 
 /**
- * Interface Setting
+ * Interface OptionKey
  * @package TheFrosty\CustomLogin\Settings
  */
 interface OptionKey
