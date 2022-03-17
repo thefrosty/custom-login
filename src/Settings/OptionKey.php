@@ -35,6 +35,7 @@ interface OptionKey
     public const LOGIN_FORM_BOX_SHADOW = 'login_form_box_shadow';
     public const LOGIN_FORM_BOX_SHADOW_COLOR = 'login_form_box_shadow_color';
     public const LOGIN_FORM_WIDTH = 'login_form_width';
+    public const LOGIN_FORM_WIDTH_UNIT = 'login_form_width_unit';
     public const LOGO_BACKGROUND_POSITION = 'logo_background_position';
     public const LOGO_BACKGROUND_REPEAT = 'logo_background_repeat';
     public const LOGO_BACKGROUND_SIZE = 'logo_background_size';
