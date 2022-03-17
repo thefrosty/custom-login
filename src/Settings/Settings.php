@@ -13,8 +13,7 @@ use TheFrosty\CustomLogin\CustomLogin;
 use TheFrosty\CustomLogin\ServiceProvider;
 use TheFrosty\WpUtilities\Api\WpRemote;
 use TheFrosty\WpUtilities\Plugin\AbstractContainerProvider;
-use TheFrosty\WpUtilities\Plugin\Container;
-use TheFrosty\WpUtilities\Utils\View;
+use TheFrosty\WpUtilities\Utils\Viewable;
 use function __;
 use function _x;
 use function array_merge;
@@ -33,20 +32,7 @@ use function wp_localize_script;
 class Settings extends AbstractContainerProvider implements OptionKey
 {
 
-    use WpRemote;
-
-    private View $view;
-
-    /**
-     * @param Container|null $container
-     * @throws \Psr\Container\ContainerExceptionInterface
-     * @throws \Psr\Container\NotFoundExceptionInterface
-     */
-    public function __construct(?Container $container = null)
-    {
-        parent::__construct($container);
-        $this->view = $this->getContainer()->get(ServiceProvider::WP_UTILITIES_VIEW);
-    }
+    use Viewable, WpRemote;
 
     /**
      * Add class hooks.
@@ -143,7 +129,7 @@ class Settings extends AbstractContainerProvider implements OptionKey
      */
     private function postbox(string $id, string $title, string $content): void
     {
-        $this->view->render(
+        $this->getView(ServiceProvider::WP_UTILITIES_VIEW)->render(
             'postbox',
             ['id' => $id, 'title' => $title, 'content' => $content]
         );
@@ -155,7 +141,7 @@ class Settings extends AbstractContainerProvider implements OptionKey
     protected function sidebarAboutTheAuthor(): void
     {
         ob_start();
-        $this->view->render('sidebars/about-the-author.php');
+        $this->getView(ServiceProvider::WP_UTILITIES_VIEW)->render('sidebars/about-the-author.php');
         $content = ob_get_clean();
 
         $this->postbox(
@@ -178,7 +164,7 @@ class Settings extends AbstractContainerProvider implements OptionKey
      */
     protected function sidebarExtensions(): void
     {
-        $content = $this->view->retrieve(
+        $content = $this->getView(ServiceProvider::WP_UTILITIES_VIEW)->retrieve(
             'dashboard-widget/rest.php',
             [
                 'posts' => $this->retrieveBodyCached(
