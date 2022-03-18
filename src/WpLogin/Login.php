@@ -7,7 +7,6 @@ use TheFrosty\CustomLogin\ServiceProvider;
 use TheFrosty\CustomLogin\Settings\Api\Factory;
 use TheFrosty\CustomLogin\Settings\OptionKey;
 use TheFrosty\CustomLogin\Settings\OptionValue;
-use TheFrosty\WpUtilities\Api\TransientsTrait;
 use TheFrosty\WpUtilities\Plugin\AbstractContainerProvider;
 use TheFrosty\WpUtilities\Plugin\HooksTrait;
 use TheFrosty\WpUtilities\Utils\Viewable;
@@ -28,7 +27,7 @@ use function wp_script_is;
 class Login extends AbstractContainerProvider
 {
 
-    use HooksTrait, TransientsTrait, Viewable;
+    use HooksTrait, Viewable;
 
     /**
      * Add class hooks.
@@ -119,9 +118,10 @@ class Login extends AbstractContainerProvider
             remove_action('login_footer', 'wp_shake_js', 12);
         }
 
-        $this->getView(ServiceProvider::WP_UTILITIES_VIEW)->render(
+        $view = $this->getView(ServiceProvider::WP_UTILITIES_VIEW);
+        $view->render(
             'wp-login/style',
-            Options::getOptions(Factory::SECTION_DESIGN)
+            Options::getOptions(Factory::getSection(Factory::SECTION_DESIGN))
         );
     }
 
@@ -148,7 +148,8 @@ class Login extends AbstractContainerProvider
             return;
         }
 
-        $this->getView(ServiceProvider::WP_UTILITIES_VIEW)->render(
+        $view = $this->getView(ServiceProvider::WP_UTILITIES_VIEW);
+        $view->render(
             'wp-login/script', [
                 OptionKey::CUSTOM_JQUERY => $data,
             ]
