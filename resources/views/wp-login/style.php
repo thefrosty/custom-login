@@ -1,5 +1,6 @@
 <?php declare(strict_types=1);
 
+use TheFrosty\CustomLogin\CustomLogin;
 use TheFrosty\CustomLogin\Settings\OptionValue;
 use function TheFrosty\CustomLogin\openCssRule;
 use function TheFrosty\CustomLogin\prefixIt;
@@ -14,7 +15,7 @@ if (!defined('SHORTINIT')) {
     define('SHORTINIT', true);
 }
 
-$version ??= '';
+$version ??= CustomLogin::VERSION;
 $close_rule = "}\n";
 
 $css = '<style>';
@@ -28,8 +29,8 @@ $css .= "
  * Extensions  : https://frosty.media/plugin/tag/custom-login-extension/
  */\n\n";
 
-/* Custom user input */
-if (!empty($custom_css)) {
+$custom_css ??= '';
+if (is_string($custom_css) && $custom_css !== '') {
     $css .= "/** START Custom CSS */\n";
     $css .= str_replace(['{BSLASH}'], ['\\'], wp_specialchars_decode(stripslashes($custom_css)));
     $css .= "\n/** END Custom CSS */\n";
@@ -91,6 +92,8 @@ if (!empty($login_form_background_color)) {
 
 if (!empty($login_form_background_url)) {
     $css .= trailingSemicolonIt('background-image', "url('$login_form_background_url')");
+    $login_form_background_position ??= '';
+    $login_form_background_repeat ??= '';
     $css .= trailingSemicolonIt('background-position', $login_form_background_position);
     $css .= trailingSemicolonIt('background-repeat', $login_form_background_repeat);
 
@@ -154,6 +157,8 @@ if (!empty($logo_background_url)) {
         $css .= trailingSemicolonIt('height', sprintf('%1$spx !important', $logo_background_size_height));
     }
     $css .= trailingSemicolonIt('background-image', "url('$logo_background_url')");
+    $logo_background_position ??= '';
+    $logo_background_repeat ??= '';
     $css .= trailingSemicolonIt('background-position', $logo_background_position);
     $css .= trailingSemicolonIt('background-repeat', $logo_background_repeat);
 
@@ -182,6 +187,7 @@ if (!empty($label_color)) {
 if (!empty($nav_color)) {
     $css .= openCssRule('.login #nav a, .login #backtoblog a');
     $css .= trailingSemicolonIt('color', sprintf('%1$s !important', $nav_color));
+    $nav_text_shadow_color ??= '';
     $css .= trailingSemicolonIt('text-shadow', sprintf('0 1px 0 %1$s', $nav_text_shadow_color));
     $css .= $close_rule; // CLOSE .login #nav a, .login #backtoblog a
 }
@@ -193,6 +199,7 @@ if (!empty($nav_color)) {
 if (!empty($nav_hover_color)) {
     $css .= openCssRule('.login #nav a:hover, .login #backtoblog a:hover');
     $css .= trailingSemicolonIt('color', sprintf('%1$s !important', $nav_hover_color));
+    $nav_text_shadow_hover_color ??= '';
     $css .= trailingSemicolonIt('text-shadow', sprintf('0 1px 0 %1$s', $nav_text_shadow_hover_color));
     $css .= $close_rule; // CLOSE .login #nav a:hover, .login #backtoblog a:hover
 }
