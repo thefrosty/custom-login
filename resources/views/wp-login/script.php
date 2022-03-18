@@ -9,22 +9,14 @@ if (!defined('SHORTINIT')) {
     define('SHORTINIT', true);
 }
 
-$data ??= '';
-if ($data === '') {
+$custom_jquery ??= '';
+if (!is_string($custom_jquery) || $custom_jquery === '') {
     return;
 }
 ?>
-/**
-* Custom Login by Austin Passy
-*
-* Plugin URI: https://frosty.media/plugins/custom-login/
-* Version: <?php echo TheFrosty\CustomLogin\CustomLogin::VERSION; ?>
-* Author URI: https://austin.passy.co/
-* Extensions: https://frosty.media/plugin/tag/custom-login-extension/
-*/
 <script type="text/javascript">
   (function ($) {
     'use strict'
-      <?php echo wp_specialchars_decode(stripslashes($data)); ?>
+      <?php echo wp_specialchars_decode(stripslashes($custom_jquery)); ?>
   }(jQuery))
 </script>
