@@ -11,6 +11,7 @@ use Dwnload\WpSettingsApi\Settings\SectionManager;
 use Dwnload\WpSettingsApi\WpSettingsApi;
 use TheFrosty\CustomLogin\CustomLogin;
 use TheFrosty\CustomLogin\ServiceProvider;
+use TheFrosty\CustomLogin\Settings\Api\Postbox;
 use TheFrosty\WpUtilities\Api\WpRemote;
 use TheFrosty\WpUtilities\Plugin\AbstractContainerProvider;
 use TheFrosty\WpUtilities\Utils\Viewable;
@@ -18,8 +19,6 @@ use function __;
 use function _x;
 use function array_merge;
 use function esc_html;
-use function ob_get_clean;
-use function ob_start;
 use function sprintf;
 use function wp_add_inline_script;
 use function wp_enqueue_code_editor;
@@ -32,7 +31,7 @@ use function wp_localize_script;
 class Settings extends AbstractContainerProvider implements OptionKey
 {
 
-    use Viewable, WpRemote;
+    use Viewable, Postbox, WpRemote;
 
     /**
      * Add class hooks.
@@ -119,20 +118,6 @@ class Settings extends AbstractContainerProvider implements OptionKey
         ]);
 
         return $styles;
-    }
-
-    /**
-     * Create a postbox widget.
-     * @param string $id ID of the postbox.
-     * @param string $title Title of the postbox.
-     * @param string $content Content of the postbox.
-     */
-    private function postbox(string $id, string $title, string $content): void
-    {
-        $this->getView(ServiceProvider::WP_UTILITIES_VIEW)->render(
-            'postbox',
-            ['id' => $id, 'title' => $title, 'content' => $content]
-        );
     }
 
     /**
