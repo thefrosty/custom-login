@@ -47,7 +47,7 @@ class Tracking extends AbstractContainerProvider
         $this->addAction('custom_login_weekly_scheduled_events', [$this, 'sendCheckIn']);
         $this->addAction(WpSettingsApi::ACTION_PREFIX . 'after_sanitize_options', [$this, 'afterSanitizeOptions']);
         $this->addAction('admin_action_' . self::OPT_INTO_TRACKING, [$this, 'checkForOptIn']);
-        $this->addAction('admin_action_cl_opt_out_of_tracking', [$this, 'checkForOptOut']);
+        $this->addAction('admin_action_' . self::OPT_OUT_OF_TRACKING, [$this, 'checkForOptOut']);
         $this->addAction('admin_notices', [$this, 'adminNotice']);
     }
 
