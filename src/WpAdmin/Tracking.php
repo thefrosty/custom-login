@@ -33,7 +33,6 @@ class Tracking extends AbstractContainerProvider
 
     use Activator, Viewable, WpRemote;
 
-    public const API = CustomLogin::API_URL . 'cl-checkin-api/?edd_action=cl_checkin';
     public const OPTION_HIDE_TRACKING_NOTICE = Factory::PREFIX . 'hide_tracking_notice';
     public const OPTION_TRACKING_LAST_SEND = Factory::PREFIX . 'tracking_last_send';
     private const OPT_INTO_TRACKING = 'cl_opt_into_tracking';
@@ -77,7 +76,7 @@ class Tracking extends AbstractContainerProvider
 
         add_action('shutdown', function () use ($extra_data): void {
             $response = $this->wpRemotePost(
-                self::API,
+                add_query_arg('edd_action', 'cl_checkin', CustomLogin::getApiUrl('cl-checkin-api/')),
                 [
                     'body' => $this->getBody($extra_data),
                     'user-agent' => 'CustomLogin/' . CustomLogin::VERSION . '; ' . get_bloginfo('url'),
