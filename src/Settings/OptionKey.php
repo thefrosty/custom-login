@@ -49,6 +49,8 @@ interface OptionKey
     public const NAV_TEXT_SHADOW_COLOR = 'nav_text_shadow_color';
     public const NAV_TEXT_SHADOW_HOVER_COLOR = 'nav_text_shadow_hover_color';
     public const REMOVE_LOGIN_CSS = 'remove_login_css';
+    public const SETTINGS_EXPORT = 'export';
+    public const SETTINGS_IMPORT = 'import';
     public const TRACKING = 'tracking';
     public const WP_SHAKE_JS = 'wp_shake_js';
 }
