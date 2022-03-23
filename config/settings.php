@@ -5,6 +5,7 @@ use Dwnload\WpSettingsApi\Api\SettingSection;
 use Dwnload\WpSettingsApi\Settings\FieldTypes;
 use TheFrosty\CustomLogin\Settings\Api\Factory;
 use TheFrosty\CustomLogin\Settings\OptionKey;
+use TheFrosty\CustomLogin\Settings\OptionValue;
 
 return [
     'sections' => [
@@ -449,7 +450,7 @@ return [
                 SettingField::LABEL => __('Activate', 'custom-login'),
                 SettingField::DESC => __('Allow Custom Login to hook into WordPress.', 'custom-login'),
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_CHECKBOX,
-                SettingField::DEFAULT => 'on',
+                SettingField::DEFAULT => OptionValue::ON,
             ],
             [
                 SettingField::NAME => OptionKey::CAPABILITY,
@@ -496,6 +497,7 @@ return [
                     __('Unchecked equals "off" (do not allow).', 'custom-login')
                 ),
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_CHECKBOX,
+                SettingField::DEFAULT => OptionValue::ON,
             ],
             [
                 SettingField::NAME => OptionKey::DASHBOARD_WIDGET,
@@ -506,6 +508,7 @@ return [
                     __('Unchecked equals "off" (do not allow).', 'custom-login')
                 ),
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_CHECKBOX,
+                SettingField::DEFAULT => OptionValue::ON,
             ],
             [
                 SettingField::NAME => OptionKey::BREAK_S,
