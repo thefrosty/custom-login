@@ -113,7 +113,7 @@ return [
                 SettingField::SANITIZE => 'esc_url',
             ],
             [
-                SettingField::NAME => 'logo_background_size_width',
+                SettingField::NAME => OptionKey::LOGO_BACKGROUND_SIZE_WIDTH,
                 SettingField::LABEL => __('Image width', 'custom-login'),
                 SettingField::DESC => __(
                     'Enter your desired image height (All not integers will be removed).',
