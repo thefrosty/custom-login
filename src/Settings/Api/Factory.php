@@ -17,6 +17,7 @@ class Factory
     public const PREFIX = 'custom_login_';
     public const SECTION_DESIGN = 'design';
     public const SECTION_GENERAL = 'general';
+    public const SECTION_IMPORT_EXPORT = 'import_export';
 
     /**
      * Helper to get the App object.
