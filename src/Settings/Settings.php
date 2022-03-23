@@ -140,9 +140,7 @@ class Settings extends AbstractContainerProvider implements OptionKey
      */
     protected function sidebarAboutTheAuthor(): void
     {
-        ob_start();
-        $this->getView(ServiceProvider::WP_UTILITIES_VIEW)->render('sidebars/about-the-author.php');
-        $content = ob_get_clean();
+        $content = $this->getView(ServiceProvider::WP_UTILITIES_VIEW)->retrieve('sidebars/about-the-author.php');
 
         $this->postbox(
             'frosty-media-author',
