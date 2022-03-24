@@ -34,7 +34,7 @@ return [
                     ),
                     esc_url(
                         wp_nonce_url(
-                            add_query_arg(['action' => ImportExport::ACTION_DOWNLOAD_EXPORT]),
+                            add_query_arg(['action' => ImportExport::ACTION_DOWNLOAD_EXPORT], admin_url('admin.php')),
                             'export',
                             ImportExport::NONCE
                         )
