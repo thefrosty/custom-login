@@ -1,0 +1,22 @@
+.Dwnload_WP_Settings_Api__menu li > a[href="#custom_login_extensions"] {
+    background-color: #e7ecef;
+    color: #474747;
+    font-weight: bold;
+}
+
+.Dwnload_WP_Settings_Api__sidebar .star-rating {
+    text-decoration: none;
+}
+
+.Dwnload_WP_Settings_Api__sidebar .star-rating i {
+    color: #fddb5a;
+}
+
+.Dwnload_WP_Settings_Api__sidebar li {
+    margin-bottom: 5px;
+}
+
+.Dwnload_WP_Settings_Api__sidebar a.rsswidget {
+    font-weight: 400;
+    line-height: 1.4;
+}
