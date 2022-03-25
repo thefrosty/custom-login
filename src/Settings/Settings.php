@@ -5,6 +5,7 @@ namespace TheFrosty\CustomLogin\Settings;
 use Dwnload\WpSettingsApi\ActionHookName;
 use Dwnload\WpSettingsApi\Api\SettingField;
 use Dwnload\WpSettingsApi\Api\SettingSection;
+use Dwnload\WpSettingsApi\Api\Style;
 use Dwnload\WpSettingsApi\Settings\FieldManager;
 use Dwnload\WpSettingsApi\Settings\SectionManager;
 use Dwnload\WpSettingsApi\WpSettingsApi;
@@ -39,6 +40,7 @@ class Settings extends AbstractContainerProvider implements OptionKey
     {
         $this->addAction(WpSettingsApi::HOOK_INIT, [$this, 'init'], 10, 3);
         $this->addFilter(ActionHookName::ADMIN_SETTINGS_ADMIN_SCRIPTS, [$this, 'adminScripts']);
+        $this->addFilter(ActionHookName::ADMIN_SETTINGS_ADMIN_STYLES, [$this, 'adminStyles']);
         $this->addAction(ActionHookName::SETTINGS_SETTINGS_SIDEBARS, [$this, 'sidebarAboutTheAuthor'], 20);
         $this->addAction(ActionHookName::SETTINGS_SETTINGS_SIDEBARS, [$this, 'sidebarExtensions'], 22);
     }
@@ -99,6 +101,23 @@ class Settings extends AbstractContainerProvider implements OptionKey
         }
 
         return $scripts;
+    }
+
+    /**
+     * @param Style[] $styles
+     * @return array
+     */
+    protected function adminStyles(array $styles): array
+    {
+        $styles[] = new Style([
+            Style::HANDLE => 'custom-login',
+            Style::SRC => $this->getPlugin()->getUrl('resources/css/settings.css'),
+            Style::DEPENDENCIES => [],
+            Style::VERSION => CustomLogin::VERSION,
+            Style::MEDIA => 'screen',
+        ]);
+
+        return $styles;
     }
 
     /**
