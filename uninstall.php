@@ -36,12 +36,12 @@ delete_transient(CL_Common::get_transient_key('announcement'));
 delete_option('custom_login_announcement_message');
 
 // Delete tracking options
-delete_option('custom_login_tracking_last_send');
-delete_option('custom_login_hide_tracking_notice');
+delete_option(TheFrosty\CustomLogin\WpAdmin\Tracking::OPTION_TRACKING_LAST_SEND);
+delete_option(TheFrosty\CustomLogin\WpAdmin\Tracking::OPTION_HIDE_TRACKING_NOTICE);
 
 // Cleanup Cron Events
-wp_clear_scheduled_hook('custom_login_daily_scheduled_events');
-wp_clear_scheduled_hook('custom_login_weekly_scheduled_events');
+wp_clear_scheduled_hook(TheFrosty\CustomLogin\Api\Cron::HOOK_DAILY);
+wp_clear_scheduled_hook(TheFrosty\CustomLogin\Api\Cron::HOOK_WEEKLY);
 
 // Delete version option
 delete_option('custom_login_version');
