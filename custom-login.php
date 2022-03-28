@@ -23,10 +23,16 @@
  */
 
 use Dwnload\WpSettingsApi\WpSettingsApi;
+use TheFrosty\CustomLogin\Api\Activator;
+use TheFrosty\CustomLogin\Api\Cron;
+use TheFrosty\CustomLogin\CustomLogin;
 use TheFrosty\CustomLogin\ServiceProvider;
 use TheFrosty\CustomLogin\Settings\Api\Factory;
+use TheFrosty\CustomLogin\Settings\ImportExport;
 use TheFrosty\CustomLogin\Settings\Settings;
 use TheFrosty\CustomLogin\WpAdmin\Dashboard;
+use TheFrosty\CustomLogin\WpAdmin\Extensions;
+use TheFrosty\CustomLogin\WpAdmin\Tracking;
 use TheFrosty\CustomLogin\WpLogin\Login;
 use TheFrosty\WpUtilities\Plugin\PluginFactory;
 
@@ -68,13 +74,22 @@ $plugin = PluginFactory::create('custom-login', __FILE__);
 $container = $plugin->getContainer();
 $container->register(new ServiceProvider());
 $plugin
+    ->add(new Cron())
+    ->addOnHook(CustomLogin::class, 'plugins_loaded', 5)
     ->addOnHook(Dashboard::class, 'load-index.php', 5, true, [Dashboard::getArgs()])
+    ->addOnHook(Extensions::class, 'init', 10, true, [$container])
+    ->addOnHook(ImportExport::class, 'init', 10, true, [$container])
     ->addOnHook(Login::class, 'init', 2, null, [$container])
     ->addOnHook(Settings::class, 'init', 10, true, [$container])
+    ->addOnHook(Tracking::class, 'admin_init', 10, true, [$container])
     ->addOnHook(WpSettingsApi::class, 'init', 10, true, [Factory::getPluginSettings($plugin)]);
 
 add_action('plugins_loaded', static function () use ($plugin): void {
     $plugin->initialize();
+});
+
+register_activation_hook(__FILE__, static function () use ($plugin): void {
+    (new CustomLogin())->activate();
 });
 
 if (!function_exists('CUSTOMLOGIN')) {
