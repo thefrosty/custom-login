@@ -23,6 +23,7 @@ use function get_option;
 use function get_plugins;
 use function home_url;
 use function sprintf;
+use function TheFrosty\CustomLogin\isSettingsPage;
 use function wp_get_theme;
 use function wp_next_scheduled;
 use function wp_schedule_single_event;
@@ -156,16 +157,7 @@ class Tracking extends AbstractContainerProvider
      */
     protected function adminNotice(): void
     {
-        $section_id = Factory::getSection(Factory::SECTION_GENERAL);
-        $options = Options::getOptions($section_id);
-        $hide_notice = get_option(self::OPTION_HIDE_TRACKING_NOTICE);
-
-        if (
-            $hide_notice === true ||
-            (!empty($options[OptionKey::ADMIN_NOTICES]) && $options[OptionKey::ADMIN_NOTICES] === OptionValue::OFF) ||
-            (!empty($options[OptionKey::TRACKING]) && $options[OptionKey::TRACKING] === OptionValue::OFF) ||
-            !current_user_can('manage_options')
-        ) {
+        if (!isSettingsPage($this->getPlugin())) {
             return;
         }
 
