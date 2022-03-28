@@ -3,6 +3,7 @@
 namespace TheFrosty\CustomLogin;
 
 use TheFrosty\CustomLogin\Settings\Api\Factory;
+use TheFrosty\WpUtilities\Plugin\PluginInterface;
 use function add_action;
 use function function_exists;
 use function get_editable_roles;
@@ -10,11 +11,24 @@ use function is_array;
 use function preg_match;
 use function sanitize_key;
 use function sprintf;
+use function strpos;
 use const DAY_IN_SECONDS;
 
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
     exit;
+}
+
+/**
+ * Are we on the Custom Login settings page?
+ * @param PluginInterface $plugin
+ * @return bool
+ */
+function isSettingsPage(PluginInterface $plugin): bool
+{
+    return $GLOBALS['pagenow'] === 'options-general.php' &&
+        isset($_GET['page']) &&
+        strpos($plugin->getSlug(), $_GET['page']) !== false;
 }
 
 /**
