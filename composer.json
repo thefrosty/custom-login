@@ -23,8 +23,10 @@
   "require": {
     "php": "^7.4 || ^8.0",
     "ext-json": "*",
-    "dwnload/wp-settings-api": "^3.4",
-    "thefrosty/wp-utilities": "dev-develop as 2.6.1"
+    "dwnload/wp-settings-api": "^3.5",
+    "opis/closure": "^3.6",
+    "pimple/pimple": "^3.5",
+    "thefrosty/wp-utilities": "^2.7"
   },
   "require-dev": {
     "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
