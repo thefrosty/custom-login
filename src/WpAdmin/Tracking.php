@@ -5,6 +5,7 @@ namespace TheFrosty\CustomLogin\WpAdmin;
 use Dwnload\WpSettingsApi\Api\Options;
 use Dwnload\WpSettingsApi\WpSettingsApi;
 use TheFrosty\CustomLogin\Api\Activator;
+use TheFrosty\CustomLogin\Api\Cron;
 use TheFrosty\CustomLogin\CustomLogin;
 use TheFrosty\CustomLogin\ServiceProvider;
 use TheFrosty\CustomLogin\Settings\Api\Factory;
@@ -13,9 +14,9 @@ use TheFrosty\CustomLogin\Settings\OptionValue;
 use TheFrosty\WpUtilities\Api\WpRemote;
 use TheFrosty\WpUtilities\Plugin\AbstractContainerProvider;
 use TheFrosty\WpUtilities\Utils\Viewable;
-use function add_action;
 use function array_keys;
 use function array_merge;
+use function current_time;
 use function function_exists;
 use function get_bloginfo;
 use function get_option;
@@ -23,6 +24,8 @@ use function get_plugins;
 use function home_url;
 use function sprintf;
 use function wp_get_theme;
+use function wp_next_scheduled;
+use function wp_schedule_single_event;
 
 /**
  * Class Tracking
@@ -35,6 +38,8 @@ class Tracking extends AbstractContainerProvider
 
     public const OPTION_HIDE_TRACKING_NOTICE = Factory::PREFIX . 'hide_tracking_notice';
     public const OPTION_TRACKING_LAST_SEND = Factory::PREFIX . 'tracking_last_send';
+    private const ACTION = 'cl_checkin';
+    private const HOOK_SEND_CHECKIN = Factory::PREFIX . 'send_check_in';
     private const OPT_INTO_TRACKING = 'cl_opt_into_tracking';
     private const OPT_OUT_OF_TRACKING = 'cl_opt_out_of_tracking';
 
@@ -43,7 +48,8 @@ class Tracking extends AbstractContainerProvider
      */
     public function addHooks(): void
     {
-        $this->addAction('custom_login_weekly_scheduled_events', [$this, 'sendCheckIn']);
+        $this->addAction(self::HOOK_SEND_CHECKIN, [$this, 'sendCheckIn'], 10, 2);
+        $this->addAction(Cron::HOOK_WEEKLY, [$this, 'sendCheckIn'], 10, 2);
         $this->addAction(WpSettingsApi::ACTION_PREFIX . 'after_sanitize_options', [$this, 'afterSanitizeOptions']);
         $this->addAction('admin_action_' . self::OPT_INTO_TRACKING, [$this, 'checkForOptIn']);
         $this->addAction('admin_action_' . self::OPT_OUT_OF_TRACKING, [$this, 'checkForOptOut']);
@@ -53,16 +59,17 @@ class Tracking extends AbstractContainerProvider
     /**
      * Runs on plugin install.
      * @since 3.0.0
+     * @update 4.0.0 Change to scheduled (cron) event.
      */
     public function activate(): void
     {
-        $this->sendCheckIn(['on_activation' => 'yes'], true);
+        $this->scheduleCheckIn(['on_activation' => 'yes'], true);
     }
 
     /**
      * Send a check-in request.
      */
-    protected function sendCheckIn(array $extra_data = [], bool $force = false)
+    protected function sendCheckIn(array $extra_data = [], bool $force = false): void
     {
         if (!$this->isTrackingAllowed() && !$force) {
             return;
@@ -74,19 +81,27 @@ class Tracking extends AbstractContainerProvider
             return;
         }
 
-        add_action('shutdown', function () use ($extra_data): void {
-            $response = $this->wpRemotePost(
-                add_query_arg('edd_action', 'cl_checkin', CustomLogin::getApiUrl('cl-checkin-api/')),
-                [
-                    'body' => $this->getBody($extra_data),
-                    'user-agent' => 'CustomLogin/' . CustomLogin::VERSION . '; ' . get_bloginfo('url'),
-                ]
-            );
+        $response = $this->wpRemotePost(
+            add_query_arg('edd_action', self::ACTION, CustomLogin::getApiUrl('cl-checkin-api/')),
+            [
+                'body' => $this->getBody($extra_data),
+                'user-agent' => 'CustomLogin/' . CustomLogin::VERSION . '; ' . get_bloginfo('url'),
+            ]
+        );
 
-            if (!is_wp_error($response)) {
-                update_option(self::OPTION_TRACKING_LAST_SEND, time());
-            }
-        });
+        if (!is_wp_error($response)) {
+            update_option(self::OPTION_TRACKING_LAST_SEND, time());
+        }
+    }
+
+    /**
+     * Schedule a single check-in request.
+     */
+    protected function scheduleCheckIn(array $extra_data = [], bool $force = false)
+    {
+        if (!wp_next_scheduled(self::HOOK_SEND_CHECKIN, [$extra_data, $force])) {
+            wp_schedule_single_event(current_time('timestamp'), self::HOOK_SEND_CHECKIN, [$extra_data, $force]);
+        }
     }
 
     /**
@@ -99,7 +114,7 @@ class Tracking extends AbstractContainerProvider
     {
         // Send an initial check in on settings save.
         if (isset($input[OptionKey::TRACKING]) && $input[OptionKey::TRACKING] === OptionValue::ON) {
-            $this->sendCheckIn(['on_activation' => 'settings', 'mailchimp_sub' => 'yes'], true);
+            $this->scheduleCheckIn(['on_activation' => 'settings', 'mailchimp_sub' => 'yes'], true);
         }
 
         return $input;
@@ -115,7 +130,7 @@ class Tracking extends AbstractContainerProvider
         $options[OptionKey::TRACKING] = OptionValue::ON;
         update_option($section_id, $options);
         update_option(self::OPTION_HIDE_TRACKING_NOTICE, '1');
-        $this->sendCheckIn(['on_activation' => 'admin notice', 'mailchimp_sub' => 'yes'], true);
+        $this->scheduleCheckIn(['on_activation' => 'admin notice', 'mailchimp_sub' => 'yes'], true);
 
         wp_safe_redirect(esc_url(remove_query_arg('action', wp_get_referer())));
         exit;
