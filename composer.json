@@ -29,6 +29,7 @@
     "thefrosty/wp-utilities": "^2.7"
   },
   "require-dev": {
+    "ext-simplexml": "*",
     "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
     "phpcompatibility/php-compatibility": "^9.3",
     "phpunit/phpunit": "^9",
@@ -47,6 +48,7 @@
   },
   "autoload-dev": {
     "psr-4": {
+      "TheFrosty\\Tests\\CustomLogin\\": "tests/unit"
     }
   },
   "scripts": {
@@ -57,7 +59,7 @@
       "bash ./vendor/thefrosty/wp-utilities/bin/phpcs.sh"
     ],
     "phpunit": [
-      "./vendor/bin/phpunit --colors --verbose --coverage-html ./tests/results && php ./tests/clover-results.php ./tests/clover.xml 0"
+      "./vendor/bin/phpunit --colors --verbose --coverage-html ./tests/results && php ./tests/clover-results.php ./tests/clover.xml 1"
     ],
     "eslint": [
       "npm run eslint"
