@@ -6,7 +6,7 @@
   "license": "GPL-2.0-only",
   "scripts": {
     "travis": "if [ \"$TRAVIS_COMMIT_RANGE\" ]; then standard $TRAVIS_COMMIT_RANGE; else standard; fi",
-    "eslint": "./vendor/bin/eslint.sh"
+    "eslint": "./vendor/thefrosty/wp-utilities/bin/eslint.sh"
   },
   "standard": {
     "globals": [
