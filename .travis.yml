@@ -1,0 +1,64 @@
+os: linux
+dist: xenial
+
+cache:
+  directories:
+    - "$HOME/.composer/cache"
+    - vendor
+
+language: php
+php:
+  - '7.4'
+  - '8.0'
+  - '8.1'
+
+branches:
+  only:
+    - develop
+    - "/^.*[Ff]eature\\/.*$/"
+    - "/^.*[rR]elease\\/.*$/"
+    - "/^.*[bB]ug\\/.*$/"
+    - "/^.*[Hh]otfix\\/.*$/"
+
+services:
+  - mysql
+
+jobs:
+  fast_finish: true
+  include:
+    - php: '7.4'
+    - php: '8.0'
+    - php: '8.1'
+  allow_failures:
+    - php: '8.0'
+    - php: '8.1'
+
+env:
+  global:
+    - WORDPRESS_DB_USER=wp
+    - WORDPRESS_DB_PASS=password
+    - WORDPRESS_DB_NAME=wp_tests
+    - WP_VERSION=5.9.2
+    - WP_MULTISITE=0
+    - XDEBUG_MODE=coverage
+
+install:
+  - composer update --no-interaction --optimize-autoloader
+  - export PATH="$HOME/.composer/vendor/bin:$PATH"
+  - export DEV_BIN_PATH=./vendor/thefrosty/wp-utilities/bin
+  - source "$DEV_BIN_PATH/create-all-branches.sh"
+
+before_script:
+  - mysql -u root -e "GRANT ALL PRIVILEGES ON $WORDPRESS_DB_NAME.* TO $WORDPRESS_DB_USER IDENTIFIED BY '$WORDPRESS_DB_PASS';"
+  - mysql -u root -e "CREATE DATABASE $WORDPRESS_DB_NAME;"
+
+script:
+  - composer tests
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+notifications:
+  email:
+    on_success: never
+    on_failure: change
