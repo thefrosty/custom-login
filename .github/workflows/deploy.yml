@@ -13,6 +13,7 @@ jobs:
       - uses: actions/checkout@master
       - name: Build # Remove or modify this step as needed
         run: |
+          composer update --no-dev --optimize-autoloader
           npm install --only=production
 
       - name: WordPress Plugin Deploy
