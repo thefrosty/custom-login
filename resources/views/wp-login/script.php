@@ -15,8 +15,5 @@ if (!is_string($custom_jquery) || $custom_jquery === '') {
 }
 ?>
 <script type="text/javascript">
-  (function ($) {
-    'use strict'
-      <?php echo wp_specialchars_decode(stripslashes($custom_jquery)); ?>
-  }(jQuery))
+    <?php echo wp_specialchars_decode(stripslashes($custom_jquery)); ?>
 </script>
