@@ -11,6 +11,7 @@ use TheFrosty\WpUtilities\Plugin\AbstractContainerProvider;
 use TheFrosty\WpUtilities\Plugin\HooksTrait;
 use TheFrosty\WpUtilities\Utils\Viewable;
 use function add_filter;
+use function apply_filters;
 use function get_bloginfo;
 use function home_url;
 use function is_multisite;
@@ -37,7 +38,7 @@ class Login extends AbstractContainerProvider
         if (
             Options::getOption(
                 OptionKey::ACTIVE,
-                Factory::SECTION_GENERAL,
+                Factory::getSection(Factory::SECTION_GENERAL),
                 OptionValue::ON
             ) === OptionValue::OFF
         ) {
@@ -63,7 +64,7 @@ class Login extends AbstractContainerProvider
             $GLOBALS['pagenow'] === 'wp-login.php' &&
             Options::getOption(
                 OptionKey::REMOVE_LOGIN_CSS,
-                Factory::SECTION_GENERAL,
+                Factory::getSection(Factory::SECTION_GENERAL),
                 OptionValue::OFF
             ) === OptionValue::ON
         ) {
@@ -81,7 +82,7 @@ class Login extends AbstractContainerProvider
         if (
             Options::getOption(
                 OptionKey::ANIMATE_CSS,
-                Factory::SECTION_DESIGN,
+                Factory::getSection(Factory::SECTION_DESIGN),
                 OptionValue::OFF
             ) === OptionValue::ON
         ) {
@@ -96,7 +97,7 @@ class Login extends AbstractContainerProvider
         }
 
         if (
-            !empty(Options::getOption(OptionKey::CUSTOM_JQUERY, Factory::SECTION_DESIGN)) &&
+            !empty(Options::getOption(OptionKey::CUSTOM_JQUERY, Factory::getSection(Factory::SECTION_DESIGN))) &&
             !wp_script_is('jquery')
         ) {
             wp_enqueue_script('jquery');
@@ -111,7 +112,7 @@ class Login extends AbstractContainerProvider
         if (
             Options::getOption(
                 OptionKey::WP_SHAKE_JS,
-                Factory::SECTION_GENERAL,
+                Factory::getSection(Factory::SECTION_GENERAL),
                 OptionValue::OFF
             ) === OptionValue::ON
         ) {
@@ -130,9 +131,15 @@ class Login extends AbstractContainerProvider
      */
     protected function loginFooterHtml(): void
     {
-        $data = Options::getOption(OptionKey::CUSTOM_HTML, Factory::SECTION_DESIGN);
+        $data = Options::getOption(OptionKey::CUSTOM_HTML, Factory::getSection(Factory::SECTION_DESIGN));
         if (!empty($data)) {
-            echo wp_kses_post($data) . PHP_EOL;
+            /**
+             * Allow the HTML to be filtered. Options could be to apply core processes like `do_shortcode`.
+             * @param string $data
+             * @return string
+             */
+            $html = apply_filters('custom_login/login_footer_html', $data);
+            echo wp_kses_post($html) . PHP_EOL;
         }
     }
 
@@ -142,7 +149,7 @@ class Login extends AbstractContainerProvider
      */
     protected function loginFooterJquery(): void
     {
-        $data = Options::getOption(OptionKey::CUSTOM_JQUERY, Factory::SECTION_DESIGN);
+        $data = Options::getOption(OptionKey::CUSTOM_JQUERY, Factory::getSection(Factory::SECTION_DESIGN));
 
         if (empty($data)) {
             return;
@@ -191,7 +198,10 @@ class Login extends AbstractContainerProvider
     {
         if (
             $GLOBALS['pagenow'] === 'wp-login.php' &&
-            Options::getOption(OptionKey::LOSTPASSWORD_TEXT, Factory::SECTION_GENERAL) !== OptionValue::OFF &&
+            Options::getOption(
+                OptionKey::LOSTPASSWORD_TEXT,
+                Factory::getSection(Factory::SECTION_GENERAL)
+            ) !== OptionValue::OFF &&
             $untranslated_text === 'Lost your password?'
         ) {
             $translated_text = ''; // Unset translation to empty string
