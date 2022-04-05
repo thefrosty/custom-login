@@ -81,7 +81,7 @@ class Login extends AbstractContainerProvider
         if (
             Options::getOption(
                 OptionKey::ANIMATE_CSS,
-                Factory::SECTION_DESIGN,
+                Factory::getSection(Factory::SECTION_DESIGN),
                 OptionValue::OFF
             ) === OptionValue::ON
         ) {
@@ -96,7 +96,7 @@ class Login extends AbstractContainerProvider
         }
 
         if (
-            !empty(Options::getOption(OptionKey::CUSTOM_JQUERY, Factory::SECTION_DESIGN)) &&
+            !empty(Options::getOption(OptionKey::CUSTOM_JQUERY, Factory::getSection(Factory::SECTION_DESIGN))) &&
             !wp_script_is('jquery')
         ) {
             wp_enqueue_script('jquery');
@@ -130,7 +130,8 @@ class Login extends AbstractContainerProvider
      */
     protected function loginFooterHtml(): void
     {
-        $data = Options::getOption(OptionKey::CUSTOM_HTML, Factory::SECTION_DESIGN);
+        $data = Options::getOption(OptionKey::CUSTOM_HTML, Factory::getSection(Factory::SECTION_DESIGN));
+        var_dump($data);
         if (!empty($data)) {
             echo wp_kses_post($data) . PHP_EOL;
         }
@@ -142,7 +143,7 @@ class Login extends AbstractContainerProvider
      */
     protected function loginFooterJquery(): void
     {
-        $data = Options::getOption(OptionKey::CUSTOM_JQUERY, Factory::SECTION_DESIGN);
+        $data = Options::getOption(OptionKey::CUSTOM_JQUERY, Factory::getSection(Factory::SECTION_DESIGN));
 
         if (empty($data)) {
             return;
