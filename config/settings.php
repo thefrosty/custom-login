@@ -427,7 +427,7 @@ return [
             ],
             [
                 SettingField::NAME => OptionKey::BREAK_S,
-                SettingField::LABEL => sprintf('<h4>%s</h4>', __('Custom jQuery', 'custom-login')),
+                SettingField::LABEL => sprintf('<h4>%s</h4>', __('Custom Javascript', 'custom-login')),
                 SettingField::DESC => '',
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_HTML,
             ],
@@ -435,8 +435,12 @@ return [
                 SettingField::NAME => OptionKey::CUSTOM_JQUERY,
                 SettingField::LABEL => '',
                 SettingField::DEFAULT => '',
-                SettingField::DESC => '<code>(function($) { "use strict";</code> ' .
-                    __('** Your custom jQuery will output here **.', 'custom-login') . ' <code>}(jQuery));</code><br>',
+                SettingField::DESC => sprintf(
+                    '<code>%1$s</code>&nbsp;%2$s&nbsp;<code>%3$s</code><br>',
+                    esc_html('<script type="text/javascript">'),
+                    __('Your custom javascript will output here', 'custom-login'),
+                    esc_html('</script>')
+                ),
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_TEXTAREA,
                 SettingField::SANITIZE => 'wp_specialchars_decode',
                 SettingField::ATTRIBUTES => [
