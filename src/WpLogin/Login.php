@@ -37,7 +37,7 @@ class Login extends AbstractContainerProvider
         if (
             Options::getOption(
                 OptionKey::ACTIVE,
-                Factory::SECTION_GENERAL,
+                Factory::getSection(Factory::SECTION_GENERAL),
                 OptionValue::ON
             ) === OptionValue::OFF
         ) {
@@ -63,7 +63,7 @@ class Login extends AbstractContainerProvider
             $GLOBALS['pagenow'] === 'wp-login.php' &&
             Options::getOption(
                 OptionKey::REMOVE_LOGIN_CSS,
-                Factory::SECTION_GENERAL,
+                Factory::getSection(Factory::SECTION_GENERAL),
                 OptionValue::OFF
             ) === OptionValue::ON
         ) {
@@ -111,7 +111,7 @@ class Login extends AbstractContainerProvider
         if (
             Options::getOption(
                 OptionKey::WP_SHAKE_JS,
-                Factory::SECTION_GENERAL,
+                Factory::getSection(Factory::SECTION_GENERAL),
                 OptionValue::OFF
             ) === OptionValue::ON
         ) {
@@ -192,7 +192,10 @@ class Login extends AbstractContainerProvider
     {
         if (
             $GLOBALS['pagenow'] === 'wp-login.php' &&
-            Options::getOption(OptionKey::LOSTPASSWORD_TEXT, Factory::SECTION_GENERAL) !== OptionValue::OFF &&
+            Options::getOption(
+                OptionKey::LOSTPASSWORD_TEXT,
+                Factory::getSection(Factory::SECTION_GENERAL)
+            ) !== OptionValue::OFF &&
             $untranslated_text === 'Lost your password?'
         ) {
             $translated_text = ''; // Unset translation to empty string
