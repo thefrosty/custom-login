@@ -11,6 +11,7 @@ use TheFrosty\WpUtilities\Plugin\AbstractContainerProvider;
 use TheFrosty\WpUtilities\Plugin\HooksTrait;
 use TheFrosty\WpUtilities\Utils\Viewable;
 use function add_filter;
+use function apply_filters;
 use function get_bloginfo;
 use function home_url;
 use function is_multisite;
@@ -131,9 +132,14 @@ class Login extends AbstractContainerProvider
     protected function loginFooterHtml(): void
     {
         $data = Options::getOption(OptionKey::CUSTOM_HTML, Factory::getSection(Factory::SECTION_DESIGN));
-        var_dump($data);
         if (!empty($data)) {
-            echo wp_kses_post($data) . PHP_EOL;
+            /**
+             * Allow the HTML to be filtered. Options could be to apply core processes like `do_shortcode`.
+             * @param string $data
+             * @return string
+             */
+            $html = apply_filters('custom_login/login_footer_html', $data);
+            echo wp_kses_post($html) . PHP_EOL;
         }
     }
 
