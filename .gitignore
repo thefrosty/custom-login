@@ -4,6 +4,8 @@ bin-release/
 bower_components/
 data/
 node_modules/
+tests/results/
+tests/clover.xml
 vendor/
 wordpress/
 composer.lock

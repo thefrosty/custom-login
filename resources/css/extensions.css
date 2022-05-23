@@ -1,0 +1,30 @@
+.section .addon .addon-container {
+    background: #f9f9f9;
+    border: 1px solid #8a8a8a;
+    max-width: 300px;
+    padding: 10px;
+    display: grid;
+    margin: 0;
+}
+
+div.img-wrap p {
+    min-height: 45px;
+}
+
+/* COLUMN SETUP  */
+.section {
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap: 1rem;
+    margin: 1% 1.6% 1% 0;
+}
+.col {
+    float: left;
+}
+
+/* GO FULL WIDTH AT LESS THAN 480 PIXELS */
+@media only screen and (max-width: 762px) {
+    .col {
+        margin: 1% 0 1em;
+    }
+}
