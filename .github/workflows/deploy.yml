@@ -39,7 +39,7 @@ jobs:
 
       - name: Test release condition
         if: |
-          github.event_name == 'release' && github.event.release.prerelease
+          github.event_name == 'release' && !github.event.release.prerelease
         run: echo "Success this is a prerelease ${{ github.event.release.prerelease }}"
 
 #      - name: WordPress Plugin Deploy
