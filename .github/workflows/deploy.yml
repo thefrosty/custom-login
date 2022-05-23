@@ -23,7 +23,8 @@ jobs:
 
       - name: Run composer install
         run: |
-          composer install --no-dev --optimize-autoloader
+          composer install --no-dev --no-interaction --optimize-autoloader
+          composer update --no-dev --no-interaction --optimize-autoloader
 
       - name: Set Node version to 16
         uses: actions/setup-node@v2
