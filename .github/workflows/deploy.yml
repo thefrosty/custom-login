@@ -23,7 +23,10 @@ jobs:
 
       - name: Run composer install
         run: |
-          composer install --no-dev --no-interaction --optimize-autoloader
+          composer install --no-interaction --optimize-autoloader
+
+      - name: Run composer update
+        run: |
           composer update --no-dev --no-interaction --optimize-autoloader
 
       - name: Set Node version to 16
