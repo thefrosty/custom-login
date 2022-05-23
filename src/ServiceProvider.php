@@ -9,7 +9,7 @@ use function dirname;
 
 /**
  * Class ServiceProvider
- * @package BeachbodyOnDemand
+ * @package TheFrosty
  */
 class ServiceProvider implements ServiceProviderInterface
 {

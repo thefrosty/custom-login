@@ -118,6 +118,16 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 == Changelog ==
 
+= Version 4.0.1 (2022/05/23) =
+
+* Version bump, including manually adding missing vendor directory (need to fix GitHub action).
+
+= Version 4.0.0 (2022/05/23) =
+
+* Complete rewrite.
+* Required PHP >= 7.4.
+* Full Changelog: [3.2.15...4.0.0](https://github.com/thefrosty/custom-login/compare/3.2.15...4.0.0)
+
 = Version 3.2.15 (2022/03/11) =
 
 * Fix settings API Settings: Uncaught Error: Call to undefined method stdClass::get_permalink() (#49)
@@ -235,8 +245,8 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 * Update: ace.js to build `20.12.14`.
 * Update: admin.css.
-* Update: Extenstions HTML and settings page location.
-* Update: Sanatize the `auth_cookie_expiration` setting with a positive integer.
+* Update: Extensions HTML and settings page location.
+* Update: Sanitize the `auth_cookie_expiration` setting with a positive integer.
 * Tweak: Remove false positive files from malware scanners; ace editor php.js [forum](https://wordpress.org/support/topic/wordfence-alerta?).
 * Tweak: Make sure `auth_cookie_expiration` is greater than 0.
 
@@ -292,6 +302,9 @@ _REQUIRES WordPress 3.9 or later_
 * New: Removed version [2.x changelog](http://plugins.svn.wordpress.org/custom-login/tags/2.4/readme.txt).
 
 == Upgrade Notice ==
+
+= 4.0.1 =
+Requires WordPress version >= 5.7 and PHP version >= 7.4.
 
 = 3.2.14 =
 Getting ready for version 4.0.0 which will bump minimum required WordPress version to 5.8 and PHP version to 7.4.
