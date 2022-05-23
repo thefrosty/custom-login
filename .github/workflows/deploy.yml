@@ -1,9 +1,6 @@
 name: "Deploy to WordPress.org"
 
 on:
-  pull_request:
-    branches:
-      - develop
   release:
     types: [ prereleased, published ]
 
@@ -19,19 +16,34 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: 7.4
-          tools: composer
+          coverage: none
+          tools: composer:v2
+        env:
+          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Install dependencies
+      - name: Run composer install
         run: |
-          echo "GitHub event pre-release: ${PRE_RELEASE}"
-          echo "Updating composer and NPM"
-          composer update --no-dev --optimize-autoloader
+          composer install --no-dev --optimize-autoloader
+
+      - name: Set Node version to 12
+        uses: actions/setup-node@v2
+        with:
+          version: 16
+
+      - name: Run npm install
+        run: |
           npm install --only=production
         env:
           PRE_RELEASE: ${{ github.event.release.prerelease }}
 
+      - name: Test release condition
+        if: |
+          github.event_name == 'release' && github.event.release.prerelease
+        run: echo "Success this is a prerelease ${{ github.event.release.prerelease }}"
+
 #      - name: WordPress Plugin Deploy
-#        if: "!github.event.release.prerelease"
+#        if: |
+#          ${{ github.event_name == 'release' && !github.event.release.prerelease }}
 #        uses: 10up/action-wordpress-plugin-deploy@stable
 #        with:
 #          generate-zip: true
