@@ -1,6 +1,9 @@
 name: "Deploy to WordPress.org"
 
 on:
+  pull_request:
+    branches:
+      - develop
   release:
     types: [ prereleased, published ]
 
@@ -38,12 +41,12 @@ jobs:
 #          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
 #          SLUG: custom-login
 
-      - name: Upload release asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ${{github.workspace}}/custom-login.zip
-          asset_name: custom-login.zip
-          asset_content_type: application/zip
+#      - name: Upload release asset
+#        uses: actions/upload-release-asset@v1
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        with:
+#          upload_url: ${{ github.event.release.upload_url }}
+#          asset_path: ${{github.workspace}}/custom-login.zip
+#          asset_name: custom-login.zip
+#          asset_content_type: application/zip
