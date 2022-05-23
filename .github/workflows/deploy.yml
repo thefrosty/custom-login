@@ -37,7 +37,6 @@ jobs:
       - name: Run npm install
         run: |
           npm install --only=production
-          mkdir build
 
       - name: WordPress Plugin Deploy
         if: |
@@ -52,7 +51,6 @@ jobs:
 
       - name: Create Artifact
         run: |
-          mkdir plugin-build
           composer archive --format=zip --file="plugin-build/custom-login"
 
       - name: Upload artifact
