@@ -142,6 +142,17 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 ## Changelog ##
 
+### Version 4.0.1 (2022/05/23) ###
+
+* Version bump, including manually adding missing vendor directory (need to fix GitHub action).
+
+### Version 4.0.0 (2022/05/23) ###
+
+* Complete rewrite.
+* Required PHP >= 7.4.
+* Full Changelog: [3.2.15...4.0.0](https://github.com/thefrosty/custom-login/compare/3.2.15...4.0.0)
+
+
 ### Version 3.2.15 (2022/03/11) ### 
 
 * Fix settings API Settings: Uncaught Error: Call to undefined method stdClass::get_permalink() (#49)
@@ -313,6 +324,9 @@ _REQUIRES WordPress 3.9 or later_
 * New: Removed version [2.x changelog](http://plugins.svn.wordpress.org/custom-login/tags/2.4/readme.txt).
 
 ## Upgrade Notice ##
+
+### 4.0.1 ###
+Requires WordPress version >= 5.7 and PHP version >= 7.4.
 
 ### 3.2 ###
 Celebrate 500,000 downloads w/ a FREE extension! Update to version 3.2 for more info.
