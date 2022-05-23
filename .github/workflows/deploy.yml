@@ -57,11 +57,11 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: custom-login
-          path: plugin-build/custom-login.zip
+          path: custom-login.zip
 
       - name: Upload release asset
         uses: softprops/action-gh-release@v1
         with:
-          files: plugin-build/custom-login.zip
+          files: custom-login.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
