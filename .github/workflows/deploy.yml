@@ -1,28 +1,43 @@
 name: "Deploy to WordPress.org"
 
 on:
-  push:
-    tags:
-      - "*"
+  release:
+    types: [ prereleased, published ]
 
 jobs:
   tag:
     name: New tag
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - name: Build # Remove or modify this step as needed
+      - name: Checkout
+        uses: actions/checkout@master
         run: |
+          echo "GitHub event pre-release: ${PRE_RELEASE}"
+        env:
+          PRE_RELEASE: ${{ github.event.release.prerelease }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.4
+          tools: composer
+
+      - name: Install dependencies
+        run: |
+          echo "Updating composer and NPM"
           composer update --no-dev --optimize-autoloader
           npm install --only=production
 
-      - name: WordPress Plugin Deploy
-        uses: 10up/action-wordpress-plugin-deploy@stable
-        with:
-          generate-zip: true
-        env:
-          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
-          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+#      - name: WordPress Plugin Deploy
+#        if: "!github.event.release.prerelease"
+#        uses: 10up/action-wordpress-plugin-deploy@stable
+#        with:
+#          generate-zip: true
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+#          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+#          SLUG: custom-login
 
       - name: Upload release asset
         uses: actions/upload-release-asset@v1
@@ -30,6 +45,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ${{ steps.deploy.outputs.zip-path }}
-          asset_name: ${{ github.event.repository.name }}.zip
+          asset_path: ${{github.workspace}}/custom-login.zip
+          asset_name: custom-login.zip
           asset_content_type: application/zip
