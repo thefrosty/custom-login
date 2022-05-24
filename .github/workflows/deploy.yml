@@ -2,7 +2,7 @@ name: "Deploy to WordPress.org"
 
 on:
   release:
-    types: [ prereleased, published ]
+    types: [ published ]
 
 jobs:
   tag:
@@ -16,34 +16,53 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: 7.4
-          tools: composer
-
-      - name: Install dependencies
-        run: |
-          echo "GitHub event pre-release: ${PRE_RELEASE}"
-          echo "Updating composer and NPM"
-          composer update --no-dev --optimize-autoloader
-          npm install --only=production
+          coverage: none
+          tools: composer:v2
         env:
-          PRE_RELEASE: ${{ github.event.release.prerelease }}
+          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-#      - name: WordPress Plugin Deploy
-#        if: "!github.event.release.prerelease"
-#        uses: 10up/action-wordpress-plugin-deploy@stable
-#        with:
-#          generate-zip: true
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
-#          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
-#          SLUG: custom-login
+      - name: Run composer install
+        run: |
+          composer install --no-interaction --optimize-autoloader
+
+      - name: Run composer update with --no-dev
+        run: |
+          composer update --no-dev --no-interaction --optimize-autoloader
+
+      - name: Set Node version to 16
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+
+      - name: Run npm install
+        run: |
+          npm install --only=production
+
+      - name: WordPress Plugin Deploy
+        if: |
+          github.event_name == 'release' && !github.event.release.prerelease
+        uses: 10up/action-wordpress-plugin-deploy@stable
+        env:
+          BUILD_DIR: svn
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SLUG: custom-login
+
+      - name: Create Artifact
+        run: |
+          mkdir plugin-build
+          composer archive -vvv --format=zip --file="plugin-build/custom-login"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: custom-login
+          path: plugin-build/custom-login.zip
 
       - name: Upload release asset
-        uses: actions/upload-release-asset@v1
+        uses: softprops/action-gh-release@v1
+        with:
+          files: plugin-build/custom-login.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ${{github.workspace}}/custom-login.zip
-          asset_name: custom-login.zip
-          asset_content_type: application/zip
