@@ -3,7 +3,7 @@ name: Generate Translations
 on:
   push:
     branches:
-      - develop
+      - release/*
 
 jobs:
   generate-translations:
