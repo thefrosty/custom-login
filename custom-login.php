@@ -53,7 +53,7 @@ if (version_compare(PHP_VERSION, '7.4', '<')) {
     return add_filter('custom_login_shutdown_error_message', function () {
         return sprintf(
             esc_html__(
-                'Custom Login 4.x requires PHP version >= 7.4, you are running %s, plugin is currently NOT ACTIVE.',
+                'Custom Login 4.x requires PHP version >= 7.4, you are running %s, plugin is currently disabled.',
                 'custom-login'
             ),
             PHP_VERSION
@@ -62,7 +62,7 @@ if (version_compare(PHP_VERSION, '7.4', '<')) {
 } elseif (!is_readable(__DIR__ . '/vendor/autoload.php')) {
     return add_filter('custom_login_shutdown_error_message', function () {
         return esc_html__(
-            'Custom Login can\'t find the autoload file, plugin is currently NOT ACTIVE.',
+            'Custom Login can\'t find the autoload file, plugin is currently disabled.',
             'custom-login'
         );
     });
