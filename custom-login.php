@@ -23,7 +23,6 @@
  */
 
 use Dwnload\WpSettingsApi\WpSettingsApi;
-use TheFrosty\CustomLogin\Api\Activator;
 use TheFrosty\CustomLogin\Api\Cron;
 use TheFrosty\CustomLogin\CustomLogin;
 use TheFrosty\CustomLogin\ServiceProvider;
@@ -32,6 +31,7 @@ use TheFrosty\CustomLogin\Settings\ImportExport;
 use TheFrosty\CustomLogin\Settings\Settings;
 use TheFrosty\CustomLogin\WpAdmin\Dashboard;
 use TheFrosty\CustomLogin\WpAdmin\Extensions;
+use TheFrosty\CustomLogin\WpAdmin\SettingsUpgrades;
 use TheFrosty\CustomLogin\WpAdmin\Tracking;
 use TheFrosty\CustomLogin\WpLogin\Login;
 use TheFrosty\WpUtilities\Plugin\PluginFactory;
@@ -81,6 +81,7 @@ $plugin
     ->addOnHook(ImportExport::class, 'init', 10, true, [$container])
     ->addOnHook(Login::class, 'init', 2, null, [$container])
     ->addOnHook(Settings::class, 'init', 10, true, [$container])
+    ->addOnHook(SettingsUpgrades::class, 'init', 10, null, [$container])
     ->addOnHook(Tracking::class, 'admin_init', 10, true, [$container])
     ->addOnHook(WpSettingsApi::class, 'init', 10, true, [Factory::getPluginSettings($plugin)]);
 
