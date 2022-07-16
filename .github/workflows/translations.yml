@@ -1,0 +1,26 @@
+name: Generate Translations
+
+on:
+  push:
+    branches:
+      - release/*
+
+jobs:
+  generate-translations:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: WordPress POT/PO/MO Generator
+        uses: strangerstudios/action-wp-pot-po-mo-generator@main
+        with:
+          destination_path: './languages'
+          generate_mo: 1
+          generate_po: 1
+          generate_pot: 1
+          merge_changes: 1
+          slug: 'custom-login'
+          text_domain: 'custom-login'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

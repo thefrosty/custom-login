@@ -1,399 +1,439 @@
+# Copyright (C) 2022 Austin Passy
+# This file is distributed under the same license as the Custom Login plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Custom Login 2.0\n"
-"POT-Creation-Date: 2013-04-15 22:01-0800\n"
-"PO-Revision-Date: 2013-04-15 22:03-0800\n"
-"Last-Translator: Austin Passy <austin@thefrosty.com>\n"
-"Language-Team: \n"
+"Project-Id-Version: Custom Login 4.0.2\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/custom-login\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.5\n"
-"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e;_x\n"
-"X-Poedit-Basepath: .\n"
-"X-Poedit-SearchPath-0: .\n"
+"POT-Creation-Date: 2022-07-15T21:04:52+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.6.0\n"
+"X-Domain: custom-login\n"
 
-#: custom-login.php:319 custom-login.php:630 functions/install.php:32
-#: functions/install.php:40
-msgid "Custom Login Settings"
-msgstr ""
-
-#: custom-login.php:324
-msgid "General Settings"
-msgstr ""
-
-#: custom-login.php:332
-msgid "Activate"
-msgstr ""
-
-#: custom-login.php:333
-msgid "Toggle this plugin on &amp; off."
-msgstr ""
-
-#: custom-login.php:339
-msgid "<h4><abbr title=\"Hyper Text Markup Language\">HTML</abbr></h4>"
-msgstr ""
-
-#: custom-login.php:346
-msgid "HTML Background Color"
-msgstr ""
-
-#: custom-login.php:353
-msgid "HTML Background Image"
-msgstr ""
-
-#: custom-login.php:354
-msgid "Upload an image or a repeating pattern (optional)."
-msgstr ""
-
-#: custom-login.php:361
-msgid "HTML Background Position"
-msgstr ""
-
-#: custom-login.php:362 custom-login.php:410 custom-login.php:465
-msgid ""
-"Allowed strings <code>left, top, center, right, bottom</code>. No more than "
-"two combined! Space delimiter."
-msgstr ""
-
-#: custom-login.php:369
-msgid "HTML Background repeat"
-msgstr ""
-
-#: custom-login.php:381
-msgid "HTML Background size"
-msgstr ""
-
-#: custom-login.php:394
-msgid "<h4>Logo</h4>"
-msgstr ""
-
-#: custom-login.php:401
-msgid "Logo"
-msgstr ""
-
-#: custom-login.php:402
-msgid "Replace the WordPress logo (optional)."
-msgstr ""
-
-#: custom-login.php:409
-msgid "Logo Background Position"
-msgstr ""
-
-#: custom-login.php:417
-msgid "Logo Background repeat"
-msgstr ""
-
-#: custom-login.php:429
-msgid "Logo Background size"
-msgstr ""
-
-#: custom-login.php:442
-msgid "<h4>Login form</h4>"
-msgstr ""
-
-#: custom-login.php:449
-msgid "Login Form Background Color"
-msgstr ""
-
-#: custom-login.php:456
-msgid "Login Form Background URL"
-msgstr ""
-
-#: custom-login.php:457
-msgid "Add an image to the form (optional)."
-msgstr ""
-
-#: custom-login.php:464
-msgid "Login Form Background Position"
-msgstr ""
-
-#: custom-login.php:472
-msgid "Login Form Background repeat"
-msgstr ""
-
-#: custom-login.php:484
-msgid "Login Form Background size"
-msgstr ""
-
-#: custom-login.php:496
-msgid "Login Form Border Radius"
-msgstr ""
-
-#: custom-login.php:504
-msgid "Login Form Border Size"
-msgstr ""
-
-#: custom-login.php:512
-msgid "Login Form Border Color"
-msgstr ""
-
-#: custom-login.php:519
-msgid "Login Form Box Shadow"
-msgstr ""
-
-#: custom-login.php:520
-#, php-format
-msgid "Use <a href=\"%s\">box shadow</a> syntax w/ out color. <code>%s</code>"
-msgstr ""
-
-#: custom-login.php:527
-msgid "Login Form Box Shadow Color"
-msgstr ""
-
-#: custom-login.php:535
-msgid "<h4>Misc.</h4>"
-msgstr ""
-
-#: custom-login.php:542
-msgid "Login Form Label Color"
-msgstr ""
-
-#: custom-login.php:550
-msgid "<h4>Below form anchor</h4>"
-msgstr ""
-
-#: custom-login.php:557
-msgid "Below form nav color"
-msgstr ""
-
-#: custom-login.php:564
-msgid "Below form nav text-shadow color"
-msgstr ""
-
-#: custom-login.php:571
-msgid "Below form nav color hover"
-msgstr ""
-
-#: custom-login.php:578
-msgid "Below form nav text-shadow hover"
-msgstr ""
-
-#: custom-login.php:586
-msgid "<h4>Custom HTML/CSS &amp; jQuery</h4>"
-msgstr ""
-
-#: custom-login.php:593
-msgid "Custom CSS"
-msgstr ""
-
-#: custom-login.php:599
-msgid "Custom HTML"
-msgstr ""
-
-#: custom-login.php:606
-msgid "Custom jQuery"
-msgstr ""
-
-#: custom-login.php:630 functions/post-types.php:37
+#. Plugin Name of the plugin
+#: src/Settings/Api/Factory.php:33
+#: src/Settings/Api/Factory.php:34
+#: src/Settings/Settings.php:132
 msgid "Custom Login"
 msgstr ""
 
-#: custom-login.php:640
-msgid "Settings"
+#. Plugin URI of the plugin
+msgid "https://frosty.media/plugins/custom-login"
 msgstr ""
 
-#: custom-login.php:672
-msgid "Support this plugin and buy me a beer"
+#. Description of the plugin
+msgid "A simple way to customize your WordPress <code>wp-login.php</code> screen! A <a href=\"https://frosty.media/\">Frosty Media</a> plugin."
 msgstr ""
 
-#: custom-login.php:673
-msgid "Rate this plugin on WordPress.org"
+#. Author of the plugin
+msgid "Austin Passy"
 msgstr ""
 
-#: custom-login.php:674
-msgid ""
-"Share your designs on <strong style=\"color:#0066DC;\">Flick</strong><strong "
-"style=\"color:#ff0084;\">r</strong>"
+#. Author URI of the plugin
+msgid "https://austin.passy.co"
 msgstr ""
 
-#: custom-login.php:675
-msgid "Get support on WordPress.org"
+#: config/import-export.php:14
+msgid "Import/Export"
 msgstr ""
 
-#: custom-login.php:676
-msgid "Contribute development on GitHub"
+#: config/import-export.php:29
+msgid "Export"
 msgstr ""
 
-#: custom-login.php:677
-msgid "Get Custom Login Add-ons"
+#: config/import-export.php:31
+msgid "This textarea is always pre-filled with the current settings. Copy these settings for import at a later time, or <a href=\"%s\">download</a> them."
 msgstr ""
 
-#: custom-login.php:683
-#, php-format
-msgid "<a href=\"%s\">%s</a> | <code>version %s</code>"
+#: config/settings.php:14
+msgid "Design Settings"
 msgstr ""
 
-#: classes/class.settings-api.php:745
-#, php-format
-msgid "%1$s | <a href=\"%2$s\">Dismiss notice</a>"
+#: config/settings.php:18
+msgid "General Settings"
 msgstr ""
 
-#: classes/class.settings-api.php:930
-msgid "Error fetching feed"
+#: config/settings.php:27
+msgid "<abbr title=\"Hyper Text Markup Language\">HTML</abbr>"
 msgstr ""
 
-#: classes/class.settings-api.php:941
-msgid "Like Extendd on Facebook"
+#: config/settings.php:34
+#: config/settings.php:226
+msgid "Background color"
 msgstr ""
 
-#: classes/class.settings-api.php:942
-msgid "Follow Extendd on Twitter"
+#: config/settings.php:41
+msgid "Background image"
 msgstr ""
 
-#: classes/class.settings-api.php:943
-msgid "Follow Austin on Twitter"
+#: config/settings.php:50
+#: config/settings.php:140
+#: config/settings.php:242
+msgid "Background position"
 msgstr ""
 
-#: classes/class.settings-api.php:944
-msgid "Circle Extendd on Google+"
+#: config/settings.php:53
+#: config/settings.php:143
+#: config/settings.php:245
+msgid "html background position"
 msgstr ""
 
-#: classes/class.settings-api.php:945
-msgid "Subscribe via email"
+#: config/settings.php:70
+#: config/settings.php:160
+#: config/settings.php:262
+msgid "Background repeat"
 msgstr ""
 
-#: classes/class.settings-api.php:948
-msgid "Latest plugins from Extendd.com"
+#: config/settings.php:82
+#: config/settings.php:172
+#: config/settings.php:274
+msgid "Background size"
 msgstr ""
 
-#: functions/post-types.php:25
-msgid "Logins"
+#: config/settings.php:94
+msgid "Logo"
 msgstr ""
 
-#: functions/post-types.php:26
-msgid "Login"
+#: config/settings.php:100
+msgid "Hide the WP logo"
 msgstr ""
 
-#: functions/post-types.php:27
-msgid "Add New"
+#: config/settings.php:101
+msgid "This setting hides the h1 element."
 msgstr ""
 
-#: functions/post-types.php:28
-msgid "Add New Login"
+#: config/settings.php:106
+msgid "Image"
 msgstr ""
 
-#: functions/post-types.php:29
-msgid "Edit Login"
+#: config/settings.php:107
+msgid "I would suggest a max width of 320px, the default form width. You can widen the width (setting below)."
 msgstr ""
 
-#: functions/post-types.php:30
-msgid "New Login"
+#: config/settings.php:118
+msgid "Image width"
 msgstr ""
 
-#: functions/post-types.php:31
-msgid "All Logins"
+#: config/settings.php:119
+#: config/settings.php:131
+msgid "Enter your desired image height (All not integers will be removed)."
 msgstr ""
 
-#: functions/post-types.php:32
-msgid "View Login"
+#: config/settings.php:130
+msgid "Image height"
 msgstr ""
 
-#: functions/post-types.php:33
-msgid "Search Logins"
+#: config/settings.php:184
+msgid "Login Form"
 msgstr ""
 
-#: functions/post-types.php:34
-msgid "No Logins found"
+#: config/settings.php:190
+msgid "Force max-width"
 msgstr ""
 
-#: functions/post-types.php:35
-msgid "No Logins found in Trash"
+#: config/settings.php:191
+msgid "If checked and the login form width (set below) is not empty, a CSS rule of <code>width</code> will be applied on the logo wrapper element <code>.login h1</code>. These settings apply to the Logo image (when background size is used)."
 msgstr ""
 
-#: functions/welcome.php:56 functions/welcome.php:57
-msgid "Welcome to Custom Login"
+#: config/settings.php:199
+msgid "Width"
 msgstr ""
 
-#: functions/welcome.php:111
-#, php-format
-msgid "Welcome to Custom Login %s"
+#: config/settings.php:200
+msgid "Change the default width of the login form."
 msgstr ""
 
-#: functions/welcome.php:112
-#, php-format
-msgid ""
-"Thank you for updating to the latest version! Custom Login %s is ready to "
-"make your login page better!"
+#: config/settings.php:208
+msgid "Width Unit"
 msgstr ""
 
-#: functions/welcome.php:113
-#, php-format
-msgid "Version %s"
+#: config/settings.php:211
+msgid "login form width unit value."
 msgstr ""
 
-#: functions/welcome.php:117
-msgid "What's New"
+#: config/settings.php:233
+msgid "Background URL"
 msgstr ""
 
-#: functions/welcome.php:122
-msgid "Improved Settings"
+#: config/settings.php:234
+msgid "Add a background image to the login form."
 msgstr ""
 
-#: functions/welcome.php:126
-msgid "Load times"
+#: config/settings.php:286
+msgid "Border radius"
 msgstr ""
 
-#: functions/welcome.php:127
-msgid ""
-"There were issues in the past version that had the plugin loading on pages "
-"it wasn't supposted to. <strong>CL</strong> now caches all queries and "
-"database calls."
+#: config/settings.php:295
+msgid "Border size"
 msgstr ""
 
-#: functions/welcome.php:129
-msgid "Better features"
+#: config/settings.php:304
+msgid "Border color"
 msgstr ""
 
-#: functions/welcome.php:130
-#, php-format
-msgid ""
-"With a complete rewrite of the plugin, I have to ability to build custom add-"
-"ons (think extensions), like stealth login, email logins and 2-step "
-"authentication to name a few of the add-ons you can find on %sExtendd.com%s "
-"in the future."
+#: config/settings.php:311
+msgid "Box shadow"
 msgstr ""
 
-#: functions/welcome.php:136
-msgid "Under the Hood"
+#: config/settings.php:313
+msgid "Use <a href=\"%s\" target=\"_blank\">box shadow</a> syntax w/ out color. <code>inset h-shadow v-shadow blur spread</code>"
 msgstr ""
 
-#: functions/welcome.php:140
-msgid "Settings Class"
+#: config/settings.php:325
+msgid "Box shadow color"
 msgstr ""
 
-#: functions/welcome.php:141
-#, php-format
-msgid ""
-"The new settings class allows to add your own add-ons! Documentation can be "
-"found on the %sExtendd.com%s site."
+#: config/settings.php:332
+msgid "Miscellaneous"
 msgstr ""
 
-#: functions/welcome.php:145
-msgid "Templates"
+#: config/settings.php:338
+msgid "Label color"
 msgstr ""
 
-#: functions/welcome.php:146
-#, php-format
-msgid ""
-"Custom login %stemplates%s can be created in your theme using the new login "
-"template add-on (coming soon)."
+#: config/settings.php:345
+msgid "Below Form anchor"
 msgstr ""
 
-#: functions/welcome.php:156
-msgid "Go to Custom Login Settings"
+#: config/settings.php:351
+msgid "Nav color"
 msgstr ""
 
-#: functions/upgrades/upgrades.php:25
+#: config/settings.php:358
+msgid "Nav text-shadow color"
+msgstr ""
+
+#: config/settings.php:365
+msgid "Nav color hover"
+msgstr ""
+
+#: config/settings.php:372
+msgid "Nav text-shadow hover"
+msgstr ""
+
+#: config/settings.php:379
+msgid "Custom CSS"
+msgstr ""
+
+#: config/settings.php:389
+msgid "Allowed variables:"
+msgstr ""
+
+#: config/settings.php:403
+msgid "Animate"
+msgstr ""
+
+#: config/settings.php:405
+msgid "Include <a href=\"%s\">animate.css</a>?"
+msgstr ""
+
+#: config/settings.php:413
+msgid "Custom HTML"
+msgstr ""
+
+#: config/settings.php:430
+msgid "Custom Javascript"
+msgstr ""
+
+#: config/settings.php:441
+msgid "Your custom javascript will output here"
+msgstr ""
+
+#: config/settings.php:454
+msgid "Activate"
+msgstr ""
+
+#: config/settings.php:455
+msgid "Allow Custom Login to hook into WordPress."
+msgstr ""
+
+#: config/settings.php:461
+msgid "Capability"
+msgstr ""
+
+#: config/settings.php:463
+msgid "Set the minimum user capability to manage these settings. The default capability is <code>%s</code>"
+msgstr ""
+
+#: config/settings.php:476
+msgid "Tracking Settings"
+msgstr ""
+
+#: config/settings.php:482
+msgid "Usage tracking"
+msgstr ""
+
+#: config/settings.php:483
+msgid "Allow Frosty Media to anonymously track how this plugin is used (and help us make the plugin better). Opt-in and receive a 20% discount code for all Custom Login extensions. Get your coupon code <a href=\"https://frosty.media/?p=21442\">here</a>."
+msgstr ""
+
+#: config/settings.php:491
+msgid "Notices"
+msgstr ""
+
+#: config/settings.php:497
+msgid "Admin notices"
+msgstr ""
+
+#: config/settings.php:500
+msgid "Allow admin notices everywhere in WordPress."
+msgstr ""
+
+#: config/settings.php:501
+#: config/settings.php:512
+msgid "Unchecked equals \"off\" (do not allow)."
+msgstr ""
+
+#: config/settings.php:508
+msgid "Dashboard widget"
+msgstr ""
+
+#: config/settings.php:511
+msgid "Show a dashboard widget, like WordPress news for Frosty Media."
+msgstr ""
+
+#: config/settings.php:519
+msgid "Login functions"
+msgstr ""
+
+#: config/settings.php:525
+msgid "Disable Login shake"
+msgstr ""
+
+#: config/settings.php:526
+msgid "Disable the login forms animated \"shake\" on error."
+msgstr ""
+
+#: config/settings.php:531
+msgid "Remove login CSS"
+msgstr ""
+
+#: config/settings.php:532
+msgid "Remove WordPress' login CSS. Warning: You'll have to add additional styles not set by this plugin."
+msgstr ""
+
+#: config/settings.php:540
+msgid "Remove lost password text"
+msgstr ""
+
+#: config/settings.php:541
+msgid "Remove the \"Lost Password?\" text. This does <strong>not</strong> disable the lost password function."
+msgstr ""
+
+#: custom-login.php:57
+msgid "Custom Login 4.x requires PHP version >= 7.4, you are running %s, plugin is currently disabled."
+msgstr ""
+
+#: custom-login.php:66
+msgid "Custom Login can't find the autoload file, plugin is currently disabled."
+msgstr ""
+
+#: resources/views/settings/extensions.php:7
+msgid "Available Custom Login Extensions"
+msgstr ""
+
+#: resources/views/settings/extensions.php:29
+msgid "Not Installed"
+msgstr ""
+
+#: resources/views/settings/extensions.php:42
+msgid "Get this Extension"
+msgstr ""
+
+#: resources/views/settings/extensions.php:55
+msgid "PayPal"
+msgstr ""
+
+#: resources/views/settings/extensions.php:63
+msgid "Credit Card"
+msgstr ""
+
+#: resources/views/settings/upgrades.php:7
 msgid "Custom Login - Upgrades"
 msgstr ""
 
-#: functions/upgrades/upgrades.php:28
-msgid ""
-"The upgrade process has started, please be patient. This could take several "
-"minutes. You will be automatically redirected when the upgrade is finished."
+#: resources/views/settings/upgrades.php:13
+msgid "The upgrade process has started, please be patient. This could take several minutes. You will be automatically redirected when the upgrade is finished."
 msgstr ""
 
-#: functions/upgrades/upgrades.php:59
+#: src/Api/Cron.php:51
+msgid "Once Weekly"
+msgstr ""
+
+#: src/CustomLogin.php:93
+msgid "Settings"
+msgstr ""
+
+#: src/CustomLogin.php:120
+msgid "Extension Installer"
+msgstr ""
+
+#: src/CustomLogin.php:124
+msgid "Extensions"
+msgstr ""
+
+#: src/Settings/ImportExport.php:97
+msgid "Custom Login settings successfully imported"
+msgstr ""
+
+#: src/Settings/Settings.php:135
+msgctxt "rate; as in rate this plugin"
+msgid "Rate"
+msgstr ""
+
+#: src/Settings/Settings.php:136
+msgctxt "the author of this plugin"
+msgid "Author"
+msgstr ""
+
+#: src/Settings/Settings.php:137
+msgid "Twitter"
+msgstr ""
+
+#: src/Settings/Settings.php:164
+msgid "Extensions %s"
+msgstr ""
+
+#: src/WpAdmin/Dashboard.php:54
+#: src/WpAdmin/Extensions.php:38
+#: src/WpAdmin/Extensions.php:39
+msgid "Custom Login Extensions"
+msgstr ""
+
+#: src/WpAdmin/Extensions.php:75
+msgid "Extensions Installer"
+msgstr ""
+
+#: src/WpAdmin/Extensions.php:77
+msgid "Install Custom Login extensions on <a href=\"%s\">this page</a> with a valid license key. <small>Purchase your license key by clicking the appropriate link below</small>."
+msgstr ""
+
+#: src/WpAdmin/SettingsUpgrades.php:66
+msgid "Custom Login: Version %s has some settings changes."
+msgstr ""
+
+#: src/WpAdmin/SettingsUpgrades.php:69
+msgctxt "Button text to trigger settings updates"
+msgid "Please click here the run the updates"
+msgstr ""
+
+#: src/WpAdmin/SettingsUpgrades.php:85
+#: src/WpAdmin/SettingsUpgrades.php:86
 msgid "Custom Login Upgrades"
+msgstr ""
+
+#: src/WpAdmin/Tracking.php:172
+msgid "Allow Custom Login to anonymously track how this plugin is used and help us make the plugin better?"
+msgstr ""
+
+#: src/WpAdmin/Tracking.php:176
+msgid "Allow"
+msgstr ""
+
+#: src/WpAdmin/Tracking.php:177
+msgid "Do not allow"
 msgstr ""

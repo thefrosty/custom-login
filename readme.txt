@@ -118,6 +118,10 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 == Changelog ==
 
+= Version 4.0.1 (2022/07/15) =
+
+* Don't show error message when not in admin.
+
 = Version 4.0.1 (2022/05/23) =
 
 * Version bump, including manually adding missing vendor directory (need to fix GitHub action).
