@@ -10,9 +10,9 @@
 **Contributors:** [austyfrosty](https://profiles.wordpress.org/austyfrosty), [frostymedia](https://profiles.wordpress.org/frostymedia)  
 **Donate link:** [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290)  
 **Tags:** admin, branding, customization, custom login, login, logo, error, login error, custom login pro  
-**Requires at least:** 4.9  
-**Tested up to:** 5.9  
-**Requires PHP**: 5.6  
+**Requires at least:** 5.8  
+**Tested up to:** 6.0.1  
+**Requires PHP**: 7.4  
 **Stable tag:** trunk  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
@@ -21,7 +21,7 @@ Custom Login allows you to easily customize your admin login page, works great f
 
 ## Description ##
 
-Custom Login 2.0 was 140% faster than version 1.0, and version 3.0 is now even better! *Minimum WordPress version is 4.9*
+Custom Login 2.0 was 140% faster than version 1.0, and version 3.0 is now even better!
 
 For more information visit the official [Custom Login](https://frosty.media/plugins/custom-login/) page.
 
@@ -142,7 +142,13 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 ## Changelog ##
 
-### Version 4.0.1 (2022/07/15) ###
+
+### Version 4.0.3 (2022/08/04) ###
+
+* Update both README's with correct "requires at least", "tested up to", and "requires PHP" header tags.
+* Cleanup admin notice messages when "unable to activate" due to invalid PHP version or missing autoload.
+
+### Version 4.0.2 (2022/07/15) ###
 
 * Don't show error message when not in admin.
 
