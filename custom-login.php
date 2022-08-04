@@ -3,7 +3,7 @@
  * Plugin Name: Custom Login
  * Plugin URI: https://frosty.media/plugins/custom-login
  * Description: A simple way to customize your WordPress <code>wp-login.php</code> screen! A <a href="https://frosty.media/">Frosty Media</a> plugin.
- * Version: 4.0.2
+ * Version: 4.0.3
  * Author: Austin Passy
  * Author URI: https://austin.passy.co
  * Requires at least: 5.8
@@ -55,7 +55,7 @@ if (version_compare(PHP_VERSION, '7.4', '<')) {
     return add_filter('custom_login_shutdown_error_message', function () {
         return sprintf(
             esc_html__(
-                'Custom Login 4.x requires PHP version >= 7.4, you are running %s, plugin is currently disabled.',
+                'Notice: Custom Login version 4 requires PHP version >= 7.4, you are running %s, all features are currently disabled.',
                 'custom-login'
             ),
             PHP_VERSION
@@ -64,7 +64,7 @@ if (version_compare(PHP_VERSION, '7.4', '<')) {
 } elseif (!is_readable(__DIR__ . '/vendor/autoload.php')) {
     return add_filter('custom_login_shutdown_error_message', function () {
         return esc_html__(
-            'Custom Login can\'t find the autoload file, plugin is currently disabled.',
+            'Error: Custom Login can\'t find the autoload file, all features are currently disabled.',
             'custom-login'
         );
     });
