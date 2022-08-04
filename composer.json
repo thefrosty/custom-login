@@ -66,6 +66,7 @@
     ],
     "tests": [
       "@phpcs",
+      "@phpunit",
       "@eslint"
     ]
   }
