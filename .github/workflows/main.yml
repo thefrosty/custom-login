@@ -1,0 +1,86 @@
+name: Main PHP Version(s) CI
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+
+# Cancels all previous workflow runs for the same branch that have not yet completed.
+concurrency:
+  # The concurrency group contains the workflow name and the branch name.
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  Test:
+    runs-on: ${{ matrix.operating-system }}
+    strategy:
+      matrix:
+        operating-system: [ ubuntu-latest ]
+        php-versions: [ 7.4, 8.0, 8.1 ]
+        wp-versions: [ 'latest' ]
+        coverage: [ true ]
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_DATABASE: wordpress_test
+          MYSQL_PASSWORD: password
+          MYSQL_USER: wp
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
+
+    name: WP ${{ matrix.wp-versions }} on PHP ${{ matrix.php-versions }}
+    env:
+      WORDPRESS_DB_NAME: wordpress_test
+      WORDPRESS_DB_PASS: password
+      WORDPRESS_DB_USER: wp
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # No shallow clone, we need all history!
+
+      - name: Setup PHP ${{ matrix.php-versions }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: mysql, mysqli
+          coverage: xdebug
+          tools: composer, cs2pr, phpunit
+
+      - name: Setup WordPress ${{ matrix.wp-versions }}
+        run: bash bin/install-wp-tests.sh wordpress_test wp password localhost ${{ matrix.wp-versions }} true
+
+      - name: Get composer cache directory
+        id: composercache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.composercache.outputs.dir }}
+          key: php-${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install dependencies
+        run: composer update --prefer-dist --no-interaction
+
+      - name: Create all branches
+        run: source ./vendor/thefrosty/wp-utilities/bin/create-all-branches.sh
+
+      - name: Run composer tests
+        run: composer tests
+        env:
+          DB_PORT: ${{ job.services.mysql.ports[3306] }}
+
+      - name: Show PHPCS results in PR
+        run: cs2pr ./phpcs-report.xml
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          fail_ci_if_error: false
