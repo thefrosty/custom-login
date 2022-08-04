@@ -2,8 +2,6 @@
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 /* Path to the WordPress codebase you'd like to test. Add a forward slash in the end. */
-// This is the install path as defined by `wordpress-install-dir` in composer.json
-$abspath = defined('TRAVIS') || getenv('TRAVIS') ? '/wordpress/' : '/';
 define('ABSPATH', dirname(__DIR__) . '/wordpress/');
 
 /*
@@ -34,9 +32,9 @@ define('WP_DEBUG', true);
 // These tests will DROP ALL TABLES in the database with the prefix named below.
 // DO NOT use a production database or one that is shared with something else.
 
-define('DB_NAME', getenv('WORDPRESS_DB_NAME') ?: 'wp_phpunit_tests');
-define('DB_USER', getenv('WORDPRESS_DB_USER') ?: 'wordpress_user');
-define('DB_PASSWORD', getenv('WORDPRESS_DB_PASS') ?: 'mysql_password');
+define('DB_NAME', getenv('WORDPRESS_DB_NAME') ?: 'wordpress_test');
+define('DB_USER', getenv('WORDPRESS_DB_USER') ?: 'wp');
+define('DB_PASSWORD', getenv('WORDPRESS_DB_PASS') ?: 'password');
 define('DB_HOST', getenv('WORDPRESS_DB_HOST') ?: '127.0.0.1');
 define('DB_CHARSET', 'utf8mb4');
 define('DB_COLLATE', '');
@@ -47,20 +45,21 @@ define('DB_COLLATE', '');
  * Change these to different unique phrases!
  * You can generate these using the {@link https://api.wordpress.org/secret-key/1.1/salt/ WordPress.org secret-key service}
  */
-define('AUTH_KEY', 'CV,%WA8/D@9|X}<|WnFk>@+*3*vdW&}=!;$|:6d+@!:7zYE|)9,P#+~mH<H0xd-Q');
-define('SECURE_AUTH_KEY', ':zfmSThnc?EV1[Fe)Nt`Sl12?hdbgxeo:>Vb:oHZbOC/HGvlbzQu+S8AE/75|AGR');
-define('LOGGED_IN_KEY', 'uukVo-T@T3=U9-bVc+Q4kWFd+w9A/Tu_6 iy}l.)ii@uP:!h|D<-b<)4Z8H~-krb');
-define('NONCE_KEY', '`UmT$5bN-(Xh9=CjA@1-:gNE~@i2pi-1RaO;400bqdzb7_xTc*ytt0,Z|HpbYWdz');
-define('AUTH_SALT', '+0~=j8U1I(%,A>{6=W&Ev8(.[-ZS4n[8t@@c:}yD$m+2?n|tw2Kmb||_Sq|7UgU<');
-define('SECURE_AUTH_SALT', '3OmX+9[;KGmFsOtv75]Akd6.%]`v1i^f(?n)Z,-T6I-w9CyF1Y[(5A3|;UJ$54Z_');
-define('LOGGED_IN_SALT', '2AGl4xbW]~[@vW|e cP:V4R0ZOFM![BiX(5!p3A?d(f DbkTtth)T9>$/mn<W[J!');
-define('NONCE_SALT', 'Q9b|w@/r%PDZ2?1%9fPk=5/6tq8n,>vK)Bq)|[4cRi06Z}{PIK!2<``=H6(X!SP[');
+define('AUTH_KEY', ']$:,ddmsBSpY++_,~!MT+T)m+N@dZfRjGMXXG}VvDx<`_L}p<1A1Egejj$3TkETd');
+define('SECURE_AUTH_KEY', 'q`M!posJii3GT{auH<kO-eUi#JJvQ/md&%I0Lvy%3~_M*OB)TuXh8TR.pI>C6z a');
+define('LOGGED_IN_KEY', '$CRI0?|w`X/tVGz[}WF]B{]bE$DhE]0dg}jmmc`F0}QXT;]ib@GhHmeCG7ay <T<');
+define('NONCE_KEY', 'W90c-$RIlL8xa<CN4[L?|MJqjfg0#S|D+;mbq ?/{lxrv0d<IKu&([`{Lpr3}@-V');
+define('AUTH_SALT', 'Z^Qc!XEV#9<i#!Aw{d%6V*f$A0<Z8E>[}H?>-NdsTf.KFjQ~9@DE+m0D QMj1-!+');
+define('SECURE_AUTH_SALT', 'oK%>WO`VV?p&OMAT6mk>U;#HT7%QnQ3I{W|LG~nxdW@KWaM,r&+;^8-f^J=QPg~,');
+define('LOGGED_IN_SALT', 'MOXV/qP< ML|&eZYuv6rp$(RW OK}Hp$SwhCqY%T5^XjKs0YQV]imsbNxp>|n|1&');
+define('NONCE_SALT', 'L3.( +bK+PG[7C{YkXLZlg]SBCLx[5&s3PPV]x)AZ-1!$y%-#SDNt#,T<~aB+SQ6');
+
 
 $table_prefix = 'wptests_';
 
 define('WP_TESTS_DOMAIN', 'example.org');
-define('WP_TESTS_EMAIL', 'admin@example.local');
-define('WP_TESTS_TITLE', 'Test Custom Login');
+define('WP_TESTS_EMAIL', 'admin@example.org');
+define('WP_TESTS_TITLE', 'Test Blog');
 
 define('WP_PHP_BINARY', 'php');
 
