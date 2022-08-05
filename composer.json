@@ -70,5 +70,11 @@
       "@phpunit",
       "@eslint"
     ]
+  },
+  "archive": {
+    "exclude": [
+      "!node_modules/",
+      "!vendor/"
+    ]
   }
 }
