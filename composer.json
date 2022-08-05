@@ -26,7 +26,8 @@
     "dwnload/wp-settings-api": "^3.5",
     "opis/closure": "^3.6",
     "pimple/pimple": "^3.5",
-    "thefrosty/wp-utilities": "^2.7"
+    "psr/container": "1.0.0 as 2.0.2",
+    "thefrosty/wp-utilities": "^2.7.4"
   },
   "require-dev": {
     "ext-simplexml": "*",
@@ -57,7 +58,7 @@
       "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run"
     ],
     "phpcs": [
-      "bash ./vendor/thefrosty/wp-utilities/bin/phpcs.sh"
+      "bash ./vendor/thefrosty/wp-utilities/bin/phpcs.sh --test-version=7.4"
     ],
     "phpunit": [
       "./vendor/bin/phpunit --colors --verbose --coverage-html ./tests/results && php ./tests/clover-results.php ./tests/clover.xml 1"
@@ -69,6 +70,13 @@
       "@phpcs",
       "@phpunit",
       "@eslint"
+    ]
+  },
+  "archive": {
+    "exclude": [
+      "!node_modules/",
+      "plugin-build/",
+      "!vendor/"
     ]
   }
 }

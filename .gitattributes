@@ -3,6 +3,7 @@
 /bin export-ignore
 /.wordpress-org export-ignore
 /coverage export-ignore
+/plugin-build export-ignore
 /tests export-ignore
 /wordpress export-ignore
 .gitattributes export-ignore

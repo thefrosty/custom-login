@@ -3,7 +3,7 @@
  * Plugin Name: Custom Login
  * Plugin URI: https://frosty.media/plugins/custom-login
  * Description: A simple way to customize your WordPress <code>wp-login.php</code> screen! A <a href="https://frosty.media/">Frosty Media</a> plugin.
- * Version: 4.0.3
+ * Version: 4.0.4
  * Author: Austin Passy
  * Author URI: https://austin.passy.co
  * Requires at least: 5.8
@@ -26,6 +26,7 @@
 
 use Dwnload\WpSettingsApi\WpSettingsApi;
 use TheFrosty\CustomLogin\Api\Cron;
+use TheFrosty\CustomLogin\Container;
 use TheFrosty\CustomLogin\CustomLogin;
 use TheFrosty\CustomLogin\ServiceProvider;
 use TheFrosty\CustomLogin\Settings\Api\Factory;
@@ -71,8 +72,7 @@ if (version_compare(PHP_VERSION, '7.4', '<')) {
 }
 
 require_once __DIR__ . '/vendor/autoload.php';
-$plugin = PluginFactory::create('custom-login', __FILE__);
-/** Container object. @var TheFrosty\WpUtilities\Plugin\Container $container */
+$plugin = PluginFactory::create('custom-login', __FILE__, new Container());
 $container = $plugin->getContainer();
 $container->register(new ServiceProvider());
 $plugin
