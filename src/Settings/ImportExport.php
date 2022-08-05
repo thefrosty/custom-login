@@ -8,11 +8,11 @@ use Dwnload\WpSettingsApi\Api\SettingSection;
 use Dwnload\WpSettingsApi\Settings\FieldManager;
 use Dwnload\WpSettingsApi\Settings\SectionManager;
 use Dwnload\WpSettingsApi\WpSettingsApi;
+use TheFrosty\CustomLogin\AbstractContainerProvider;
 use TheFrosty\CustomLogin\CustomLogin;
 use TheFrosty\CustomLogin\Settings\Api\Factory;
 use TheFrosty\CustomLogin\Settings\Api\Postbox;
 use TheFrosty\WpUtilities\Api\WpRemote;
-use TheFrosty\WpUtilities\Plugin\AbstractContainerProvider;
 use TheFrosty\WpUtilities\Utils\Viewable;
 
 /**

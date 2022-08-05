@@ -26,7 +26,8 @@
     "dwnload/wp-settings-api": "^3.5",
     "opis/closure": "^3.6",
     "pimple/pimple": "^3.5",
-    "thefrosty/wp-utilities": "^2.7.3"
+    "psr/container": "1.0.0 as 2.0.2",
+    "thefrosty/wp-utilities": "^2.7.4"
   },
   "require-dev": {
     "ext-simplexml": "*",

@@ -172,6 +172,11 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 ## Changelog ##
 
+### Version 4.0.4 (2022/08/05) ###
+
+* Change PSR Container package to use version 1 instead of 2 to avoid WooCommerce errors; fixes [#65](https://github.com/thefrosty/custom-login/issues/65)
+* Full Changelog: [4.0.3...4.0.4](https://github.com/thefrosty/custom-login/compare/4.0.3...4.0.4)
+
 ### Version 4.0.3 (2022/08/04) ###
 
 * Update both README's with correct "requires at least", "tested up to", and "requires PHP" header tags.
