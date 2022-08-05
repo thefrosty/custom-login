@@ -52,9 +52,6 @@ jobs:
           coverage: xdebug
           tools: composer, cs2pr, phpunit
 
-      - name: Setup WordPress ${{ matrix.wp-versions }}
-        run: source ./vendor/thefrosty/wp-utilities/bin/install-wp-tests.sh wordpress_test wp password localhost ${{ matrix.wp-versions }} true
-
       - name: Get composer cache directory
         id: composercache
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
@@ -68,6 +65,9 @@ jobs:
 
       - name: Install dependencies
         run: composer update --prefer-dist --no-interaction
+
+      - name: Setup WordPress ${{ matrix.wp-versions }}
+        run: bash ./vendor/thefrosty/wp-utilities/bin/install-wp-tests.sh wordpress_test wp password localhost ${{ matrix.wp-versions }} true
 
       - name: Create all branches
         run: source ./vendor/thefrosty/wp-utilities/bin/create-all-branches.sh
