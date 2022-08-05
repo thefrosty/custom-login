@@ -50,7 +50,7 @@ There are currently 7 premium extensions available, with more coming (suggestion
 * "Super User" only access for client sites.
 * **Added in core as of version 3.0** Remove default WordPress login CSS.
 * Submit button styles!
-* **Added as of version 3.2** Custom Login pre made settings templates *AKA* [Style Packs](https://frosty.media/plugin/tag/style-pack/).
+* **Added as of version 3.2** Custom Login pre-made settings templates *AKA* [Style Packs](https://frosty.media/plugin/tag/style-pack/).
 
 = More info =
 
@@ -60,7 +60,7 @@ Activate the plugin and customize your WordPress login screen. It's as easy as m
 2. Read more about [Custom Login 3.1](https://frosty.media/2015/custom-login-v3-1-released/)
 2. Read more about [Custom Login 2.0](http://wp.me/pzgsJ-HY)
 
-**For those looking to showoff your login screen, check out the [Flickr group](http://flickr.com/groups/custom-login/)! Share you designs with the community!**
+**For those looking to show off your login screen, check out the [Flickr group](http://flickr.com/groups/custom-login/)! Share you designs with the community!**
 
 = links =
 
@@ -307,7 +307,7 @@ _REQUIRES WordPress 3.9 or later_
 
 * New: Complete rewrite.
 * New: Settings page UI update, now matches your WordPress admin color scheme.
-* New: Extensions installer moved to sparate settings page (hidden).
+* New: Extensions installer moved to separate settings page (hidden).
 * New: Removed version [2.x changelog](http://plugins.svn.wordpress.org/custom-login/tags/2.4/readme.txt).
 
 == Upgrade Notice ==
