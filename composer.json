@@ -74,6 +74,7 @@
   "archive": {
     "exclude": [
       "!node_modules/",
+      "plugin-build/",
       "!vendor/"
     ]
   }
