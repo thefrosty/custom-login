@@ -3,7 +3,7 @@
  * Plugin Name: Custom Login
  * Plugin URI: https://frosty.media/plugins/custom-login
  * Description: A simple way to customize your WordPress <code>wp-login.php</code> screen! A <a href="https://frosty.media/">Frosty Media</a> plugin.
- * Version: 4.0.4
+ * Version: 4.0.5
  * Author: Austin Passy
  * Author URI: https://austin.passy.co
  * Requires at least: 5.8
@@ -40,10 +40,10 @@ use TheFrosty\CustomLogin\WpLogin\Login;
 use TheFrosty\WpUtilities\Plugin\PluginFactory;
 
 /**
- * Maybe trigger an error notice "message" on the `shutdown` action hook.
+ * Maybe trigger an error notice "message" on the `admin_notices` action hook.
  * Uses an anonymous function which required PHP >= 5.3.
  */
-add_action('shutdown', function () {
+add_action('admin_notices', function () {
     $message = apply_filters('custom_login_shutdown_error_message', '');
     if (!is_admin() || empty($message)) {
         return;

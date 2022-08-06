@@ -16,6 +16,11 @@ if (!defined('WP_UNINSTALL_PLUGIN')) {
 
 // Load Custom Login
 include_once 'custom-login.php';
+
+// In the off-chance the code isn't found, lets return, so we don't throw a fatal error.
+if (!class_exists('TheFrosty\CustomLogin\CustomLogin')) {
+    return;
+}
 $settings = TheFrosty\CustomLogin\CustomLogin::getSettings();
 
 // Delete all plugin options
@@ -32,7 +37,6 @@ foreach ($all_user_ids as $user_id) {
 }
 
 // Delete all announcement options and transients
-delete_transient(CL_Common::get_transient_key('announcement'));
 delete_option('custom_login_announcement_message');
 
 // Delete tracking options
