@@ -90,8 +90,8 @@ Share you designs with the community!**
 ### links ###
 
 * Premium Plugins: [https://frosty.media/plugins](https://frosty.media/plugins/ "Premium WordPress Plugins by Frosty")
-* Austins Blog: [https:/austin.passy.co/](http://austin.passy.co/ "Austin Passy's blog")
-* Austin on Twitter: @[TheFrosty](https:/twitter.com/TheFrosty "Austin TheFrosty' Passy on Twitter")
+* Austins Blog: [https:/austin.passy.co/](http://austin.passy.co/ "Austin's blog")
+* Austin on Twitter: @[TheFrosty](https:/twitter.com/TheFrosty "Austin on Twitter")
 * Frosty Media on Twitter: @[Frosty_Media](https:/twitter.com/Frosty_Media "Frosty Media on Twitter")
 * **Development welcomed on [GitHub](https://github.com/thefrosty/custom-login)**
 
@@ -171,6 +171,11 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 ](https://ps.w.org/custom-login/assets/screenshot-4.png)
 
 ## Changelog ##
+
+### Version 4.0.5 (2022/08/06) ###
+
+* Make sure autoloading is working before loading classes on plugin uninstall.
+* Full Changelog: [4.0.4...4.0.5](https://github.com/thefrosty/custom-login/compare/4.0.4...4.0.5)
 
 ### Version 4.0.4 (2022/08/05) ###
 
