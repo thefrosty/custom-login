@@ -11,7 +11,6 @@ use Dwnload\WpSettingsApi\Settings\SectionManager;
 use Dwnload\WpSettingsApi\WpSettingsApi;
 use TheFrosty\CustomLogin\CustomLogin;
 use TheFrosty\CustomLogin\ServiceProvider;
-use TheFrosty\CustomLogin\Settings\Api\Factory;
 use TheFrosty\CustomLogin\Settings\Api\Postbox;
 use TheFrosty\WpUtilities\Api\WpRemote;
 use TheFrosty\WpUtilities\Plugin\AbstractContainerProvider;
@@ -39,7 +38,7 @@ class Settings extends AbstractContainerProvider implements OptionKey
      */
     public function addHooks(): void
     {
-        $this->addAction(WpSettingsApi::HOOK_INIT, [$this, 'init'], 10, 2);
+        $this->addAction(WpSettingsApi::HOOK_INIT, [$this, 'init'], 10, 3);
         $this->addFilter(ActionHookName::ADMIN_SETTINGS_ADMIN_SCRIPTS, [$this, 'adminScripts']);
         $this->addFilter(ActionHookName::ADMIN_SETTINGS_ADMIN_STYLES, [$this, 'adminStyles']);
         $this->addAction(ActionHookName::SETTINGS_SETTINGS_SIDEBARS, [$this, 'sidebarAboutTheAuthor'], 20);
@@ -50,9 +49,14 @@ class Settings extends AbstractContainerProvider implements OptionKey
      * Initiate our setting to the Section & Field Manager classes.
      * @param SectionManager $section_manager
      * @param FieldManager $field_manager
+     * @param WpSettingsApi $wp_settings_api
      */
-    protected function init(SectionManager $section_manager, FieldManager $field_manager): void {
-        if (Factory::getPluginSettings($this->getPlugin())->getMenuSlug() !== $this->getPlugin()->getSlug()) {
+    protected function init(
+        SectionManager $section_manager,
+        FieldManager $field_manager,
+        WpSettingsApi $wp_settings_api
+    ): void {
+        if ($wp_settings_api->getPluginInfo()->getMenuSlug() !== $this->getPlugin()->getSlug()) {
             return;
         }
 
