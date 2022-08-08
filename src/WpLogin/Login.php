@@ -3,11 +3,11 @@
 namespace TheFrosty\CustomLogin\WpLogin;
 
 use Dwnload\WpSettingsApi\Api\Options;
-use TheFrosty\CustomLogin\AbstractContainerProvider;
 use TheFrosty\CustomLogin\ServiceProvider;
 use TheFrosty\CustomLogin\Settings\Api\Factory;
 use TheFrosty\CustomLogin\Settings\OptionKey;
 use TheFrosty\CustomLogin\Settings\OptionValue;
+use TheFrosty\WpUtilities\Plugin\AbstractContainerProvider;
 use TheFrosty\WpUtilities\Plugin\HooksTrait;
 use TheFrosty\WpUtilities\Utils\Viewable;
 use function add_filter;

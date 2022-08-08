@@ -2,9 +2,9 @@
 
 namespace TheFrosty\CustomLogin\WpAdmin;
 
-use TheFrosty\CustomLogin\AbstractContainerProvider;
 use TheFrosty\CustomLogin\CustomLogin;
 use TheFrosty\CustomLogin\ServiceProvider;
+use TheFrosty\WpUtilities\Plugin\AbstractContainerProvider;
 use TheFrosty\WpUtilities\Utils\Viewable;
 use function add_options_page;
 use function admin_url;
