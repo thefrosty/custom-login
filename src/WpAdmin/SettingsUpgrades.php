@@ -2,9 +2,9 @@
 
 namespace TheFrosty\CustomLogin\WpAdmin;
 
-use TheFrosty\CustomLogin\AbstractContainerProvider;
 use TheFrosty\CustomLogin\CustomLogin;
 use TheFrosty\CustomLogin\ServiceProvider;
+use TheFrosty\WpUtilities\Plugin\AbstractContainerProvider;
 use TheFrosty\WpUtilities\Utils\Viewable;
 use function add_options_page;
 use function admin_url;
@@ -56,7 +56,7 @@ class SettingsUpgrades extends AbstractContainerProvider
 
         if (!$database_version) {
             // 3.2.15 is the last version before 4.0.0
-            $database_version = '3.2.15';
+            $database_version = '4.0.1';
         }
 
         // Version less than 4.0.1

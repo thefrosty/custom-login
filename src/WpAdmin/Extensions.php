@@ -3,10 +3,10 @@
 namespace TheFrosty\CustomLogin\WpAdmin;
 
 use Dwnload\WpSettingsApi\ActionHookName;
-use TheFrosty\CustomLogin\AbstractContainerProvider;
 use TheFrosty\CustomLogin\CustomLogin;
 use TheFrosty\CustomLogin\ServiceProvider;
 use TheFrosty\CustomLogin\Settings\Api\Postbox;
+use TheFrosty\WpUtilities\Plugin\AbstractContainerProvider;
 use TheFrosty\WpUtilities\Utils\Viewable;
 use function is_string;
 use function sprintf;

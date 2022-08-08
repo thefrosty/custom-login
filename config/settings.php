@@ -43,7 +43,7 @@ return [
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_FILE,
                 SettingField::DEFAULT => '',
                 SettingField::SIZE => 'medium',
-                SettingField::SANITIZE => 'esc_url',
+                SettingField::SANITIZE => '\sanitize_text_field',
             ],
             [
                 SettingField::NAME => OptionKey::HTML_BACKGROUND_POSITION,
@@ -111,7 +111,7 @@ return [
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_FILE,
                 SettingField::DEFAULT => '',
                 SettingField::SIZE => 'medium',
-                SettingField::SANITIZE => 'esc_url',
+                SettingField::SANITIZE => '\sanitize_text_field',
             ],
             [
                 SettingField::NAME => OptionKey::LOGO_BACKGROUND_SIZE_WIDTH,
@@ -235,7 +235,7 @@ return [
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_FILE,
                 SettingField::DEFAULT => '',
                 SettingField::SIZE => 'medium',
-                SettingField::SANITIZE => 'esc_url',
+                SettingField::SANITIZE => '\sanitize_text_field',
             ],
             [
                 SettingField::NAME => OptionKey::LOGIN_FORM_BACKGROUND_POSITION,

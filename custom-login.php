@@ -3,7 +3,7 @@
  * Plugin Name: Custom Login
  * Plugin URI: https://frosty.media/plugins/custom-login
  * Description: A simple way to customize your WordPress <code>wp-login.php</code> screen! A <a href="https://frosty.media/">Frosty Media</a> plugin.
- * Version: 4.0.4
+ * Version: 4.0.6
  * Author: Austin Passy
  * Author URI: https://austin.passy.co
  * Requires at least: 5.8
@@ -26,7 +26,6 @@
 
 use Dwnload\WpSettingsApi\WpSettingsApi;
 use TheFrosty\CustomLogin\Api\Cron;
-use TheFrosty\CustomLogin\Container;
 use TheFrosty\CustomLogin\CustomLogin;
 use TheFrosty\CustomLogin\ServiceProvider;
 use TheFrosty\CustomLogin\Settings\Api\Factory;
@@ -40,10 +39,10 @@ use TheFrosty\CustomLogin\WpLogin\Login;
 use TheFrosty\WpUtilities\Plugin\PluginFactory;
 
 /**
- * Maybe trigger an error notice "message" on the `shutdown` action hook.
+ * Maybe trigger an error notice "message" on the `admin_notices` action hook.
  * Uses an anonymous function which required PHP >= 5.3.
  */
-add_action('shutdown', function () {
+add_action('admin_notices', function () {
     $message = apply_filters('custom_login_shutdown_error_message', '');
     if (!is_admin() || empty($message)) {
         return;
@@ -72,7 +71,7 @@ if (version_compare(PHP_VERSION, '7.4', '<')) {
 }
 
 require_once __DIR__ . '/vendor/autoload.php';
-$plugin = PluginFactory::create('custom-login', __FILE__, new Container());
+$plugin = PluginFactory::create('custom-login', __FILE__);
 $container = $plugin->getContainer();
 $container->register(new ServiceProvider());
 $plugin
@@ -91,7 +90,7 @@ add_action('plugins_loaded', static function () use ($plugin): void {
     $plugin->initialize();
 });
 
-register_activation_hook(__FILE__, static function () use ($plugin): void {
+register_activation_hook(__FILE__, static function (): void {
     (new CustomLogin())->activate();
 });
 
