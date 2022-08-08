@@ -4,7 +4,6 @@ namespace TheFrosty\CustomLogin\WpAdmin;
 
 use Dwnload\WpSettingsApi\Api\Options;
 use Dwnload\WpSettingsApi\WpSettingsApi;
-use TheFrosty\CustomLogin\AbstractContainerProvider;
 use TheFrosty\CustomLogin\Api\Activator;
 use TheFrosty\CustomLogin\Api\Cron;
 use TheFrosty\CustomLogin\CustomLogin;
@@ -13,6 +12,7 @@ use TheFrosty\CustomLogin\Settings\Api\Factory;
 use TheFrosty\CustomLogin\Settings\OptionKey;
 use TheFrosty\CustomLogin\Settings\OptionValue;
 use TheFrosty\WpUtilities\Api\WpRemote;
+use TheFrosty\WpUtilities\Plugin\AbstractContainerProvider;
 use TheFrosty\WpUtilities\Utils\Viewable;
 use function array_keys;
 use function array_merge;
