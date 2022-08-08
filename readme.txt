@@ -115,6 +115,13 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 == Changelog ==
 
+= Version 4.0.6 (2022/08/08) =
+
+* Fix: Resolve micro regression with `psr/container` issues.
+* Fix: Resolve file (URL) fields breaking on save.
+* Update WP Utilities to 2.8.
+* Update WP Settings API to 3.6.
+
 = Version 4.0.5 (2022/08/06) =
 
 * Make sure autoloading is working before loading classes on plugin uninstall.
@@ -175,7 +182,7 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 == Upgrade Notice ==
 
 = 4.0.1 =
-Requires WordPress version >= 5.7 and PHP version >= 7.4.
+Requires WordPress version >= 5.8 and PHP version >= 7.4.
 
 = 3.2.14 =
 Getting ready for version 4.0.0 which will bump minimum required WordPress version to 5.8 and PHP version to 7.4.
