@@ -10,16 +10,13 @@
         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
 >
     <coverage includeUncoveredFiles="true">
-        <include>=
+        <include>
             <directory suffix=".php">./src</directory>
         </include>
         <report>
             <clover outputFile="./tests/clover.xml"/>
         </report>
     </coverage>
-    <listeners>
-        <listener class="JohnKary\PHPUnit\Listener\SpeedTrapListener"/>
-    </listeners>
     <php>
         <ini name="error_reporting" value="24575"/>
         <env name="WP_PHPUNIT__TESTS_CONFIG" value="./tests/wp-tests-config.php"/>
@@ -34,6 +31,5 @@
             <directory phpVersion="7.4" phpVersionOperator=">=" suffix="Test.php">./tests/unit</directory>
         </testsuite>
     </testsuites>
-    <logging/>
 </phpunit>
 
