@@ -193,8 +193,11 @@ class Login extends AbstractContainerProvider
 
     /**
      * Remove the "Lost your password?" text.
+     * @param mixed $translated_text
+     * @param mixed $untranslated_text
+     * @return string|false
      */
-    protected function removeLostPasswordText($translated_text, $untranslated_text): string
+    protected function removeLostPasswordText($translated_text, $untranslated_text)
     {
         if (
             $GLOBALS['pagenow'] === 'wp-login.php' &&

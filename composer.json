@@ -61,7 +61,7 @@
       "bash ./vendor/thefrosty/wp-utilities/bin/phpcs.sh --test-version=7.4"
     ],
     "phpunit": [
-      "./vendor/bin/phpunit --colors --verbose --coverage-html ./tests/results && php ./tests/clover-results.php ./tests/clover.xml 1"
+      "./vendor/bin/phpunit --colors --verbose --coverage-html ./tests/results && php ./tests/clover-results.php ./tests/clover.xml 01"
     ],
     "eslint": [
       "npm run eslint"
@@ -74,9 +74,15 @@
   },
   "archive": {
     "exclude": [
+      ".gitignore",
       "!node_modules/",
       "plugin-build/",
-      "!vendor/"
+      "!vendor/",
+      "composer.lock",
+      "package-lock.json",
+      "phpcs-ruleset.xml",
+      "phpstan.neon.dist",
+      "phpunit.xml"
     ]
   }
 }

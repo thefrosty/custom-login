@@ -1,11 +1,22 @@
+<?xml version="1.0"?>
 <phpunit
         bootstrap="./tests/bootstrap.php"
         backupGlobals="false"
         colors="true"
         convertErrorsToExceptions="true"
         convertNoticesToExceptions="true"
-        convertWarningsToExceptions="true">
-
+        convertWarningsToExceptions="true"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
+>
+    <coverage includeUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">./src</directory>
+        </include>
+        <report>
+            <clover outputFile="./tests/clover.xml"/>
+        </report>
+    </coverage>
     <php>
         <ini name="error_reporting" value="24575"/>
         <env name="WP_PHPUNIT__TESTS_CONFIG" value="./tests/wp-tests-config.php"/>
@@ -16,17 +27,9 @@
         <env name="DB_PORT" value="3306"/>
     </php>
     <testsuites>
-        <testsuite name="unit">
+        <testsuite name="BeachbodyOnDemand">
             <directory phpVersion="7.4" phpVersionOperator=">=" suffix="Test.php">./tests/unit</directory>
         </testsuite>
     </testsuites>
-
-    <filter>
-        <whitelist processUncoveredFilesFromWhitelist="false">
-            <directory suffix=".php">./src</directory>
-        </whitelist>
-    </filter>
-    <logging>
-        <log type="coverage-clover" target="./tests/clover.xml"/>
-    </logging>
 </phpunit>
+
