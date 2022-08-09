@@ -153,11 +153,18 @@ class Tracking extends AbstractContainerProvider
     }
 
     /**
-     * Display the admin notice to users that have not opted-in or out
+     * Display the admin notice to users that have not opted-in or out.
+     * Don't show this notice when _not_ on the Custom Login settings page.
+     * Don't show this notice when the hide tracking notice has been "saved".
      */
     protected function adminNotice(): void
     {
         if (!isSettingsPage($this->getPlugin())) {
+            return;
+        }
+
+        // Check the notice setting _after_ settings page check..
+        if (!empty(get_option(self::OPTION_HIDE_TRACKING_NOTICE))) {
             return;
         }
 
