@@ -38,15 +38,15 @@ jobs:
         run: |
           npm install --only=production
 
-      - name: WordPress Plugin Deploy
-        if: |
-          github.event_name == 'release' && !github.event.release.prerelease
-        uses: 10up/action-wordpress-plugin-deploy@stable
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
-          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
-          SLUG: custom-login
+#      - name: WordPress Plugin Deploy
+#        if: |
+#          github.event_name == 'release' && !github.event.release.prerelease
+#        uses: 10up/action-wordpress-plugin-deploy@stable
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+#          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+#          SLUG: custom-login
 
       - name: Create Artifact
         run: |
