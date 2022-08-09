@@ -64,7 +64,7 @@ if (version_compare(PHP_VERSION, '7.4', '<')) {
 } elseif (!is_readable(__DIR__ . '/vendor/autoload.php')) {
     return add_filter('custom_login_shutdown_error_message', function () {
         return esc_html__(
-            'Error: Custom Login can\'t find the autoload file, all features are currently disabled.',
+            'Error: Custom Login can\'t find the autoload file (if installed from GitHub, please run `composer install`), all features are currently disabled.',
             'custom-login'
         );
     });
