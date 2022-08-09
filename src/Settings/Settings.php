@@ -56,7 +56,7 @@ class Settings extends AbstractContainerProvider implements OptionKey
         FieldManager $field_manager,
         WpSettingsApi $wp_settings_api
     ): void {
-        if ($wp_settings_api->getPluginInfo()->getMenuSlug() !== $this->getPlugin()->getSlug()) {
+        if (!$wp_settings_api->isCurrentMenuSlug($this->getPlugin()->getSlug())) {
             return;
         }
 
@@ -122,9 +122,13 @@ class Settings extends AbstractContainerProvider implements OptionKey
 
     /**
      * Build the about the author sidebar.
+     * @param WpSettingsApi $wp_settings_api
      */
-    protected function sidebarAboutTheAuthor(): void
+    protected function sidebarAboutTheAuthor(WpSettingsApi $wp_settings_api): void
     {
+        if (!$wp_settings_api->isCurrentMenuSlug($this->getPlugin()->getSlug())) {
+            return;
+        }
         $content = $this->getView(ServiceProvider::WP_UTILITIES_VIEW)->retrieve('sidebars/about-the-author.php');
 
         $this->postbox(
@@ -144,9 +148,13 @@ class Settings extends AbstractContainerProvider implements OptionKey
 
     /**
      * Build the extensions' sidebar.
+     * @param WpSettingsApi $wp_settings_api
      */
-    protected function sidebarExtensions(): void
+    protected function sidebarExtensions(WpSettingsApi $wp_settings_api): void
     {
+        if (!$wp_settings_api->isCurrentMenuSlug($this->getPlugin()->getSlug())) {
+            return;
+        }
         $content = $this->getView(ServiceProvider::WP_UTILITIES_VIEW)->retrieve(
             'dashboard-widget/rest.php',
             [

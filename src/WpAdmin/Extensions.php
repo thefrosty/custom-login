@@ -3,6 +3,7 @@
 namespace TheFrosty\CustomLogin\WpAdmin;
 
 use Dwnload\WpSettingsApi\ActionHookName;
+use Dwnload\WpSettingsApi\WpSettingsApi;
 use TheFrosty\CustomLogin\CustomLogin;
 use TheFrosty\CustomLogin\ServiceProvider;
 use TheFrosty\CustomLogin\Settings\Api\Postbox;
@@ -67,9 +68,13 @@ class Extensions extends AbstractContainerProvider
     }
     /**
      * Build the extensions' sidebar.
+     * @param WpSettingsApi $wp_settings_api
      */
-    protected function sidebarExtensions(): void
+    protected function sidebarExtensions(WpSettingsApi $wp_settings_api): void
     {
+        if (!$wp_settings_api->isCurrentMenuSlug($this->getPlugin()->getSlug())) {
+            return;
+        }
         $this->postbox(
             'custom-login-extensions-installer',
             __('Extensions Installer', 'custom-login'),
