@@ -48,10 +48,6 @@ class ImportExport extends AbstractContainerProvider
         FieldManager $field_manager,
         WpSettingsApi $wp_settings_api
     ): void {
-        if ($wp_settings_api->getPluginInfo()->getMenuSlug() !== $this->getPlugin()->getSlug()) {
-            return;
-        }
-
         $settings = include __DIR__ . '/../../config/import-export.php';
         foreach ($settings['sections'] as $section) {
             $section_manager->addSection(
