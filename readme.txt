@@ -57,8 +57,9 @@ There are currently 7 premium extensions available, with more coming (suggestion
 Activate the plugin and customize your WordPress login screen. It's as easy as modifying a few settings, there is no need to understand CSS at all. Custom Login even has a HTML, CSS &amp; jQuery textarea for more advanced customizations.
 
 1. Works great for client site installs.
-2. Read more about [Custom Login 3.1](https://frosty.media/2015/custom-login-v3-1-released/)
-2. Read more about [Custom Login 2.0](http://wp.me/pzgsJ-HY)
+2. Read more about [Custom Login 4.0](https://frosty.media/2022/custom-login-4-0-x-released/)
+3. Read more about [Custom Login 3.1](https://frosty.media/2015/custom-login-v3-1-released/)
+4. Read more about [Custom Login 2.0](http://wp.me/pzgsJ-HY)
 
 **For those looking to show off your login screen, check out the [Flickr group](http://flickr.com/groups/custom-login/)! Share you designs with the community!**
 
@@ -114,6 +115,14 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 4. Custom Login Extensions Installer (an active license key is required).
 
 == Changelog ==
+
+= Version 4.0.7 (2022/08/09) =
+
+* Don't type cast the return value of removeLostPasswordText.
+* Uncomment update option to resolve upgrade notice always showing.
+* Don't show the tracking notice, when opt-in or opt-out has already been selected.
+* Update WpSettingsApi, and use new condition checks for sidebar(s).
+* Update missing autoload notice message.
 
 = Version 4.0.6 (2022/08/08) =
 
