@@ -11,6 +11,7 @@ use function admin_url;
 use function get_option;
 use function printf;
 use function sprintf;
+use function update_option;
 use function version_compare;
 use function wp_send_json_success;
 
@@ -114,7 +115,7 @@ class SettingsUpgrades extends AbstractContainerProvider
             $this->v401Upgrades();
         }
 
-//        update_option(self::OPTION_VERSION, CustomLogin::VERSION);
+        update_option(self::OPTION_VERSION, CustomLogin::VERSION);
         wp_send_json_success();
     }
 
