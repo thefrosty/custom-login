@@ -27,7 +27,7 @@ For more information visit the official [Custom Login](https://frosty.media/plug
 
 = Video =
 
-http://www.youtube.com/watch?v=hZkc-t36xYQ
+https://www.youtube.com/watch?v=hZkc-t36xYQ
 
 = Extensions =
 
@@ -90,12 +90,6 @@ Follow the steps below to install the plugin.
 = What are extensions? =
 They are additional plugins that add/extend functionality to the Custom Login plugin. You can find all Custom Login extensions on [Frosty.Media](http://frosty.media).
 
-= My new settings aren't showing up =
-This plugin caches all settings in a transient, try clicking the new 'Update stylesheet' button to delete and refresh the cache. *This will apply to versions < 3.0*.
-
-= Why create this plugin? =
-I created this plugin to allow for custom login of any WordPress login screen. See working example on: [Frosty.Media/login](http://frosty.media/wp-login.php).
-
 = Where can I upload and share my cool login screen? =
 Check out the [Flickr group](http://flickr.com/groups/custom-login/)! Upload and add it to our pool!
 
@@ -115,6 +109,10 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 4. Custom Login Extensions Installer (an active license key is required).
 
 == Changelog ==
+
+= Version 4.0.8 (2022/08/11) =
+
+* Fix: Make sure WordPress' capabilities array keys are string values to avoid `shutdown` action fatal errors.
 
 = Version 4.0.7 (2022/08/09) =
 
