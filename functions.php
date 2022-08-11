@@ -8,6 +8,7 @@ use function add_action;
 use function function_exists;
 use function get_editable_roles;
 use function is_array;
+use function is_string;
 use function preg_match;
 use function sanitize_key;
 use function sprintf;
@@ -113,7 +114,7 @@ function _getEditableRoles(): array
         }
         foreach ($role['capabilities'] as $capability => $array) {
             // Remove the (deprecated) capabilities from the array
-            if (preg_match('/^level_/', $capability)) {
+            if (is_string($capability) && preg_match('/^level_/', $capability)) {
                 continue;
             }
             $roles[$capability] = $capability;
