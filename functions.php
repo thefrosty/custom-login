@@ -7,13 +7,15 @@ use TheFrosty\WpUtilities\Plugin\PluginInterface;
 use function add_action;
 use function function_exists;
 use function get_editable_roles;
+use function is_admin;
 use function is_array;
 use function is_string;
 use function preg_match;
 use function sanitize_key;
 use function sprintf;
 use function strpos;
-use const DAY_IN_SECONDS;
+use function wp_doing_ajax;
+use const WEEK_IN_SECONDS;
 
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
@@ -40,10 +42,10 @@ function getWpRoles(): array
 {
     $key = sprintf('%1$s%2$s', Factory::PREFIX, sanitize_key(__FUNCTION__));
     $roles = get_transient($key);
-    if (empty($roles)) {
+    if (empty($roles) && is_admin() && !wp_doing_ajax()) {
         add_action('shutdown', static function () use ($key, &$roles): void {
             $roles = _getEditableRoles();
-            set_transient($key, $roles, DAY_IN_SECONDS);
+            set_transient($key, $roles, WEEK_IN_SECONDS);
         });
     }
 
