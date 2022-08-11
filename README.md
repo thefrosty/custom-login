@@ -41,7 +41,7 @@ For more information visit the official [Custom Login](https://frosty.media/plug
 
 ### Video ###
 
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/hZkc-t36xYQ/0.jpg)](https://www.youtube.com/watch?v=hZkc-t36xYQ)
+[![Custom Login v3.0](https://img.youtube.com/vi/hZkc-t36xYQ/0.jpg)](https://www.youtube.com/watch?v=hZkc-t36xYQ)
 
 ### Extensions ###
 
@@ -58,11 +58,11 @@ free to said user*).
   - Manage login redirects.
 * [No Password](https://frosty.media/plugins/custom-login-no-password-login/?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt "Custom Login No Password logins")
   - allow users to login without a password.
-* [Style Pack #1](https://frosty.media/plugins/custom-login-style-pack-1?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt "Custom Login Style Pack #1")
+* [Style Pack #1](https://frosty.media/plugins/custom-login-style-pack-1?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt "Custom Login Style Pack #1") ⭐️
   - four pre-designed login styles.
-* [Style Pack #2](https://frosty.media/plugins/custom-login-style-pack-2?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt "Custom Login Style Pack #2")
+* [Style Pack #2](https://frosty.media/plugins/custom-login-style-pack-2?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt "Custom Login Style Pack #2") ⭐️
   - four pre-designed fun login styles.
-* [Style Pack #3](https://frosty.media/plugins/custom-login-style-pack-3?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt "Custom Login Style Pack #3")
+* [Style Pack #3](https://frosty.media/plugins/custom-login-style-pack-3?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt "Custom Login Style Pack #3") ⭐️
   - four pre-designed holiday login styles.
 
 **Extensions in development/extension ideas**
@@ -117,19 +117,9 @@ Follow the steps below to install the plugin.
 They are additional plugins that add/extend functionality to the Custom Login plugin. You can find all Custom Login
 extensions on [Frosty.Media](http://frosty.media).
 
-### My new settings aren't showing up ###
-
-This plugin caches all settings in a transient, try clicking the new 'Update stylesheet' button to delete and refresh
-the cache. *This will apply to versions < 3.0*.
-
 ### Is there a PRO version? ###
 
 Not anymore.
-
-### Why create this plugin? ###
-
-I created this plugin to allow for custom login of any WordPress login screen. See working example
-on: [Frosty.Media/login](http://frosty.media/wp-login.php).
 
 ### Where can I upload and share my cool login screen? ###
 
@@ -172,6 +162,10 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 ](https://ps.w.org/custom-login/assets/screenshot-4.png)
 
 ## Changelog ##
+
+### Version 4.0.8 (2022/08/11) ###
+
+* Fix: Make sure WordPress' capabilities array keys are string values to avoid `shutdown` action fatal errors.
 
 ### Version 4.0.7 (2022/08/09) ###
 
