@@ -17,6 +17,9 @@
       "roots/wordpress-core-installer": true
     },
     "optimize-autoloader": true,
+    "platform": {
+      "php": "7.4"
+    },
     "preferred-install": "dist",
     "sort-packages": true
   },
