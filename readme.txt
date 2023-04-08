@@ -110,6 +110,10 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 == Changelog ==
 
+= Version 4.0.9 (2023/03/31) =
+
+* Fix: Resolve edge case error on setting page.
+
 = Version 4.0.8 (2022/08/11) =
 
 * Fix: Make sure WordPress' capabilities array keys are string values to avoid `shutdown` action fatal errors.

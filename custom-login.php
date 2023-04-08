@@ -3,18 +3,18 @@
  * Plugin Name: Custom Login
  * Plugin URI: https://frosty.media/plugins/custom-login
  * Description: A simple way to customize your WordPress <code>wp-login.php</code> screen! A <a href="https://frosty.media/">Frosty Media</a> plugin.
- * Version: 4.0.8
+ * Version: 4.0.9
  * Author: Austin Passy
  * Author URI: https://austin.passy.co
  * Requires at least: 5.8
- * Tested up to: 6.0.1
+ * Tested up to: 6.2
  * Requires PHP: 7.4
  * Text Domain: custom-login
  * GitHub Plugin URI: https://github.com/thefrosty/custom-login
  * Primary Branch: develop
  * Release Asset: true
  *
- * @copyright 2012 - 2022
+ * @copyright 2012 - 2023
  * @author Austin Passy
  * @link https://austin.passy.co/
  * @license https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
