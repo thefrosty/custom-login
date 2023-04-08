@@ -25,7 +25,7 @@ class CustomLogin extends AbstractHookProvider
 
     public const API_URL = 'https://frosty.media/';
     public const OPTION = 'custom_login';
-    public const VERSION = '4.0.9';
+    public const VERSION = '4.0.10';
 
     /**
      * Get the API URL.

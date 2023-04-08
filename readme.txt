@@ -109,6 +109,9 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 4. Custom Login Extensions Installer (an active license key is required).
 
 == Changelog ==
+= Version 4.0.10 (2023/04/08) =
+
+* Fix: Uninitialized value.
 
 = Version 4.0.9 (2023/03/31) =
 
