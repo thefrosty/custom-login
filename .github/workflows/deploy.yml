@@ -30,7 +30,7 @@ jobs:
           composer update --no-dev --no-interaction --optimize-autoloader
 
       - name: Set Node version to 16
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: 16
 
@@ -54,7 +54,7 @@ jobs:
           composer archive -vvv --format=zip --file="plugin-build/custom-login"
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: custom-login
           path: plugin-build/custom-login.zip
