@@ -8,12 +8,14 @@ use Dwnload\WpSettingsApi\Api\SettingSection;
 use Dwnload\WpSettingsApi\Settings\FieldManager;
 use Dwnload\WpSettingsApi\Settings\SectionManager;
 use Dwnload\WpSettingsApi\WpSettingsApi;
+use Laravel\SerializableClosure\SerializableClosure;
 use TheFrosty\CustomLogin\CustomLogin;
 use TheFrosty\CustomLogin\Settings\Api\Factory;
 use TheFrosty\CustomLogin\Settings\Api\Postbox;
 use TheFrosty\WpUtilities\Api\WpRemote;
 use TheFrosty\WpUtilities\Plugin\AbstractContainerProvider;
 use TheFrosty\WpUtilities\Utils\Viewable;
+use function unserialize;
 
 /**
  * Class ImportExport
@@ -82,7 +84,8 @@ class ImportExport extends AbstractContainerProvider
             return;
         }
 
-        $import = \Opis\Closure\unserialize(base64_decode($options[OptionKey::SETTINGS_IMPORT]));
+        $closure = unserialize(base64_decode($options[OptionKey::SETTINGS_IMPORT]))->getClosure();
+        $import = $closure();
         if (is_array($import)) {
             foreach ($import as $setting_key => $settings) {
                 if ($settings !== false) {
@@ -134,6 +137,10 @@ class ImportExport extends AbstractContainerProvider
             $settings[$section[SettingSection::SECTION_ID]] = Options::getOptions($section[SettingSection::SECTION_ID]);
         }
 
-        return base64_encode(\Opis\Closure\serialize($settings));
+        try {
+            return base64_encode(serialize(new SerializableClosure(static fn () => $settings)));
+        } catch (\Throwable $exception) {
+            return 'ERROR';
+        }
     }
 }
