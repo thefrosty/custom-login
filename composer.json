@@ -27,7 +27,6 @@
     "php": "^7.4 || ^8.0",
     "ext-json": "*",
     "dwnload/wp-settings-api": "^3.6",
-    "laravel/serializable-closure": "^1.3",
     "pimple/pimple": "^3.5",
     "psr/container": "1.0.0 as 2.0.0",
     "thefrosty/wp-utilities": "^2.8"
