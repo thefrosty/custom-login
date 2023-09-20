@@ -64,7 +64,7 @@
       "bash ./vendor/thefrosty/wp-utilities/bin/phpcs.sh --test-version=7.4"
     ],
     "phpunit": [
-      "./vendor/bin/phpunit --colors --verbose --coverage-html ./tests/results && php ./tests/clover-results.php ./tests/clover.xml 01"
+      "./vendor/bin/phpunit --colors --verbose --coverage-html ./tests/results && php ./tests/clover-results.php 01"
     ],
     "eslint": [
       "npm run eslint"
