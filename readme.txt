@@ -111,7 +111,7 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 == Changelog ==
 = Version 4.0.11 (2023/09/20) =
 
-* Fix: Replaced Opis Closure package w/ Laravel Closure Serializer (causing PHP deprecation notices in 8.1+).
+* Fix: Removed Opis Closure package (causing PHP deprecation notices in 8.1+).
 
 = Version 4.0.10 (2023/04/08) =
 
