@@ -18,7 +18,7 @@ jobs:
     strategy:
       matrix:
         operating-system: [ ubuntu-latest ]
-        php-versions: [ 7.4, 8.0, 8.1 ]
+        php-versions: [ '7.4', '8.0', '8.1' ]
         wp-versions: [ 'latest' ]
         coverage: [ true ]
     services:
@@ -40,7 +40,7 @@ jobs:
       WORDPRESS_DB_USER: wp
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0 # No shallow clone, we need all history!
 
@@ -51,17 +51,6 @@ jobs:
           extensions: mysql, mysqli
           coverage: xdebug
           tools: composer, cs2pr, phpunit
-
-      - name: Get composer cache directory
-        id: composercache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-
-      - name: Cache dependencies
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.composercache.outputs.dir }}
-          key: php-${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-composer-
 
       - name: Install dependencies
         run: composer update --prefer-dist --no-interaction
