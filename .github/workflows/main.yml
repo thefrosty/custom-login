@@ -52,13 +52,6 @@ jobs:
           coverage: xdebug
           tools: composer, cs2pr, phpunit
 
-      - name: Cache dependencies
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.composercache.outputs.dir }}
-          key: php-${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-composer-
-
       - name: Install dependencies
         run: composer update --prefer-dist --no-interaction
 
