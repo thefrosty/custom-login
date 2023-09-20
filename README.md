@@ -13,7 +13,7 @@
 **Donate link:** [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290)  
 **Tags:** admin, branding, customization, custom login, login, logo, error, login error, custom login pro  
 **Requires at least:** 5.8  
-**Tested up to:** 6.0.1  
+**Tested up to:** 6.3.1  
 **Requires PHP**: 7.4  
 **Stable tag:** trunk  
 **License:** GPLv2 or later  
@@ -162,6 +162,10 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 ](https://ps.w.org/custom-login/assets/screenshot-4.png)
 
 ## Changelog ##
+
+### Version 4.0.11 (2023/09/20) ###
+
+* Fix: Removed Opis Closure package (causing PHP deprecation notices in 8.1+).
 
 ### Version 4.0.10 (2023/04/08) ###
 

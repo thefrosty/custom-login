@@ -82,7 +82,7 @@ class ImportExport extends AbstractContainerProvider
             return;
         }
 
-        $import = \Opis\Closure\unserialize(base64_decode($options[OptionKey::SETTINGS_IMPORT]));
+        $import = json_decode(base64_decode($options[OptionKey::SETTINGS_IMPORT]), true);
         if (is_array($import)) {
             foreach ($import as $setting_key => $settings) {
                 if ($settings !== false) {
@@ -97,6 +97,7 @@ class ImportExport extends AbstractContainerProvider
                 }
             }
         }
+        \delete_option('custom_login_import_export');
     }
 
     /**
@@ -134,6 +135,6 @@ class ImportExport extends AbstractContainerProvider
             $settings[$section[SettingSection::SECTION_ID]] = Options::getOptions($section[SettingSection::SECTION_ID]);
         }
 
-        return base64_encode(\Opis\Closure\serialize($settings));
+        return base64_encode(json_encode($settings));
     }
 }
