@@ -28,7 +28,7 @@
     </php>
     <testsuites>
         <testsuite name="CustomLogin">
-            <directory phpVersion="7.4" phpVersionOperator=">=" suffix="Test.php">./tests/unit</directory>
+            <directory phpVersion="8.0" phpVersionOperator=">=" suffix="Test.php">./tests/unit</directory>
         </testsuite>
     </testsuites>
 </phpunit>
