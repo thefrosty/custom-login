@@ -2,16 +2,18 @@
 Contributors: austyfrosty, frostymedia
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290
 Tags: admin, branding, customization, custom login, login, logo, error, login error, custom login pro
-Requires at least: 5.8
-Tested up to: 6.3.1
-Requires PHP: 7.4
-Stable tag: trunk
+Requires at least: 6.2
+Tested up to: 6.4.0
+Requires PHP: 8.0
+Stable tag: 4.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Custom Login allows you to easily customize your admin login page, works great for client sites!
 
 == Description ==
+
+Note: as of Custom Login 4.1, PHP >= 8.0 is required.
 
 Custom Login 3.0 was 200% faster than version 2.0, and version 4.0 is now even better!
 
@@ -109,6 +111,14 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 4. Custom Login Extensions Installer (an active license key is required).
 
 == Changelog ==
+= Version 4.1.0 (2023/11/09) =
+
+* Drop support for PHP <= 7.4.
+* Resolve PHP deprecation notices in PHP 8.2.
+* Official supported WordPress is >= 6.2.
+* Tested with WordPress 6.4.
+* Remove deprecated function `CUSTOMLOGIN()`.
+
 = Version 4.0.11 (2023/09/20) =
 
 * Fix: Removed Opis Closure package (causing PHP deprecation notices in 8.1+).
@@ -167,37 +177,10 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 * Required PHP >= 7.4.
 * Full Changelog: [3.2.15...4.0.0](https://github.com/thefrosty/custom-login/compare/3.2.15...4.0.0)
 
-= Version 3.2.15 (2022/03/11) =
-
-* Fix settings API Settings: Uncaught Error: Call to undefined method stdClass::get_permalink() (#49)
-
-= Version 3.2.14 (2022/03/10) =
-
-* Fix settings widget feed for available extensions. Changes from RSS to REST.
-* Add auto deploy to WordPress.org GitHub action.
-
-= Version 3.2.13 (2022/01/06) =
-
-* Change custom CSS settings sanitizer in admin to allow for proper HTML CSS attributes like `>`.
-
-= Version 3.2.12 (2021/11/07) =
-
-* Change dashboard from RSS feed to REST API endpoint.
-* Fix condition for dashboard widget to use `is_blog_admin`.
-
-= Version 3.2.11 (2020/12/07) =
-
-* PHP 8 compatibility fixes.
-* Tested on WordPress 5.6
-
-= Version 3.2.10 (2020/08/14) =
-
-* Tested up to WordPress 5.5
-* Fix toggle on/off on settings page, incorrect check in AJAX for new installs.
-* Enable on activation hook fixed.
-* Remove ace.js theme call to non-existing theme.
-
 == Upgrade Notice ==
+
+= 4.1.0 =
+Requires WordPress version >= 6.2 and PHP version >= 8.0.
 
 = 4.0.1 =
 Requires WordPress version >= 5.8 and PHP version >= 7.4.

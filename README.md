@@ -12,9 +12,9 @@
 , [frostymedia](https://profiles.wordpress.org/frostymedia)  
 **Donate link:** [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290)  
 **Tags:** admin, branding, customization, custom login, login, logo, error, login error, custom login pro  
-**Requires at least:** 5.8  
-**Tested up to:** 6.3.1  
-**Requires PHP**: 7.4  
+**Requires at least:** 6.2  
+**Tested up to:** 6.4.0  
+**Requires PHP**: 8.0 
 **Stable tag:** trunk  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html
@@ -81,6 +81,7 @@ Activate the plugin and customize your WordPress login screen. It's as easy as m
 need to understand CSS at all. Custom Login even has a HTML, CSS &amp; jQuery textarea for more advanced customizations.
 
 1. Works great for client site installs.
+2. Read more about [Custom Login 4.1](https://frosty.media/2023/custom-login-4-1-x-released/)
 2. Read more about [Custom Login 4.0](https://frosty.media/2022/custom-login-4-0-x-released/)
 3. Read more about [Custom Login 3.1](https://frosty.media/2015/custom-login-v3-1-released/)
 4. Read more about [Custom Login 2.0](http://wp.me/pzgsJ-HY)
@@ -162,6 +163,14 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 ](https://ps.w.org/custom-login/assets/screenshot-4.png)
 
 ## Changelog ##
+
+### Version 4.1.0 (2023/11/09) ### 
+
+* Drop support for PHP <= 7.4.
+* Resolve PHP deprecation notices in PHP 8.2.
+* Official supported WordPress is >= 6.2.
+* Tested with WordPress 6.4.
+* Remove deprecated function `CUSTOMLOGIN()`.
 
 ### Version 4.0.11 (2023/09/20) ###
 
