@@ -18,7 +18,7 @@ jobs:
     strategy:
       matrix:
         operating-system: [ ubuntu-latest ]
-        php-versions: [ '7.4', '8.0', '8.1' ]
+        php-versions: [ '8.0', '8.1', '8.2' ]
         wp-versions: [ 'latest' ]
         coverage: [ true ]
     services:
@@ -40,7 +40,7 @@ jobs:
       WORDPRESS_DB_USER: wp
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0 # No shallow clone, we need all history!
 
