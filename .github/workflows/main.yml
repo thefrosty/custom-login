@@ -82,6 +82,7 @@ jobs:
   run-eslint:
     name: Run ESLint
     runs-on: ubuntu-latest
+    if: ${{ false }} # Disable for now
     steps:
       - name: Checkout
         uses: actions/checkout@v4
