@@ -87,7 +87,9 @@ $plugin
     ->addOnHook(WpSettingsApi::class, 'init', 10, true, [Factory::getPluginSettings($plugin)]);
 
 add_action('plugins_loaded', static function () use ($plugin): void {
+    do_action('custom_login_loaded_before_initialize', $plugin);
     $plugin->initialize();
+    do_action('custom_login_loaded_after_initialize', $plugin);
 });
 
 register_activation_hook(__FILE__, static function (): void {
