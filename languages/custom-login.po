@@ -1,17 +1,17 @@
-# Copyright (C) 2022 Austin Passy
+# Copyright (C) 2023 Austin Passy
 # This file is distributed under the same license as the Custom Login plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Custom Login 4.0.6\n"
+"Project-Id-Version: Custom Login 4.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/custom-login\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-08-09T18:58:54+00:00\n"
+"POT-Creation-Date: 2023-11-09T00:02:40+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.6.0\n"
+"X-Generator: WP-CLI 2.9.0\n"
 "X-Domain: custom-login\n"
 
 #: ../custom-login.php:187
@@ -683,4 +683,8 @@ msgstr ""
 
 #: custom-login.php:66
 msgid "Error: Custom Login can't find the autoload file (if installed from GitHub, please run `composer install`), all features are currently disabled."
+msgstr ""
+
+#: custom-login.php:57
+msgid "Notice: Custom Login version 4 requires PHP version >= 8.0, you are running %s, all features are currently disabled."
 msgstr ""
