@@ -77,15 +77,18 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           tools: 'composer, phpunit'
 
-      - name: Run PHPUnit
-        id: phpunit
+      - name: Install WP Tests
         run: |
           chmod u+x vendor/thefrosty/wp-utilities/bin/install-wp-tests.sh
           ./vendor/thefrosty/wp-utilities/bin/install-wp-tests.sh wordpress_test root root 127.0.0.1:${{ job.services.mysql.ports['3306'] }} latest true
-          composer phpunit
+        env:
+          WORDPRESS_DB_HOST: 127.0.0.1:${{ job.services.mysql.ports['3306'] }}
+
+      - name: Run PHPUnit
+        id: phpunit
+        run: composer phpunit
         env:
           CHANGED_FILES: ${{ steps.ci-setup.outputs.files }}
-          WORDPRESS_DB_HOST: 127.0.0.1:${{ job.services.mysql.ports['3306'] }}
 
       - name: Upload coverage to Codecov
         if: ${{ github.event_name == 'pull_request' }}
