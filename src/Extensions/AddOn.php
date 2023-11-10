@@ -22,6 +22,12 @@ abstract class AddOn implements WpHooksInterface
     use HooksTrait;
 
     /**
+     * Settings fields.
+     * @var array $fields
+     */
+    protected array $fields;
+
+    /**
      * AddOn constructor.
      * @param Plugin $parent
      * @param string $file
@@ -66,6 +72,12 @@ abstract class AddOn implements WpHooksInterface
         FieldManager $field_manager,
         WpSettingsApi $wp_settings_api
     ): void;
+
+    /**
+     * Return the extensions settings fields.
+     * @return array
+     */
+    abstract protected function getSettingsFields(): array;
 
     /**
      * Plugin Actions

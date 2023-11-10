@@ -8,12 +8,6 @@ trait StylePack
 {
 
     /**
-     * Style Packs
-     * @var array $style_packs
-     */
-    private array $style_packs;
-
-    /**
      * Add our settings error notification.
      */
     protected function addSettingsError(): void
@@ -44,12 +38,12 @@ trait StylePack
         $label = $style = '';
         $settings = [];
 
-        foreach ($this->style_packs as $style_pack) {
-            if (!\str_contains($_GET['action'], $style_pack['name'])) {
+        foreach ($this->fields as $field) {
+            if (!\str_contains($_GET['action'], $field['name'])) {
                 continue;
             }
-            $style = $style_pack['name'];
-            $label = $style_pack['label'];
+            $style = $field['name'];
+            $label = $field['label'];
         }
 
         if ($style !== '') {
@@ -66,7 +60,7 @@ trait StylePack
                             \add_settings_error(
                                 $setting_key,
                                 esc_attr('settings_updated'),
-                                esc_html__('Custom Login settings successfully imported', 'custom-login'),
+                                esc_html__('Custom Login style pack successfully imported.', 'custom-login'),
                                 'updated'
                             );
                         }
