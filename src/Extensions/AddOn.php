@@ -54,7 +54,7 @@ abstract class AddOn implements WpHooksInterface
     public function addHooks(): void
     {
         $this->addAction('init', function (): void {
-            $this->addAction(WpSettingsApi::HOOK_INIT, [$this, 'init'], 21, 3);
+            $this->addAction(WpSettingsApi::HOOK_INIT, [$this, 'init'], 14, 3);
             if (\is_blog_admin()) {
                 $this->addFilter('plugin_action_links', [$this, 'pluginActionLinks'], 10, 2);
             }

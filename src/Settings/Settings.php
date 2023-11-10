@@ -41,8 +41,8 @@ class Settings extends AbstractContainerProvider implements OptionKey
         $this->addAction(WpSettingsApi::HOOK_INIT, [$this, 'init'], 10, 3);
         $this->addFilter(ActionHookName::ADMIN_SETTINGS_ADMIN_SCRIPTS, [$this, 'adminScripts']);
         $this->addFilter(ActionHookName::ADMIN_SETTINGS_ADMIN_STYLES, [$this, 'adminStyles']);
-        $this->addAction(ActionHookName::SETTINGS_SETTINGS_SIDEBARS, [$this, 'sidebarAboutTheAuthor'], 20);
-        $this->addAction(ActionHookName::SETTINGS_SETTINGS_SIDEBARS, [$this, 'sidebarExtensions'], 22);
+        $this->addAction(ActionHookName::SETTINGS_SETTINGS_SIDEBARS, [$this, 'sidebarAboutTheAuthor'], 30);
+        $this->addAction(ActionHookName::SETTINGS_SETTINGS_SIDEBARS, [$this, 'sidebarExtensions'], 35);
     }
 
     /**

@@ -27,7 +27,7 @@ class Extensions extends AbstractContainerProvider
     public function addHooks(): void
     {
         $this->addAction('admin_menu', [$this, 'adminMenu']);
-        $this->addAction(ActionHookName::SETTINGS_SETTINGS_SIDEBARS, [$this, 'sidebarExtensions'], 22);
+        $this->addAction(ActionHookName::SETTINGS_SETTINGS_SIDEBARS, [$this, 'sidebarExtensions'], 35);
     }
 
     /**
