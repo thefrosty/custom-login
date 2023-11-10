@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace TheFrosty\CustomLogin\Extensions;
 
-use TheFrosty\CustomLogin\Settings\ImportExport;
-use TheFrosty\CustomLogin\Settings\OptionKey;
-
 trait StylePack
 {
 
