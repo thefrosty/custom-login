@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TheFrosty\CustomLogin\Extensions;
 
+use Dwnload\EddSoftwareLicenseManager\Edd\AbstractLicenceManager;
 use Dwnload\WpSettingsApi\Settings\FieldManager;
 use Dwnload\WpSettingsApi\Settings\SectionManager;
 use Dwnload\WpSettingsApi\WpSettingsApi;
@@ -38,14 +39,15 @@ abstract class AddOn implements WpHooksInterface
      */
     public function __construct(
         protected Plugin $parent,
-        protected string $file,
+        public string $file,
         public string $version,
-        protected string $domain,
-        protected string $plugin_id,
-        protected string $plugin_name,
+        public string $domain,
+        public string $plugin_id,
+        public string $plugin_name
     ) {
         $this->domain = $this->parent->getSlug();
         $this->plugin_id = Factory::getSection($plugin_id);
+        $this->fields = $this->getSettingsFields();
     }
 
     /**
@@ -55,7 +57,7 @@ abstract class AddOn implements WpHooksInterface
     {
         $this->addAction('init', function (): void {
             $this->addAction(WpSettingsApi::HOOK_INIT, [$this, 'init'], 14, 3);
-            $this->addFilter('dwnload_edd_slm_licenses', function(array $licenses): array {
+            $this->addFilter('dwnload_edd_slm_licenses', function (array $licenses): array {
                 $licenses[$this->plugin_id] = \esc_html($this->plugin_name);
 
                 return $licenses;
@@ -65,6 +67,17 @@ abstract class AddOn implements WpHooksInterface
                 $this->addFilter('plugin_action_links', [$this, 'pluginActionLinks'], 10, 2);
             }
         });
+    }
+
+    /**
+     * Get the current Addon license key value.
+     * @return string
+     */
+    public function getLicense(): string
+    {
+        $license = \get_option(AbstractLicenceManager::LICENSE_SETTING, []);
+
+        return $license[$this->plugin_id]['license'] ?? '';
     }
 
     /**
