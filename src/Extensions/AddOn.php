@@ -39,7 +39,7 @@ abstract class AddOn implements WpHooksInterface
     public function __construct(
         protected Plugin $parent,
         protected string $file,
-        protected string $version,
+        public string $version,
         protected string $domain,
         protected string $plugin_id,
         protected string $plugin_name,
@@ -55,6 +55,12 @@ abstract class AddOn implements WpHooksInterface
     {
         $this->addAction('init', function (): void {
             $this->addAction(WpSettingsApi::HOOK_INIT, [$this, 'init'], 14, 3);
+            $this->addFilter('dwnload_edd_slm_licenses', function(array $licenses): array {
+                $licenses[$this->plugin_id] = \esc_html($this->plugin_name);
+
+                return $licenses;
+            });
+            $this->addFilter('dwnload_edd_slm_use_local_scripts', fn(): bool => true);
             if (\is_blog_admin()) {
                 $this->addFilter('plugin_action_links', [$this, 'pluginActionLinks'], 10, 2);
             }
