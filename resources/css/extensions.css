@@ -13,13 +13,12 @@ div.img-wrap p {
 
 /* COLUMN SETUP  */
 .section {
-    display: grid;
-    grid-auto-flow: column;
-    grid-gap: 1rem;
+    display: inline-block;
     margin: 1% 1.6% 1% 0;
 }
 .col {
     float: left;
+    margin: 1rem 0 1rem;
 }
 
 /* GO FULL WIDTH AT LESS THAN 480 PIXELS */
