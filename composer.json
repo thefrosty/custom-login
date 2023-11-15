@@ -26,6 +26,7 @@
   "require": {
     "php": "^8.0",
     "ext-json": "*",
+    "dwnload/edd-software-license-manager": "^2.0",
     "dwnload/wp-settings-api": "^3.9",
     "pimple/pimple": "^3.5",
     "psr/container": "^2.0",
