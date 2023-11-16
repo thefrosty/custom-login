@@ -89,7 +89,7 @@ class Login extends AbstractContainerProvider
             // Enqueue the Animate.CSS
             wp_enqueue_style(
                 'animate.css',
-                $this->getPlugin()->getPath('node_modules/animate.css/animate.css'),
+                $this->getPlugin()->getUrl('node_modules/animate.css/animate.css'),
                 ['login'],
                 '4.1.1',
                 'screen'

@@ -133,7 +133,7 @@ class Tracking extends AbstractContainerProvider
         update_option(self::OPTION_HIDE_TRACKING_NOTICE, '1');
         $this->scheduleCheckIn(['on_activation' => 'admin notice', 'mailchimp_sub' => 'yes'], true);
 
-        wp_safe_redirect(esc_url(remove_query_arg('action', wp_get_referer())));
+        wp_safe_redirect(esc_url_raw(remove_query_arg('action', wp_get_referer())));
         exit;
     }
 
@@ -148,7 +148,7 @@ class Tracking extends AbstractContainerProvider
         update_option($section_id, $options);
         update_option(self::OPTION_HIDE_TRACKING_NOTICE, '1');
 
-        wp_safe_redirect(esc_url(remove_query_arg('action', wp_get_referer())));
+        wp_safe_redirect(esc_url_raw(remove_query_arg('action', wp_get_referer())));
         exit;
     }
 

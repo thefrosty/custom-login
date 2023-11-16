@@ -118,6 +118,7 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 * Official supported WordPress is >= 6.2.
 * Tested with WordPress 6.4.
 * Remove deprecated function `CUSTOMLOGIN()`.
+* Fix: resolve use of path instead of URL for animate.css.
 
 = Version 4.0.11 (2023/09/20) =
 
