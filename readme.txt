@@ -3,9 +3,9 @@ Contributors: austyfrosty, frostymedia
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290
 Tags: admin, branding, customization, custom login, login, logo, error, login error, custom login pro
 Requires at least: 6.2
-Tested up to: 6.4.0
+Tested up to: 6.4.2
 Requires PHP: 8.0
-Stable tag: 4.1.0
+Stable tag: 4.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -111,6 +111,11 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 4. Custom Login Extensions Installer (an active license key is required).
 
 == Changelog ==
+
+= Version 4.1.1 (2023/12/13) =
+
+* Resolve Security Vulnerability (CVE-2023-49858).
+
 = Version 4.1.0 (2023/11/09) =
 
 * Drop support for PHP <= 7.4.
