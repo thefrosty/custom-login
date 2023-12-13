@@ -98,7 +98,7 @@ class Tracking extends AbstractContainerProvider
     /**
      * Schedule a single check-in request.
      */
-    protected function scheduleCheckIn(array $extra_data = [], bool $force = false)
+    protected function scheduleCheckIn(array $extra_data = [], bool $force = false): void
     {
         if (!wp_next_scheduled(self::HOOK_SEND_CHECKIN, [$extra_data, $force])) {
             wp_schedule_single_event(current_time('timestamp'), self::HOOK_SEND_CHECKIN, [$extra_data, $force]);
@@ -136,7 +136,7 @@ class Tracking extends AbstractContainerProvider
         update_option(self::OPTION_HIDE_TRACKING_NOTICE, '1');
         $this->scheduleCheckIn(['on_activation' => 'admin notice', 'mailchimp_sub' => 'yes'], true);
 
-        wp_safe_redirect(esc_url(remove_query_arg('action', wp_get_referer())));
+        wp_safe_redirect(esc_url_raw(remove_query_arg('action', wp_get_referer())));
         exit;
     }
 
@@ -154,7 +154,7 @@ class Tracking extends AbstractContainerProvider
         update_option($section_id, $options);
         update_option(self::OPTION_HIDE_TRACKING_NOTICE, '1');
 
-        wp_safe_redirect(esc_url(remove_query_arg('action', wp_get_referer())));
+        wp_safe_redirect(esc_url_raw(remove_query_arg('action', wp_get_referer())));
         exit;
     }
 

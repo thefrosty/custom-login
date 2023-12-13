@@ -3,8 +3,7 @@
     border: 1px solid #8a8a8a;
     max-width: 300px;
     padding: 10px;
-    display: grid;
-    margin: 0;
+    margin: 0 1rem 1rem;
 }
 
 div.img-wrap p {
@@ -13,18 +12,16 @@ div.img-wrap p {
 
 /* COLUMN SETUP  */
 .section {
-    display: grid;
-    grid-auto-flow: column;
-    grid-gap: 1rem;
+    display: inline-block;
     margin: 1% 1.6% 1% 0;
 }
-.col {
+.section .col {
     float: left;
 }
 
 /* GO FULL WIDTH AT LESS THAN 480 PIXELS */
 @media only screen and (max-width: 762px) {
-    .col {
+    .section .col {
         margin: 1% 0 1em;
     }
 }

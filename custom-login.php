@@ -3,12 +3,12 @@
  * Plugin Name: Custom Login
  * Plugin URI: https://frosty.media/plugins/custom-login
  * Description: A simple way to customize your WordPress <code>wp-login.php</code> screen! A <a href="https://frosty.media/">Frosty Media</a> plugin.
- * Version: 4.0.12
+ * Version: 4.1.1
  * Author: Austin Passy
  * Author URI: https://austin.passy.co
- * Requires at least: 5.8
+ * Requires at least: 6.2
  * Tested up to: 6.4.2
- * Requires PHP: 7.4
+ * Requires PHP: 8.0
  * Text Domain: custom-login
  * GitHub Plugin URI: https://github.com/thefrosty/custom-login
  * Primary Branch: develop
@@ -51,11 +51,11 @@ add_action('admin_notices', function () {
     echo wp_kses_post(sprintf('<div class="error">%s</div>', wpautop($message)));
 });
 
-if (version_compare(PHP_VERSION, '7.4', '<')) {
+if (version_compare(PHP_VERSION, '8.0', '<')) {
     return add_filter('custom_login_shutdown_error_message', function () {
         return sprintf(
             esc_html__(
-                'Notice: Custom Login version 4 requires PHP version >= 7.4, you are running %s, all features are currently disabled.',
+                'Notice: Custom Login version 4 requires PHP version >= 8.0, you are running %s, all features are currently disabled.',
                 'custom-login'
             ),
             PHP_VERSION
@@ -87,21 +87,11 @@ $plugin
     ->addOnHook(WpSettingsApi::class, 'init', 10, true, [Factory::getPluginSettings($plugin)]);
 
 add_action('plugins_loaded', static function () use ($plugin): void {
+    do_action('custom_login_loaded_before_initialize', $plugin);
     $plugin->initialize();
+    do_action('custom_login_loaded_after_initialize', $plugin);
 });
 
 register_activation_hook(__FILE__, static function (): void {
     (new CustomLogin())->activate();
 });
-
-if (!function_exists('CUSTOMLOGIN')) {
-    /**
-     * The main function responsible for returning the one true Instance to function everywhere.
-     * Use this function like you would a global variable, except without needing to declare the global.
-     * @deprecated 4.0.0
-     */
-    function CUSTOMLOGIN()
-    {
-        _deprecated_function(__FUNCTION__, '4.0.0');
-    }
-}

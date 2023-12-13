@@ -9,7 +9,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
 >
-    <coverage includeUncoveredFiles="true">
+    <coverage processUncoveredFiles="false">
         <include>
             <directory suffix=".php">./src</directory>
         </include>
@@ -28,7 +28,7 @@
     </php>
     <testsuites>
         <testsuite name="CustomLogin">
-            <directory phpVersion="7.4" phpVersionOperator=">=" suffix="Test.php">./tests/unit</directory>
+            <directory phpVersion="8.0" phpVersionOperator=">=" suffix="Test.php">./tests/unit</directory>
         </testsuite>
     </testsuites>
 </phpunit>

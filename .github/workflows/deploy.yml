@@ -10,12 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v3
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 7.4
+          php-version: 8.0
           coverage: none
           tools: composer:v2
         env:
@@ -30,7 +30,7 @@ jobs:
           composer update --no-dev --no-interaction --optimize-autoloader
 
       - name: Set Node version to 16
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: 16
 
@@ -54,7 +54,7 @@ jobs:
           composer archive -vvv --format=zip --file="plugin-build/custom-login"
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: custom-login
           path: plugin-build/custom-login.zip

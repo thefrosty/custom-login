@@ -25,7 +25,7 @@ class CustomLogin extends AbstractHookProvider
 
     public const API_URL = 'https://frosty.media/';
     public const OPTION = 'custom_login';
-    public const VERSION = '4.0.12';
+    public const VERSION = '4.1.1';
 
     /**
      * Get the API URL.
@@ -76,7 +76,7 @@ class CustomLogin extends AbstractHookProvider
 
     /**
      * Plugins row action links.
-     * @param string[] $actions An array of plugin action links. By default this can include
+     * @param string[] $actions An array of plugin action links. By default, this can include
      *                              'activate', 'deactivate', and 'delete'. With Multisite active
      *                              this can also include 'network_active' and 'network_only' items.
      * @param string $plugin_file Path to the plugin file relative to the plugins directory.

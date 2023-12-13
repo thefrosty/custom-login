@@ -13,74 +13,93 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  Test:
-    runs-on: ${{ matrix.operating-system }}
+  run-phpcs:
+    name: Run PHPCS
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        operating-system: [ ubuntu-latest ]
-        php-versions: [ 7.4, 8.0, 8.1 ]
-        wp-versions: [ 'latest' ]
-        coverage: [ true ]
-    services:
-      mysql:
-        image: mysql:8.0
-        env:
-          MYSQL_DATABASE: wordpress_test
-          MYSQL_PASSWORD: password
-          MYSQL_USER: wp
-          MYSQL_ROOT_PASSWORD: root
-        ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
-
-    name: WP ${{ matrix.wp-versions }} on PHP ${{ matrix.php-versions }}
-    env:
-      WORDPRESS_DB_NAME: wordpress_test
-      WORDPRESS_DB_PASS: password
-      WORDPRESS_DB_USER: wp
+        php-version: [ "8.0", "8.1", "8.2" ]
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+
+      - name: Setup
+        id: ci-setup
+        uses: ./.github/actions/ci-setup
         with:
-          fetch-depth: 0 # No shallow clone, we need all history!
+          extensions: 'curl'
+          extensions-cache-key: run-phpcs-${{ matrix.php-version }}
+          php-version: ${{ matrix.php-version }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tools: 'composer, cs2pr, phpcs'
 
-      - name: Setup PHP ${{ matrix.php-versions }}
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php-versions }}
-          extensions: mysql, mysqli
-          coverage: xdebug
-          tools: composer, cs2pr, phpunit
-
-      - name: Get composer cache directory
-        id: composercache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-
-      - name: Cache dependencies
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.composercache.outputs.dir }}
-          key: php-${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-composer-
-
-      - name: Install dependencies
-        run: composer update --prefer-dist --no-interaction
-
-      - name: Setup WordPress ${{ matrix.wp-versions }}
-        run: bash ./vendor/thefrosty/wp-utilities/bin/install-wp-tests.sh wordpress_test wp password localhost ${{ matrix.wp-versions }} true
-
-      - name: Create all branches
-        run: source ./vendor/thefrosty/wp-utilities/bin/create-all-branches.sh
-
-      - name: Run composer tests
-        run: composer tests
+      - name: Run PHPCS
+        continue-on-error: false
+        id: phpcs
+        run: composer phpcs
         env:
-          DB_PORT: ${{ job.services.mysql.ports[3306] }}
+          CHANGED_FILES: ${{ steps.ci-setup.outputs.files }}
+          PHP_VERSION: ${{ matrix.php-version }}
 
       - name: Show PHPCS results in PR
+        if: ${{ always() && steps.phpcs.outcome == 'failure' }}
         run: cs2pr ./phpcs-report.xml
 
+  run-phpunit:
+    name: Run PHPUnit
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version: [ "8.0", "8.1", "8.2" ]
+        coverage: [ true ]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup
+        id: ci-setup
+        uses: ./.github/actions/ci-setup
+        with:
+          extensions: 'curl, mysql, mysqli, tar, zip'
+          extensions-cache-key: run-phpunit-${{ matrix.php-version }}
+          php-version: ${{ matrix.php-version }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tools: 'composer, phpunit'
+
+      - name: Run PHPUnit
+        continue-on-error: false
+        id: phpunit
+        run: composer phpunit
+        env:
+          CHANGED_FILES: ${{ steps.ci-setup.outputs.files }}
+
       - name: Upload coverage to Codecov
+        if: ${{ github.event_name == 'pull_request' }}
         uses: codecov/codecov-action@v3
         with:
           fail_ci_if_error: false
+
+  run-eslint:
+    name: Run ESLint
+    runs-on: ubuntu-latest
+    if: ${{ false }} # Disable for now
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Get Changed Files
+        id: files
+        uses: masesgroup/retrieve-changed-files@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Run ESLint
+        id: eslint
+        run: |
+          npm install
+          composer eslint
+        env:
+          CHANGED_FILES: ${{ steps.ci-setup.outputs.files }}
