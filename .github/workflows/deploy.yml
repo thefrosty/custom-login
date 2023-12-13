@@ -36,7 +36,7 @@ jobs:
 
       - name: Run npm install
         run: |
-          npm install --only=production
+          npm install --only=production --omit=dev
 
 #      - name: WordPress Plugin Deploy
 #        if: |

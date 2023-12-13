@@ -3,9 +3,9 @@ Contributors: austyfrosty, frostymedia
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290
 Tags: admin, branding, customization, custom login, login, logo, error, login error, custom login pro
 Requires at least: 5.8
-Tested up to: 6.0.1
+Tested up to: 6.4.2
 Requires PHP: 7.4
-Stable tag: trunk
+Stable tag: 4.0.12
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -109,6 +109,21 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 4. Custom Login Extensions Installer (an active license key is required).
 
 == Changelog ==
+= Version 4.0.12 (2023/12/13) =
+
+* Resolve Security Vulnerability (CVE-2023-49858).
+
+= Version 4.0.11 (2023/09/20) =
+
+* Fix: Removed Opis Closure package (causing PHP deprecation notices in 8.1+).
+
+= Version 4.0.10 (2023/04/08) =
+
+* Fix: Uninitialized value.
+
+= Version 4.0.9 (2023/03/31) =
+
+* Fix: Resolve edge case error on setting page.
 
 = Version 4.0.8 (2022/08/11) =
 

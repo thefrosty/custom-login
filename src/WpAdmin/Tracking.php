@@ -126,6 +126,9 @@ class Tracking extends AbstractContainerProvider
      */
     protected function checkForOptIn(): void
     {
+        if (!isset($_GET['_wpnonce']) || !\wp_verify_nonce($_GET['_wpnonce'], self::ACTION)) {
+            return;
+        }
         $section_id = Factory::getSection(Factory::SECTION_GENERAL);
         $options = Options::getOptions($section_id);
         $options[OptionKey::TRACKING] = OptionValue::ON;
@@ -142,6 +145,9 @@ class Tracking extends AbstractContainerProvider
      */
     protected function checkForOptOut(): void
     {
+        if (!isset($_GET['_wpnonce']) || !\wp_verify_nonce($_GET['_wpnonce'], self::ACTION)) {
+            return;
+        }
         $section_id = Factory::getSection(Factory::SECTION_GENERAL);
         $options = Options::getOptions($section_id);
         $options[OptionKey::TRACKING] = OptionValue::OFF;
@@ -172,8 +178,14 @@ class Tracking extends AbstractContainerProvider
             $this->getView(ServiceProvider::WP_UTILITIES_VIEW)->retrieve(
                 'notices/admin-notice.php',
                 [
-                    'opt_in_url' => add_query_arg('action', self::OPT_INTO_TRACKING, admin_url('admin.php')),
-                    'opt_out_url' => add_query_arg('action', self::OPT_OUT_OF_TRACKING, admin_url('admin.php')),
+                    'opt_in_url' => wp_nonce_url(
+                        add_query_arg('action', self::OPT_INTO_TRACKING, admin_url('admin.php')),
+                        self::ACTION
+                    ),
+                    'opt_out_url' => wp_nonce_url(
+                        add_query_arg('action', self::OPT_OUT_OF_TRACKING, admin_url('admin.php')),
+                        self::ACTION
+                    ),
                 ]
             ),
             esc_html__(

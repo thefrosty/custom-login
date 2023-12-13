@@ -27,7 +27,7 @@
         <env name="DB_PORT" value="3306"/>
     </php>
     <testsuites>
-        <testsuite name="BeachbodyOnDemand">
+        <testsuite name="CustomLogin">
             <directory phpVersion="7.4" phpVersionOperator=">=" suffix="Test.php">./tests/unit</directory>
         </testsuite>
     </testsuites>
