@@ -82,9 +82,8 @@ need to understand CSS at all. Custom Login even has a HTML, CSS &amp; jQuery te
 
 1. Works great for client site installs.
 2. Read more about [Custom Login 4.1](https://frosty.media/2023/custom-login-4-1-x-released/)
-2. Read more about [Custom Login 4.0](https://frosty.media/2022/custom-login-4-0-x-released/)
-3. Read more about [Custom Login 3.1](https://frosty.media/2015/custom-login-v3-1-released/)
-4. Read more about [Custom Login 2.0](http://wp.me/pzgsJ-HY)
+3. Read more about [Custom Login 4.0](https://frosty.media/2022/custom-login-4-0-x-released/)
+4. Read more about [Custom Login 3.1](https://frosty.media/2015/custom-login-v3-1-released/)
 
 **For those looking to show off your login screen, check out the [Flickr group](http://flickr.com/groups/custom-login/)!
 Share you designs with the community!**
@@ -129,6 +128,11 @@ Check out the [Flickr group](http://flickr.com/groups/custom-login/)! Upload and
 ### I think I want to uninstall ###
 
 Just deactivate it. Sad panda is sad.
+
+### Where do I report security bugs found in this plugin? ###
+Please report security bugs found in the source code of the Custom Login plugin through the 
+[Patchstack Vulnerability Disclosure Program](https://patchstack.com/database/vdp/custom-login). The Patchstack team will assist you with 
+verification, CVE assignment, and notify the developers of this plugin.
 
 ## Screenshots ##
 
