@@ -125,6 +125,10 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 * Remove deprecated function `CUSTOMLOGIN()`.
 * Fix: resolve use of path instead of URL for animate.css.
 
+= Version 4.0.12 (2023/12/13) =
+
+* Resolve Security Vulnerability (CVE-2023-49858).
+
 = Version 4.0.11 (2023/09/20) =
 
 * Fix: Removed Opis Closure package (causing PHP deprecation notices in 8.1+).
