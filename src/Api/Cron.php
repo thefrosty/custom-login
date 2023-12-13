@@ -43,7 +43,7 @@ class Cron extends AbstractHookProvider
      * @return array
      * @since 1.6
      */
-    public function maybeAddSchedule(array $schedules = []): array
+    protected function maybeAddSchedule(array $schedules = []): array
     {
         if (!array_key_exists('weekly', $schedules)) {
             $schedules['weekly'] = [
