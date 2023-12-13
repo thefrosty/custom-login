@@ -13,9 +13,9 @@
 **Donate link:** [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290)  
 **Tags:** admin, branding, customization, custom login, login, logo, error, login error, custom login pro  
 **Requires at least:** 5.8  
-**Tested up to:** 6.3.1  
+**Tested up to:** 6.4.2  
 **Requires PHP**: 7.4  
-**Stable tag:** trunk  
+**Stable tag:** 4.0.12  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -162,6 +162,10 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 ](https://ps.w.org/custom-login/assets/screenshot-4.png)
 
 ## Changelog ##
+
+### Version 4.0.12 (2023/12/13) ###
+
+* Resolve Security Vulnerability (CVE-2023-49858).
 
 ### Version 4.0.11 (2023/09/20) ###
 
