@@ -82,6 +82,7 @@
   "archive": {
     "exclude": [
       ".gitignore",
+      ".wordpress-org",
       "!node_modules/",
       "plugin-build/",
       "!vendor/",

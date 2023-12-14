@@ -252,6 +252,10 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 ## Upgrade Notice ##
 
+### 4.1.0 ###
+
+Requires WordPress version >= 6.2 and PHP version >= 8.0.
+
 ### 4.0.1 ###
 
 Requires WordPress version >= 5.7 and PHP version >= 7.4.
