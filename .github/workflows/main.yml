@@ -48,6 +48,17 @@ jobs:
   run-phpunit:
     name: Run PHPUnit
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_DATABASE: wordpress_test
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_USER: wordpress_user
+          MYSQL_PASSWORD: mysql_password
+        ports:
+          - 3306/tcp
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     strategy:
       matrix:
         php-version: [ "8.0", "8.1", "8.2" ]
@@ -66,8 +77,14 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           tools: 'composer, phpunit'
 
+      - name: Install WP Tests
+        run: |
+          chmod u+x vendor/thefrosty/wp-utilities/bin/install-wp-tests.sh
+          ./vendor/thefrosty/wp-utilities/bin/install-wp-tests.sh wordpress_test root root 127.0.0.1:${{ job.services.mysql.ports['3306'] }} latest true
+        env:
+          WORDPRESS_DB_HOST: 127.0.0.1:${{ job.services.mysql.ports['3306'] }}
+
       - name: Run PHPUnit
-        continue-on-error: false
         id: phpunit
         run: composer phpunit
         env:

@@ -65,6 +65,9 @@
       "bash ./vendor/thefrosty/wp-utilities/bin/phpcs.sh"
     ],
     "phpunit": [
+      "./vendor/bin/phpunit --colors --verbose"
+    ],
+    "phpunit-coverage": [
       "./vendor/bin/phpunit --colors --verbose --coverage-html ./tests/results && php ./tests/clover-results.php ./tests/clover.xml 01"
     ],
     "eslint": [
