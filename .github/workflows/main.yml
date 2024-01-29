@@ -106,7 +106,7 @@ jobs:
 
       - name: Get Changed Files
         id: files
-        uses: masesgroup/retrieve-changed-files@v2
+        uses: masesgroup/retrieve-changed-files@v3
 
       - name: Setup Node
         uses: actions/setup-node@v3
