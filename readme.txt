@@ -117,6 +117,10 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 == Changelog ==
 
+= Version 4.2.0 (2024/04/25) =
+
+* Bump Tested up to too "6.5.2"
+
 = Version 4.1.1 (2023/12/13) =
 
 * Resolve Security Vulnerability (CVE-2023-49858).
