@@ -5,7 +5,7 @@ Tags: admin, branding, customization, custom login, login, logo, error, login er
 Requires at least: 6.2
 Tested up to: 6.5.2
 Requires PHP: 8.0
-Stable tag: 4.1.1
+Stable tag: 4.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
