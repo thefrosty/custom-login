@@ -9,7 +9,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
 >
-    <coverage processUncoveredFiles="false">
+    <coverage includeUncoveredFiles="true" processUncoveredFiles="false">
         <include>
             <directory suffix=".php">./src</directory>
         </include>
@@ -17,6 +17,14 @@
             <clover outputFile="./tests/clover.xml"/>
         </report>
     </coverage>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./src</directory>
+        </whitelist>
+    </filter>
+    <logging>
+        <log type="coverage-clover" target="./tests/clover.xml"/>
+    </logging>
     <php>
         <ini name="error_reporting" value="24575"/>
         <env name="WP_PHPUNIT__TESTS_CONFIG" value="./tests/wp-tests-config.php"/>

@@ -27,7 +27,7 @@
     "php": "^8.0",
     "ext-json": "*",
     "dwnload/edd-software-license-manager": "^2.0",
-    "dwnload/wp-settings-api": "^3.9",
+    "dwnload/wp-settings-api": "^3.11",
     "pimple/pimple": "^3.5",
     "psr/container": "^2.0",
     "thefrosty/wp-utilities": "^3.2"
@@ -41,7 +41,7 @@
     "roots/wordpress": "^6.4",
     "squizlabs/php_codesniffer": "^3.2",
     "symfony/var-dumper": "^5.4 || ^6.2",
-    "wp-phpunit/wp-phpunit": "^6.3",
+    "wp-phpunit/wp-phpunit": "^6.4",
     "yoast/phpunit-polyfills": "^2.0"
   },
   "autoload": {
@@ -65,6 +65,9 @@
       "bash ./vendor/thefrosty/wp-utilities/bin/phpcs.sh"
     ],
     "phpunit": [
+      "./vendor/bin/phpunit --colors --verbose"
+    ],
+    "phpunit-coverage": [
       "./vendor/bin/phpunit --colors --verbose --coverage-html ./tests/results && php ./tests/clover-results.php ./tests/clover.xml 01"
     ],
     "eslint": [
@@ -79,6 +82,7 @@
   "archive": {
     "exclude": [
       ".gitignore",
+      ".wordpress-org",
       "!node_modules/",
       "plugin-build/",
       "!vendor/",

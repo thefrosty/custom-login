@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -30,9 +30,9 @@ jobs:
           composer update --no-dev --no-interaction --optimize-autoloader
 
       - name: Set Node version to 16
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 20
 
       - name: Run npm install
         run: |
@@ -61,6 +61,7 @@ jobs:
 
       - name: Upload release asset
         uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
         with:
           files: plugin-build/custom-login.zip
         env:

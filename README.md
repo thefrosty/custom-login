@@ -13,9 +13,9 @@
 **Donate link:** [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290)  
 **Tags:** admin, branding, customization, custom login, login, logo, error, login error, custom login pro  
 **Requires at least:** 6.2  
-**Tested up to:** 6.4.2  
+**Tested up to:** 6.5.2  
 **Requires PHP**: 8.0  
-**Stable tag:** 4.1.1  
+**Stable tag:** 4.2.0  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -82,9 +82,8 @@ need to understand CSS at all. Custom Login even has a HTML, CSS &amp; jQuery te
 
 1. Works great for client site installs.
 2. Read more about [Custom Login 4.1](https://frosty.media/2023/custom-login-4-1-x-released/)
-2. Read more about [Custom Login 4.0](https://frosty.media/2022/custom-login-4-0-x-released/)
-3. Read more about [Custom Login 3.1](https://frosty.media/2015/custom-login-v3-1-released/)
-4. Read more about [Custom Login 2.0](http://wp.me/pzgsJ-HY)
+3. Read more about [Custom Login 4.0](https://frosty.media/2022/custom-login-4-0-x-released/)
+4. Read more about [Custom Login 3.1](https://frosty.media/2015/custom-login-v3-1-released/)
 
 **For those looking to show off your login screen, check out the [Flickr group](http://flickr.com/groups/custom-login/)!
 Share you designs with the community!**
@@ -130,6 +129,11 @@ Check out the [Flickr group](http://flickr.com/groups/custom-login/)! Upload and
 
 Just deactivate it. Sad panda is sad.
 
+### Where do I report security bugs found in this plugin? ###
+Please report security bugs found in the source code of the Custom Login plugin through the 
+[Patchstack Vulnerability Disclosure Program](https://patchstack.com/database/vdp/custom-login). The Patchstack team will assist you with 
+verification, CVE assignment, and notify the developers of this plugin.
+
 ## Screenshots ##
 
 Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-login/).
@@ -163,6 +167,12 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 ](https://ps.w.org/custom-login/assets/screenshot-4.png)
 
 ## Changelog ##
+
+### Version 4.2.0 (2024/04/25) ###
+
+* Bump Tested up to too "6.5.2"
+* Resolve possible "Uncaught TypeError" when initializing wp.codeEditor on empty element.
+* Development enhancements. 
 
 ### Version 4.1.1 (2023/12/13) ### 
 
@@ -247,6 +257,10 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 * Fix settings API Settings: Uncaught Error: Call to undefined method stdClass::get_permalink() (#49)
 
 ## Upgrade Notice ##
+
+### 4.1.0 ###
+
+Requires WordPress version >= 6.2 and PHP version >= 8.0.
 
 ### 4.0.1 ###
 
