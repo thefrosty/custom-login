@@ -171,6 +171,7 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 ### Version 4.2.0 (2024/04/25) ###
 
 * Bump Tested up to too "6.5.2"
+* Resolve possible "Uncaught TypeError" when initializing wp.codeEditor on empty element.
 * Development enhancements. 
 
 ### Version 4.1.1 (2023/12/13) ### 
