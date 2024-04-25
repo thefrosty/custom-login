@@ -3,7 +3,7 @@ Contributors: austyfrosty, frostymedia
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290
 Tags: admin, branding, customization, custom login, login, logo, error, login error, custom login pro
 Requires at least: 6.2
-Tested up to: 6.4.2
+Tested up to: 6.5.2
 Requires PHP: 8.0
 Stable tag: 4.1.1
 License: GPLv2 or later
