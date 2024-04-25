@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 ?>
-<div class="updated">
+<div class="notice notice-info">
     <p>
         <span>%1$s</span>
         <span class="alignright">

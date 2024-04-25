@@ -3,9 +3,9 @@ Contributors: austyfrosty, frostymedia
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290
 Tags: admin, branding, customization, custom login, login, logo, error, login error, custom login pro
 Requires at least: 6.2
-Tested up to: 6.4.2
+Tested up to: 6.5.2
 Requires PHP: 8.0
-Stable tag: 4.1.1
+Stable tag: 4.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -117,6 +117,11 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 == Changelog ==
 
+= Version 4.2.0 (2024/04/25) =
+
+* Bump Tested up to too "6.5.2"
+* Resolve possible "Uncaught TypeError" when initializing wp.codeEditor on empty element.
+
 = Version 4.1.1 (2023/12/13) =
 
 * Resolve Security Vulnerability (CVE-2023-49858).
@@ -138,59 +143,8 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 * Fix: Removed Opis Closure package (causing PHP deprecation notices in 8.1+).
 
-= Version 4.0.10 (2023/04/08) =
-
-* Fix: Uninitialized value.
-
-= Version 4.0.9 (2023/03/31) =
-
-* Fix: Resolve edge case error on setting page.
-
-= Version 4.0.8 (2022/08/11) =
-
-* Fix: Make sure WordPress' capabilities array keys are string values to avoid `shutdown` action fatal errors.
-
-= Version 4.0.7 (2022/08/09) =
-
-* Don't type cast the return value of removeLostPasswordText.
-* Uncomment update option to resolve upgrade notice always showing.
-* Don't show the tracking notice, when opt-in or opt-out has already been selected.
-* Update WpSettingsApi, and use new condition checks for sidebar(s).
-* Update missing autoload notice message.
-
-= Version 4.0.6 (2022/08/08) =
-
-* Fix: Resolve micro regression with `psr/container` issues.
-* Fix: Resolve file (URL) fields breaking on save.
-* Update WP Utilities to 2.8.
-* Update WP Settings API to 3.6.
-
-= Version 4.0.5 (2022/08/06) =
-
-* Make sure autoloading is working before loading classes on plugin uninstall.
-
-= Version 4.0.4 (2022/08/05) =
-
-* Change PSR Container package to use version 1 instead of 2 to avoid WooCommerce errors.
-
-= Version 4.0.3 (2022/08/04) =
-
-* Update both README's with correct "requires at least", "tested up to", and "requires PHP" header tags.
-* Cleanup admin notice messages when "unable to activate" due to invalid PHP version or missing autoload.
-
-= Version 4.0.2 (2022/07/15) =
-
-* Don't show error message when not in admin.
-
-= Version 4.0.1 (2022/05/23) =
-
-* Version bump, including manually adding missing vendor directory (need to fix GitHub action).
-
-= Version 4.0.0 (2022/05/23) =
-
-* Complete rewrite.
-* Required PHP >= 7.4.
-* Full Changelog: [3.2.15...4.0.0](https://github.com/thefrosty/custom-login/compare/3.2.15...4.0.0)
+[Full CHANGELOG](https://github.com/thefrosty/custom-login/blob/develop/README.md#changelog)
+[All Releases](https://github.com/thefrosty/custom-login/releases)
 
 == Upgrade Notice ==
 
