@@ -96,7 +96,12 @@ class Settings extends AbstractContainerProvider implements OptionKey
             wp_localize_script('code-editor', $objectName, $settings);
             wp_add_inline_script(
                 'code-editor',
-                'jQuery(document).ready(function($){wp.codeEditor.initialize($(\'textarea[data-codemirror="' . $type . '"]\'), ' . $objectName . ')})'
+                'jQuery(document).ready(function($) {
+                const $textarea = $(\'textarea[data-codemirror="' . $type . '"]\')
+                if ($textarea.length > 0) {
+                    wp.codeEditor.initialize($textarea, ' . $objectName . ')
+                }
+                })'
             );
         }
 
