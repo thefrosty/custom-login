@@ -1,4 +1,4 @@
-name: "Deploy to WordPress.org"
+name: "Deploy to .org & upload artifact(s)"
 
 on:
   release:
@@ -23,20 +23,20 @@ jobs:
 
       - name: Run composer install
         run: |
-          composer install --no-interaction --optimize-autoloader
+          composer install --no-interaction
 
       - name: Run composer update with --no-dev
         run: |
           composer update --no-dev --no-interaction --optimize-autoloader
 
-      - name: Set Node version to 16
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
       - name: Run npm install
         run: |
-          npm install --only=production --omit=dev
+          npm install --omit=dev
 
 #      - name: WordPress Plugin Deploy
 #        if: |
@@ -54,7 +54,7 @@ jobs:
           composer archive -vvv --format=zip --file="plugin-build/custom-login"
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: custom-login
           path: plugin-build/custom-login.zip
