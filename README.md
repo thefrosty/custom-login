@@ -11,7 +11,7 @@
 **Contributors:** [austyfrosty](https://profiles.wordpress.org/austyfrosty)
 , [frostymedia](https://profiles.wordpress.org/frostymedia)  
 **Donate link:** [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290)  
-**Tags:** admin, branding, customization, custom login, login, logo, error, login error, custom login pro  
+**Tags:** admin, branding, customization, custom login, logo  
 **Requires at least:** 6.2  
 **Tested up to:** 6.5.2  
 **Requires PHP**: 8.0  
