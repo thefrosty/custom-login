@@ -2,10 +2,10 @@
 Contributors: austyfrosty, frostymedia
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290
 Tags: admin, branding, customization, custom login, logo
-Requires at least: 6.2
-Tested up to: 6.6.2
+Requires at least: 6.3
+Tested up to: 6.7.0
 Requires PHP: 8.0
-Stable tag: 4.2.0
+Stable tag: 4.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -116,6 +116,11 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 4. Custom Login Extensions Installer (an active license key is required).
 
 == Changelog ==
+
+= Version 4.2.0 (2024/10/30) =
+
+* Bump Tested up to too "6.7.0"
+* Updated login logo HTML attribute for CSS targeting in WP 6.7.
 
 = Version 4.2.0 (2024/04/25) =
 

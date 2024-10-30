@@ -11,10 +11,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-if (!defined('SHORTINIT')) {
-    define('SHORTINIT', true);
-}
-
+$login_h1 = version_compare($GLOBALS['wp_version'], '6.7', '>=') ? '.login .wp-login-logo' : '.login h1';
 $version ??= CustomLogin::VERSION;
 $close_rule = "}\n";
 
@@ -136,20 +133,20 @@ if ((!empty($hide_wp_logo) && $hide_wp_logo === OptionValue::ON) && empty($logo_
 
 /**
  * Open login h1
- * @rule .login h1
+ * @rule .login h1 / .login .wp-login-logo
  */
 if ((!empty($logo_force_form_max_width) && $logo_force_form_max_width === OptionValue::ON) && !empty($login_form_width)) {
-    $css .= openCssRule('.login h1');
+    $css .= openCssRule($login_h1);
     $css .= trailingSemicolonIt('width', sprintf('%1$s%2$s', $login_form_width, $login_form_width_unit ?? 'px'));
-    $css .= $close_rule; // CLOSE .login
+    $css .= $close_rule; // CLOSE .login h1 / .login .wp-login-logo
 }
 
 /**
  * Open login h1 a
- * @rule .login h1 a
+ * @rule .login h1 a / .login .wp-login-logo a
  */
 if (!empty($logo_background_url)) {
-    $css .= openCssRule('.login h1 a');
+    $css .= openCssRule("$login_h1 a");
     if (!empty($logo_background_size_width)) {
         $css .= trailingSemicolonIt('width', sprintf('%1$spx !important', $logo_background_size_width));
     }
@@ -167,7 +164,7 @@ if (!empty($logo_background_url)) {
     } else {
         $css .= prefixIt('background-size', 'inherit');
     }
-    $css .= $close_rule; // CLOSE .login h1 a
+    $css .= $close_rule; // CLOSE .login h1 a / .login .wp-login-logo a
 }
 
 /**
