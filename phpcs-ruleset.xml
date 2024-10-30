@@ -23,7 +23,7 @@
     <arg name="tab-width" value="4"/>
     <!-- For CI, don't fail on warnings -->
     <config name="ignore_warnings_on_exit" value="1"/>
-    <config name="minimum_supported_wp_version" value="6.2" />
+    <config name="minimum_supported_wp_version" value="6.3" />
 
     <rule ref="PSR12">
         <exclude name="PSR12.Classes.OpeningBraceSpace.Found"/>
