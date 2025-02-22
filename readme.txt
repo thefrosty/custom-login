@@ -117,7 +117,7 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 == Changelog ==
 
-= Version 4.2.0 (2024/10/30) =
+= Version 4.3.0 (2024/10/30) =
 
 * Bump Tested up to too "6.7.0"
 * Updated login logo HTML attribute for CSS targeting in WP 6.7.
