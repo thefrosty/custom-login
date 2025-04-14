@@ -93,8 +93,8 @@ add_action('plugins_loaded', static function () use ($plugin) {
 
 // Defer the WpSettingsApi until after 'init' for translations issues triggered in WP >= 6.7.0.
 add_action('init', static function () use ($plugin) {
-    $plugin->addOnHook(WpSettingsApi::class, 'init', 12, true, [Factory::getPluginSettings($plugin)]);
-});
+    $plugin->addOnHook(WpSettingsApi::class, 'init', 5, true, [Factory::getPluginSettings($plugin)]);
+}, 2);
 
 register_activation_hook(__FILE__, static function () {
     (new CustomLogin())->activate();
