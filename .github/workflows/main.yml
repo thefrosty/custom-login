@@ -67,6 +67,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Install SVN
+        run: sudo apt-get update && sudo apt-get install -y subversion
+
       - name: Setup
         id: ci-setup
         uses: ./.github/actions/ci-setup
