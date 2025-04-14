@@ -1,39 +1,44 @@
-# Copyright (C) 2023 Austin Passy
+# Copyright (C) 2025 Austin Passy
 # This file is distributed under the same license as the Custom Login plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Custom Login 4.1.0\n"
+"Project-Id-Version: Custom Login 4.4.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/custom-login\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-11-09T00:02:40+00:00\n"
+"POT-Creation-Date: 2025-04-14T20:21:42+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.9.0\n"
+"X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: custom-login\n"
 
 #. Plugin Name of the plugin
+#: custom-login.php
 #: src/Settings/Api/Factory.php:33
 #: src/Settings/Api/Factory.php:34
-#: src/Settings/Settings.php:136
+#: src/Settings/Settings.php:141
 msgid "Custom Login"
 msgstr ""
 
 #. Plugin URI of the plugin
+#: custom-login.php
 msgid "https://frosty.media/plugins/custom-login"
 msgstr ""
 
 #. Description of the plugin
+#: custom-login.php
 msgid "A simple way to customize your WordPress <code>wp-login.php</code> screen! A <a href=\"https://frosty.media/\">Frosty Media</a> plugin."
 msgstr ""
 
 #. Author of the plugin
+#: custom-login.php
 msgid "Austin Passy"
 msgstr ""
 
 #. Author URI of the plugin
+#: custom-login.php
 msgid "https://austin.passy.co"
 msgstr ""
 
@@ -325,30 +330,38 @@ msgid "Remove the \"Lost Password?\" text. This does <strong>not</strong> disabl
 msgstr ""
 
 #: custom-login.php:57
-msgid "Notice: Custom Login version 4 requires PHP version >= 8.0, you are running %s, all features are currently disabled."
+msgid "Notice: Custom Login version 4 requires PHP version >= 8.1, you are running %s, all features are currently disabled."
 msgstr ""
 
 #: custom-login.php:66
 msgid "Error: Custom Login can't find the autoload file (if installed from GitHub, please run `composer install`), all features are currently disabled."
 msgstr ""
 
-#: resources/views/settings/extensions.php:7
+#: resources/views/settings/extensions.php:11
 msgid "Available Custom Login Extensions"
 msgstr ""
 
-#: resources/views/settings/extensions.php:29
+#: resources/views/settings/extensions.php:40
 msgid "Not Installed"
 msgstr ""
 
 #: resources/views/settings/extensions.php:42
-msgid "Get this Extension"
+msgid "Installed - Not Active"
 msgstr ""
 
-#: resources/views/settings/extensions.php:55
-msgid "PayPal"
+#: resources/views/settings/extensions.php:44
+msgid "Active"
 msgstr ""
 
 #: resources/views/settings/extensions.php:63
+msgid "Get this Extension"
+msgstr ""
+
+#: resources/views/settings/extensions.php:82
+msgid "PayPal"
+msgstr ""
+
+#: resources/views/settings/extensions.php:92
 msgid "Credit Card"
 msgstr ""
 
@@ -365,6 +378,7 @@ msgid "Once Weekly"
 msgstr ""
 
 #: src/CustomLogin.php:93
+#: src/Extensions/AddOn.php:112
 msgid "Settings"
 msgstr ""
 
@@ -376,25 +390,37 @@ msgstr ""
 msgid "Extensions"
 msgstr ""
 
+#: src/Extensions/StylePack.php:20
+msgid "The Custom Login Style Pack \"%s\" was successfully imported."
+msgstr ""
+
+#: src/Extensions/StylePack.php:35
+msgid "Invalid nonce."
+msgstr ""
+
+#: src/Extensions/StylePack.php:63
+msgid "Custom Login style pack successfully imported."
+msgstr ""
+
 #: src/Settings/ImportExport.php:93
 msgid "Custom Login settings successfully imported"
 msgstr ""
 
-#: src/Settings/Settings.php:139
+#: src/Settings/Settings.php:144
 msgctxt "rate; as in rate this plugin"
 msgid "Rate"
 msgstr ""
 
-#: src/Settings/Settings.php:140
+#: src/Settings/Settings.php:145
 msgctxt "the author of this plugin"
 msgid "Author"
 msgstr ""
 
-#: src/Settings/Settings.php:141
+#: src/Settings/Settings.php:146
 msgid "Twitter"
 msgstr ""
 
-#: src/Settings/Settings.php:172
+#: src/Settings/Settings.php:177
 msgid "Extensions %s"
 msgstr ""
 
@@ -426,14 +452,14 @@ msgstr ""
 msgid "Custom Login Upgrades"
 msgstr ""
 
-#: src/WpAdmin/Tracking.php:179
+#: src/WpAdmin/Tracking.php:191
 msgid "Allow Custom Login to anonymously track how this plugin is used and help us make the plugin better?"
 msgstr ""
 
-#: src/WpAdmin/Tracking.php:183
+#: src/WpAdmin/Tracking.php:195
 msgid "Allow"
 msgstr ""
 
-#: src/WpAdmin/Tracking.php:184
+#: src/WpAdmin/Tracking.php:196
 msgid "Do not allow"
 msgstr ""
