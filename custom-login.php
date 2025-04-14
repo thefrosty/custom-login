@@ -3,18 +3,18 @@
  * Plugin Name: Custom Login
  * Plugin URI: https://frosty.media/plugins/custom-login
  * Description: A simple way to customize your WordPress <code>wp-login.php</code> screen! A <a href="https://frosty.media/">Frosty Media</a> plugin.
- * Version: 4.3.0
+ * Version: 4.4.0.1
  * Author: Austin Passy
  * Author URI: https://austin.passy.co
- * Requires at least: 6.3
- * Tested up to: 6.7.0
- * Requires PHP: 8.0
+ * Requires at least: 6.6
+ * Tested up to: 6.8.0
+ * Requires PHP: 8.1
  * Text Domain: custom-login
  * GitHub Plugin URI: https://github.com/thefrosty/custom-login
  * Primary Branch: develop
  * Release Asset: true
  *
- * @copyright 2012 - 2024
+ * @copyright 2012 - 2025
  * @author Austin Passy
  * @link https://austin.passy.co/
  * @license https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
@@ -51,11 +51,11 @@ add_action('admin_notices', function () {
     echo wp_kses_post(sprintf('<div class="error">%s</div>', wpautop($message)));
 });
 
-if (version_compare(PHP_VERSION, '8.0', '<')) {
+if (version_compare(PHP_VERSION, '8.1', '<')) {
     return add_filter('custom_login_shutdown_error_message', function () {
         return sprintf(
             esc_html__(
-                'Notice: Custom Login version 4 requires PHP version >= 8.0, you are running %s, all features are currently disabled.',
+                'Notice: Custom Login version 4 requires PHP version >= 8.1, you are running %s, all features are currently disabled.',
                 'custom-login'
             ),
             PHP_VERSION
@@ -83,14 +83,18 @@ $plugin
     ->addOnHook(Login::class, 'init', 2, null, [$container])
     ->addOnHook(Settings::class, 'init', 10, true, [$container])
     ->addOnHook(SettingsUpgrades::class, 'init', 10, null, [$container])
-    ->addOnHook(Tracking::class, 'admin_init', 10, true, [$container])
-    ->addOnHook(WpSettingsApi::class, 'init', 10, true, [Factory::getPluginSettings($plugin)]);
+    ->addOnHook(Tracking::class, 'admin_init', 10, true, [$container]);
 
 add_action('plugins_loaded', static function () use ($plugin) {
     do_action('custom_login_loaded_before_initialize', $plugin);
     $plugin->initialize();
     do_action('custom_login_loaded_after_initialize', $plugin);
 });
+
+// Defer the WpSettingsApi until after 'init' for translations issues triggered in WP >= 6.7.0.
+add_action('init', static function () use ($plugin) {
+    $plugin->addOnHook(WpSettingsApi::class, 'init', 5, true, [Factory::getPluginSettings($plugin)]);
+}, 2);
 
 register_activation_hook(__FILE__, static function () {
     (new CustomLogin())->activate();

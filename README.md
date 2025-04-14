@@ -12,10 +12,10 @@
 , [frostymedia](https://profiles.wordpress.org/frostymedia)  
 **Donate link:** [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290)  
 **Tags:** admin, branding, customization, custom login, logo  
-**Requires at least:** 6.2  
-**Tested up to:** 6.7.0  
-**Requires PHP**: 8.0  
-**Stable tag:** 4.3.0  
+**Requires at least:** 6.6  
+**Tested up to:** 6.8.0  
+**Requires PHP**: 8.1  
+**Stable tag:** 4.4.0.1  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -167,6 +167,12 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 ](https://ps.w.org/custom-login/assets/screenshot-4.png)
 
 ## Changelog ##
+
+### Version 4.4.0 (2025/04/14) ###
+
+* Requires PHP >= 8.1.
+* Bump Tested up to too "6.8.0".
+* Resolve "Translation loading for the custom-login domain was triggered too early" added in WP 6.7.0.
 
 ### Version 4.3.0 (2024/10/30) ###
 
