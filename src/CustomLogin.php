@@ -69,7 +69,7 @@ class CustomLogin extends AbstractHookProvider
     {
         $this->addFilter('plugin_action_links', [$this, 'pluginActionLinks'], 10, 2);
         $this->addFilter('plugin_row_meta', [$this, 'pluginRowMeta'], 10, 2);
-        $this->addAction('plugins_loaded', [$this, 'i18n']);
+        $this->addAction('init', [$this, 'i18n']);
         $this->addAction('login_head', [$this, 'metaGenerator'], 1);
         do_action(Factory::PREFIX . 'actions');
     }
