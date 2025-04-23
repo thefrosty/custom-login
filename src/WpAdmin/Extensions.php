@@ -16,6 +16,7 @@ use TheFrosty\CustomLogin\Settings\OptionValue;
 use TheFrosty\WpUtilities\Plugin\AbstractContainerProvider;
 use TheFrosty\WpUtilities\Utils\Viewable;
 
+use function apply_filters;
 use function is_string;
 use function sprintf;
 
@@ -30,12 +31,22 @@ class Extensions extends AbstractContainerProvider
     use Viewable;
 
     /**
+     * Get an array of Extensions that are registered.
+     * @return array
+     */
+    public static function getExtensions(): array
+    {
+        return array_filter(apply_filters('custom_login/plugin_extensions_to_hide', []));
+    }
+
+    /**
      * Add class hooks.
      */
     public function addHooks(): void
     {
         $this->addAction('admin_menu', [$this, 'adminMenu']);
         $this->addAction(ActionHookName::SETTINGS_SETTINGS_SIDEBARS, [$this, 'sidebarExtensions'], 35);
+        $this->addFilter('all_plugins', [$this, 'maybeHideExtensions']);
     }
 
     /**
@@ -103,5 +114,25 @@ class Extensions extends AbstractContainerProvider
                 sprintf(admin_url('options-general.php?page=%s/extensions'), $this->getPlugin()->getSlug())
             )
         );
+    }
+
+    /**
+     * Hide the extensions from the plugin
+     * @param array $plugins
+     * @return array
+     */
+    protected function maybeHideExtensions(array $plugins): array
+    {
+        global $pagenow;
+
+        if ($pagenow !== 'plugins.php' || isset($_GET['plugin_status'])) {
+            return $plugins;
+        }
+
+        foreach (self::getExtensions() as $extension) {
+            unset($plugins[$extension]);
+        }
+
+        return $plugins;
     }
 }

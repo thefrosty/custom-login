@@ -13,6 +13,16 @@ use TheFrosty\WpUtilities\Plugin\HooksTrait;
 use TheFrosty\WpUtilities\Plugin\Plugin;
 use TheFrosty\WpUtilities\Plugin\WpHooksInterface;
 
+use function __;
+use function admin_url;
+use function array_merge;
+use function array_unshift;
+use function esc_html;
+use function get_option;
+use function is_blog_admin;
+use function plugin_basename;
+use function sprintf;
+
 /**
  * Class AddOn
  * @package TheFrosty\CustomLogin\Extensions
@@ -58,13 +68,17 @@ abstract class AddOn implements WpHooksInterface
         $this->addAction('init', function (): void {
             $this->addAction(WpSettingsApi::HOOK_INIT, [$this, 'init'], 14, 3);
             $this->addFilter('dwnload_edd_slm_licenses', function (array $licenses): array {
-                $licenses[$this->plugin_id] = \esc_html($this->plugin_name);
+                $licenses[$this->plugin_id] = esc_html($this->plugin_name);
 
                 return $licenses;
             });
             $this->addFilter('dwnload_edd_slm_use_local_scripts', fn(): bool => true);
-            if (\is_blog_admin()) {
+            if (is_blog_admin()) {
                 $this->addFilter('plugin_action_links', [$this, 'pluginActionLinks'], 10, 2);
+                $this->addFilter(
+                    'custom_login/plugin_extensions_to_hide',
+                    fn(array $plugins): array => array_merge($plugins, [plugin_basename($this->file)])
+                );
             }
         });
     }
@@ -75,7 +89,7 @@ abstract class AddOn implements WpHooksInterface
      */
     public function getLicense(): string
     {
-        $license = \get_option(AbstractLicenceManager::LICENSE_SETTING, []);
+        $license = get_option(AbstractLicenceManager::LICENSE_SETTING, []);
 
         return $license[$this->plugin_id]['license'] ?? '';
     }
@@ -105,13 +119,13 @@ abstract class AddOn implements WpHooksInterface
      */
     protected function pluginActionLinks(array $actions, string $plugin_file): array
     {
-        if (\plugin_basename($this->file) === $plugin_file) {
-            $settings_link = \sprintf(
+        if (plugin_basename($this->file) === $plugin_file) {
+            $settings_link = sprintf(
                 '<a href="%s">%s</a>',
-                \admin_url(\sprintf('options-general.php?page=%s#%s', $this->parent->getSlug(), $this->plugin_id)),
-                \__('Settings', 'custom-login')
+                admin_url(sprintf('options-general.php?page=%s#%s', $this->parent->getSlug(), $this->plugin_id)),
+                __('Settings', 'custom-login')
             );
-            \array_unshift($actions, $settings_link); // Before other links.
+            array_unshift($actions, $settings_link); // Before other links.
         }
 
         return $actions;
