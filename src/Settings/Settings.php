@@ -143,9 +143,9 @@ class Settings extends AbstractContainerProvider implements OptionKey
                 $content,
                 _x('Rate', 'rate; as in rate this plugin', 'custom-login'),
                 _x('Author', 'the author of this plugin', 'custom-login'),
-                __('Twitter', 'custom-login'),
+                __('X (Twitter)', 'custom-login'),
                 'https://github.com/thefrosty/custom-login/issues',
-                'https://twitter.com/TheFrosty',
+                'https://x.com/TheFrosty',
                 'https://austin.passy.co'
             )
         );
