@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Custom Login plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Custom Login 4.4.0\n"
+"Project-Id-Version: Custom Login 4.4.0.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/custom-login\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-04-14T20:21:42+00:00\n"
+"POT-Creation-Date: 2025-04-23T16:54:55+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: custom-login\n"
@@ -79,6 +79,7 @@ msgstr ""
 #: ../includes/class-cl-extensions.php:35
 #: src/WpAdmin/Extensions.php:77
 #: src/WpAdmin/Extensions.php:82
+#: src/WpAdmin/Extensions.php:99
 #, php-format
 msgid "Install Custom Login extensions on <a href=\"%s\">this page</a> with a valid license key. <small>Purchase your license key by clicking the appropriate link below</small>."
 msgstr ""
@@ -86,6 +87,7 @@ msgstr ""
 #: ../includes/class-cl-extensions.php:37
 #: src/WpAdmin/Extensions.php:75
 #: src/WpAdmin/Extensions.php:80
+#: src/WpAdmin/Extensions.php:97
 msgid "Extensions Installer"
 msgstr ""
 
@@ -94,6 +96,7 @@ msgstr ""
 #: src/WpAdmin/Extensions.php:38
 #: src/WpAdmin/Extensions.php:39
 #: src/WpAdmin/Extensions.php:40
+#: src/WpAdmin/Extensions.php:47
 msgid "Custom Login Extensions"
 msgstr ""
 
@@ -412,6 +415,7 @@ msgstr ""
 
 #: ../includes/default-settings.php:431
 #: config/settings.php:476
+#: config/settings.php:483
 msgid "Tracking Settings"
 msgstr ""
 
@@ -426,6 +430,7 @@ msgstr ""
 
 #: ../includes/default-settings.php:447
 #: config/settings.php:491
+#: config/settings.php:498
 msgid "Notices"
 msgstr ""
 
@@ -439,6 +444,7 @@ msgstr ""
 
 #: ../includes/default-settings.php:463
 #: config/settings.php:519
+#: config/settings.php:526
 msgid "Login functions"
 msgstr ""
 
@@ -452,6 +458,7 @@ msgstr ""
 
 #: ../includes/default-settings.php:477
 #: config/settings.php:531
+#: config/settings.php:538
 msgid "Remove login CSS"
 msgstr ""
 
@@ -469,6 +476,7 @@ msgstr ""
 
 #: ../includes/default-settings.php:492
 #: config/settings.php:540
+#: config/settings.php:547
 msgid "Remove lost password text"
 msgstr ""
 
@@ -557,47 +565,59 @@ msgid "Your custom javascript will output here"
 msgstr ""
 
 #: config/settings.php:482
+#: config/settings.php:489
 msgid "Usage tracking"
 msgstr ""
 
 #: config/settings.php:483
+#: config/settings.php:490
 msgid "Allow Frosty Media to anonymously track how this plugin is used (and help us make the plugin better). Opt-in and receive a 20% discount code for all Custom Login extensions. Get your coupon code <a href=\"https://frosty.media/?p=21442\">here</a>."
 msgstr ""
 
 #: config/settings.php:497
+#: config/settings.php:504
 msgid "Admin notices"
 msgstr ""
 
 #: config/settings.php:500
+#: config/settings.php:507
 msgid "Allow admin notices everywhere in WordPress."
 msgstr ""
 
 #: config/settings.php:501
 #: config/settings.php:512
+#: config/settings.php:508
+#: config/settings.php:519
 msgid "Unchecked equals \"off\" (do not allow)."
 msgstr ""
 
 #: config/settings.php:508
+#: config/settings.php:515
 msgid "Dashboard widget"
 msgstr ""
 
 #: config/settings.php:511
+#: config/settings.php:518
 msgid "Show a dashboard widget, like WordPress news for Frosty Media."
 msgstr ""
 
 #: config/settings.php:525
+#: config/settings.php:532
 msgid "Disable Login shake"
 msgstr ""
 
 #: config/settings.php:526
+#: config/settings.php:533
 msgid "Disable the login forms animated \"shake\" on error."
 msgstr ""
 
 #: config/settings.php:532
+#: config/settings.php:539
 msgid "Remove WordPress' login CSS. Warning: You'll have to add additional styles not set by this plugin."
 msgstr ""
 
 #: config/settings.php:541
+#: config/settings.php:548
 msgid "Remove the \"Lost Password?\" text. This does <strong>not</strong> disable the lost password function."
 msgstr ""
 
@@ -730,4 +750,16 @@ msgstr ""
 
 #: src/Extensions/StylePack.php:63
 msgid "Custom Login style pack successfully imported."
+msgstr ""
+
+#: config/settings.php:476
+msgid "Extensions Submenu"
+msgstr ""
+
+#: config/settings.php:477
+msgid "Show (checked) or hide the extensions in the WordPress' settings menu."
+msgstr ""
+
+#: src/WpAdmin/Extensions.php:48
+msgid "<span>&mdash; Extensions</span>"
 msgstr ""
