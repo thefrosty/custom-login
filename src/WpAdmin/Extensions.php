@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace TheFrosty\CustomLogin\WpAdmin;
 
@@ -9,6 +11,7 @@ use TheFrosty\CustomLogin\ServiceProvider;
 use TheFrosty\CustomLogin\Settings\Api\Postbox;
 use TheFrosty\WpUtilities\Plugin\AbstractContainerProvider;
 use TheFrosty\WpUtilities\Utils\Viewable;
+
 use function is_string;
 use function sprintf;
 
@@ -19,7 +22,8 @@ use function sprintf;
 class Extensions extends AbstractContainerProvider
 {
 
-    use Postbox, Viewable;
+    use Postbox;
+    use Viewable;
 
     /**
      * Add class hooks.
@@ -66,6 +70,7 @@ class Extensions extends AbstractContainerProvider
             });
         }
     }
+
     /**
      * Build the extensions' sidebar.
      * @param WpSettingsApi $wp_settings_api
