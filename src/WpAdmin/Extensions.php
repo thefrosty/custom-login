@@ -1,14 +1,21 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace TheFrosty\CustomLogin\WpAdmin;
 
 use Dwnload\WpSettingsApi\ActionHookName;
+use Dwnload\WpSettingsApi\Api\Options;
 use Dwnload\WpSettingsApi\WpSettingsApi;
 use TheFrosty\CustomLogin\CustomLogin;
 use TheFrosty\CustomLogin\ServiceProvider;
+use TheFrosty\CustomLogin\Settings\Api\Factory;
 use TheFrosty\CustomLogin\Settings\Api\Postbox;
+use TheFrosty\CustomLogin\Settings\OptionKey;
+use TheFrosty\CustomLogin\Settings\OptionValue;
 use TheFrosty\WpUtilities\Plugin\AbstractContainerProvider;
 use TheFrosty\WpUtilities\Utils\Viewable;
+
 use function is_string;
 use function sprintf;
 
@@ -19,7 +26,8 @@ use function sprintf;
 class Extensions extends AbstractContainerProvider
 {
 
-    use Postbox, Viewable;
+    use Postbox;
+    use Viewable;
 
     /**
      * Add class hooks.
@@ -37,7 +45,7 @@ class Extensions extends AbstractContainerProvider
     {
         $options_page = add_options_page(
             esc_html__('Custom Login Extensions', 'custom-login'),
-            esc_html__('Custom Login Extensions', 'custom-login'),
+            __('<span>&mdash; Extensions</span>', 'custom-login'),
             'install_plugins',
             sprintf('%s/extensions', $this->getPlugin()->getSlug()),
             function (): void {
@@ -51,7 +59,15 @@ class Extensions extends AbstractContainerProvider
             }
         );
 
-        remove_submenu_page('options-general.php', sprintf('%s/extensions', $this->getPlugin()->getSlug()));
+        if (
+            Options::getOption(
+                OptionKey::EXTENSIONS_MENU,
+                Factory::getSection(Factory::SECTION_GENERAL),
+                OptionValue::ON
+            ) === OptionValue::OFF
+        ) {
+            remove_submenu_page('options-general.php', sprintf('%s/extensions', $this->getPlugin()->getSlug()));
+        }
         if (is_string($options_page)) {
             $this->addAction('load-' . $options_page, function (): void {
                 $this->addAction('admin_enqueue_scripts', function (): void {
@@ -66,6 +82,7 @@ class Extensions extends AbstractContainerProvider
             });
         }
     }
+
     /**
      * Build the extensions' sidebar.
      * @param WpSettingsApi $wp_settings_api

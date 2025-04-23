@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace TheFrosty\CustomLogin\Settings;
 
@@ -17,6 +19,7 @@ interface OptionKey
     public const CUSTOM_HTML = 'custom_html';
     public const CUSTOM_JQUERY = 'custom_jquery';
     public const DASHBOARD_WIDGET = 'dashboard_widget';
+    public const EXTENSIONS_MENU = 'extensions_menu';
     public const HIDE_WP_LOGO = 'hide_wp_logo';
     public const HTML_BACKGROUND_COLOR = 'html_background_color';
     public const HTML_BACKGROUND_POSITION = 'html_background_position';
