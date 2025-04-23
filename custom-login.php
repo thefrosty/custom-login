@@ -88,12 +88,12 @@ $plugin
 add_action('plugins_loaded', static function () use ($plugin) {
     do_action('custom_login_loaded_before_initialize', $plugin);
     $plugin->initialize();
-    do_action('custom_login_loaded_after_initialize', $plugin);
 });
 
 // Defer the WpSettingsApi until after 'init' for translations issues triggered in WP >= 6.7.0.
 add_action('init', static function () use ($plugin) {
     $plugin->addOnHook(WpSettingsApi::class, 'init', 5, true, [Factory::getPluginSettings($plugin)]);
+    do_action('custom_login_loaded_after_initialize', $plugin);
 }, 2);
 
 register_activation_hook(__FILE__, static function () {
