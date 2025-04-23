@@ -159,6 +159,9 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 == Upgrade Notice ==
 
+= 4.4.0 =
+Requires WordPress version >= 6.6 and PHP version >= 8.1.
+
 = 4.1.0 =
 Requires WordPress version >= 6.2 and PHP version >= 8.0.
 
