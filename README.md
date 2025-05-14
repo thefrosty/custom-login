@@ -13,9 +13,9 @@
 **Donate link:** [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290)  
 **Tags:** admin, branding, customization, custom login, logo  
 **Requires at least:** 6.6  
-**Tested up to:** 6.8.0  
+**Tested up to:** 6.8.1 
 **Requires PHP**: 8.1  
-**Stable tag:** 4.4.0.1  
+**Stable tag:** 4.5.0  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -167,6 +167,17 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 ](https://ps.w.org/custom-login/assets/screenshot-4.png)
 
 ## Changelog
+
+### Version 4.5.0 (2025/05/14)
+
+* Add roave/security-advisories
+* Update codecov-action to v5
+* Setting: Expose Extensions Submenu
+* 🔄 Regenerate translation files
+* Readme Updates
+* Update references from Twitter to X.
+* Hide "active" Custom Login Extensions from the plugins.php page
+* Bug: Fix Codemirror syntax issue
 
 ### Version 4.4.0 (2025/04/14)
 
