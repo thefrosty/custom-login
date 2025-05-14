@@ -33,7 +33,9 @@ use function wp_json_encode;
 class Settings extends AbstractContainerProvider implements OptionKey
 {
 
-    use Postbox, Viewable, WpRemote;
+    use Postbox;
+    use Viewable;
+    use WpRemote;
 
     /**
      * Add class hooks.
