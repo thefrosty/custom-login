@@ -472,6 +472,13 @@ return [
                 SettingField::OPTIONS => TheFrosty\CustomLogin\getWpRoles(),
             ],
             [
+                SettingField::NAME => OptionKey::EXTENSIONS_MENU,
+                SettingField::LABEL => __('Extensions Submenu', 'custom-login'),
+                SettingField::DESC => __('Show (checked) or hide the extensions in the WordPress\' settings menu.', 'custom-login'),
+                SettingField::TYPE => FieldTypes::FIELD_TYPE_CHECKBOX,
+                SettingField::DEFAULT => OptionValue::OFF,
+            ],
+            [
                 SettingField::NAME => OptionKey::BREAK_S,
                 SettingField::LABEL => sprintf('<h4>%s</h4>', __('Tracking Settings', 'custom-login')),
                 SettingField::DESC => '',

@@ -1,4 +1,4 @@
-# Custom Login #
+# Custom Login
 
 [![WordPress plugin](https://img.shields.io/wordpress/plugin/dt/custom-login.svg?style=flat)](https://wordpress.org/plugins/custom-login/)
 [![WordPress plugin](https://img.shields.io/wordpress/plugin/v/custom-login.svg?style=flat)](https://wordpress.org/plugins/custom-login/)
@@ -13,15 +13,15 @@
 **Donate link:** [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290)  
 **Tags:** admin, branding, customization, custom login, logo  
 **Requires at least:** 6.6  
-**Tested up to:** 6.8.0  
+**Tested up to:** 6.8.1 
 **Requires PHP**: 8.1  
-**Stable tag:** 4.4.0.1  
+**Stable tag:** 4.5.0  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html
 
 Custom Login allows you to easily customize your admin login page, works great for client sites!
 
-## Description ##
+## Description
 
 Custom Login 2.0 was 140% faster than version 1.0, and version 4.0 is now even better!
 
@@ -39,11 +39,11 @@ For more information visit the official [Custom Login](https://frosty.media/plug
 > <strong>Bug Reports</strong><br>
 > Bug reports for Custom Login are [welcomed on GitHub](https://github.com/thefrosty/custom-login).
 
-### Video ###
+### Video
 
 [![Custom Login v3.0](https://img.youtube.com/vi/hZkc-t36xYQ/0.jpg)](https://www.youtube.com/watch?v=hZkc-t36xYQ)
 
-### Extensions ###
+### Extensions
 
 There are currently 7 premium extensions available, with more coming (suggestions welcome - and *will be offered for
 free to said user*).
@@ -75,7 +75,7 @@ free to said user*).
 * **Added as of version 3.2** Custom Login pre-made settings templates *
   AKA* [Style Packs](https://frosty.media/plugin/tag/style-pack/).
 
-### More info ###
+### More info
 
 Activate the plugin and customize your WordPress login screen. It's as easy as modifying a few settings, there is no
 need to understand CSS at all. Custom Login even has a HTML, CSS &amp; jQuery textarea for more advanced customizations.
@@ -88,7 +88,7 @@ need to understand CSS at all. Custom Login even has a HTML, CSS &amp; jQuery te
 **For those looking to show off your login screen, check out the [Flickr group](http://flickr.com/groups/custom-login/)!
 Share you designs with the community!**
 
-### links ###
+### links
 
 * Premium Plugins: [https://frosty.media/plugins](https://frosty.media/plugins/ "Premium WordPress Plugins by Frosty")
 * Austins Blog: [https:/austin.passy.co/](http://austin.passy.co/ "Austin's blog")
@@ -96,11 +96,11 @@ Share you designs with the community!**
 * Frosty Media on Twitter: @[Frosty_Media](https:/twitter.com/Frosty_Media "Frosty Media on Twitter")
 * **Development welcomed on [GitHub](https://github.com/thefrosty/custom-login)**
 
-### Hooks and Filters ###
+### Hooks and Filters
 
 Coming Soon.
 
-## Installation ##
+## Installation
 
 Follow the steps below to install the plugin.
 
@@ -110,31 +110,31 @@ Follow the steps below to install the plugin.
 4. Design away.
 5. Activate the settings by checking "Enable" in the "General Settings" tab.
 
-## Frequently Asked Questions ##
+## Frequently Asked Questions
 
-### What are extensions? ###
+### What are extensions?
 
 They are additional plugins that add/extend functionality to the Custom Login plugin. You can find all Custom Login
 extensions on [Frosty.Media](http://frosty.media).
 
-### Is there a PRO version? ###
+### Is there a PRO version?
 
 Not anymore.
 
-### Where can I upload and share my cool login screen? ###
+### Where can I upload and share my cool login screen?
 
 Check out the [Flickr group](http://flickr.com/groups/custom-login/)! Upload and add it to our pool!
 
-### I think I want to uninstall ###
+### I think I want to uninstall
 
 Just deactivate it. Sad panda is sad.
 
-### Where do I report security bugs found in this plugin? ###
+### Where do I report security bugs found in this plugin?
 Please report security bugs found in the source code of the Custom Login plugin through the 
 [Patchstack Vulnerability Disclosure Program](https://patchstack.com/database/vdp/custom-login). The Patchstack team will assist you with 
 verification, CVE assignment, and notify the developers of this plugin.
 
-## Screenshots ##
+## Screenshots
 
 Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-login/).
 
@@ -166,30 +166,41 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 ![Custom Login Extensions Installer (an active license key is required).
 ](https://ps.w.org/custom-login/assets/screenshot-4.png)
 
-## Changelog ##
+## Changelog
 
-### Version 4.4.0 (2025/04/14) ###
+### Version 4.5.0 (2025/05/14)
+
+* Add roave/security-advisories
+* Update codecov-action to v5
+* Setting: Expose Extensions Submenu
+* 🔄 Regenerate translation files
+* Readme Updates
+* Update references from Twitter to X.
+* Hide "active" Custom Login Extensions from the plugins.php page
+* Bug: Fix Codemirror syntax issue
+
+### Version 4.4.0 (2025/04/14)
 
 * Requires PHP >= 8.1.
 * Bump Tested up to too "6.8.0".
 * Resolve "Translation loading for the custom-login domain was triggered too early" added in WP 6.7.0.
 
-### Version 4.3.0 (2024/10/30) ###
+### Version 4.3.0 (2024/10/30)
 
 * Bump Tested up to too "6.7.0"
 * Updated login logo HTML attribute for CSS targeting in WP 6.7.
 
-### Version 4.2.0 (2024/04/25) ###
+### Version 4.2.0 (2024/04/25)
 
 * Bump Tested up to too "6.5.2"
 * Resolve possible "Uncaught TypeError" when initializing wp.codeEditor on empty element.
 * Development enhancements. 
 
-### Version 4.1.1 (2023/12/13) ### 
+### Version 4.1.1 (2023/12/13) 
 
 * Resolve Security Vulnerability (CVE-2023-49858).
 
-### Version 4.1.0 (2023/11/09) ### 
+### Version 4.1.0 (2023/11/09) 
 
 * Drop support for PHP <= 7.4.
 * Resolve PHP deprecation notices in PHP 8.2.
@@ -198,27 +209,27 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 * Remove deprecated function `CUSTOMLOGIN()`.
 * Fix: resolve use of path instead of URL for animate.css.
 
-### Version 4.0.12 (2023/12/13) ###
+### Version 4.0.12 (2023/12/13)
 
 * Resolve Security Vulnerability (CVE-2023-49858).
 
-### Version 4.0.11 (2023/09/20) ###
+### Version 4.0.11 (2023/09/20)
 
 * Fix: Removed Opis Closure package (causing PHP deprecation notices in 8.1+).
 
-### Version 4.0.10 (2023/04/08) ###
+### Version 4.0.10 (2023/04/08)
 
 * Fix: Uninitialized value.
 
-### Version 4.0.9 (2023/03/31) ###
+### Version 4.0.9 (2023/03/31)
 
 * Fix: Resolve edge case error on setting page.
 
-### Version 4.0.8 (2022/08/11) ###
+### Version 4.0.8 (2022/08/11)
 
 * Fix: Make sure WordPress' capabilities array keys are string values to avoid `shutdown` action fatal errors.
 
-### Version 4.0.7 (2022/08/09) ###
+### Version 4.0.7 (2022/08/09)
 
 * Don't type cast the return value of removeLostPasswordText. [#75](https://github.com/thefrosty/custom-login/pull/75)
 * Uncomment update option to resolve upgrade notice always showing. [#76](https://github.com/thefrosty/custom-login/pull/76)
@@ -226,53 +237,56 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 * Update WpSettingsApi, and use new condition checks for sidebar(s). [#78](https://github.com/thefrosty/custom-login/pull/78)
 * Update missing autoload notice message. [#80](https://github.com/thefrosty/custom-login/pull/80)
 
-### Version 4.0.6 (2022/08/08) ###
+### Version 4.0.6 (2022/08/08)
 
 * Fix: Resolve micro regression with `psr/container` issues.
 * Fix: Resolve file (URL) fields breaking on save.
 * Update WP Utilities to 2.8.
 * Update WP Settings API to 3.6.
 
-### Version 4.0.5 (2022/08/06) ###
+### Version 4.0.5 (2022/08/06)
 
 * Make sure autoloading is working before loading classes on plugin uninstall.
 * Full Changelog: [4.0.4...4.0.5](https://github.com/thefrosty/custom-login/compare/4.0.4...4.0.5)
 
-### Version 4.0.4 (2022/08/05) ###
+### Version 4.0.4 (2022/08/05)
 
 * Change PSR Container package to use version 1 instead of 2 to avoid WooCommerce errors; fixes [#65](https://github.com/thefrosty/custom-login/issues/65)
 * Full Changelog: [4.0.3...4.0.4](https://github.com/thefrosty/custom-login/compare/4.0.3...4.0.4)
 
-### Version 4.0.3 (2022/08/04) ###
+### Version 4.0.3 (2022/08/04)
 
 * Update both README's with correct "requires at least", "tested up to", and "requires PHP" header tags.
 * Cleanup admin notice messages when "unable to activate" due to invalid PHP version or missing autoload.
 * Full Changelog: [4.0.2...4.0.3](https://github.com/thefrosty/custom-login/compare/4.0.2...4.0.3)
 
-### Version 4.0.2 (2022/07/15) ###
+### Version 4.0.2 (2022/07/15)
 
 * Don't show error message when not in admin.
 
-### Version 4.0.1 (2022/05/23) ###
+### Version 4.0.1 (2022/05/23)
 
 * Version bump, including manually adding missing vendor directory (need to fix GitHub action).
 
-### Version 4.0.0 (2022/05/23) ###
+### Version 4.0.0 (2022/05/23)
 
 * Complete rewrite.
 * Required PHP >= 7.4.
 * Full Changelog: [3.2.15...4.0.0](https://github.com/thefrosty/custom-login/compare/3.2.15...4.0.0)
 
-### Version 3.2.15 (2022/03/11) ### 
+### Version 3.2.15 (2022/03/11)
 
 * Fix settings API Settings: Uncaught Error: Call to undefined method stdClass::get_permalink() (#49)
 
-## Upgrade Notice ##
+## Upgrade Notice
 
-### 4.1.0 ###
+### 4.4.0
+Requires WordPress version >= 6.6 and PHP version >= 8.1.
+
+### 4.1.0
 
 Requires WordPress version >= 6.2 and PHP version >= 8.0.
 
-### 4.0.1 ###
+### 4.0.1
 
 Requires WordPress version >= 5.7 and PHP version >= 7.4.

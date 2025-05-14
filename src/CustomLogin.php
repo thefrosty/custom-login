@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace TheFrosty\CustomLogin;
 
@@ -7,7 +9,11 @@ use TheFrosty\CustomLogin\Api\Activator;
 use TheFrosty\CustomLogin\Settings\Api\Factory;
 use TheFrosty\CustomLogin\Settings\OptionKey;
 use TheFrosty\CustomLogin\Settings\OptionValue;
+use TheFrosty\CustomLogin\WpAdmin\Extensions;
 use TheFrosty\WpUtilities\Plugin\AbstractHookProvider;
+
+use function add_query_arg;
+use function admin_url;
 use function apply_filters;
 use function printf;
 use function sprintf;
@@ -25,7 +31,7 @@ class CustomLogin extends AbstractHookProvider
 
     public const API_URL = 'https://frosty.media/';
     public const OPTION = 'custom_login';
-    public const VERSION = '4.4.0.1';
+    public const VERSION = '4.5.0';
 
     /**
      * Get the API URL.
@@ -34,10 +40,7 @@ class CustomLogin extends AbstractHookProvider
      */
     public static function getApiUrl(string $uri = ''): string
     {
-        return sprintf(
-            '%1$s/%2$s',
-            untrailingslashit(getenv('CUSTOM_LOGIN_API_URL') ?: self::API_URL), $uri
-        );
+        return sprintf('%1$s/%2$s', untrailingslashit(getenv('CUSTOM_LOGIN_API_URL') ?: self::API_URL), $uri);
     }
 
     /**
@@ -93,6 +96,14 @@ class CustomLogin extends AbstractHookProvider
                     esc_html__('Settings', 'custom-login')
                 )
             );
+
+            if (!empty(Extensions::getExtensions())) {
+                $actions[] = sprintf(
+                    '<a href="%s">%s</a>',
+                    add_query_arg('plugin_status', 'all', admin_url('plugins.php')),
+                    esc_html__('Show Extensions', 'custom-login')
+                );
+            }
         }
 
         return $actions;
@@ -112,14 +123,18 @@ class CustomLogin extends AbstractHookProvider
         }
 
         $links = [
-            sprintf('<a href="%s">%s</a>',
-                esc_url(sprintf(
-                    admin_url('options-general.php?page=%s/extensions'),
-                    $this->getPlugin()->getSlug()
-                )),
+            sprintf(
+                '<a href="%s">%s</a>',
+                esc_url(
+                    sprintf(
+                        admin_url('options-general.php?page=%s/extensions'),
+                        $this->getPlugin()->getSlug()
+                    )
+                ),
                 esc_html__('Extension Installer', 'custom-login')
             ),
-            sprintf('<a href="%s">%s</a>',
+            sprintf(
+                '<a href="%s">%s</a>',
                 esc_url('https://frosty.media/plugin/tag/custom-login-extension/'),
                 esc_html__('Extensions', 'custom-login')
             ),

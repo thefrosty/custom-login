@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace TheFrosty\CustomLogin\Settings;
 
@@ -22,7 +24,7 @@ use function esc_html;
 use function sprintf;
 use function wp_add_inline_script;
 use function wp_enqueue_code_editor;
-use function wp_localize_script;
+use function wp_json_encode;
 
 /**
  * Class Settings
@@ -31,7 +33,9 @@ use function wp_localize_script;
 class Settings extends AbstractContainerProvider implements OptionKey
 {
 
-    use Postbox, Viewable, WpRemote;
+    use Postbox;
+    use Viewable;
+    use WpRemote;
 
     /**
      * Add class hooks.
@@ -91,15 +95,13 @@ class Settings extends AbstractContainerProvider implements OptionKey
     {
         $types = ['css', 'html', 'javascript'];
         foreach ($types as $type) {
-            $settings = ['codeEditor' => wp_enqueue_code_editor(['type' => "text/$type"])];
-            $objectName = "LoginCodeEditor_$type";
-            wp_localize_script('code-editor', $objectName, $settings);
+            $settings = wp_enqueue_code_editor(['type' => "text/$type"]);
             wp_add_inline_script(
                 'code-editor',
                 'jQuery(document).ready(function($) {
                 const $textarea = $(\'textarea[data-codemirror="' . $type . '"]\')
                 if ($textarea.length > 0) {
-                    wp.codeEditor.initialize($textarea, ' . $objectName . ')
+                    wp.codeEditor.initialize($textarea, ' . wp_json_encode($settings) . ')
                 }
                 })'
             );
@@ -143,9 +145,9 @@ class Settings extends AbstractContainerProvider implements OptionKey
                 $content,
                 _x('Rate', 'rate; as in rate this plugin', 'custom-login'),
                 _x('Author', 'the author of this plugin', 'custom-login'),
-                __('Twitter', 'custom-login'),
+                __('X (Twitter)', 'custom-login'),
                 'https://github.com/thefrosty/custom-login/issues',
-                'https://twitter.com/TheFrosty',
+                'https://x.com/TheFrosty',
                 'https://austin.passy.co'
             )
         );

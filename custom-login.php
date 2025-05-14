@@ -3,11 +3,11 @@
  * Plugin Name: Custom Login
  * Plugin URI: https://frosty.media/plugins/custom-login
  * Description: A simple way to customize your WordPress <code>wp-login.php</code> screen! A <a href="https://frosty.media/">Frosty Media</a> plugin.
- * Version: 4.4.0.1
+ * Version: 4.5.0
  * Author: Austin Passy
  * Author URI: https://austin.passy.co
  * Requires at least: 6.6
- * Tested up to: 6.8.0
+ * Tested up to: 6.8.1
  * Requires PHP: 8.1
  * Text Domain: custom-login
  * GitHub Plugin URI: https://github.com/thefrosty/custom-login
@@ -88,12 +88,12 @@ $plugin
 add_action('plugins_loaded', static function () use ($plugin) {
     do_action('custom_login_loaded_before_initialize', $plugin);
     $plugin->initialize();
-    do_action('custom_login_loaded_after_initialize', $plugin);
 });
 
 // Defer the WpSettingsApi until after 'init' for translations issues triggered in WP >= 6.7.0.
 add_action('init', static function () use ($plugin) {
     $plugin->addOnHook(WpSettingsApi::class, 'init', 5, true, [Factory::getPluginSettings($plugin)]);
+    do_action('custom_login_loaded_after_initialize', $plugin);
 }, 2);
 
 register_activation_hook(__FILE__, static function () {
