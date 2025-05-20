@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace TheFrosty\CustomLogin\Settings;
 
@@ -22,7 +24,9 @@ use TheFrosty\WpUtilities\Utils\Viewable;
 class ImportExport extends AbstractContainerProvider
 {
 
-    use Viewable, Postbox, WpRemote;
+    use Postbox;
+    use Viewable;
+    use WpRemote;
 
     public const ACTION_DOWNLOAD_EXPORT = Factory::PREFIX . 'download_export';
     public const NONCE = Factory::PREFIX . 'nonce';
@@ -48,6 +52,9 @@ class ImportExport extends AbstractContainerProvider
         FieldManager $field_manager,
         WpSettingsApi $wp_settings_api
     ): void {
+        if (!$wp_settings_api->isCurrentMenuSlug($this->getPlugin()->getSlug())) {
+            return;
+        }
         $settings = include __DIR__ . '/../../config/import-export.php';
         foreach ($settings['sections'] as $section) {
             $section_manager->addSection(
