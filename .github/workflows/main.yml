@@ -5,6 +5,9 @@ on:
     branches:
       - develop
   pull_request:
+    branches-ignore:
+      - main
+      - master
 
 # Cancels all previous workflow runs for the same branch that have not yet completed.
 concurrency:
