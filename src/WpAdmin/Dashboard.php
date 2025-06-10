@@ -1,12 +1,20 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace TheFrosty\CustomLogin\WpAdmin;
 
+use Dwnload\WpSettingsApi\Api\Options;
+use TheFrosty\CustomLogin\Settings\Api\Factory;
+use TheFrosty\CustomLogin\Settings\OptionKey;
+use TheFrosty\CustomLogin\Settings\OptionValue;
 use TheFrosty\WpUtilities\Api\WpRemote;
 use TheFrosty\WpUtilities\WpAdmin\Dashboard\Widget;
 use TheFrosty\WpUtilities\WpAdmin\DashboardWidget;
 use function esc_html__;
 use function printf;
+use function sanitize_key;
+use function sprintf;
 use const WEEK_IN_SECONDS;
 
 /**
@@ -38,7 +46,27 @@ class Dashboard extends DashboardWidget
     public function addHooks(): void
     {
         parent::addHooks();
+        $this->addAction('load-index.php', function (): void {
+            $this->addFilter(
+                sprintf(self::HOOK_NAME_ALLOWED_S, sanitize_key($this->getWidget()->getWidgetId())),
+                [$this, 'checkAllowDashboard']
+            );
+        }, 12);
         $this->addAction(DashboardWidget::HOOK_NAME_RENDER, [$this, 'renderWidget'], 10, 3);
+    }
+
+    /**
+     * Make sure we filter the dashboard widget visibility.
+     * @param bool $allowed
+     * @return bool
+     */
+    protected function checkAllowDashboard(bool $allowed): bool
+    {
+        $options = Options::getOptions(Factory::getSection(Factory::SECTION_GENERAL));
+        if (isset($options[OptionKey::DASHBOARD_WIDGET]) && $options[OptionKey::DASHBOARD_WIDGET] === OptionValue::OFF) {
+            return false;
+        }
+        return $allowed;
     }
 
     /**
