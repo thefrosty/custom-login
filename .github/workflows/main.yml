@@ -45,7 +45,7 @@ jobs:
           PHP_VERSION: ${{ matrix.php-version }}
 
       - name: Show PHPCS results in PR
-        if: ${{ always() && steps.phpcs.outcome == 'failure' }}
+        if: ${{ always() && steps.phpcs.outcome == 'failure' && matrix.php-version == '8.1' }}
         run: cs2pr ./phpcs-report.xml
 
   run-phpunit:
