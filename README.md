@@ -15,7 +15,7 @@
 **Requires at least:** 6.6  
 **Tested up to:** 6.8.1 
 **Requires PHP**: 8.1  
-**Stable tag:** 4.5.1  
+**Stable tag:** 4.5.2  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -167,6 +167,12 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 ](https://ps.w.org/custom-login/assets/screenshot-4.png)
 
 ## Changelog
+
+### Version 4.5.2 (2025/06/10)
+
+* Bump WP Utilities to 3.4.3
+* Resolve dashboard visibility no hiding on setting toggle.
+* Update default remote request timeout from 15 to 2 seconds.
 
 ### Version 4.5.1 (2025/05/20)
 

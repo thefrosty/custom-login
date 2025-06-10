@@ -30,7 +30,7 @@
     "dwnload/wp-settings-api": "^3.11",
     "pimple/pimple": "^3.5",
     "psr/container": "^2.0",
-    "thefrosty/wp-utilities": "^3.4"
+    "thefrosty/wp-utilities": "^3.4.3"
   },
   "require-dev": {
     "ext-simplexml": "*",

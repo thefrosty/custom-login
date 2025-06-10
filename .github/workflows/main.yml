@@ -5,6 +5,9 @@ on:
     branches:
       - develop
   pull_request:
+    branches-ignore:
+      - main
+      - master
 
 # Cancels all previous workflow runs for the same branch that have not yet completed.
 concurrency:
@@ -42,7 +45,7 @@ jobs:
           PHP_VERSION: ${{ matrix.php-version }}
 
       - name: Show PHPCS results in PR
-        if: ${{ always() && steps.phpcs.outcome == 'failure' }}
+        if: ${{ always() && steps.phpcs.outcome == 'failure' && matrix.php-version == '8.1' }}
         run: cs2pr ./phpcs-report.xml
 
   run-phpunit:
