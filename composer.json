@@ -18,13 +18,13 @@
     },
     "optimize-autoloader": true,
     "platform": {
-      "php": "8.1"
+      "php": "8.3"
     },
     "preferred-install": "dist",
     "sort-packages": true
   },
   "require": {
-    "php": "^8.1",
+    "php": "^7.4 || ^8.3",
     "ext-json": "*",
     "dwnload/edd-software-license-manager": "^2.1",
     "dwnload/wp-settings-api": "^3.11",
@@ -38,6 +38,7 @@
     "phpcompatibility/php-compatibility": "^9.3",
     "phpunit/php-code-coverage": "^9",
     "phpunit/phpunit": "^9",
+    "rector/rector": "^2.0",
     "roave/security-advisories": "dev-latest",
     "roots/wordpress": "^6.7",
     "squizlabs/php_codesniffer": "^3.2",
