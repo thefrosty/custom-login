@@ -1,10 +1,13 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace TheFrosty\CustomLogin;
 
 use TheFrosty\CustomLogin\Settings\Api\Factory;
 use TheFrosty\WpUtilities\Plugin\PluginInterface;
 use function add_action;
+use function defined;
 use function function_exists;
 use function get_editable_roles;
 use function is_admin;
@@ -13,7 +16,7 @@ use function is_string;
 use function preg_match;
 use function sanitize_key;
 use function sprintf;
-use function strpos;
+use function str_contains;
 use function wp_doing_ajax;
 use const WEEK_IN_SECONDS;
 
@@ -21,6 +24,8 @@ use const WEEK_IN_SECONDS;
 if (!defined('ABSPATH')) {
     exit;
 }
+
+const CUSTOM_LOGIN_FUNCTIONS = true;
 
 /**
  * Are we on the Custom Login settings page?
@@ -31,7 +36,7 @@ function isSettingsPage(PluginInterface $plugin): bool
 {
     return $GLOBALS['pagenow'] === 'options-general.php' &&
         isset($_GET['page']) &&
-        strpos($plugin->getSlug(), $_GET['page']) !== false;
+        str_contains($plugin->getSlug(), $_GET['page']);
 }
 
 /**
