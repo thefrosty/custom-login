@@ -24,11 +24,14 @@ jobs:
         run: |
           composer install --no-interaction
 
-      - name: Run rector downgrade
+      - name: Update composer PHP 7.4
         run: |
           composer config platform.php 7.4
           composer require --no-update php:^7.4
           vendor/bin/rector process
+
+      - name: Run rector downgrade
+        run: vendor/bin/rector process
 
       - name: Run composer update with --no-dev
         run: |
