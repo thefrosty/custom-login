@@ -6,9 +6,9 @@
  * Version: 4.5.2
  * Author: Austin Passy
  * Author URI: https://austin.passy.co
- * Requires at least: 6.6
+ * Requires at least: 6.4
  * Tested up to: 6.8.1
- * Requires PHP: 8.1
+ * Requires PHP: 7.4
  * Text Domain: custom-login
  * GitHub Plugin URI: https://github.com/thefrosty/custom-login
  * Primary Branch: develop
@@ -42,7 +42,7 @@ use TheFrosty\WpUtilities\Plugin\PluginFactory;
  * Maybe trigger an error notice "message" on the `admin_notices` action hook.
  * Uses an anonymous function which required PHP >= 5.3.
  */
-add_action('admin_notices', function () {
+add_action('admin_notices', static function (): void {
     $message = apply_filters('custom_login_shutdown_error_message', '');
     if (!is_admin() || empty($message)) {
         return;
@@ -51,17 +51,19 @@ add_action('admin_notices', function () {
     echo wp_kses_post(sprintf('<div class="error">%s</div>', wpautop($message)));
 });
 
-if (version_compare(PHP_VERSION, '8.1', '<')) {
+if (version_compare(PHP_VERSION, '7.4', '<')) {
     return add_filter('custom_login_shutdown_error_message', function () {
         return sprintf(
             esc_html__(
-                'Notice: Custom Login version 4 requires PHP version >= 8.1, you are running %s, all features are currently disabled.',
+                'Notice: Custom Login version 4 requires PHP version >= 7.4, you are running %s, all features are currently disabled.',
                 'custom-login'
             ),
             PHP_VERSION
         );
     });
-} elseif (!is_readable(__DIR__ . '/vendor/autoload.php')) {
+}
+
+if (!is_readable(__DIR__ . '/vendor/autoload.php') && !defined('TheFrosty\CustomLogin\CUSTOM_LOGIN_FUNCTIONS')) {
     return add_filter('custom_login_shutdown_error_message', function () {
         return esc_html__(
             'Error: Custom Login can\'t find the autoload file (if installed from GitHub, please run `composer install`), all features are currently disabled.',
@@ -70,7 +72,9 @@ if (version_compare(PHP_VERSION, '8.1', '<')) {
     });
 }
 
-require_once __DIR__ . '/vendor/autoload.php';
+if (file_exists(__DIR__ . '/vendor/autoload.php')) {
+    require_once __DIR__ . '/vendor/autoload.php';
+}
 $plugin = PluginFactory::create('custom-login', __FILE__);
 $container = $plugin->getContainer();
 $container->register(new ServiceProvider());
@@ -90,12 +94,12 @@ add_action('plugins_loaded', static function () use ($plugin) {
     $plugin->initialize();
 });
 
-// Defer the WpSettingsApi until after 'init' for translations issues triggered in WP >= 6.7.0.
-add_action('init', static function () use ($plugin) {
+// Defer the WpSettingsApi until after 'init' for translation's issues triggered in WP >= 6.7.0.
+add_action('init', static function () use ($plugin): void {
     $plugin->addOnHook(WpSettingsApi::class, 'init', 5, true, [Factory::getPluginSettings($plugin)]);
     do_action('custom_login_loaded_after_initialize', $plugin);
 }, 2);
 
-register_activation_hook(__FILE__, static function () {
+register_activation_hook(__FILE__, static function (): void {
     (new CustomLogin())->activate();
 });
