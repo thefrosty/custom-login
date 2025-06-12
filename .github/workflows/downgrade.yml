@@ -1,0 +1,55 @@
+name: "Temp PR Downgrade Test"
+
+on:
+  pull_request:
+
+jobs:
+  tag:
+    name: New tag
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.3
+          coverage: none
+          tools: composer:v2
+        env:
+          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run composer install
+        run: |
+          composer install --no-interaction
+
+      - name: Run rector downgrade
+        run: |
+          composer config platform.php 7.4
+          composer require --no-update php:^7.4
+          vendor/bin/rector process
+
+      - name: Run composer update with --no-dev
+        run: |
+          composer update --no-dev --no-interaction --optimize-autoloader
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run npm install
+        run: |
+          npm install --omit=dev
+
+      - name: Create Artifact
+        run: |
+          mkdir plugin-build
+          composer archive -vvv --format=zip --file="plugin-build/custom-login"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: custom-login
+          path: plugin-build/custom-login.zip
