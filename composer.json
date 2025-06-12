@@ -1,6 +1,7 @@
 {
   "name": "thefrosty/custom-login",
   "type": "wordpress-plugin",
+  "description": "A simple way to customize your WordPress <code>wp-login.php</code> screen! A <a href=\"https://frosty.media/\">Frosty Media</a> plugin.",
   "license": "GPL-2.0-or-later",
   "authors": [
     {
@@ -30,7 +31,7 @@
     "dwnload/wp-settings-api": "^3.11",
     "pimple/pimple": "^3.5",
     "psr/container": "^2.0",
-    "thefrosty/wp-utilities": "^3.4.3"
+    "thefrosty/wp-utilities": "^3.8"
   },
   "require-dev": {
     "ext-simplexml": "*",
