@@ -17,6 +17,8 @@ use TheFrosty\CustomLogin\Settings\Api\Postbox;
 use TheFrosty\WpUtilities\Api\WpRemote;
 use TheFrosty\WpUtilities\Plugin\AbstractContainerProvider;
 use TheFrosty\WpUtilities\Utils\Viewable;
+use TheFrosty\WpUtilities\WpAdmin\Dashboard\Widget;
+use TheFrosty\WpUtilities\WpAdmin\DashboardWidget;
 use function __;
 use function _x;
 use function array_merge;
@@ -165,12 +167,13 @@ class Settings extends AbstractContainerProvider implements OptionKey
         $content = $this->getView(ServiceProvider::WP_UTILITIES_VIEW)->retrieve(
             'dashboard-widget/rest.php',
             [
-                'posts' => $this->retrieveBodyCached(
-                    'https://frosty.media/wp-json/wp/v2/extensions?per_page=6&plugin_tag=29',
-                    WEEK_IN_SECONDS
-                ),
+                'instance' => new DashboardWidget([
+                    Widget::FEED_URL => 'https://frosty.media/wp-json/wp/v2/extensions?per_page=6&plugin_tag=29',
+                    Widget::TYPE => Widget::TYPE_REST,
+                    Widget::WIDGET_ID => 'custom-login-extensions',
+                    Widget::WIDGET_NAME => 'Custom Login Extensions',
+                ]),
                 'renderContent' => false,
-                'widgetId' => 'custom-login-extensions',
             ]
         );
 

@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-version: [ "8.1", "8.2", "8.3", "8.4" ]
+        php-version: [ "8.3", "8.4" ]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -45,7 +45,7 @@ jobs:
           PHP_VERSION: ${{ matrix.php-version }}
 
       - name: Show PHPCS results in PR
-        if: ${{ always() && steps.phpcs.outcome == 'failure' && matrix.php-version == '8.1' }}
+        if: ${{ always() && steps.phpcs.outcome == 'failure' && matrix.php-version == '8.3' }}
         run: cs2pr ./phpcs-report.xml
 
   run-phpunit:
@@ -64,7 +64,7 @@ jobs:
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     strategy:
       matrix:
-        php-version: [ "8.1" ]
+        php-version: [ "8.3" ]
         coverage: [ true ]
     steps:
       - name: Checkout
