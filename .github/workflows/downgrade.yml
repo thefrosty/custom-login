@@ -5,7 +5,7 @@ on:
 
 jobs:
   tag:
-    name: New tag
+    name: Downgrade
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -53,15 +53,15 @@ jobs:
       - name: Create artifact
         uses: montudor/action-zip@v1
         with:
-          args: zip -X -r plugin-build/${{ github.event.repository.name }}.zip . -x *.git* bin** .* "*/\.*" *.dist *.xml *.neon composer.* package*.json rector.php tests** plugin-build**
+          args: zip -X -r plugin-build/${{ github.event.repository.name }}-action.zip . -x *.git* bin** .* "*/\.*" *.dist *.xml *.neon composer.* package*.json rector.php tests** plugin-build**
 
-#      - name: Create Artifact
-#        run: |
-#          mkdir plugin-build
-#          composer archive --format=zip --file plugin-build/custom-login
+      - name: Create Artifact
+        run: |
+          mkdir plugin-build
+          composer archive --format=zip --file plugin-build/custom-login-composer
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: custom-login
-          path: plugin-build/custom-login.zip
+          path: plugin-build/ # Upload an Entire Directory
