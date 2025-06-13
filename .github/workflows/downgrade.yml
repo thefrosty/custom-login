@@ -2,6 +2,8 @@ name: "Temp PR Downgrade Test"
 
 on:
   pull_request:
+    branches:
+      - 'feature/rector**'
 
 jobs:
   tag:
