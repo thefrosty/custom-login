@@ -28,7 +28,6 @@ jobs:
         run: |
           composer config platform.php 7.4
           composer require --no-update php:^7.4
-          vendor/bin/rector process
 
       - name: Run rector downgrade
         run: vendor/bin/rector process
@@ -50,17 +49,12 @@ jobs:
 
       - run: mkdir plugin-build
 
-      - name: Create artifact
-        uses: montudor/action-zip@v1
-        with:
-          args: zip -X -r plugin-build/${{ github.event.repository.name }}-action.zip . -x *.git* bin** .* "*/\.*" *.dist *.xml *.neon composer.* package*.json rector.php tests** plugin-build**
-
       - name: Create Artifact
         run: |
-          composer archive --format=zip --file plugin-build/custom-login-composer
+          composer archive --format=zip --file plugin-build/custom-login
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: custom-login
-          path: plugin-build/ # Upload an Entire Directory
+          path: plugin-build/custom-login.zip
