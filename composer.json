@@ -92,6 +92,7 @@
       "!vendor/",
       "composer.json",
       "composer.lock",
+      "package.json",
       "package-lock.json",
       "phpcs-ruleset.xml",
       "phpstan.neon.dist",
