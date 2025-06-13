@@ -51,7 +51,7 @@ jobs:
 
       - name: Create Artifact
         run: |
-          composer archive --format=zip --file=plugin-build/custom-login
+          composer archive --format="zip" --file="plugin-build/custom-login"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
