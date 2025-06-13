@@ -25,7 +25,7 @@
     "sort-packages": true
   },
   "require": {
-    "php": "^7.4 || ^8.3",
+    "php": "^8.3",
     "ext-json": "*",
     "dwnload/edd-software-license-manager": "^2.1",
     "dwnload/wp-settings-api": "^3.11",
@@ -88,12 +88,17 @@
       ".wordpress-org",
       "!node_modules/",
       "plugin-build/",
+      "tests",
       "!vendor/",
+      "composer.json",
       "composer.lock",
+      "package.json",
       "package-lock.json",
       "phpcs-ruleset.xml",
       "phpstan.neon.dist",
-      "phpunit.xml"
+      "phpunit.xml",
+      "README.md",
+      "rector.php"
     ]
   }
 }

@@ -13,7 +13,7 @@
 **Donate link:** [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290)  
 **Tags:** admin, branding, customization, custom login, logo  
 **Requires at least:** 6.6  
-**Tested up to:** 6.8.1 
+**Tested up to:** 6.8.1  
 **Requires PHP**: 8.1  
 **Stable tag:** 4.5.2  
 **License:** GPLv2 or later  
