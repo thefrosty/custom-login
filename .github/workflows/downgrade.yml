@@ -37,6 +37,8 @@ jobs:
 
       - name: Run composer update with --no-dev
         run: |
+          composer config platform.php 8.3
+          composer require --no-update php:^8.3
           composer update --no-dev --no-interaction --optimize-autoloader
 
       - name: Setup Node
