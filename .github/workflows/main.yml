@@ -1,9 +1,6 @@
 name: Main PHP Version(s) CI
 
 on:
-  push:
-    branches:
-      - develop
   pull_request:
     branches-ignore:
       - main
