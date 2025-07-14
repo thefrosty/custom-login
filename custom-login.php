@@ -18,7 +18,6 @@
  * @author Austin Passy
  * @link https://austin.passy.co/
  * @license https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -40,7 +39,6 @@ use TheFrosty\WpUtilities\Plugin\PluginFactory;
 
 /**
  * Maybe trigger an error notice "message" on the `admin_notices` action hook.
- * Uses an anonymous function which required PHP >= 5.3.
  */
 add_action('admin_notices', static function (): void {
     $message = apply_filters('custom_login_shutdown_error_message', '');
@@ -52,19 +50,20 @@ add_action('admin_notices', static function (): void {
 });
 
 if (version_compare(PHP_VERSION, '7.4', '<')) {
-    return add_filter('custom_login_shutdown_error_message', function () {
+    return add_filter('custom_login_shutdown_error_message', static function (): string {
         return sprintf(
             esc_html__(
-                'Notice: Custom Login version 4 requires PHP version >= 7.4, you are running %s, all features are currently disabled.',
+                'Notice: Custom Login version %s requires PHP version >= 7.4, you are running %s, all features are currently disabled.',
                 'custom-login'
             ),
+            get_plugin_data(__FILE__, translate: false)['Version'],
             PHP_VERSION
         );
     });
 }
 
 if (!is_readable(__DIR__ . '/vendor/autoload.php') && !defined('TheFrosty\CustomLogin\CUSTOM_LOGIN_FUNCTIONS')) {
-    return add_filter('custom_login_shutdown_error_message', function () {
+    return add_filter('custom_login_shutdown_error_message', static function (): string {
         return esc_html__(
             'Error: Custom Login can\'t find the autoload file (if installed from GitHub, please run `composer install`), all features are currently disabled.',
             'custom-login'
