@@ -1,9 +1,6 @@
-name: "Temp PR Downgrade Test"
+name: "Downgrade to PHP 7.4"
 
 on:
-  pull_request:
-    branches:
-      - 'feature/rector**'
   release:
     types: [ published ]
   workflow_dispatch:
