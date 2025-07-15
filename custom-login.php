@@ -53,7 +53,7 @@ if (version_compare(PHP_VERSION, '7.4', '<')) {
     return add_filter('custom_login_shutdown_error_message', static function (): string {
         return sprintf(
             esc_html__(
-                'Notice: Custom Login version %s requires PHP version >= 7.4, you are running %s, all features are currently disabled.',
+                'Notice: Custom Login version %1$s requires PHP version >= 7.4, you are running %2$s, all features are currently disabled.',
                 'custom-login'
             ),
             get_plugin_data(__FILE__, false, false)['Version'],
@@ -88,7 +88,7 @@ $plugin
     ->addOnHook(SettingsUpgrades::class, 'init', 10, null, [$container])
     ->addOnHook(Tracking::class, 'admin_init', 10, true, [$container]);
 
-add_action('plugins_loaded', static function () use ($plugin) {
+add_action('plugins_loaded', static function () use ($plugin): void {
     do_action('custom_login_loaded_before_initialize', $plugin);
     $plugin->initialize();
 });
