@@ -7,7 +7,6 @@ namespace TheFrosty\CustomLogin;
 use TheFrosty\CustomLogin\Settings\Api\Factory;
 use TheFrosty\WpUtilities\Plugin\PluginInterface;
 use function add_action;
-use function defined;
 use function function_exists;
 use function get_editable_roles;
 use function is_admin;
@@ -19,11 +18,6 @@ use function sprintf;
 use function str_contains;
 use function wp_doing_ajax;
 use const WEEK_IN_SECONDS;
-
-// Exit if accessed directly
-if (!defined('ABSPATH')) {
-    exit;
-}
 
 const CUSTOM_LOGIN_FUNCTIONS = true;
 
