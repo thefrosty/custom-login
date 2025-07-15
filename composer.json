@@ -63,21 +63,13 @@
     }
   },
   "scripts": {
-    "install-codestandards": [
-      "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run"
-    ],
-    "phpcs": [
-      "bash ./vendor/thefrosty/wp-utilities/bin/phpcs.sh"
-    ],
-    "phpunit": [
-      "./vendor/bin/phpunit --colors"
-    ],
-    "phpunit-coverage": [
-      "./vendor/bin/phpunit --colors --coverage-html ./tests/results && php ./tests/clover-results.php ./tests/clover.xml 01"
-    ],
-    "eslint": [
-      "npm run eslint"
-    ],
+    "eslint": "npm run eslint",
+    "install-codestandards": "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run",
+    "phpcs": "bash ./vendor/thefrosty/wp-utilities/bin/phpcs.sh",
+    "phpunit": "./vendor/bin/phpunit --colors",
+    "phpunit-coverage": "./vendor/bin/phpunit --colors --coverage-html ./tests/results && php ./tests/clover-results.php ./tests/clover.xml 01",
+    "refactor": "rector --ansi",
+    "test:refactor": "rector --dry-run --debug --ansi",
     "tests": [
       "@phpcs",
       "@phpunit",

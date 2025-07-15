@@ -35,7 +35,7 @@ jobs:
           composer require --no-update php:~7.4
 
       - name: Run Rector
-        run: composer rector
+        run: composer refactor
 
       - name: Run composer update with --no-dev
         run: |
