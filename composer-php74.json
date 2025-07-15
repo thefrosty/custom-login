@@ -1,0 +1,65 @@
+{
+  "name": "thefrosty/custom-login",
+  "type": "wordpress-plugin",
+  "description": "A simple way to customize your WordPress <code>wp-login.php</code> screen! A <a href=\"https://frosty.media/\">Frosty Media</a> plugin.",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Austin Passy",
+      "email": "367897+thefrosty@users.noreply.github.com",
+      "homepage": "https://austin.passy.co",
+      "role": "Developer"
+    }
+  ],
+  "config": {
+    "allow-plugins": {
+      "composer/installers": true
+    },
+    "optimize-autoloader": true,
+    "platform": {
+      "php": "8.3"
+    },
+    "preferred-install": "dist",
+    "sort-packages": true
+  },
+  "require": {
+    "php": ">=7.4",
+    "ext-json": "*",
+    "dwnload/edd-software-license-manager": "^2.1",
+    "dwnload/wp-settings-api": "^3.11",
+    "pimple/pimple": "^3.5",
+    "psr/container": "^2.0",
+    "thefrosty/wp-utilities": "^3.8"
+  },
+  "require-dev": {
+    "rector/rector": "^2.0"
+  },
+  "autoload": {
+    "files": [
+      "functions.php"
+    ],
+    "psr-4": {
+      "TheFrosty\\CustomLogin\\": "src/"
+    }
+  },
+  "archive": {
+    "exclude": [
+      ".gitignore",
+      ".wordpress-org",
+      "!node_modules/",
+      "plugin-build/",
+      "tests",
+      "!vendor/",
+      "composer-php74.json",
+      "composer.json",
+      "composer.lock",
+      "package.json",
+      "package-lock.json",
+      "phpcs-ruleset.xml",
+      "phpstan.neon.dist",
+      "phpunit.xml",
+      "README.md",
+      "rector.php"
+    ]
+  }
+}
