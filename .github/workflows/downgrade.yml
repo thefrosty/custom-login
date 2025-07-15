@@ -24,21 +24,17 @@ jobs:
 
       - name: Run composer install
         run: |
-          composer install --no-interaction
-
-      - name: Update composer PHP 7.4
-        run: |
-          composer config platform.php 7.4
-          composer require --no-update php:~7.4
+          composer install --no-dev --no-interaction --optimize-autoloader
+          composer require rector/rector:^2.0
 
       - name: Run Rector
         run: composer refactor
 
       - name: Run composer update with --no-dev
         run: |
-          composer config platform.php 8.3
-          composer require --no-update php:>=7.4
-          composer update --no-dev --no-interaction --optimize-autoloader
+          composer remove rector/rector
+          composer require --no-update php:^7.4
+          composer dump
 
       - name: Setup Node
         uses: actions/setup-node@v4
