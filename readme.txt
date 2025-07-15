@@ -2,10 +2,10 @@
 Contributors: austyfrosty, frostymedia
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290
 Tags: admin, branding, customization, custom login, logo
-Requires at least: 6.6
-Tested up to: 6.8.1
-Requires PHP: 8.1
-Stable tag: 4.5.2
+Requires at least: 6.4
+Tested up to: 6.8.2
+Requires PHP: 7.4
+Stable tag: 5.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,9 +13,10 @@ Custom Login allows you to easily customize your admin login page, works great f
 
 == Description ==
 
-Note: as of Custom Login 4.4, PHP >= 8.1 is required.
+NOTE: in Custom Login 4.4, PHP 8.1 or greater was required, but in version 5.0.0, PHP requirements were
+dropped back to 7.4 or greater. Enjoy the update.
 
-Custom Login 3.0 was 200% faster than version 2.0, and version 4.0 is now even better!
+Custom Login 3.0 was 200% faster than version 2.0, and version 4.0 and 5.0 is now even better!
 
 For more information visit the official [Custom Login](https://frosty.media/plugins/custom-login/) page.
 
@@ -33,7 +34,7 @@ https://www.youtube.com/watch?v=hZkc-t36xYQ
 
 = Extensions =
 
-There are currently 7 premium extensions available, with more coming (suggestions welcome - and *will be offered for free to said user*).
+There are currently seven premium extensions available, with more coming (suggestions welcome - and *will be offered for free to said user*).
 
 **Extensions available now**
 
@@ -67,15 +68,11 @@ Activate the plugin and customize your WordPress login screen. It's as easy as m
 
 = links =
 
-* Premium Plugins: [https://frosty.media/plugins](https://frosty.media/plugins/ "Premium WordPress Plugins by Frosty")
+* Additional Plugins: [https://frosty.media/plugins](https://frosty.media/plugins/ "Premium WordPress Plugins by Frosty")
 * Austins Blog: [https:/austin.passy.co/](http://austin.passy.co/ "Austin's blog")
-* Austin on Twitter: @[TheFrosty](https:/twitter.com/TheFrosty "Austin on Twitter")
-* Frosty Media on Twitter: @[Frosty_Media](https:/twitter.com/Frosty_Media "Frosty Media on Twitter")
-* **Development welcomed on [GitHub](https://github.com/thefrosty/custom-login)**
-
-= Hooks and Filters =
-
-Coming Soon.
+* Austin on Twitter: [@TheFrosty](https:/x.com/TheFrosty "Austin on X (Twitter)")
+* Frosty Media on Twitter: [@Frosty_Media](https:/x.com/Frosty_Media "Frosty Media on X (Twitter)")
+* Development welcomed on **[GitHub](https://github.com/thefrosty/custom-login)**
 
 == Installation ==
 
@@ -116,6 +113,13 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 4. Custom Login Extensions Installer (an active license key is required).
 
 == Changelog ==
+
+= Version 5.0.0 (2025/07/15) =
+
+* Tested up to 6.8.2
+* Bumped dependencies for PHP >= 8.3.
+* Dropped plugin PHP support back to >= 7.4 (WordPress repo) with Rector.
+* Add better Composer installation support, requires PHP >= 8.3 (for installations via Packagist).
 
 = Version 4.5.2 (2025/06/10) =
 

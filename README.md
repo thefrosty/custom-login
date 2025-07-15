@@ -13,9 +13,9 @@
 **Donate link:** [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290)  
 **Tags:** admin, branding, customization, custom login, logo  
 **Requires at least:** 6.6  
-**Tested up to:** 6.8.1  
-**Requires PHP**: 8.1  
-**Stable tag:** 4.5.2  
+**Tested up to:** 6.8.2  
+**Requires PHP**: 8.3  
+**Stable tag:** 5.0.0  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -25,11 +25,14 @@ Custom Login allows you to easily customize your admin login page, works great f
 
 Custom Login 2.0 was 140% faster than version 1.0, and version 4.0 is now even better!
 
-For more information visit the official [Custom Login](https://frosty.media/plugins/custom-login/) page.
+> NOTE: For version 5, this plugin should be installed via composer or from WordPress only. 
+> If you are not running PHP 8.3, grab the php74 release asset. 
+
+For more information, visit the official [Custom Login](https://frosty.media/plugins/custom-login/) page.
 
 > <strong>Support</strong><br>
 > [Austin](http://austin.passy.co) and the [Frosty Media](https://frosty.media/) team will always try our best to
-> support the Custom Login plugin on the WordPress.org forum, but please note that we can not guarantee a response in a
+> support the Custom Login plugin on the WordPress.org forum, but please note that we cannot guarantee a response in a
 > timely manner. If you have an issue we would appriciate you using GitHub or purchasing priority support on our site.
 >
 > Any extensions purchased on [Frosty Media](https://frosty.media/) (not hosted on WordPress.org) will not be supported
@@ -80,8 +83,8 @@ free to said user*).
 Activate the plugin and customize your WordPress login screen. It's as easy as modifying a few settings, there is no
 need to understand CSS at all. Custom Login even has a HTML, CSS &amp; jQuery textarea for more advanced customizations.
 
-1. Works great for client site installs.
-2. Read more about [Custom Login 4.1](https://frosty.media/2023/custom-login-4-1-x-released/)
+1. **Read more about [Custom Login 5.0](https://frosty.media/2025/custom-login-5-0-released/)**
+2. Read more about [Custom Login 4.2 & 4.3](https://frosty.media/2025/custom-login-4-3-released/)
 3. Read more about [Custom Login 4.0](https://frosty.media/2022/custom-login-4-0-x-released/)
 4. Read more about [Custom Login 3.1](https://frosty.media/2015/custom-login-v3-1-released/)
 
@@ -90,19 +93,21 @@ Share you designs with the community!**
 
 ### links
 
-* Premium Plugins: [https://frosty.media/plugins](https://frosty.media/plugins/ "Premium WordPress Plugins by Frosty")
+* Additional Plugins: [https://frosty.media/plugins](https://frosty.media/plugins/ "Premium WordPress Plugins by Frosty")
 * Austins Blog: [https:/austin.passy.co/](http://austin.passy.co/ "Austin's blog")
-* Austin on Twitter: @[TheFrosty](https:/twitter.com/TheFrosty "Austin on Twitter")
-* Frosty Media on Twitter: @[Frosty_Media](https:/twitter.com/Frosty_Media "Frosty Media on Twitter")
-* **Development welcomed on [GitHub](https://github.com/thefrosty/custom-login)**
-
-### Hooks and Filters
-
-Coming Soon.
+* Austin on Twitter: [@TheFrosty](https:/x.com/TheFrosty "Austin on X (Twitter)")
+* Frosty Media on Twitter: [@Frosty_Media](https:/x.com/Frosty_Media "Frosty Media on X (Twitter)")
+* Development welcomed on **[GitHub](https://github.com/thefrosty/custom-login)**
 
 ## Installation
 
-Follow the steps below to install the plugin.
+Installation via composer:
+
+```bash
+composer require thefrosty/custom-login:^5
+```
+
+Or, follow the steps below to install the plugin.
 
 1. Upload the `custom-login` directory to the /wp-content/plugins/ directory.
 2. Activate the plugin through the 'plugins' menu in WordPress.
@@ -167,6 +172,14 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 ](https://ps.w.org/custom-login/assets/screenshot-4.png)
 
 ## Changelog
+
+
+### Version 5.0.0 (2025/07/15)
+
+* Tested up to 6.8.2
+* Bumped dependencies for PHP >= 8.3.
+* Dropped plugin PHP support back to >= 7.4 (WordPress install) with Rector.
+* Add better Composer installation support, requires PHP >= 8.3.
 
 ### Version 4.5.2 (2025/06/10)
 
