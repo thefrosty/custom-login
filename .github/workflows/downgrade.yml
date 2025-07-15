@@ -33,6 +33,7 @@ jobs:
 
       - name: Remove Rector & dump autoloader
         run: |
+          composer config platform.php 7.4
           composer remove --dev rector/rector 
           composer dump
 
