@@ -22,7 +22,7 @@ jobs:
         env:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - run: cp -f composer-php-74.json composer.json
+      - run: cp -f composer-php74.json composer.json
 
       - name: Run composer install
         run: |
