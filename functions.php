@@ -7,7 +7,6 @@ namespace TheFrosty\CustomLogin;
 use TheFrosty\CustomLogin\Settings\Api\Factory;
 use TheFrosty\WpUtilities\Plugin\PluginInterface;
 use function add_action;
-use function defined;
 use function function_exists;
 use function get_editable_roles;
 use function is_admin;
@@ -20,21 +19,18 @@ use function str_contains;
 use function wp_doing_ajax;
 use const WEEK_IN_SECONDS;
 
-// Exit if accessed directly
-if (!defined('ABSPATH')) {
-    exit;
-}
-
 const CUSTOM_LOGIN_FUNCTIONS = true;
 
 /**
  * Are we on the Custom Login settings page?
+ * phpcs:disable SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable.DisallowedSuperGlobalVariable
  * @param PluginInterface $plugin
  * @return bool
  */
 function isSettingsPage(PluginInterface $plugin): bool
 {
-    return $GLOBALS['pagenow'] === 'options-general.php' &&
+    global $pagenow;
+    return $pagenow === 'options-general.php' &&
         isset($_GET['page']) &&
         str_contains($plugin->getSlug(), $_GET['page']);
 }
@@ -120,7 +116,7 @@ function _getEditableRoles(): array
             continue;
         }
         foreach ($role['capabilities'] as $capability => $array) {
-            // Remove the (deprecated) capabilities from the array
+            // Remove the (deprecated) capabilities from the array.
             if (is_string($capability) && preg_match('/^level_/', $capability)) {
                 continue;
             }
