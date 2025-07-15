@@ -22,23 +22,20 @@ jobs:
         env:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - run: cp -f composer-php74.json composer.json
+
       - name: Run composer install
         run: |
           composer install --no-interaction
 
-      - name: Update composer PHP 7.4
-        run: |
-          composer config platform.php 7.4
-          composer require --no-update php:~7.4
-
       - name: Run Rector
-        run: composer refactor
+        run: vendor/bin/rector --debug --ansi
 
-      - name: Run composer update with --no-dev
+      - name: Remove Rector & dump autoloader
         run: |
-          composer config platform.php 8.3
-          composer require --no-update php:^8.3
-          composer update --no-dev --no-interaction --optimize-autoloader
+          composer remove --dev rector/rector 
+          composer config platform.php 7.4
+          composer dump --ignore-platform-reqs
 
       - name: Setup Node
         uses: actions/setup-node@v4
