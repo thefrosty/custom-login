@@ -33,7 +33,7 @@ jobs:
 
       - name: Remove Rector & dump autoloader
         run: |
-          composer remove rector/rector 
+          composer remove --dev rector/rector 
           composer dump
 
       - name: Setup Node
