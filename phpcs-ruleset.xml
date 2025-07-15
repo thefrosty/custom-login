@@ -59,13 +59,16 @@
         <exclude name="PSR12.Traits.UseDeclaration.UseAfterBrace"/>
     </rule>
 
-
     <rule ref="Generic.Arrays.ArrayIndent"/>
     <rule ref="Squiz.Arrays.ArrayDeclaration.KeyNotAligned">
         <severity>0</severity>
     </rule>
     <rule ref="Squiz.Arrays.ArrayDeclaration.ValueNotAligned">
         <severity>0</severity>
+    </rule>
+
+    <rule ref="Generic.Files.LineLength">
+        <exclude-pattern>custom-login.php</exclude-pattern>
     </rule>
 
     <!-- Slevomat (selective) Coding Standards -->
