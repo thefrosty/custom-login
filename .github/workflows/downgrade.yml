@@ -24,13 +24,14 @@ jobs:
 
       - name: Run composer install
         run: |
-          composer install --no-dev --no-interaction --optimize-autoloader
+          composer install --no-interaction
+          composer update --no-dev --no-interaction --optimize-autoloader
           composer require rector/rector:^2.0
 
       - name: Run Rector
         run: composer refactor
 
-      - name: Run composer update with --no-dev
+      - name: Remove Rector & dump autoloader
         run: |
           composer remove rector/rector
           composer require --no-update php:^7.4
