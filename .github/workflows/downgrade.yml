@@ -30,7 +30,7 @@ jobs:
           composer require rector/rector:^2.0
 
       - name: Run Rector
-        run: composer refactor
+        run: vendor/bin/rector --debug --ansi
 
       - name: Remove Rector & dump autoloader
         run: |
