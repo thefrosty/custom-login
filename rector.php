@@ -6,6 +6,8 @@ use Rector\Config\RectorConfig;
 
 return RectorConfig::configure()
     ->withPaths([
+        __DIR__ . '/custom-login.php',
+        __DIR__ . '/functions.php',
         __DIR__ . '/src',
         __DIR__ . '/vendor/dwnload/',
         __DIR__ . '/vendor/thefrosty/wp-utilities',
