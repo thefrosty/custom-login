@@ -26,6 +26,7 @@ jobs:
         run: |
           composer install --no-interaction
           composer update --no-dev --no-interaction --optimize-autoloader
+          composer remove rector/rector --dev
           composer require rector/rector:^2.0
 
       - name: Run Rector
