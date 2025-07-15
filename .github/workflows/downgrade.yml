@@ -4,6 +4,8 @@ on:
   pull_request:
     branches:
       - 'feature/rector**'
+  release:
+    types: [ published ]
   workflow_dispatch:
 
 jobs:
@@ -32,8 +34,8 @@ jobs:
           composer config platform.php 7.4
           composer require --no-update php:~7.4
 
-      - name: Run rector downgrade
-        run: vendor/bin/rector process
+      - name: Run Rector
+        run: composer rector
 
       - name: Run composer update with --no-dev
         run: |
@@ -61,3 +63,11 @@ jobs:
         with:
           name: custom-login-php74
           path: plugin-build/
+
+      - name: Upload release asset
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: plugin-build/custom-login-php74.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
