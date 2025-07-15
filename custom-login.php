@@ -56,7 +56,7 @@ if (version_compare(PHP_VERSION, '7.4', '<')) {
                 'Notice: Custom Login version %s requires PHP version >= 7.4, you are running %s, all features are currently disabled.',
                 'custom-login'
             ),
-            get_plugin_data(__FILE__, translate: false)['Version'],
+            get_plugin_data(__FILE__, false, false)['Version'],
             PHP_VERSION
         );
     });
