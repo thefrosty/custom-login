@@ -80,6 +80,7 @@ class Dashboard extends DashboardWidget
         echo '<hr>';
         echo $div_open;
         printf('<h4>%s</h4>', esc_html__('Custom Login Extensions', 'custom-login'));
+        $instance = $this;
         $posts = $this->retrieveBodyCached(
             'https://frosty.media/wp-json/wp/v2/extensions?per_page=1&plugin_tag=29',
             WEEK_IN_SECONDS

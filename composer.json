@@ -1,6 +1,7 @@
 {
   "name": "thefrosty/custom-login",
   "type": "wordpress-plugin",
+  "description": "A simple way to customize your WordPress <code>wp-login.php</code> screen! A <a href=\"https://frosty.media/\">Frosty Media</a> plugin.",
   "license": "GPL-2.0-or-later",
   "authors": [
     {
@@ -18,30 +19,35 @@
     },
     "optimize-autoloader": true,
     "platform": {
-      "php": "8.1"
+      "php": "8.3"
     },
     "preferred-install": "dist",
     "sort-packages": true
   },
   "require": {
-    "php": "^8.1",
+    "php": "^8.3",
     "ext-json": "*",
     "dwnload/edd-software-license-manager": "^2.1",
     "dwnload/wp-settings-api": "^3.11",
     "pimple/pimple": "^3.5",
     "psr/container": "^2.0",
-    "thefrosty/wp-utilities": "^3.4.3"
+    "thefrosty/wp-utilities": "^3.8"
   },
   "require-dev": {
     "ext-simplexml": "*",
     "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+    "php-stubs/wordpress-stubs": "^6.8",
     "phpcompatibility/php-compatibility": "^9.3",
-    "phpunit/php-code-coverage": "^9",
-    "phpunit/phpunit": "^9",
+    "phpunit/php-code-coverage": "^11",
+    "phpunit/phpunit": "^11",
+    "rector/rector": "^2.0",
     "roave/security-advisories": "dev-latest",
     "roots/wordpress": "^6.7",
+    "slevomat/coding-standard": "^8.18",
     "squizlabs/php_codesniffer": "^3.2",
     "symfony/var-dumper": "^6.4 || ^7.2",
+    "szepeviktor/phpstan-wordpress": "^2.0",
+    "wp-coding-standards/wpcs": "^3.1",
     "wp-phpunit/wp-phpunit": "^6.7",
     "yoast/phpunit-polyfills": "^3.0 || ^4.0"
   },
@@ -55,25 +61,17 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "TheFrosty\\Tests\\CustomLogin\\": "tests/unit"
+      "TheFrosty\\CustomLogin\\Tests\\": "tests/unit/"
     }
   },
   "scripts": {
-    "install-codestandards": [
-      "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run"
-    ],
-    "phpcs": [
-      "bash ./vendor/thefrosty/wp-utilities/bin/phpcs.sh"
-    ],
-    "phpunit": [
-      "./vendor/bin/phpunit --colors"
-    ],
-    "phpunit-coverage": [
-      "./vendor/bin/phpunit --colors --coverage-html ./tests/results && php ./tests/clover-results.php ./tests/clover.xml 01"
-    ],
-    "eslint": [
-      "npm run eslint"
-    ],
+    "eslint": "npm run eslint",
+    "install-codestandards": "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run",
+    "phpcs": "bash ./vendor/thefrosty/wp-utilities/bin/phpcs.sh --standard=phpcs-ruleset.xml",
+    "phpunit": "./vendor/bin/phpunit --colors",
+    "phpunit-coverage": "./vendor/bin/phpunit --colors --coverage-html ./tests/results && php ./tests/clover-results.php ./tests/clover.xml 01",
+    "refactor": "rector --ansi",
+    "test:refactor": "rector --dry-run --debug --ansi",
     "tests": [
       "@phpcs",
       "@phpunit",
@@ -86,12 +84,18 @@
       ".wordpress-org",
       "!node_modules/",
       "plugin-build/",
+      "tests",
       "!vendor/",
+      "composer-php74.json",
+      "composer.json",
       "composer.lock",
+      "package.json",
       "package-lock.json",
       "phpcs-ruleset.xml",
       "phpstan.neon.dist",
-      "phpunit.xml"
+      "phpunit.xml",
+      "README.md",
+      "rector.php"
     ]
   }
 }

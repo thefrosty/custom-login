@@ -1,9 +1,6 @@
 name: Main PHP Version(s) CI
 
 on:
-  push:
-    branches:
-      - develop
   pull_request:
     branches-ignore:
       - main
@@ -21,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-version: [ "8.1", "8.2", "8.3", "8.4" ]
+        php-version: [ "8.3", "8.4" ]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -45,27 +42,31 @@ jobs:
           PHP_VERSION: ${{ matrix.php-version }}
 
       - name: Show PHPCS results in PR
-        if: ${{ always() && steps.phpcs.outcome == 'failure' && matrix.php-version == '8.1' }}
+        if: ${{ always() && steps.phpcs.outcome == 'failure' && matrix.php-version == '8.3' }}
         run: cs2pr ./phpcs-report.xml
 
   run-phpunit:
     name: Run PHPUnit
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version: [ "8.3" ]
+        wp-version: [ 'latest' ]
+        coverage: [ true ]
     services:
       mysql:
         image: mysql:8.0
         env:
           MYSQL_DATABASE: wordpress_test
           MYSQL_ROOT_PASSWORD: root
-          MYSQL_USER: wordpress_user
-          MYSQL_PASSWORD: mysql_password
         ports:
-          - 3306/tcp
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-    strategy:
-      matrix:
-        php-version: [ "8.1" ]
-        coverage: [ true ]
+          - "3306:3306"
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
+    env:
+      WORDPRESS_DB_NAME: wordpress_test
+      WORDPRESS_DB_PASS: root
+      WORDPRESS_DB_USER: root
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -77,24 +78,23 @@ jobs:
         id: ci-setup
         uses: ./.github/actions/ci-setup
         with:
-          extensions: 'curl, mysql, mysqli, tar, zip'
-          extensions-cache-key: run-phpunit-${{ matrix.php-version }}
+          extensions: 'curl, mysql, mysqli, zip'
+          extensions-cache-key: run-phpunit-${{ matrix.wp-version }}-${{ matrix.php-version }}
           php-version: ${{ matrix.php-version }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          tools: 'composer, phpunit'
+          tools: 'composer, phpunit:11'
 
-      - name: Install WP Tests
+      - name: Setup WordPress ${{ matrix.wp-version }}
         run: |
           chmod u+x vendor/thefrosty/wp-utilities/bin/install-wp-tests.sh
-          ./vendor/thefrosty/wp-utilities/bin/install-wp-tests.sh wordpress_test root root 127.0.0.1:${{ job.services.mysql.ports['3306'] }} latest true
-        env:
-          WORDPRESS_DB_HOST: 127.0.0.1:${{ job.services.mysql.ports['3306'] }}
+          ./vendor/thefrosty/wp-utilities/bin/install-wp-tests.sh ${{ env.WORDPRESS_DB_NAME }} ${{ env.WORDPRESS_DB_USER }} ${{ env.WORDPRESS_DB_PASS }} 127.0.0.1:${{ job.services.mysql.ports['3306'] }} ${{ matrix.wp-version }} true
 
       - name: Run PHPUnit
         id: phpunit
         run: composer phpunit
         env:
           CHANGED_FILES: ${{ steps.ci-setup.outputs.files }}
+          DB_PORT: ${{ job.services.mysql.ports[3306] }}
 
       - name: Upload coverage to Codecov
         if: ${{ github.event_name == 'pull_request' }}
