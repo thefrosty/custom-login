@@ -5,7 +5,7 @@ Tags: admin, branding, customization, custom login, logo
 Requires at least: 6.4
 Tested up to: 6.8.2
 Requires PHP: 7.4
-Stable tag: 5.0.0
+Stable tag: 5.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,7 +13,7 @@ Custom Login allows you to easily customize your admin login page, works great f
 
 == Description ==
 
-NOTE: in Custom Login 4.4, PHP 8.1 or greater was required, but in version 5.0.0, PHP requirements were
+NOTE: in Custom Login 4.4, PHP 8.1 or greater was required, but in version 5.x, PHP requirements were
 dropped back to 7.4 or greater. Enjoy the update.
 
 Custom Login 3.0 was 200% faster than version 2.0, and version 4.0 and 5.0 is now even better!
@@ -114,6 +114,12 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 == Changelog ==
 
+= Version 5.0.1 (2025/07/16) =
+
+* Fix: export-ignore for Composer installs.
+* Bump PHPUnit to 11.
+* Change Requires PHP back to 8.3 (modified in downgrade action for WordPress repo)
+
 = Version 5.0.0 (2025/07/15) =
 
 * Tested up to 6.8.2
@@ -183,6 +189,9 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 [All Releases](https://github.com/thefrosty/custom-login/releases)
 
 == Upgrade Notice ==
+
+= 5.0.1 =
+Requires WordPress version >= 6.4 and PHP version >= 7.4.
 
 = 4.4.0 =
 Requires WordPress version >= 6.6 and PHP version >= 8.1.

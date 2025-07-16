@@ -12,10 +12,10 @@
 , [frostymedia](https://profiles.wordpress.org/frostymedia)  
 **Donate link:** [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290)  
 **Tags:** admin, branding, customization, custom login, logo  
-**Requires at least:** 6.6  
+**Requires at least:** 6.7  
 **Tested up to:** 6.8.2  
 **Requires PHP**: 8.3  
-**Stable tag:** 5.0.0  
+**Stable tag:** 5.0.1  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -173,6 +173,11 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 ## Changelog
 
+### Version 5.0.1 (2025/07/16)
+
+* Fix: export-ignore for Composer installs.
+* Bump PHPUnit to 11.
+* Change Requires PHP back to 8.3 (modified in downgrade action)
 
 ### Version 5.0.0 (2025/07/15)
 
