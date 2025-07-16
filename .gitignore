@@ -8,6 +8,7 @@ tests/results/
 tests/clover.xml
 vendor/
 wordpress/
+.phpunit.cache
 composer.lock
 phpcs-report.xml
 
