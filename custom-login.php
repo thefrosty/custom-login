@@ -8,7 +8,7 @@
  * Author URI: https://austin.passy.co
  * Requires at least: 6.4
  * Tested up to: 6.8.2
- * Requires PHP: 7.4
+ * Requires PHP: 8.3
  * Text Domain: custom-login
  * GitHub Plugin URI: https://github.com/thefrosty/custom-login
  * Primary Branch: develop
@@ -49,11 +49,11 @@ add_action('admin_notices', static function (): void {
     echo wp_kses_post(sprintf('<div class="error">%s</div>', wpautop($message)));
 });
 
-if (version_compare(PHP_VERSION, '7.4', '<')) {
+if (version_compare(PHP_VERSION, '8.3', '<')) {
     return add_filter('custom_login_shutdown_error_message', static function (): string {
         return sprintf(
             esc_html__(
-                'Notice: Custom Login version %1$s requires PHP version >= 7.4, you are running %2$s, all features are currently disabled.',
+                'Notice: Custom Login version %1$s requires PHP version >= 8.3, you are running %2$s, all features are currently disabled.',
                 'custom-login'
             ),
             get_plugin_data(__FILE__, false, false)['Version'],

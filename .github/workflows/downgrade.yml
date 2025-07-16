@@ -37,6 +37,11 @@ jobs:
           composer config platform.php 7.4
           composer dump --ignore-platform-reqs
 
+      - name: Transform Requires PHP via sed
+        run: |
+          sed -i 's/\* Requires PHP: 8\.3/* Requires PHP: 7.4/g' custom-login.php
+          sed -i 's/8\.3/7.4/g' custom-login.php
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -45,6 +50,7 @@ jobs:
       - name: Run npm install
         run: |
           npm install --omit=dev
+          npm prune --production
 
       - run: mkdir plugin-build
 
