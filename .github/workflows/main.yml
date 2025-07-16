@@ -51,6 +51,7 @@ jobs:
     strategy:
       matrix:
         php-version: [ "8.3" ]
+        wp-version: [ 'latest' ]
         coverage: [ true ]
     services:
       mysql:
