@@ -59,7 +59,7 @@ There are currently seven premium extensions available, with more coming (sugges
 
 Activate the plugin and customize your WordPress login screen. It's as easy as modifying a few settings, there is no need to understand CSS at all. Custom Login even has a HTML, CSS &amp; jQuery textarea for more advanced customizations.
 
-1. Works great for client site installs.
+1. **Read more about [Custom Login 5.0](https://frosty.media/2025/custom-login-5-0-released/)**
 2. Read more about [Custom Login 4.1](https://frosty.media/2023/custom-login-4-1-x-released/)
 3. Read more about [Custom Login 4.0](https://frosty.media/2022/custom-login-4-0-x-released/)
 4. Read more about [Custom Login 3.1](https://frosty.media/2015/custom-login-v3-1-released/)
