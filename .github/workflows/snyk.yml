@@ -2,6 +2,9 @@ name: Vulnerabilities Scan
 
 on:
   pull_request:
+    branches-ignore:
+      - main
+      - master
 
 # Cancels all previous workflow runs for the same branch that have not yet completed.
 concurrency:
