@@ -61,7 +61,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "TheFrosty\\Tests\\CustomLogin\\": "tests/unit"
+      "TheFrosty\\CustomLogin\\Tests\\": "tests/unit/"
     }
   },
   "scripts": {

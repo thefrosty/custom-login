@@ -1,29 +1,30 @@
-<?php declare(strict_types=1);
+<?php
 
-namespace TheFrosty\Tests\CustomLogin;
+declare(strict_types=1);
+
+namespace TheFrosty\CustomLogin\Tests;
 
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase as PhpUnitTestCase;
+use Psr\Container\ContainerInterface;
 use ReflectionObject;
 use TheFrosty\WpUtilities\Plugin\Plugin;
 use TheFrosty\WpUtilities\Plugin\PluginFactory;
+use function dirname;
 use function get_class;
 
 /**
  * Class TestCase
  * @package TheFrosty\Tests\CustomLogin
  */
-class TestCase extends \WP_UnitTestCase
+class TestCase extends PhpUnitTestCase
 {
 
-    public const METHOD_ADD_FILTER = 'addFilter';
+    public const string METHOD_ADD_ACTION = 'addAction';
+    public const string METHOD_ADD_FILTER = 'addFilter';
 
-    /** @var \TheFrosty\WpUtilities\Plugin\Container $container */
-    protected $container;
-
-    /** @var Plugin $plugin */
+    protected ContainerInterface $container;
     protected Plugin $plugin;
-
-    /** @var ReflectionObject $reflection */
     protected ReflectionObject $reflection;
 
     /**
@@ -33,7 +34,7 @@ class TestCase extends \WP_UnitTestCase
     {
         parent::setUp();
         // Set the filename to the root of the plugin (not the test plugin (so we have asset access without mocks)).
-        $filename = \dirname(__DIR__, 2) . '/custom-login.php';
+        $filename = dirname(__DIR__, 2) . '/custom-login.php';
         $this->plugin = PluginFactory::create('custom-login', $filename);
         $this->container = $this->plugin->getContainer();
     }

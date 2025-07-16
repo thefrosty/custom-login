@@ -1,6 +1,8 @@
-<?php declare(strict_types=1);
+<?php
 
-namespace TheFrosty\Tests\CustomLogin;
+declare(strict_types=1);
+
+namespace TheFrosty\CustomLogin\Tests;
 
 use TheFrosty\CustomLogin\CustomLogin;
 
