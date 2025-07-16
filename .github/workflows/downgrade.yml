@@ -50,6 +50,7 @@ jobs:
       - name: Run npm install
         run: |
           npm install --omit=dev
+          npm prune --production
 
       - run: mkdir plugin-build
 
