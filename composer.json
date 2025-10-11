@@ -41,7 +41,6 @@
     "phpunit/php-code-coverage": "^11",
     "phpunit/phpunit": "^11",
     "rector/rector": "^2.0",
-    "roave/security-advisories": "dev-latest",
     "roots/wordpress": "^6.7",
     "slevomat/coding-standard": "^8.18",
     "squizlabs/php_codesniffer": "^3.2",

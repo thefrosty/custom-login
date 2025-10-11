@@ -101,7 +101,7 @@ msgid "Custom Login Extensions"
 msgstr ""
 
 #: ../includes/class-cl-extensions.php:44
-msgid "Custom Login Extentions"
+msgid "Custom Login Extensions"
 msgstr ""
 
 #: ../includes/class-cl-extensions.php:207
@@ -463,7 +463,7 @@ msgid "Remove login CSS"
 msgstr ""
 
 #: ../includes/default-settings.php:478
-msgid "Remove WordPress' login CSS. Warning: You'll have to add aditional syles not set by this plugin."
+msgid "Remove WordPress' login CSS. Warning: You'll have to add additional styles not set by this plugin."
 msgstr ""
 
 #: ../includes/default-settings.php:483
