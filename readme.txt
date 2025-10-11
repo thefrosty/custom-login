@@ -114,6 +114,10 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 == Changelog ==
 
+= Version 5.0.2 (2025/10/11) =
+
+* Remove roave/security-advisories (due to political support on their README I don't agree with).
+
 = Version 5.0.1 (2025/07/16) =
 
 * Fix: export-ignore for Composer installs.

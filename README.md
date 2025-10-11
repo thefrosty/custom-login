@@ -173,6 +173,10 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 ## Changelog
 
+### Version 5.0.2 (2025/10/11) =
+
+* Remove `roave/security-advisories` (due to political support on their README I don't agree with).
+
 ### Version 5.0.1 (2025/07/16)
 
 * Fix: export-ignore for Composer installs.
@@ -198,7 +202,7 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 ### Version 4.5.0 (2025/05/14)
 
-* Add roave/security-advisories
+* Add `roave/security-advisories`
 * Update codecov-action to v5
 * Setting: Expose Extensions Submenu
 * 🔄 Regenerate translation files
