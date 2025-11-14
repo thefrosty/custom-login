@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace TheFrosty\CustomLogin\WpLogin;
 
@@ -48,6 +50,7 @@ class Login extends AbstractContainerProvider
         $this->addAction('init', [$this, 'maybeRemoveLoginStyle']);
         $this->addAction('login_enqueue_scripts', [$this, 'loginEnqueueScripts']);
         $this->addAction('login_head', [$this, 'loginHead']);
+        $this->addAction('login_footer', [$this, 'loginFooter'], 10, 999);
         $this->addAction('login_footer', [$this, 'loginFooterHtml'], 8);
         $this->addAction('login_footer', [$this, 'loginFooterJquery'], 19);
         $this->addFilter('login_headerurl', [$this, 'loginHeaderUrl']);
@@ -60,8 +63,9 @@ class Login extends AbstractContainerProvider
      */
     protected function maybeRemoveLoginStyle(): void
     {
+        global $pagenow;
         if (
-            $GLOBALS['pagenow'] === 'wp-login.php' &&
+            $pagenow === 'wp-login.php' &&
             Options::getOption(
                 OptionKey::REMOVE_LOGIN_CSS,
                 Factory::getSection(Factory::SECTION_GENERAL),
@@ -86,7 +90,7 @@ class Login extends AbstractContainerProvider
                 OptionValue::OFF
             ) === OptionValue::ON
         ) {
-            // Enqueue the Animate.CSS
+            // Enqueue the Animate.CSS.
             wp_enqueue_style(
                 'animate.css',
                 $this->getPlugin()->getUrl('node_modules/animate.css/animate.css'),
@@ -127,6 +131,31 @@ class Login extends AbstractContainerProvider
     }
 
     /**
+     * Actions hooked into login_footer.
+     */
+    protected function loginFooter(): void
+    {
+        if (
+            Options::getOption(
+                OptionKey::HTML_USE_IMG_SRCSET,
+                Factory::getSection(Factory::SECTION_DESIGN),
+                OptionValue::OFF
+            ) === OptionValue::ON
+        ) {
+            $view = $this->getView(ServiceProvider::WP_UTILITIES_VIEW);
+            $view->render(
+                'wp-login/srcset',
+                [
+                    'html_background_url' => Options::getOption(
+                        OptionKey::HTML_BACKGROUND_URL,
+                        Factory::getSection(Factory::SECTION_DESIGN)
+                    ),
+                ]
+            );
+        }
+    }
+
+    /**
      * If there is custom HTML set in the settings echo it to the 'login_footer' hook in wp-login.php.
      */
     protected function loginFooterHtml(): void
@@ -157,7 +186,8 @@ class Login extends AbstractContainerProvider
 
         $view = $this->getView(ServiceProvider::WP_UTILITIES_VIEW);
         $view->render(
-            'wp-login/script', [
+            'wp-login/script',
+            [
                 OptionKey::CUSTOM_JQUERY => $data,
             ]
         );
@@ -193,21 +223,22 @@ class Login extends AbstractContainerProvider
 
     /**
      * Remove the "Lost your password?" text.
-     * @param mixed $translated_text
-     * @param mixed $untranslated_text
-     * @return string|false
+     * @param string $translated_text
+     * @param string $untranslated_text
+     * @return string
      */
-    protected function removeLostPasswordText($translated_text, $untranslated_text)
+    protected function removeLostPasswordText(string $translated_text, string $untranslated_text): string
     {
+        global $pagenow;
         if (
-            $GLOBALS['pagenow'] === 'wp-login.php' &&
+            $pagenow === 'wp-login.php' &&
             Options::getOption(
                 OptionKey::LOSTPASSWORD_TEXT,
                 Factory::getSection(Factory::SECTION_GENERAL)
             ) !== OptionValue::OFF &&
             $untranslated_text === 'Lost your password?'
         ) {
-            $translated_text = ''; // Unset translation to empty string
+            $translated_text = ''; // Unset translation to empty string.
         }
 
         return $translated_text;

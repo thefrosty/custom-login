@@ -13,9 +13,9 @@
 **Donate link:** [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290)  
 **Tags:** admin, branding, customization, custom login, logo  
 **Requires at least:** 6.7  
-**Tested up to:** 6.8.2  
+**Tested up to:** 6.8.3  
 **Requires PHP**: 8.3  
-**Stable tag:** 5.0.1  
+**Stable tag:** 5.1.0  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,7 +33,7 @@ For more information, visit the official [Custom Login](https://frosty.media/plu
 > <strong>Support</strong><br>
 > [Austin](http://austin.passy.co) and the [Frosty Media](https://frosty.media/) team will always try our best to
 > support the Custom Login plugin on the WordPress.org forum, but please note that we cannot guarantee a response in a
-> timely manner. If you have an issue we would appriciate you using GitHub or purchasing priority support on our site.
+> timely manner. If you have an issue we would appreciate you using GitHub or purchasing priority support on our site.
 >
 > Any extensions purchased on [Frosty Media](https://frosty.media/) (not hosted on WordPress.org) will not be supported
 > on the WordPress.org forum. You can always browse our *small* but growing [documentation](https://frosty.media/docs) for
@@ -173,6 +173,15 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 ## Changelog
 
+### Version 5.1.0 (2025/11/14) =
+
+* Bump js-yaml and standard by @dependabot[bot]
+* Feature: Add Login style <img> with `srcset` for responsive image backgrounds.
+
+### Version 5.0.2 (2025/10/11) =
+
+* Remove `roave/security-advisories` (due to political support on their README I don't agree with).
+
 ### Version 5.0.1 (2025/07/16)
 
 * Fix: export-ignore for Composer installs.
@@ -198,7 +207,7 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 ### Version 4.5.0 (2025/05/14)
 
-* Add roave/security-advisories
+* Add `roave/security-advisories`
 * Update codecov-action to v5
 * Setting: Expose Extensions Submenu
 * 🔄 Regenerate translation files

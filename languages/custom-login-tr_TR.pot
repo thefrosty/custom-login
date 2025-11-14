@@ -348,7 +348,7 @@ msgstr "Yükleme süreleri"
 #: functions/welcome.php:127
 msgid ""
 "There were issues in the past version that had the plugin loading on pages "
-"it wasn't supposted to. <strong>CL</strong> now caches all queries and "
+"it wasn't supposed to. <strong>CL</strong> now caches all queries and "
 "database calls."
 msgstr ""
 "Önceki sürümünde, eklentinin sayfalarda yüklenmesiyle ilgili istenmeyen "

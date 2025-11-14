@@ -3,9 +3,9 @@ Contributors: austyfrosty, frostymedia
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290
 Tags: admin, branding, customization, custom login, logo
 Requires at least: 6.4
-Tested up to: 6.8.2
+Tested up to: 6.8.3
 Requires PHP: 7.4
-Stable tag: 5.0.0
+Stable tag: 5.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,7 +21,7 @@ Custom Login 3.0 was 200% faster than version 2.0, and version 4.0 and 5.0 is no
 For more information visit the official [Custom Login](https://frosty.media/plugins/custom-login/) page.
 
 > <strong>Support</strong><br>
-> [Austin](http://austin.passy.co) and the [Frosty Media](https://frosty.media/) team will always try our best to support the Custom Login plugin on the WordPress.org forum, but please note that we can not guarantee a response in a timely manner. If you have an issue we would appriciate you using GitHub or purchasing priority support on our site.
+> [Austin](http://austin.passy.co) and the [Frosty Media](https://frosty.media/) team will always try our best to support the Custom Login plugin on the WordPress.org forum, but please note that we can not guarantee a response in a timely manner. If you have an issue we would appreciate you using GitHub or purchasing priority support on our site.
 >
 > Any extensions purchased on [Frosty Media](https://frosty.media/) (not hosted on WordPress.org) will not be supported on the WordPress.org forum. You can always browse our *small* but growing [documentation](https://frosty.media/docs) for further assistance. You need a valid license key to make support submissions *on our site*. We thank you in advance.
 
@@ -59,7 +59,7 @@ There are currently seven premium extensions available, with more coming (sugges
 
 Activate the plugin and customize your WordPress login screen. It's as easy as modifying a few settings, there is no need to understand CSS at all. Custom Login even has a HTML, CSS &amp; jQuery textarea for more advanced customizations.
 
-1. Works great for client site installs.
+1. **Read more about [Custom Login 5.0](https://frosty.media/2025/custom-login-5-0-released/)**
 2. Read more about [Custom Login 4.1](https://frosty.media/2023/custom-login-4-1-x-released/)
 3. Read more about [Custom Login 4.0](https://frosty.media/2022/custom-login-4-0-x-released/)
 4. Read more about [Custom Login 3.1](https://frosty.media/2015/custom-login-v3-1-released/)
@@ -113,6 +113,15 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 4. Custom Login Extensions Installer (an active license key is required).
 
 == Changelog ==
+
+= Version 5.1.0 (2025/11/14) =
+
+ * Bump js-yaml and standard by @dependabot[bot]
+ * Feature: Add Login style <img> with `srcset` for responsive image backgrounds.
+
+= Version 5.0.2 (2025/10/11) =
+
+* Remove roave/security-advisories (due to political support on their README I don't agree with).
 
 = Version 5.0.1 (2025/07/16) =
 
