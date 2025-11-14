@@ -173,6 +173,10 @@ Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-logi
 
 ## Changelog
 
+### Version 5.1.1 (2025/11/14) =
+
+* Resolve `gettext` mixed type fatal error.
+
 ### Version 5.1.0 (2025/11/14) =
 
 * Bump js-yaml and standard by @dependabot[bot]
