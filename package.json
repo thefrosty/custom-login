@@ -18,7 +18,7 @@
     "eslint": "~8.10.0",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-no-jquery": "^2.7.0",
-    "standard": "^16.0.4"
+    "standard": "^17.1.2"
   },
   "dependencies": {
     "animate.css": "4.1.1"
