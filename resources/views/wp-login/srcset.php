@@ -17,35 +17,23 @@ if ($id === 0 || !($srcset = wp_get_attachment_image_srcset($id))) {
 }
 $style = <<<CSS
 <style>
-picture#custom-login__picture {
+#custom-login__bq_wrapper picture {
     position:fixed;
     left:0;
     top:0;
     z-index:-999;
-    object-fit:cover;
     width:100vw;
-    animation: unblur 1200ms;
-}
-@keyframes unblur {
-  0% {
-    filter: blur(200px)
-  }
-  70% {
-    filter: blur(20px)
-  }
-  40% {
-    filter: blur(40px)
-  }
-  100% {
-    filter: blur(0)
-  }
+    height:100vh;
 }
 </style>
 CSS;
 
 printf(
-    '%3$s<picture id="custom-login__picture"><img srcset="%1$s" alt="%2$ss" src=""></picture>',
+    '%3$s<div id="custom-login__bq_wrapper"><picture><source srcset="%1$s"><img alt="%2$s" src="%4$s"></picture></div>',
     esc_attr($srcset),
     esc_attr(get_post_meta($id, '_wp_attachment_image_alt', true)),
-    $style
+    "\n" . $style . "\n",
+    esc_url(wp_get_attachment_image_src($id, 'medium')[0])
 );
+
+echo PHP_EOL;
