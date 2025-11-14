@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 use TheFrosty\CustomLogin\CustomLogin;
 use TheFrosty\CustomLogin\Settings\OptionValue;
@@ -44,7 +46,7 @@ if (!empty($html_background_color) || !empty($html_background_url)) {
         $css .= trailingSemicolonIt('background-color', $html_background_color);
     }
 
-    if (!empty($html_background_url)) {
+    if (!empty($html_background_url) && (empty($html_use_img_srcset) || $html_use_img_srcset === OptionValue::OFF)) {
         $css .= trailingSemicolonIt('background-image', "url('$html_background_url')");
         $html_background_position ??= '';
         $html_background_repeat ??= '';
@@ -102,8 +104,10 @@ if (!empty($login_form_background_url)) {
 
 if (!empty($login_form_border_size) && !empty($login_form_border_color)) {
     $login_form_border_size = rtrim($login_form_border_size, 'px');
-    $css .= trailingSemicolonIt('border',
-        sprintf('%1$spx solid %2$s', $login_form_border_size, $login_form_border_color));
+    $css .= trailingSemicolonIt(
+        'border',
+        sprintf('%1$spx solid %2$s', $login_form_border_size, $login_form_border_color)
+    );
 }
 
 if (!empty($login_form_border_radius)) {
@@ -200,7 +204,7 @@ if (!empty($nav_hover_color)) {
     $css .= trailingSemicolonIt('text-shadow', sprintf('0 1px 0 %1$s', $nav_text_shadow_hover_color));
     $css .= $close_rule; // CLOSE .login #nav a:hover, .login #backtoblog a:hover
 }
-$css .= '</style>';
+$css .= "</style>\n";
 
 /*
  * Out of the frying pan, and into the fire!
