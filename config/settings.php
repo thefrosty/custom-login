@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 use Dwnload\WpSettingsApi\Api\SettingField;
 use Dwnload\WpSettingsApi\Api\SettingSection;
@@ -44,6 +45,15 @@ return [
                 SettingField::DEFAULT => '',
                 SettingField::SIZE => 'medium',
                 SettingField::SANITIZE => '\sanitize_text_field',
+            ],
+            [
+                SettingField::NAME => OptionKey::HTML_USE_IMG_SRCSET,
+                SettingField::LABEL => __('Use &lt;img&gt; element', 'custom-login'),
+                SettingField::DESC => __(
+                    'Select this box if you want to use a fixed position &lt;img&gt; element using cores responsive images with `srcset`. Use `#custom-login__bq_wrapper picture img` if you need to target additional CSS.',
+                    'custom-login'
+                ),
+                SettingField::TYPE => FieldTypes::FIELD_TYPE_CHECKBOX,
             ],
             [
                 SettingField::NAME => OptionKey::HTML_BACKGROUND_POSITION,
@@ -128,8 +138,10 @@ return [
             [
                 SettingField::NAME => OptionKey::LOGO_BACKGROUND_SIZE_HEIGHT,
                 SettingField::LABEL => __('Image height', 'custom-login'),
-                SettingField::DESC => __('Enter your desired image height (All not integers will be removed).',
-                    'custom-login'),
+                SettingField::DESC => __(
+                    'Enter your desired image height (All not integers will be removed).',
+                    'custom-login'
+                ),
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_NUMBER,
                 SettingField::SIZE => 'small',
                 SettingField::DEFAULT => '',
@@ -474,7 +486,10 @@ return [
             [
                 SettingField::NAME => OptionKey::EXTENSIONS_MENU,
                 SettingField::LABEL => __('Extensions Submenu', 'custom-login'),
-                SettingField::DESC => __('Show (checked) or hide the extensions in the WordPress\' settings menu.', 'custom-login'),
+                SettingField::DESC => __(
+                    'Show (checked) or hide the extensions in the WordPress\' settings menu.',
+                    'custom-login'
+                ),
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_CHECKBOX,
                 SettingField::DEFAULT => OptionValue::OFF,
             ],
