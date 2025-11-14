@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if (!defined('ABSPATH')) {
     exit;
 }
@@ -12,7 +12,7 @@ if (empty($html_background_url)) {
 }
 
 $id = attachment_url_to_postid(esc_url($html_background_url));
-if ($id === 0 || !($srcset = wp_get_attachment_image_srcset($id))) {
+if ($id === 0 || !($srcset = wp_get_attachment_image_srcset($id))) { // phpcs:ignore
     return;
 }
 $style = <<<CSS

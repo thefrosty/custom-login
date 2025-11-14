@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 use Dwnload\WpSettingsApi\Api\SettingField;
@@ -7,6 +8,9 @@ use Dwnload\WpSettingsApi\Settings\FieldTypes;
 use TheFrosty\CustomLogin\Settings\Api\Factory;
 use TheFrosty\CustomLogin\Settings\OptionKey;
 use TheFrosty\CustomLogin\Settings\OptionValue;
+use function TheFrosty\CustomLogin\getWpRoles;
+
+// phpcs:disable Generic.Files.LineLength.TooLong
 
 return [
     'sections' => [
@@ -24,8 +28,8 @@ return [
             [
                 SettingField::NAME => OptionKey::BREAK_S,
                 SettingField::LABEL => sprintf(
-                    '<h4>%s</h4>',
-                    __('<abbr title="Hyper Text Markup Language">HTML</abbr>', 'custom-login')
+                    '<h4><abbr title="%s">HTML</abbr></h4>',
+                    __('Hyper Text Markup Language', 'custom-login')
                 ),
                 SettingField::DESC => '',
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_HTML,
@@ -405,7 +409,9 @@ return [
 			</ul>'
                 ),
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_TEXTAREA,
-                SettingField::SANITIZE => fn($css): string => wp_specialchars_decode(wp_filter_nohtml_kses($css)),
+                SettingField::SANITIZE => static fn($css): string => wp_specialchars_decode(
+                    wp_filter_nohtml_kses($css)
+                ),
                 SettingField::ATTRIBUTES => [
                     'data-codemirror' => 'css',
                 ],
@@ -432,7 +438,7 @@ return [
                 SettingField::DEFAULT => '',
                 SettingField::DESC => '',
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_TEXTAREA,
-                SettingField::SANITIZE => 'wp_kses_post', //Allow HTML
+                SettingField::SANITIZE => 'wp_kses_post', // Allow HTML.
                 SettingField::ATTRIBUTES => [
                     'data-codemirror' => 'html',
                 ],
@@ -481,7 +487,7 @@ return [
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_SELECT,
                 SettingField::SIZE => 'medium',
                 SettingField::DEFAULT => 'manage_options',
-                SettingField::OPTIONS => TheFrosty\CustomLogin\getWpRoles(),
+                SettingField::OPTIONS => getWpRoles(),
             ],
             [
                 SettingField::NAME => OptionKey::EXTENSIONS_MENU,

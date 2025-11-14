@@ -63,8 +63,9 @@ class Login extends AbstractContainerProvider
      */
     protected function maybeRemoveLoginStyle(): void
     {
+        global $pagenow;
         if (
-            $GLOBALS['pagenow'] === 'wp-login.php' &&
+            $pagenow === 'wp-login.php' &&
             Options::getOption(
                 OptionKey::REMOVE_LOGIN_CSS,
                 Factory::getSection(Factory::SECTION_GENERAL),
@@ -89,7 +90,7 @@ class Login extends AbstractContainerProvider
                 OptionValue::OFF
             ) === OptionValue::ON
         ) {
-            // Enqueue the Animate.CSS
+            // Enqueue the Animate.CSS.
             wp_enqueue_style(
                 'animate.css',
                 $this->getPlugin()->getUrl('node_modules/animate.css/animate.css'),
@@ -222,21 +223,22 @@ class Login extends AbstractContainerProvider
 
     /**
      * Remove the "Lost your password?" text.
-     * @param mixed $translated_text
-     * @param mixed $untranslated_text
-     * @return string|false
+     * @param string $translated_text
+     * @param string $untranslated_text
+     * @return string
      */
-    protected function removeLostPasswordText($translated_text, $untranslated_text)
+    protected function removeLostPasswordText(string $translated_text, string $untranslated_text): string
     {
+        global $pagenow;
         if (
-            $GLOBALS['pagenow'] === 'wp-login.php' &&
+            $pagenow === 'wp-login.php' &&
             Options::getOption(
                 OptionKey::LOSTPASSWORD_TEXT,
                 Factory::getSection(Factory::SECTION_GENERAL)
             ) !== OptionValue::OFF &&
             $untranslated_text === 'Lost your password?'
         ) {
-            $translated_text = ''; // Unset translation to empty string
+            $translated_text = ''; // Unset translation to empty string.
         }
 
         return $translated_text;

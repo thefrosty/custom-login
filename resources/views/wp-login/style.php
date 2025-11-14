@@ -4,15 +4,17 @@ declare(strict_types=1);
 
 use TheFrosty\CustomLogin\CustomLogin;
 use TheFrosty\CustomLogin\Settings\OptionValue;
+
 use function TheFrosty\CustomLogin\openCssRule;
 use function TheFrosty\CustomLogin\prefixIt;
 use function TheFrosty\CustomLogin\trailingSemicolonIt;
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if (!defined('ABSPATH')) {
     exit;
 }
 
+// phpcs:ignore
 $login_h1 = version_compare($GLOBALS['wp_version'], '6.7', '>=') ? '.login .wp-login-logo' : '.login h1';
 $version ??= CustomLogin::VERSION;
 $close_rule = "}\n";
@@ -57,7 +59,7 @@ if (!empty($html_background_color) || !empty($html_background_url)) {
             $css .= prefixIt('background-size', $html_background_size);
         }
     }
-    $css .= $close_rule; // CLOSE html
+    $css .= $close_rule; // CLOSE html.
 }
 
 /**
@@ -67,7 +69,7 @@ if (!empty($html_background_color) || !empty($html_background_url)) {
 if (!empty($html_background_color) || !empty($html_background_url)) {
     $css .= openCssRule('body.login');
     $css .= trailingSemicolonIt('background', 'transparent');
-    $css .= $close_rule;  // CLOSE body.login
+    $css .= $close_rule;  // CLOSE body.login.
 }
 
 /**
@@ -77,7 +79,7 @@ if (!empty($html_background_color) || !empty($html_background_url)) {
 if (!empty($login_form_width)) {
     $css .= openCssRule('#login');
     $css .= trailingSemicolonIt('width', sprintf('%1$s%2$s', $login_form_width, $login_form_width_unit ?? 'px'));
-    $css .= $close_rule; // CLOSE #login
+    $css .= $close_rule; // CLOSE #login.
 }
 
 /**
@@ -97,7 +99,8 @@ if (!empty($login_form_background_url)) {
     $css .= trailingSemicolonIt('background-repeat', $login_form_background_repeat);
 
     if (!empty($login_form_background_size) && $login_form_background_size !== 'none') {
-        $login_form_background_size = $login_form_background_size !== 'flex' ? $login_form_background_size : '100% auto';
+        $login_form_background_size = $login_form_background_size !== 'flex' ?
+            $login_form_background_size : '100% auto';
         $css .= prefixIt('background-size', $login_form_background_size);
     }
 }
@@ -123,7 +126,7 @@ if (!empty($login_form_box_shadow)) {
 
     $css .= prefixIt('box-shadow', trim($box_shadow));
 }
-$css .= $close_rule; // CLOSE #login form
+$css .= $close_rule; // CLOSE #login form.
 
 /**
  * Open login h1
@@ -132,17 +135,23 @@ $css .= $close_rule; // CLOSE #login form
 if ((!empty($hide_wp_logo) && $hide_wp_logo === OptionValue::ON) && empty($logo_background_url)) {
     $css .= openCssRule('#login h1');
     $css .= trailingSemicolonIt('display', 'none');
-    $css .= $close_rule; // CLOSE #login h1
+    $css .= $close_rule; // CLOSE #login h1.
 }
 
 /**
  * Open login h1
  * @rule .login h1 / .login .wp-login-logo
  */
-if ((!empty($logo_force_form_max_width) && $logo_force_form_max_width === OptionValue::ON) && !empty($login_form_width)) {
+if (
+    (!empty($logo_force_form_max_width) && $logo_force_form_max_width === OptionValue::ON) &&
+    !empty($login_form_width)
+) {
     $css .= openCssRule($login_h1);
-    $css .= trailingSemicolonIt('width', sprintf('%1$s%2$s', $login_form_width, $login_form_width_unit ?? 'px'));
-    $css .= $close_rule; // CLOSE .login h1 / .login .wp-login-logo
+    $css .= trailingSemicolonIt(
+        'width',
+        sprintf('%1$s%2$s', $login_form_width, $login_form_width_unit ?? 'px')
+    );
+    $css .= $close_rule; // CLOSE .login h1 / .login .wp-login-logo.
 }
 
 /**
@@ -168,7 +177,7 @@ if (!empty($logo_background_url)) {
     } else {
         $css .= prefixIt('background-size', 'inherit');
     }
-    $css .= $close_rule; // CLOSE .login h1 a / .login .wp-login-logo a
+    $css .= $close_rule; // CLOSE .login h1 a / .login .wp-login-logo a.
 }
 
 /**
@@ -178,7 +187,7 @@ if (!empty($logo_background_url)) {
 if (!empty($label_color)) {
     $css .= openCssRule('.login label');
     $css .= trailingSemicolonIt('color', $label_color);
-    $css .= $close_rule; // CLOSE .login label
+    $css .= $close_rule; // CLOSE .login label.
 }
 
 /**
@@ -190,7 +199,7 @@ if (!empty($nav_color)) {
     $css .= trailingSemicolonIt('color', sprintf('%1$s !important', $nav_color));
     $nav_text_shadow_color ??= '';
     $css .= trailingSemicolonIt('text-shadow', sprintf('0 1px 0 %1$s', $nav_text_shadow_color));
-    $css .= $close_rule; // CLOSE .login #nav a, .login #backtoblog a
+    $css .= $close_rule; // CLOSE .login #nav a, .login #backtoblog a.
 }
 
 /**
@@ -202,7 +211,7 @@ if (!empty($nav_hover_color)) {
     $css .= trailingSemicolonIt('color', sprintf('%1$s !important', $nav_hover_color));
     $nav_text_shadow_hover_color ??= '';
     $css .= trailingSemicolonIt('text-shadow', sprintf('0 1px 0 %1$s', $nav_text_shadow_hover_color));
-    $css .= $close_rule; // CLOSE .login #nav a:hover, .login #backtoblog a:hover
+    $css .= $close_rule; // CLOSE .login #nav a:hover, .login #backtoblog a:hover.
 }
 $css .= "</style>\n";
 
