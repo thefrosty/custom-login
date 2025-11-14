@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace TheFrosty\CustomLogin\WpLogin;
 
@@ -15,7 +17,6 @@ use function apply_filters;
 use function get_bloginfo;
 use function home_url;
 use function is_multisite;
-use function printf;
 use function remove_action;
 use function wp_deregister_style;
 use function wp_enqueue_script;
@@ -133,16 +134,24 @@ class Login extends AbstractContainerProvider
      */
     protected function loginFooter(): void
     {
-        $view = $this->getView(ServiceProvider::WP_UTILITIES_VIEW);
-        $view->render(
-            'wp-login/srcset',
-            [
-                'html_background_url' => Options::getOption(
-                    OptionKey::HTML_BACKGROUND_URL,
-                    Factory::getSection(Factory::SECTION_DESIGN)
-                ),
-            ]
-        );
+        if (
+            Options::getOption(
+                OptionKey::HTML_USE_IMG_SRCSET,
+                Factory::getSection(Factory::SECTION_DESIGN),
+                OptionValue::OFF
+            ) === OptionValue::ON
+        ) {
+            $view = $this->getView(ServiceProvider::WP_UTILITIES_VIEW);
+            $view->render(
+                'wp-login/srcset',
+                [
+                    'html_background_url' => Options::getOption(
+                        OptionKey::HTML_BACKGROUND_URL,
+                        Factory::getSection(Factory::SECTION_DESIGN)
+                    ),
+                ]
+            );
+        }
     }
 
     /**
@@ -176,7 +185,8 @@ class Login extends AbstractContainerProvider
 
         $view = $this->getView(ServiceProvider::WP_UTILITIES_VIEW);
         $view->render(
-            'wp-login/script', [
+            'wp-login/script',
+            [
                 OptionKey::CUSTOM_JQUERY => $data,
             ]
         );
