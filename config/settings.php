@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 use Dwnload\WpSettingsApi\Api\SettingField;
 use Dwnload\WpSettingsApi\Api\SettingSection;
@@ -6,6 +8,9 @@ use Dwnload\WpSettingsApi\Settings\FieldTypes;
 use TheFrosty\CustomLogin\Settings\Api\Factory;
 use TheFrosty\CustomLogin\Settings\OptionKey;
 use TheFrosty\CustomLogin\Settings\OptionValue;
+use function TheFrosty\CustomLogin\getWpRoles;
+
+// phpcs:disable Generic.Files.LineLength.TooLong
 
 return [
     'sections' => [
@@ -23,8 +28,8 @@ return [
             [
                 SettingField::NAME => OptionKey::BREAK_S,
                 SettingField::LABEL => sprintf(
-                    '<h4>%s</h4>',
-                    __('<abbr title="Hyper Text Markup Language">HTML</abbr>', 'custom-login')
+                    '<h4><abbr title="%s">HTML</abbr></h4>',
+                    __('Hyper Text Markup Language', 'custom-login')
                 ),
                 SettingField::DESC => '',
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_HTML,
@@ -44,6 +49,15 @@ return [
                 SettingField::DEFAULT => '',
                 SettingField::SIZE => 'medium',
                 SettingField::SANITIZE => '\sanitize_text_field',
+            ],
+            [
+                SettingField::NAME => OptionKey::HTML_USE_IMG_SRCSET,
+                SettingField::LABEL => __('Use &lt;img&gt; element', 'custom-login'),
+                SettingField::DESC => __(
+                    'Select this box if you want to use a fixed position &lt;img&gt; element using cores responsive images with `srcset`. Use `#custom-login__bq_wrapper picture img` if you need to target additional CSS.',
+                    'custom-login'
+                ),
+                SettingField::TYPE => FieldTypes::FIELD_TYPE_CHECKBOX,
             ],
             [
                 SettingField::NAME => OptionKey::HTML_BACKGROUND_POSITION,
@@ -128,8 +142,10 @@ return [
             [
                 SettingField::NAME => OptionKey::LOGO_BACKGROUND_SIZE_HEIGHT,
                 SettingField::LABEL => __('Image height', 'custom-login'),
-                SettingField::DESC => __('Enter your desired image height (All not integers will be removed).',
-                    'custom-login'),
+                SettingField::DESC => __(
+                    'Enter your desired image height (All not integers will be removed).',
+                    'custom-login'
+                ),
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_NUMBER,
                 SettingField::SIZE => 'small',
                 SettingField::DEFAULT => '',
@@ -393,7 +409,9 @@ return [
 			</ul>'
                 ),
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_TEXTAREA,
-                SettingField::SANITIZE => fn($css): string => wp_specialchars_decode(wp_filter_nohtml_kses($css)),
+                SettingField::SANITIZE => static fn($css): string => wp_specialchars_decode(
+                    wp_filter_nohtml_kses($css)
+                ),
                 SettingField::ATTRIBUTES => [
                     'data-codemirror' => 'css',
                 ],
@@ -420,7 +438,7 @@ return [
                 SettingField::DEFAULT => '',
                 SettingField::DESC => '',
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_TEXTAREA,
-                SettingField::SANITIZE => 'wp_kses_post', //Allow HTML
+                SettingField::SANITIZE => 'wp_kses_post', // Allow HTML.
                 SettingField::ATTRIBUTES => [
                     'data-codemirror' => 'html',
                 ],
@@ -469,12 +487,15 @@ return [
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_SELECT,
                 SettingField::SIZE => 'medium',
                 SettingField::DEFAULT => 'manage_options',
-                SettingField::OPTIONS => TheFrosty\CustomLogin\getWpRoles(),
+                SettingField::OPTIONS => getWpRoles(),
             ],
             [
                 SettingField::NAME => OptionKey::EXTENSIONS_MENU,
                 SettingField::LABEL => __('Extensions Submenu', 'custom-login'),
-                SettingField::DESC => __('Show (checked) or hide the extensions in the WordPress\' settings menu.', 'custom-login'),
+                SettingField::DESC => __(
+                    'Show (checked) or hide the extensions in the WordPress\' settings menu.',
+                    'custom-login'
+                ),
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_CHECKBOX,
                 SettingField::DEFAULT => OptionValue::OFF,
             ],

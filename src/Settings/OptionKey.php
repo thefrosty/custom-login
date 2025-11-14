@@ -26,6 +26,7 @@ interface OptionKey
     public const HTML_BACKGROUND_REPEAT = 'html_background_repeat';
     public const HTML_BACKGROUND_SIZE = 'html_background_size';
     public const HTML_BACKGROUND_URL = 'html_background_url';
+    public const HTML_USE_IMG_SRCSET = 'html_use_img_srcset';
     public const LABEL_COLOR = 'label_color';
     public const LOGIN_FORM_BACKGROUND_COLOR = 'login_form_background_color';
     public const LOGIN_FORM_BACKGROUND_POSITION = 'login_form_background_position';
