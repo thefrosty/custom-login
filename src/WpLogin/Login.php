@@ -223,11 +223,11 @@ class Login extends AbstractContainerProvider
 
     /**
      * Remove the "Lost your password?" text.
-     * @param string $translated_text
-     * @param string $untranslated_text
-     * @return string
+     * @param mixed $translated_text
+     * @param mixed $untranslated_text
+     * @return mixed
      */
-    protected function removeLostPasswordText(string $translated_text, string $untranslated_text): string
+    protected function removeLostPasswordText(mixed $translated_text, mixed $untranslated_text): mixed
     {
         global $pagenow;
         if (
