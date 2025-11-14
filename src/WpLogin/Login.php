@@ -15,6 +15,7 @@ use function apply_filters;
 use function get_bloginfo;
 use function home_url;
 use function is_multisite;
+use function printf;
 use function remove_action;
 use function wp_deregister_style;
 use function wp_enqueue_script;
@@ -48,6 +49,7 @@ class Login extends AbstractContainerProvider
         $this->addAction('init', [$this, 'maybeRemoveLoginStyle']);
         $this->addAction('login_enqueue_scripts', [$this, 'loginEnqueueScripts']);
         $this->addAction('login_head', [$this, 'loginHead']);
+        $this->addAction('login_footer', [$this, 'loginFooter'], 10, 999);
         $this->addAction('login_footer', [$this, 'loginFooterHtml'], 8);
         $this->addAction('login_footer', [$this, 'loginFooterJquery'], 19);
         $this->addFilter('login_headerurl', [$this, 'loginHeaderUrl']);
@@ -123,6 +125,23 @@ class Login extends AbstractContainerProvider
         $view->render(
             'wp-login/style',
             Options::getOptions(Factory::getSection(Factory::SECTION_DESIGN))
+        );
+    }
+
+    /**
+     * Actions hooked into login_footer.
+     */
+    protected function loginFooter(): void
+    {
+        $view = $this->getView(ServiceProvider::WP_UTILITIES_VIEW);
+        $view->render(
+            'wp-login/srcset',
+            [
+                'html_background_url' => Options::getOption(
+                    OptionKey::HTML_BACKGROUND_URL,
+                    Factory::getSection(Factory::SECTION_DESIGN)
+                ),
+            ]
         );
     }
 
