@@ -7,7 +7,7 @@ Tested up to: 6.8.3
 Requires PHP: 7.4
 Stable tag: 5.1.1
 License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Custom Login allows you to easily customize your admin login page, works great for client sites!
 
@@ -21,7 +21,7 @@ Custom Login 3.0 was 200% faster than version 2.0, and version 4.0 and 5.0 is no
 For more information visit the official [Custom Login](https://frosty.media/plugins/custom-login/) page.
 
 > <strong>Support</strong><br>
-> [Austin](http://austin.passy.co) and the [Frosty Media](https://frosty.media/) team will always try our best to support the Custom Login plugin on the WordPress.org forum, but please note that we can not guarantee a response in a timely manner. If you have an issue we would appreciate you using GitHub or purchasing priority support on our site.
+> [Austin](https://austin.passy.co) and the [Frosty Media](https://frosty.media/) team will always try our best to support the Custom Login plugin on the WordPress.org forum, but please note that we can not guarantee a response in a timely manner. If you have an issue we would appreciate you using GitHub or purchasing priority support on our site.
 >
 > Any extensions purchased on [Frosty Media](https://frosty.media/) (not hosted on WordPress.org) will not be supported on the WordPress.org forum. You can always browse our *small* but growing [documentation](https://frosty.media/docs) for further assistance. You need a valid license key to make support submissions *on our site*. We thank you in advance.
 
@@ -64,12 +64,12 @@ Activate the plugin and customize your WordPress login screen. It's as easy as m
 3. Read more about [Custom Login 4.0](https://frosty.media/2022/custom-login-4-0-x-released/)
 4. Read more about [Custom Login 3.1](https://frosty.media/2015/custom-login-v3-1-released/)
 
-**For those looking to show off your login screen, check out the [Flickr group](http://flickr.com/groups/custom-login/)! Share you designs with the community!**
+**For those looking to show off your login screen, check out the [Flickr group](https://flickr.com/groups/custom-login/)! Share you designs with the community!**
 
 = links =
 
 * Additional Plugins: [https://frosty.media/plugins](https://frosty.media/plugins/ "Premium WordPress Plugins by Frosty")
-* Austins Blog: [https:/austin.passy.co/](http://austin.passy.co/ "Austin's blog")
+* Austins Blog: [https:/austin.passy.co/](https://austin.passy.co/ "Austin's blog")
 * Austin on Twitter: [@TheFrosty](https:/x.com/TheFrosty "Austin on X (Twitter)")
 * Frosty Media on Twitter: [@Frosty_Media](https:/x.com/Frosty_Media "Frosty Media on X (Twitter)")
 * Development welcomed on **[GitHub](https://github.com/thefrosty/custom-login)**
@@ -87,10 +87,10 @@ Follow the steps below to install the plugin.
 == Frequently Asked Questions ==
 
 = What are extensions? =
-They are additional plugins that add/extend functionality to the Custom Login plugin. You can find all Custom Login extensions on [Frosty.Media](http://frosty.media).
+They are additional plugins that add/extend functionality to the Custom Login plugin. You can find all Custom Login extensions on [Frosty.Media](https://frosty.media).
 
 = Where can I upload and share my cool login screen? =
-Check out the [Flickr group](http://flickr.com/groups/custom-login/)! Upload and add it to our pool!
+Check out the [Flickr group](https://flickr.com/groups/custom-login/)! Upload and add it to our pool!
 
 = I think I want to uninstall =
 Just deactivate it. Sad panda is sad.
@@ -102,7 +102,7 @@ verification, CVE assignment, and notify the developers of this plugin.
 
 == Screenshots ==
 
-Custom Login showcase on the [Flickr group](http://flickr.com/groups/custom-login/).
+Custom Login showcase on the [Flickr group](https://flickr.com/groups/custom-login/).
 
 1. Custom Login v3 Design Settings part 1.
 
