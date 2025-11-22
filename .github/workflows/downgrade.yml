@@ -26,7 +26,8 @@ jobs:
 
       - name: Run composer install
         run: |
-          composer install --no-interaction
+          composer install --no-interaction --ignore-platform-reqs
+          composer remove illuminate/encryption
 
       - name: Run Rector
         run: vendor/bin/rector --debug --ansi
