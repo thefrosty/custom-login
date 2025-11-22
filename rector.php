@@ -10,6 +10,7 @@ return RectorConfig::configure()
         __DIR__ . '/functions.php',
         __DIR__ . '/src',
         __DIR__ . '/vendor/dwnload/',
+        __DIR__ . '/vendor/illuminate/',
         __DIR__ . '/vendor/thefrosty/wp-utilities',
     ])
     ->withDowngradeSets(php74: true);
