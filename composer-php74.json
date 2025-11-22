@@ -27,6 +27,7 @@
     "ext-json": "*",
     "dwnload/edd-software-license-manager": "^2.1",
     "dwnload/wp-settings-api": "^3.11",
+    "illuminate/encryption": "^8.20",
     "pimple/pimple": "^3.5",
     "psr/container": "^2.0",
     "thefrosty/wp-utilities": "^3.8"
