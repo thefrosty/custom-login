@@ -5,6 +5,7 @@ on:
     branches-ignore:
       - main
       - master
+      - translate/*
 
 # Cancels all previous workflow runs for the same branch that have not yet completed.
 concurrency:

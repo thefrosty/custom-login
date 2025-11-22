@@ -5,6 +5,10 @@ permissions:
 
 on:
   pull_request:
+    branches-ignore:
+      - main
+      - master
+      - translate/*
 
 env:
   CLICOLOR: 1
