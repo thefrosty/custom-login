@@ -15,7 +15,7 @@
 **Requires at least:** 6.7  
 **Tested up to:** 6.8.3  
 **Requires PHP**: 8.3  
-**Stable tag:** 5.1.2  
+**Stable tag:** 5.1.2.1  
 **License:** GPLv2 or later  
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -172,6 +172,10 @@ Custom Login showcase on the [Flickr group](https://flickr.com/groups/custom-log
 ](https://ps.w.org/custom-login/assets/screenshot-4.png)
 
 ## Changelog
+
+### Version 5.1.2.1 (2025/11/23) =
+
+* Fix edge case Fatal error found in legacy plugins using Hash from thefrosty/wp-utilities update.
 
 ### Version 5.1.2 (2025/11/22) =
 
