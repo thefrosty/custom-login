@@ -5,7 +5,7 @@ Tags: admin, branding, customization, custom login, logo
 Requires at least: 6.4
 Tested up to: 6.8.3
 Requires PHP: 7.4
-Stable tag: 5.1.2
+Stable tag: 5.1.2.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -113,6 +113,10 @@ Custom Login showcase on the [Flickr group](https://flickr.com/groups/custom-log
 4. Custom Login Extensions Installer (an active license key is required).
 
 == Changelog ==
+
+= Version 5.1.2.1 (2025/11/23) =
+
+* Fix edge case Fatal error found in legacy plugins using Hash from thefrosty/wp-utilities update.
 
 = Version 5.1.2 (2025/11/22) =
 
