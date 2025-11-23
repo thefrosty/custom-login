@@ -2,6 +2,8 @@ name: PHP Security Checker
 
 on:
   pull_request:
+    branches-ignore:
+      - translate/*
 
 jobs:
   security-checker:
