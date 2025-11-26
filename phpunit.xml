@@ -2,7 +2,7 @@
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
          bootstrap="tests/bootstrap.php"
-         cacheDirectory=".phpunit.cache"
+         cacheDirectory="tests/.phpunit.cache"
          executionOrder="depends,defects"
          shortenArraysForExportThreshold="10"
          requireCoverageMetadata="true"
@@ -14,8 +14,8 @@
 
     <coverage>
         <report>
-            <clover outputFile="./tests/clover.xml"/>
-            <html outputDirectory="tests"/>
+            <clover outputFile="tests/clover.xml"/>
+            <html outputDirectory="tests/results"/>
         </report>
     </coverage>
 
