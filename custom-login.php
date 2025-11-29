@@ -62,7 +62,9 @@ if (version_compare(PHP_VERSION, '8.3', '<')) {
     });
 }
 
-if (!is_readable(__DIR__ . '/vendor/autoload.php') && !defined('TheFrosty\CustomLogin\CUSTOM_LOGIN_FUNCTIONS')) {
+// Our functions.php file is autoloaded via composer, so maybe don't include a second autoload if installed globally.
+$isLoaded = defined('TheFrosty\CustomLogin\CUSTOM_LOGIN_FUNCTIONS');
+if (!is_readable(__DIR__ . '/vendor/autoload.php') && !$isLoaded) {
     return add_filter('custom_login_shutdown_error_message', static function (): string {
         return esc_html__(
             'Error: Custom Login can\'t find the autoload file (if installed from GitHub, please run `composer install`), all features are currently disabled.',
@@ -71,7 +73,7 @@ if (!is_readable(__DIR__ . '/vendor/autoload.php') && !defined('TheFrosty\Custom
     });
 }
 
-if (file_exists(__DIR__ . '/vendor/autoload.php')) {
+if (file_exists(__DIR__ . '/vendor/autoload.php') && !$isLoaded) {
     require_once __DIR__ . '/vendor/autoload.php';
 }
 $plugin = PluginFactory::create('custom-login', __FILE__);
