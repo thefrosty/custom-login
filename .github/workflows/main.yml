@@ -1,4 +1,4 @@
-name: Main PHP Version(s) CI
+name: CI Tests
 
 on:
   pull_request:
@@ -26,7 +26,7 @@ jobs:
 
       - name: Setup
         id: ci-setup
-        uses: ./.github/actions/ci-setup
+        uses: thefrosty/ci-setup@main
         with:
           extensions: 'curl'
           extensions-cache-key: run-phpcs-${{ matrix.php-version }}
@@ -77,7 +77,7 @@ jobs:
 
       - name: Setup
         id: ci-setup
-        uses: ./.github/actions/ci-setup
+        uses: thefrosty/ci-setup@main
         with:
           extensions: 'curl, mysql, mysqli, zip'
           extensions-cache-key: run-phpunit-${{ matrix.wp-version }}-${{ matrix.php-version }}

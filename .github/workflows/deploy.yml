@@ -30,7 +30,7 @@ jobs:
           composer update --no-dev --no-interaction --optimize-autoloader
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 20
 
@@ -54,7 +54,7 @@ jobs:
           composer archive --format=zip --file="plugin-build/custom-login"
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: custom-login
           path: plugin-build/custom-login.zip
