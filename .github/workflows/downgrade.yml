@@ -60,7 +60,7 @@ jobs:
           composer archive --format="zip" --file="plugin-build/custom-login-php74"
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: custom-login-php74
           path: plugin-build/
