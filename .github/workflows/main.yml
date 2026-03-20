@@ -112,9 +112,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Get Changed Files
-        id: files
-        uses: masesgroup/retrieve-changed-files@v4
+      - name: Setup
+        id: ci-setup
+        uses: thefrosty/ci-setup@main
+        with:
+          extensions: 'curl'
+          extensions-cache-key: run-eslint-php83
+          php-version: '8.3'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tools: 'composer'
 
       - name: Setup Node
         uses: actions/setup-node@v6
@@ -125,6 +131,6 @@ jobs:
         id: eslint
         run: |
           npm install
-          composer eslint
+          npm run eslint
         env:
           CHANGED_FILES: ${{ steps.ci-setup.outputs.files }}
