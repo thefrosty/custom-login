@@ -44,7 +44,7 @@ jobs:
           sed -i "s/'8\.3'/'7.4'/g" custom-login.php
 
       - name: Setup Node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: 24
 
