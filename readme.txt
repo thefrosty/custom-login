@@ -2,10 +2,10 @@
 Contributors: austyfrosty, frostymedia
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290
 Tags: admin, branding, customization, custom login, logo
-Requires at least: 6.4
-Tested up to: 6.8.3
+Requires at least: 6.7
+Tested up to: 7.1.0
 Requires PHP: 7.4
-Stable tag: 5.1.2.2
+Stable tag: 5.1.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
