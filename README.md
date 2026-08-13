@@ -173,6 +173,16 @@ Custom Login showcase on the [Flickr group](https://flickr.com/groups/custom-log
 
 ## Changelog
 
+### Version 5.1.3 (2026/08/13) =
+
+* Tested up to WordPress 7.1
+* Many Dependabot fixes.
+* Resolve Extensions button on correct status 
+* PHPCS Fixes via PHPCBF
+* Fix: Export Settings field
+* 🔄 Regenerate translation files
+* **Full Changelog**: https://github.com/thefrosty/custom-login/compare/5.1.2.2...5.1.3
+
 ### Version 5.1.2.2 (2025/11/29) =
 
 * Upstream dependency updates from thefrosty/wp-utilities.
@@ -333,6 +343,9 @@ Custom Login showcase on the [Flickr group](https://flickr.com/groups/custom-log
 * Fix settings API Settings: Uncaught Error: Call to undefined method stdClass::get_permalink() (#49)
 
 ## Upgrade Notice
+
+### 5.0.1
+Requires WordPress version >= 6.4 and PHP version >= 7.4.
 
 ### 4.4.0
 Requires WordPress version >= 6.6 and PHP version >= 8.1.

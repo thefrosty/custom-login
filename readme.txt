@@ -114,6 +114,16 @@ Custom Login showcase on the [Flickr group](https://flickr.com/groups/custom-log
 
 == Changelog ==
 
+= Version 5.1.3 (2026/08/13) =
+
+* Tested up to WordPress 7.1
+* Many Dependabot fixes.
+* Resolve Extensions button on correct status
+* PHPCS Fixes via PHPCBF
+* Fix: Export Settings field
+* 🔄 Regenerate translation files
+* **Full Changelog**: https://github.com/thefrosty/custom-login/compare/5.1.2.2...5.1.3
+
 = Version 5.1.2.2 (2025/11/29) =
 
 * Upstream dependency updates from thefrosty/wp-utilities.
