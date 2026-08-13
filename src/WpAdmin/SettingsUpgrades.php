@@ -58,11 +58,11 @@ class SettingsUpgrades extends AbstractContainerProvider
         $database_version = get_option(self::OPTION_VERSION);
 
         if (!$database_version) {
-            // 3.2.15 is the last version before 4.0.0
+            // 3.2.15 is the last version before 4.0.0.
             $database_version = '4.0.1';
         }
 
-        // Version less than 4.0.1
+        // Version less than 4.0.1.
         if (version_compare($database_version, '4.0', '<')) {
             $this->renderUpgradeNotice(
                 sprintf(
@@ -107,12 +107,12 @@ class SettingsUpgrades extends AbstractContainerProvider
         $version = get_option(self::OPTION_VERSION);
 
         if (!$version) {
-            // 3.2.15 is the last version before 4.0.0
+            // 3.2.15 is the last version before 4.0.0.
             $version = '3.2.15';
             add_option(self::OPTION_VERSION, $version);
         }
 
-        // Version less than 4.0.1
+        // Version less than 4.0.1.
         if (!$version || version_compare($version, '4.0.1', '<')) {
             $this->v401Upgrades();
         }
