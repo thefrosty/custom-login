@@ -12,7 +12,15 @@ $extensions ??= [];
     <form method="post">
         <div class="section">
             <?php
-            foreach ($extensions as $key => $extension) { ?>
+            foreach ($extensions as $key => $extension) {
+                if (!array_key_exists($extension['slug'], $all_plugins)) {
+                    $status = 'not-installed';
+                } elseif (is_plugin_inactive($extension['slug'])) {
+                    $status = 'installed';
+                } else {
+                    $status = 'active';
+                }
+                ?>
                 <div class="col addon">
                     <div class="addon-container">
                         <div class="img-wrap">
@@ -34,11 +42,12 @@ $extensions ??= [];
 
                         <h3><?php
                             echo esc_html($extension['title']); ?></h3>
-                        <div class="status" data-status="not-installed" style="display:none">
+                        <div class="status" data-status="<?php
+                        echo esc_attr($status); ?>" style="display:none">
                             <?php
-                            if (!array_key_exists($extension['slug'], $all_plugins)) {
+                            if ($status === 'not-installed') {
                                 printf('<p>%s</p>', esc_html__('Not Installed', 'custom-login'));
-                            } elseif (is_plugin_inactive($extension['slug'])) {
+                            } elseif ($status === 'installed') {
                                 printf('<p>%s</p>', esc_html__('Installed - Not Active', 'custom-login'));
                             } else {
                                 printf('<p>%s</p>', esc_html__('Active', 'custom-login'));
