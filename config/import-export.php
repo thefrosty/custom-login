@@ -45,7 +45,7 @@ return [
                 SettingField::ATTRIBUTES => [
                     'readonly' => 'readonly',
                 ],
-                SettingField::SANITIZE => '__return_empty_string',
+                SettingField::SANITIZE => fn (): string => $this->getEncodedSettings(),
             ],
         ],
     ],
