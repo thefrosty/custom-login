@@ -72,7 +72,7 @@ abstract class AddOn implements WpHooksInterface
 
                 return $licenses;
             });
-            $this->addFilter('dwnload_edd_slm_use_local_scripts', fn(): bool => true);
+            $this->addFilter('dwnload_edd_slm_use_local_scripts', static fn(): bool => true);
             if (is_blog_admin()) {
                 $this->addFilter('plugin_action_links', [$this, 'pluginActionLinks'], 10, 2);
                 $this->addFilter(
