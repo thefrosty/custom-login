@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace TheFrosty\CustomLogin\WpAdmin;
 
@@ -24,9 +26,9 @@ class SettingsUpgrades extends AbstractContainerProvider
 
     use Viewable;
 
-    public const ACTION_NONCE = self::class;
-    public const AJAX_ACTION = 'custom_login_trigger_upgrades';
-    public const OPTION_VERSION = 'custom_login_version';
+    public const string ACTION_NONCE = self::class;
+    public const string AJAX_ACTION = 'custom_login_trigger_upgrades';
+    public const string OPTION_VERSION = 'custom_login_version';
 
     /**
      * Options page menu slug.
@@ -100,7 +102,7 @@ class SettingsUpgrades extends AbstractContainerProvider
      */
     protected function triggerUpgrades(): void
     {
-        check_ajax_referer(SettingsUpgrades::ACTION_NONCE);
+        check_ajax_referer(self::ACTION_NONCE);
 
         $version = get_option(self::OPTION_VERSION);
 
