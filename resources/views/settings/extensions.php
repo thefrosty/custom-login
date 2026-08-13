@@ -2,8 +2,11 @@
 
 declare(strict_types=1);
 
+// phpcs:disable
+use TheFrosty\CustomLogin\CustomLogin;
+
 $all_plugins = function_exists('get_plugins') ? get_plugins() : [];
-$checkout_url ??= TheFrosty\CustomLogin\CustomLogin::getApiUrl();
+$checkout_url ??= CustomLogin::getApiUrl();
 $extensions ??= [];
 ?>
 <div class="wrap">
@@ -12,19 +15,25 @@ $extensions ??= [];
     <form method="post">
         <div class="section">
             <?php
-            foreach ($extensions as $key => $extension) { ?>
+            foreach ($extensions as $key => $extension) {
+                if (!array_key_exists($extension['slug'], $all_plugins)) {
+                    $status = 'not-installed';
+                } elseif (is_plugin_inactive($extension['slug'])) {
+                    $status = 'installed';
+                } else {
+                    $status = 'active';
+                }
+                ?>
                 <div class="col addon">
                     <div class="addon-container">
                         <div class="img-wrap">
                             <a href="<?php
-                            echo esc_url(
-                                add_query_arg([
-                                    'utm_source' => 'plugin-extensions-page',
-                                    'utm_medium' => 'custom-login',
-                                    'utm_campaign' => 'extensions',
-                                    'utm_content' => esc_attr($extension['title']),
-                                ], $extension['url'])
-                            ); ?>" target="_blank">
+                            echo esc_url(add_query_arg([
+                                'utm_source' => 'plugin-extensions-page',
+                                'utm_medium' => 'custom-login',
+                                'utm_campaign' => 'extensions',
+                                'utm_content' => esc_attr($extension['title']),
+                            ], $extension['url'])); ?>" target="_blank">
                                 <img class="thumbnail" src="<?php
                                 echo esc_url($extension['image']); ?>" alt="">
                             </a>
@@ -34,11 +43,12 @@ $extensions ??= [];
 
                         <h3><?php
                             echo esc_html($extension['title']); ?></h3>
-                        <div class="status" data-status="not-installed" style="display:none">
+                        <div class="status" data-status="<?php
+                        echo esc_attr($status); ?>" style="display:none">
                             <?php
-                            if (!array_key_exists($extension['slug'], $all_plugins)) {
+                            if ($status === 'not-installed') {
                                 printf('<p>%s</p>', esc_html__('Not Installed', 'custom-login'));
-                            } elseif (is_plugin_inactive($extension['slug'])) {
+                            } elseif ($status === 'installed') {
                                 printf('<p>%s</p>', esc_html__('Installed - Not Active', 'custom-login'));
                             } else {
                                 printf('<p>%s</p>', esc_html__('Active', 'custom-login'));
@@ -54,13 +64,14 @@ $extensions ??= [];
                                        'edd_action' => 'add_to_cart',
                                        'download_id' => $extension['download_id'],
                                    ],
-                                   TheFrosty\CustomLogin\CustomLogin::getApiUrl('checkout/')
+                                   CustomLogin::getApiUrl('checkout/')
                                )
-                           ); ?>" target="_blank"
-                           data-toggle="purchase-links-<?php
-                           echo esc_attr($key); ?>"
-                           style="display:none"><?php
-                            esc_html_e('Get this Extension', 'custom-login'); ?></a>
+                           ); ?>" target="_blank" data-toggle="purchase-links-<?php
+                        echo esc_attr($key); ?>"
+                           style="display:none">
+                            <?php
+                            esc_html_e('Get this Extension', 'custom-login'); ?>
+                        </a>
                         <div id="purchase-links-<?php
                         echo esc_attr($key); ?>" style="display:none">
                             <ul>
@@ -82,14 +93,14 @@ $extensions ??= [];
                                             esc_html_e('PayPal', 'custom-login'); ?></a>
                                         |
                                         <a href="<?php
-                                        echo esc_url(
-                                            add_query_arg([
-                                                'edd_action' => 'add_to_cart',
-                                                'download_id' => $link['download_id'],
-                                                'edd_options[price_id]' => $link['price_id'],
-                                            ], $checkout_url)
-                                        ); ?>"><?php
-                                            esc_html_e('Credit Card', 'custom-login'); ?></a>
+                                        echo esc_url(add_query_arg([
+                                            'edd_action' => 'add_to_cart',
+                                            'download_id' => $link['download_id'],
+                                            'edd_options[price_id]' => $link['price_id'],
+                                        ], $checkout_url)); ?>">
+                                            <?php
+                                            esc_html_e('Credit Card', 'custom-login'); ?>
+                                        </a>
                                     </li>
                                     <?php
                                 } // Links ?>

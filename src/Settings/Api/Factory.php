@@ -6,6 +6,7 @@ use Dwnload\WpSettingsApi\Api\PluginSettings;
 use Dwnload\WpSettingsApi\SettingsApiFactory;
 use TheFrosty\CustomLogin\CustomLogin;
 use TheFrosty\WpUtilities\Plugin\Plugin;
+use function esc_html__;
 
 /**
  * Class WpSettingsApiFactory
@@ -30,8 +31,8 @@ class Factory
             'domain' => $plugin->getSlug(),
             'file' => __FILE__, // Path to WpSettingsApi file.
             'menu-slug' => $plugin->getSlug(),
-            'menu-title' => \esc_html__('Custom Login', 'custom-login'),
-            'page-title' => \esc_html__('Custom Login', 'custom-login'),
+            'menu-title' => esc_html__('Custom Login', 'custom-login'),
+            'page-title' => esc_html__('Custom Login', 'custom-login'),
             'prefix' => self::PREFIX,
             'version' => CustomLogin::VERSION,
         ]);

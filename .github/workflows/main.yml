@@ -1,4 +1,4 @@
-name: Main PHP Version(s) CI
+name: CI Tests
 
 on:
   pull_request:
@@ -22,11 +22,11 @@ jobs:
         php-version: [ "8.3", "8.4" ]
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup
         id: ci-setup
-        uses: ./.github/actions/ci-setup
+        uses: thefrosty/ci-setup@main
         with:
           extensions: 'curl'
           extensions-cache-key: run-phpcs-${{ matrix.php-version }}
@@ -70,14 +70,14 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Install SVN
         run: sudo apt-get update && sudo apt-get install -y subversion
 
       - name: Setup
         id: ci-setup
-        uses: ./.github/actions/ci-setup
+        uses: thefrosty/ci-setup@main
         with:
           extensions: 'curl, mysql, mysqli, zip'
           extensions-cache-key: run-phpunit-${{ matrix.wp-version }}-${{ matrix.php-version }}
@@ -99,7 +99,7 @@ jobs:
 
       - name: Upload coverage to Codecov
         if: ${{ github.event_name == 'pull_request' }}
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v7
         with:
           fail_ci_if_error: false
           token: ${{ secrets.CODECOV_TOKEN }}
@@ -110,21 +110,27 @@ jobs:
     if: ${{ false }} # Disable for now
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
-      - name: Get Changed Files
-        id: files
-        uses: masesgroup/retrieve-changed-files@v3
+      - name: Setup
+        id: ci-setup
+        uses: thefrosty/ci-setup@main
+        with:
+          extensions: 'curl'
+          extensions-cache-key: run-eslint-php83
+          php-version: '8.3'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tools: 'composer'
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
-          node-version: 20
+          node-version: 24
 
       - name: Run ESLint
         id: eslint
         run: |
           npm install
-          composer eslint
+          npm run eslint
         env:
           CHANGED_FILES: ${{ steps.ci-setup.outputs.files }}

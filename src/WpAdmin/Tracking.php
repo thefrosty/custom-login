@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace TheFrosty\CustomLogin\WpAdmin;
 
@@ -27,6 +29,7 @@ use function TheFrosty\CustomLogin\isSettingsPage;
 use function wp_get_theme;
 use function wp_next_scheduled;
 use function wp_schedule_single_event;
+use function wp_verify_nonce;
 
 /**
  * Class Tracking
@@ -35,14 +38,16 @@ use function wp_schedule_single_event;
 class Tracking extends AbstractContainerProvider
 {
 
-    use Activator, Viewable, WpRemote;
+    use Activator;
+    use Viewable;
+    use WpRemote;
 
-    public const OPTION_HIDE_TRACKING_NOTICE = Factory::PREFIX . 'hide_tracking_notice';
-    public const OPTION_TRACKING_LAST_SEND = Factory::PREFIX . 'tracking_last_send';
-    private const ACTION = 'cl_checkin';
-    private const HOOK_SEND_CHECKIN = Factory::PREFIX . 'send_check_in';
-    private const OPT_INTO_TRACKING = 'cl_opt_into_tracking';
-    private const OPT_OUT_OF_TRACKING = 'cl_opt_out_of_tracking';
+    public const string OPTION_HIDE_TRACKING_NOTICE = Factory::PREFIX . 'hide_tracking_notice';
+    public const string OPTION_TRACKING_LAST_SEND = Factory::PREFIX . 'tracking_last_send';
+    private const string ACTION = 'cl_checkin';
+    private const string HOOK_SEND_CHECKIN = Factory::PREFIX . 'send_check_in';
+    private const string OPT_INTO_TRACKING = 'cl_opt_into_tracking';
+    private const string OPT_OUT_OF_TRACKING = 'cl_opt_out_of_tracking';
 
     /**
      * Add class hooks.
@@ -69,6 +74,8 @@ class Tracking extends AbstractContainerProvider
 
     /**
      * Send a check-in request.
+     * @param array $extra_data
+     * @param bool $force
      */
     protected function sendCheckIn(array $extra_data = [], bool $force = false): void
     {
@@ -76,7 +83,7 @@ class Tracking extends AbstractContainerProvider
             return;
         }
 
-        // Send a maximum of once per week
+        // Send a maximum of once per week.
         $last_send = $this->getLastSend();
         if ($last_send && $last_send > strtotime('-1 week')) {
             return;
@@ -97,6 +104,8 @@ class Tracking extends AbstractContainerProvider
 
     /**
      * Schedule a single check-in request.
+     * @param array $extra_data
+     * @param bool $force
      */
     protected function scheduleCheckIn(array $extra_data = [], bool $force = false): void
     {
@@ -123,10 +132,11 @@ class Tracking extends AbstractContainerProvider
 
     /**
      * Check for a new opt-in via the admin notice.
+     * phpcs:disable SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable.DisallowedSuperGlobalVariable
      */
     protected function checkForOptIn(): void
     {
-        if (!isset($_GET['_wpnonce']) || !\wp_verify_nonce($_GET['_wpnonce'], self::ACTION)) {
+        if (!isset($_GET['_wpnonce']) || !wp_verify_nonce($_GET['_wpnonce'], self::ACTION)) {
             return;
         }
         $section_id = Factory::getSection(Factory::SECTION_GENERAL);
@@ -145,7 +155,7 @@ class Tracking extends AbstractContainerProvider
      */
     protected function checkForOptOut(): void
     {
-        if (!isset($_GET['_wpnonce']) || !\wp_verify_nonce($_GET['_wpnonce'], self::ACTION)) {
+        if (!isset($_GET['_wpnonce']) || !wp_verify_nonce($_GET['_wpnonce'], self::ACTION)) {
             return;
         }
         $section_id = Factory::getSection(Factory::SECTION_GENERAL);
@@ -199,6 +209,7 @@ class Tracking extends AbstractContainerProvider
 
     /**
      * Check if the user has opted into tracking
+     * phpcs:disable PSR2.Methods.FunctionCallSignature.Indent
      * @return bool
      */
     private function isTrackingAllowed(): bool
@@ -227,7 +238,7 @@ class Tracking extends AbstractContainerProvider
         $data['theme'] = $theme;
         $data['email'] = get_bloginfo('admin_email');
 
-        // Retrieve current plugin information
+        // Retrieve current plugin information.
         if (!function_exists('get_plugins')) {
             include ABSPATH . '/wp-admin/includes/plugin.php';
         }
@@ -236,8 +247,8 @@ class Tracking extends AbstractContainerProvider
         $active_plugins = get_option('active_plugins', []);
 
         foreach ($plugins as $key => $plugin) {
-            if (in_array($plugin, $active_plugins)) {
-                unset($plugins[$key]); // Remove active plugins from list, so we can show active and inactive separately
+            if (in_array($plugin, $active_plugins, true)) {
+                unset($plugins[$key]); // Remove active plugins, so we can show active and inactive separately.
             }
         }
 

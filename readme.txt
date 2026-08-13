@@ -2,10 +2,10 @@
 Contributors: austyfrosty, frostymedia
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290
 Tags: admin, branding, customization, custom login, logo
-Requires at least: 6.4
-Tested up to: 6.8.3
+Requires at least: 6.7
+Tested up to: 7.1.0
 Requires PHP: 7.4
-Stable tag: 5.1.2.2
+Stable tag: 5.1.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -113,6 +113,16 @@ Custom Login showcase on the [Flickr group](https://flickr.com/groups/custom-log
 4. Custom Login Extensions Installer (an active license key is required).
 
 == Changelog ==
+
+= Version 5.1.3 (2026/08/13) =
+
+* Tested up to WordPress 7.1
+* Many Dependabot fixes.
+* Resolve Extensions button on correct status
+* PHPCS Fixes via PHPCBF
+* Fix: Export Settings field
+* 🔄 Regenerate translation files
+* **Full Changelog**: https://github.com/thefrosty/custom-login/compare/5.1.2.2...5.1.3
 
 = Version 5.1.2.2 (2025/11/29) =
 
