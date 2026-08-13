@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 use Dwnload\WpSettingsApi\Api\SettingField;
 use Dwnload\WpSettingsApi\Api\SettingSection;
@@ -18,7 +19,7 @@ return [
         Factory::getSection(Factory::SECTION_IMPORT_EXPORT) => [
             [
                 SettingField::NAME => OptionKey::SETTINGS_IMPORT,
-                SettingField::LABEL => esc_html__(OptionKey::SETTINGS_IMPORT, 'custom-login'),
+                SettingField::LABEL => esc_html__('Import', 'custom-login'),
                 SettingField::DESC => '',
                 SettingField::DEFAULT => '',
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_TEXTAREA,
@@ -29,6 +30,7 @@ return [
                 SettingField::LABEL => esc_html__('Export', 'custom-login'),
                 SettingField::DESC => sprintf(
                     __(
+                        // phpcs:ignore
                         'This textarea is always pre-filled with the current settings. Copy these settings for import at a later time, or <a href="%s">download</a> them.',
                         'custom-login'
                     ),
@@ -45,7 +47,7 @@ return [
                 SettingField::ATTRIBUTES => [
                     'readonly' => 'readonly',
                 ],
-                SettingField::SANITIZE => '__return_empty_string',
+                SettingField::SANITIZE => fn(): string => $this->getEncodedSettings(),
             ],
         ],
     ],
