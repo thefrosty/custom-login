@@ -13,9 +13,9 @@
 **Donate link:** [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290)  
 **Tags:** admin, branding, customization, custom login, logo  
 **Requires at least:** 6.7  
-**Tested up to:** 6.8.3  
+**Tested up to:** 7.1.0  
 **Requires PHP**: 8.3  
-**Stable tag:** 5.1.2.2  
+**Stable tag:** 5.1.3  
 **License:** GPLv2 or later  
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -172,6 +172,16 @@ Custom Login showcase on the [Flickr group](https://flickr.com/groups/custom-log
 ](https://ps.w.org/custom-login/assets/screenshot-4.png)
 
 ## Changelog
+
+### Version 5.1.3 (2026/08/13) =
+
+* Tested up to WordPress 7.1
+* Many Dependabot fixes.
+* Resolve Extensions button on correct status 
+* PHPCS Fixes via PHPCBF
+* Fix: Export Settings field
+* 🔄 Regenerate translation files
+* **Full Changelog**: https://github.com/thefrosty/custom-login/compare/5.1.2.2...5.1.3
 
 ### Version 5.1.2.2 (2025/11/29) =
 
@@ -333,6 +343,9 @@ Custom Login showcase on the [Flickr group](https://flickr.com/groups/custom-log
 * Fix settings API Settings: Uncaught Error: Call to undefined method stdClass::get_permalink() (#49)
 
 ## Upgrade Notice
+
+### 5.0.1
+Requires WordPress version >= 6.4 and PHP version >= 7.4.
 
 ### 4.4.0
 Requires WordPress version >= 6.6 and PHP version >= 8.1.
