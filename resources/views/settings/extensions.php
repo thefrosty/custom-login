@@ -2,8 +2,11 @@
 
 declare(strict_types=1);
 
+// phpcs:disable
+use TheFrosty\CustomLogin\CustomLogin;
+
 $all_plugins = function_exists('get_plugins') ? get_plugins() : [];
-$checkout_url ??= TheFrosty\CustomLogin\CustomLogin::getApiUrl();
+$checkout_url ??= CustomLogin::getApiUrl();
 $extensions ??= [];
 ?>
 <div class="wrap">
@@ -25,14 +28,12 @@ $extensions ??= [];
                     <div class="addon-container">
                         <div class="img-wrap">
                             <a href="<?php
-                            echo esc_url(
-                                add_query_arg([
-                                    'utm_source' => 'plugin-extensions-page',
-                                    'utm_medium' => 'custom-login',
-                                    'utm_campaign' => 'extensions',
-                                    'utm_content' => esc_attr($extension['title']),
-                                ], $extension['url'])
-                            ); ?>" target="_blank">
+                            echo esc_url(add_query_arg([
+                                'utm_source' => 'plugin-extensions-page',
+                                'utm_medium' => 'custom-login',
+                                'utm_campaign' => 'extensions',
+                                'utm_content' => esc_attr($extension['title']),
+                            ], $extension['url'])); ?>" target="_blank">
                                 <img class="thumbnail" src="<?php
                                 echo esc_url($extension['image']); ?>" alt="">
                             </a>
@@ -63,13 +64,14 @@ $extensions ??= [];
                                        'edd_action' => 'add_to_cart',
                                        'download_id' => $extension['download_id'],
                                    ],
-                                   TheFrosty\CustomLogin\CustomLogin::getApiUrl('checkout/')
+                                   CustomLogin::getApiUrl('checkout/')
                                )
-                           ); ?>" target="_blank"
-                           data-toggle="purchase-links-<?php
-                           echo esc_attr($key); ?>"
-                           style="display:none"><?php
-                            esc_html_e('Get this Extension', 'custom-login'); ?></a>
+                           ); ?>" target="_blank" data-toggle="purchase-links-<?php
+                        echo esc_attr($key); ?>"
+                           style="display:none">
+                            <?php
+                            esc_html_e('Get this Extension', 'custom-login'); ?>
+                        </a>
                         <div id="purchase-links-<?php
                         echo esc_attr($key); ?>" style="display:none">
                             <ul>
@@ -91,14 +93,14 @@ $extensions ??= [];
                                             esc_html_e('PayPal', 'custom-login'); ?></a>
                                         |
                                         <a href="<?php
-                                        echo esc_url(
-                                            add_query_arg([
-                                                'edd_action' => 'add_to_cart',
-                                                'download_id' => $link['download_id'],
-                                                'edd_options[price_id]' => $link['price_id'],
-                                            ], $checkout_url)
-                                        ); ?>"><?php
-                                            esc_html_e('Credit Card', 'custom-login'); ?></a>
+                                        echo esc_url(add_query_arg([
+                                            'edd_action' => 'add_to_cart',
+                                            'download_id' => $link['download_id'],
+                                            'edd_options[price_id]' => $link['price_id'],
+                                        ], $checkout_url)); ?>">
+                                            <?php
+                                            esc_html_e('Credit Card', 'custom-login'); ?>
+                                        </a>
                                     </li>
                                     <?php
                                 } // Links ?>
