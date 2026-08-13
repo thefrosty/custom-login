@@ -67,6 +67,7 @@
     "eslint": "npm run eslint",
     "install-codestandards": "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run",
     "phpcs": "bash ./vendor/thefrosty/wp-utilities/bin/phpcs.sh --standard=phpcs-ruleset.xml",
+    "phpcs:fix": "bash ./vendor/thefrosty/wp-utilities/bin/phpcbf.sh --standard=phpcs-ruleset.xml",
     "phpunit": "./vendor/bin/phpunit --colors",
     "phpunit-coverage": "./vendor/bin/phpunit --colors --coverage-html ./tests/results && php ./tests/clover-results.php ./tests/clover.xml 01",
     "refactor": "rector --ansi",

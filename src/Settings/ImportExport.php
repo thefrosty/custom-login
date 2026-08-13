@@ -16,6 +16,7 @@ use TheFrosty\CustomLogin\Settings\Api\Postbox;
 use TheFrosty\WpUtilities\Api\WpRemote;
 use TheFrosty\WpUtilities\Plugin\AbstractContainerProvider;
 use TheFrosty\WpUtilities\Utils\Viewable;
+use function delete_option;
 
 /**
  * Class ImportExport
@@ -28,8 +29,8 @@ class ImportExport extends AbstractContainerProvider
     use Viewable;
     use WpRemote;
 
-    public const ACTION_DOWNLOAD_EXPORT = Factory::PREFIX . 'download_export';
-    public const NONCE = Factory::PREFIX . 'nonce';
+    public const string ACTION_DOWNLOAD_EXPORT = Factory::PREFIX . 'download_export';
+    public const string NONCE = Factory::PREFIX . 'nonce';
 
     /**
      * Add class hooks.
@@ -77,6 +78,7 @@ class ImportExport extends AbstractContainerProvider
     /**
      * Sanitize callback for Settings API before input into database.
      * @ref http://stackoverflow.com/a/10797086/558561
+     * @param array $options
      */
     protected function maybeImportSettings(array $options): void
     {
@@ -92,30 +94,29 @@ class ImportExport extends AbstractContainerProvider
         $import = json_decode(base64_decode($options[OptionKey::SETTINGS_IMPORT]), true);
         if (is_array($import)) {
             foreach ($import as $setting_key => $settings) {
-                if ($settings !== false) {
-                    if (update_option($setting_key, $settings)) {
-                        add_settings_error(
-                            $setting_key,
-                            esc_attr('settings_updated'),
-                            esc_html__('Custom Login settings successfully imported', 'custom-login'),
-                            'updated'
-                        );
-                    }
+                if (($settings !== false) && update_option($setting_key, $settings)) {
+                    add_settings_error(
+                        $setting_key,
+                        esc_attr('settings_updated'),
+                        esc_html__('Custom Login settings successfully imported', 'custom-login'),
+                        'updated'
+                    );
                 }
             }
         }
-        \delete_option('custom_login_import_export');
+        delete_option('custom_login_import_export');
     }
 
     /**
      * Export the settings.
+     * phpcs:disable SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable.DisallowedSuperGlobalVariable
      * @ref http://stackoverflow.com/a/16440501/558561
      */
-    protected function downloadSettingsExport(): void
+    protected function downloadSettingsExport(): never
     {
         if (
-            (!isset($_GET['action']) || $_GET['action'] !== self::ACTION_DOWNLOAD_EXPORT) ||
-            (!isset($_GET[self::NONCE]) || !wp_verify_nonce($_GET[self::NONCE], 'export'))
+            (!isset($_GET['action'], $_GET[self::NONCE]) || $_GET['action'] !== self::ACTION_DOWNLOAD_EXPORT) ||
+            (!wp_verify_nonce($_GET[self::NONCE], 'export'))
         ) {
             wp_safe_redirect(remove_query_arg(['action', self::NONCE]));
             exit;

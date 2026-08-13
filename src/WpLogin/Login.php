@@ -30,7 +30,8 @@ use function wp_script_is;
 class Login extends AbstractContainerProvider
 {
 
-    use HooksTrait, Viewable;
+    use HooksTrait;
+    use Viewable;
 
     /**
      * Add class hooks.

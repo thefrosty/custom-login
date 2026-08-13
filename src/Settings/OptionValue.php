@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace TheFrosty\CustomLogin\Settings;
 
@@ -8,6 +10,6 @@ namespace TheFrosty\CustomLogin\Settings;
  */
 interface OptionValue
 {
-    public const ON = 'on';
-    public const OFF = 'off';
+    public const string ON = 'on';
+    public const string OFF = 'off';
 }
