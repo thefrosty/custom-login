@@ -36,7 +36,7 @@
   "require-dev": {
     "ext-simplexml": "*",
     "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
-    "php-stubs/wordpress-stubs": "^6.8",
+    "php-stubs/wordpress-stubs": "^7.1",
     "phpcompatibility/php-compatibility": "^9.3",
     "phpunit/php-code-coverage": "^11",
     "phpunit/phpunit": "^11",
