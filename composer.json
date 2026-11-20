@@ -95,6 +95,7 @@
       "phpstan.neon.dist",
       "phpunit.xml",
       "README.md",
+      ".rector",
       "rector.php"
     ]
   }

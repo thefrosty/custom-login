@@ -3,6 +3,9 @@
 declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
+use TheFrosty\CustomLogin\Rector\DowngradeEnumCaseFetchRector;
+
+require_once __DIR__ . '/.rector/DowngradeEnumCaseFetchRector.php';
 
 return RectorConfig::configure()
     ->withPaths([
@@ -17,4 +20,6 @@ return RectorConfig::configure()
     ->withAutoloadPaths(array_filter([
         __DIR__ . '/vendor/php-stubs/wordpress-stubs/wordpress-stubs.php',
     ], 'is_file'))
-    ->withDowngradeSets(php74: true);
+    ->withDowngradeSets(php74: true)
+    // `Enum::CASE->value` isn't downgraded by the core sets (see the rule for details).
+    ->withRules([DowngradeEnumCaseFetchRector::class]);
