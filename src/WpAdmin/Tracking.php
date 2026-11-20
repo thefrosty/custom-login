@@ -209,6 +209,7 @@ class Tracking extends AbstractContainerProvider
                 ]
             ),
             esc_html__(
+                // phpcs:ignore Generic.Files.LineLength.TooLong
                 'Allow Custom Login to send usage data (site URL, admin email, WordPress version, theme, and plugin list) once a week to help us make the plugin better?',
                 'custom-login'
             ),
