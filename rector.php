@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
 use TheFrosty\CustomLogin\Rector\DowngradeEnumCaseFetchRector;
-use TheFrosty\CustomLogin\Rector\DowngradeFirstClassCallableRector;
 use TheFrosty\CustomLogin\Rector\DowngradeIntersectionTypedPropertyRector;
+use TheFrosty\CustomLogin\Rector\DowngradeParenthesizedNewRector;
 
 // Custom rules for PHP 8.x syntax the core downgrade sets don't cover (see each rule).
 foreach (glob(__DIR__ . '/.rector/*.php') ?: [] as $rule) {
@@ -39,6 +39,6 @@ return RectorConfig::configure()
     ->withDowngradeSets(php74: true)
     ->withRules([
         DowngradeEnumCaseFetchRector::class,
-        DowngradeFirstClassCallableRector::class,
         DowngradeIntersectionTypedPropertyRector::class,
+        DowngradeParenthesizedNewRector::class,
     ]);
