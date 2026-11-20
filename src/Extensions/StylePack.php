@@ -3,13 +3,18 @@
 declare(strict_types=1);
 
 namespace TheFrosty\CustomLogin\Extensions;
+
+use TheFrosty\CustomLogin\Settings\Sanitize;
 use function __;
 use function add_query_arg;
 use function add_settings_error;
 use function admin_url;
+use function current_user_can;
 use function esc_attr;
+use function esc_html__;
 use function file_exists;
 use function filter_var;
+use function is_array;
 use function plugin_dir_path;
 use function remove_query_arg;
 use function sprintf;
@@ -53,7 +58,10 @@ trait StylePack
     protected function maybeImportStylePack(): never
     {
         if (!isset($_GET['action'], $_GET['cl_nonce']) || !wp_verify_nonce($_GET['cl_nonce'], 'style_pack')) {
-            wp_die(__('Invalid nonce.', 'custom-login'));
+            wp_die(esc_html__('Invalid nonce.', 'custom-login'));
+        }
+        if (!current_user_can('manage_options')) {
+            wp_die(esc_html__('You do not have sufficient permissions to import a style pack.', 'custom-login'));
         }
 
         $label = $style = '';
@@ -74,17 +82,15 @@ trait StylePack
                 $settings = include $filename;
             }
 
-            if (!empty($settings)) {
-                foreach ($settings as $setting_key => $setting) {
-                    if ($setting !== false) {
-                        if (update_option($setting_key, $setting)) {
-                            add_settings_error(
-                                $setting_key,
-                                esc_attr('settings_updated'),
-                                esc_html__('Custom Login style pack successfully imported.', 'custom-login'),
-                                'updated'
-                            );
-                        }
+            if (is_array($settings) && !empty($settings)) {
+                foreach (Sanitize::importPayload($settings) as $setting_key => $setting) {
+                    if (update_option($setting_key, $setting)) {
+                        add_settings_error(
+                            $setting_key,
+                            esc_attr('settings_updated'),
+                            esc_html__('Custom Login style pack successfully imported.', 'custom-login'),
+                            'updated'
+                        );
                     }
                 }
                 wp_safe_redirect(

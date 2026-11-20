@@ -16,7 +16,9 @@ use TheFrosty\CustomLogin\Settings\Api\Postbox;
 use TheFrosty\WpUtilities\Api\WpRemote;
 use TheFrosty\WpUtilities\Plugin\AbstractContainerProvider;
 use TheFrosty\WpUtilities\Utils\Viewable;
+use function current_user_can;
 use function delete_option;
+use function is_string;
 
 /**
  * Class ImportExport
@@ -83,7 +85,9 @@ class ImportExport extends AbstractContainerProvider
     protected function maybeImportSettings(array $options): void
     {
         if (
+            !current_user_can('manage_options') ||
             empty($options[OptionKey::SETTINGS_IMPORT]) ||
+            !is_string($options[OptionKey::SETTINGS_IMPORT]) ||
             base64_encode(
                 base64_decode($options[OptionKey::SETTINGS_IMPORT], true)
             ) !== $options[OptionKey::SETTINGS_IMPORT]
@@ -93,8 +97,9 @@ class ImportExport extends AbstractContainerProvider
 
         $import = json_decode(base64_decode($options[OptionKey::SETTINGS_IMPORT]), true);
         if (is_array($import)) {
-            foreach ($import as $setting_key => $settings) {
-                if (($settings !== false) && update_option($setting_key, $settings)) {
+            // Only ever write the plugin's own options (never arbitrary `wp_options` keys).
+            foreach (Sanitize::importPayload($import) as $setting_key => $settings) {
+                if (update_option($setting_key, $settings)) {
                     add_settings_error(
                         $setting_key,
                         esc_attr('settings_updated'),
@@ -116,7 +121,8 @@ class ImportExport extends AbstractContainerProvider
     {
         if (
             (!isset($_GET['action'], $_GET[self::NONCE]) || $_GET['action'] !== self::ACTION_DOWNLOAD_EXPORT) ||
-            (!wp_verify_nonce($_GET[self::NONCE], 'export'))
+            (!wp_verify_nonce($_GET[self::NONCE], 'export')) ||
+            !current_user_can('manage_options')
         ) {
             wp_safe_redirect(remove_query_arg(['action', self::NONCE]));
             exit;
