@@ -103,6 +103,9 @@ jobs:
           wp config set WP_DEBUG true --raw
           wp config set WP_DEBUG_LOG true --raw
           wp config set WP_DEBUG_DISPLAY false --raw
+          # Keep the tested version fixed (running cron below would otherwise auto-update to the latest minor).
+          wp config set AUTOMATIC_UPDATER_DISABLED true --raw
+          wp config set WP_AUTO_UPDATE_CORE false --raw
           wp core install --url="$SITE_URL" --title="PHP 7.4 CI" \
             --admin_user=admin --admin_password=password --admin_email=ci@example.com --skip-email
           # Older versions can be left asking for a database update, which redirects every admin page.
@@ -151,6 +154,8 @@ jobs:
               /wp-admin/*)
                 if [[ "$url" == *upgrade.php* || "$url" == *wp-login.php* ]]; then
                   echo "::error::$path was redirected to $url"
+                  (cd "$WP_DIR" && wp core version --extra && wp option get db_version) || true
+                  sed 's/<[^>]*>//g' "$out" | grep -v '^[[:space:]]*$' | head -n 40
                   exit 1
                 fi
                 ;;
