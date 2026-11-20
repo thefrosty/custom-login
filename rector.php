@@ -4,8 +4,13 @@ declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
 use TheFrosty\CustomLogin\Rector\DowngradeEnumCaseFetchRector;
+use TheFrosty\CustomLogin\Rector\DowngradeFirstClassCallableRector;
+use TheFrosty\CustomLogin\Rector\DowngradeIntersectionTypedPropertyRector;
 
-require_once __DIR__ . '/.rector/DowngradeEnumCaseFetchRector.php';
+// Custom rules for PHP 8.x syntax the core downgrade sets don't cover (see each rule).
+foreach (glob(__DIR__ . '/.rector/*.php') ?: [] as $rule) {
+    require_once $rule;
+}
 
 return RectorConfig::configure()
     ->withPaths([
@@ -32,5 +37,8 @@ return RectorConfig::configure()
         __DIR__ . '/vendor/php-stubs/wordpress-stubs/wordpress-stubs.php',
     ], 'is_file'))
     ->withDowngradeSets(php74: true)
-    // `Enum::CASE->value` isn't downgraded by the core sets (see the rule for details).
-    ->withRules([DowngradeEnumCaseFetchRector::class]);
+    ->withRules([
+        DowngradeEnumCaseFetchRector::class,
+        DowngradeFirstClassCallableRector::class,
+        DowngradeIntersectionTypedPropertyRector::class,
+    ]);
