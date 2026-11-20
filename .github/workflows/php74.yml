@@ -83,9 +83,10 @@ jobs:
       - name: Lint all PHP files with PHP 7.4
         run: |
           php -v
-          # Bundled third-party packages' own test suites are never loaded by WordPress, skip them.
-          find "$PACKAGE_DIR" -type f -name '*.php' -not -path '*/vendor/*/tests/*' -print0 \
-            | xargs -0 -n 1 -P 4 php -d display_errors=1 -l > lint.log 2>&1 || true
+          # Bundled packages' own test suites are never loaded by WordPress (and aren't downgraded), skip them.
+          # `php -l` exits 255 on a parse error, which would make xargs stop early, so always exit 0.
+          find "$PACKAGE_DIR" -type f -name '*.php' -not -path '*/vendor/*/tests/*' -not -path '*/vendor/*/Tests/*' -print0 \
+            | xargs -0 -n 1 -P 4 sh -c 'php -d display_errors=1 -l "$0" 2>&1; exit 0' > lint.log
           if grep -v '^No syntax errors detected' lint.log | grep -q .; then
             grep -v '^No syntax errors detected' lint.log
             echo "::error::PHP 7.4 syntax errors in the downgraded package"
