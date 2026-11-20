@@ -83,7 +83,8 @@ jobs:
       - name: Lint all PHP files with PHP 7.4
         run: |
           php -v
-          find "$PACKAGE_DIR" -type f -name '*.php' -print0 \
+          # Bundled third-party packages' own test suites are never loaded by WordPress, skip them.
+          find "$PACKAGE_DIR" -type f -name '*.php' -not -path '*/vendor/*/tests/*' -print0 \
             | xargs -0 -n 1 -P 4 php -d display_errors=1 -l > lint.log 2>&1 || true
           if grep -v '^No syntax errors detected' lint.log | grep -q .; then
             grep -v '^No syntax errors detected' lint.log

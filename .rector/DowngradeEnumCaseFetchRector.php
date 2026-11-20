@@ -36,11 +36,13 @@ final class DowngradeEnumCaseFetchRector extends AbstractRector
     }
 
     /**
-     * @param PropertyFetch $node
+     * @param Node $node A PropertyFetch (see getNodeTypes()).
+     * @return Node|null
      */
     public function refactor(Node $node): ?Node
     {
         if (
+            !$node instanceof PropertyFetch ||
             !$node->var instanceof ClassConstFetch ||
             !$node->var->class instanceof Name ||
             !$node->var->name instanceof Identifier ||
