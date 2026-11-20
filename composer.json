@@ -69,7 +69,7 @@
     "phpcs": "bash ./vendor/thefrosty/wp-utilities/bin/phpcs.sh --standard=phpcs-ruleset.xml",
     "phpcs:fix": "bash ./vendor/thefrosty/wp-utilities/bin/phpcbf.sh --standard=phpcs-ruleset.xml",
     "phpunit": "./vendor/bin/phpunit --colors",
-    "phpunit-coverage": "./vendor/bin/phpunit --colors --coverage-html ./tests/results && php ./tests/clover-results.php ./tests/clover.xml 01",
+    "phpunit-coverage": "./vendor/bin/phpunit --colors && php ./tests/clover-results.php ./tests/clover.xml 90",
     "refactor": "rector --ansi",
     "test:refactor": "rector --dry-run --debug --ansi",
     "tests": [
