@@ -32,6 +32,8 @@ function isSettingsPage(PluginInterface $plugin): bool
     global $pagenow;
     return $pagenow === 'options-general.php' &&
         isset($_GET['page']) &&
+        is_string($_GET['page']) &&
+        $_GET['page'] !== '' &&
         str_contains($plugin->getSlug(), $_GET['page']);
 }
 

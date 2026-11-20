@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use TheFrosty\CustomLogin\CustomLogin;
 use TheFrosty\CustomLogin\Settings\OptionValue;
+use TheFrosty\CustomLogin\Settings\Sanitize;
 
 use function TheFrosty\CustomLogin\openCssRule;
 use function TheFrosty\CustomLogin\prefixIt;
@@ -19,8 +20,7 @@ $login_h1 = version_compare($GLOBALS['wp_version'], '6.7', '>=') ? '.login .wp-l
 $version ??= CustomLogin::VERSION;
 $close_rule = "}\n";
 
-$css = '<style>';
-$css .= "
+$css = "
 /**
  * Custom Login by Austin Passy
  *
@@ -213,9 +213,8 @@ if (!empty($nav_hover_color)) {
     $css .= trailingSemicolonIt('text-shadow', sprintf('0 1px 0 %1$s', $nav_text_shadow_hover_color));
     $css .= $close_rule; // CLOSE .login #nav a:hover, .login #backtoblog a:hover.
 }
-$css .= "</style>\n";
-
 /*
  * Out of the frying pan, and into the fire!
+ * Escape the stylesheet, so nothing in it can close the `<style>` element.
  */
-echo $css;
+echo '<style>', Sanitize::cssForStyleElement($css), "</style>\n"; // phpcs:ignore WordPress.Security.EscapeOutput
