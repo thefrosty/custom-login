@@ -32,6 +32,7 @@
     "thefrosty/wp-utilities": "^3.8"
   },
   "require-dev": {
+    "php-stubs/wordpress-stubs": "^7.1",
     "rector/rector": "^2.0"
   },
   "autoload": {
