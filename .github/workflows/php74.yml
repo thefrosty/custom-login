@@ -105,6 +105,8 @@ jobs:
           wp config set WP_DEBUG_DISPLAY false --raw
           wp core install --url="$SITE_URL" --title="PHP 7.4 CI" \
             --admin_user=admin --admin_password=password --admin_email=ci@example.com --skip-email
+          # Older versions can be left asking for a database update, which redirects every admin page.
+          wp core update-db
           wp core version
 
       - name: Install & activate plugin
@@ -134,14 +136,25 @@ jobs:
           fetch() {
             # fetch <path> <output file> [extra curl args...]
             local path=$1 out=$2; shift 2
-            local code
-            code=$(curl -s -L -o "$out" -w '%{http_code}' -b cookies.txt -c cookies.txt "$@" "$SITE_URL$path")
-            echo "$path -> HTTP $code"
+            local result code url
+            result=$(curl -s -L -o "$out" -w '%{http_code} %{url_effective}' -b cookies.txt -c cookies.txt "$@" "$SITE_URL$path")
+            code=${result%% *}
+            url=${result#* }
+            echo "$path -> HTTP $code ($url)"
             if [ "$code" != "200" ] || grep -qi 'critical error\|Fatal error' "$out"; then
               echo "::error::$path failed (HTTP $code)"
               cat "$out"
               exit 1
             fi
+            # Admin pages must not end up on the database upgrade screen or back at the login form.
+            case "$path" in
+              /wp-admin/*)
+                if [[ "$url" == *upgrade.php* || "$url" == *wp-login.php* ]]; then
+                  echo "::error::$path was redirected to $url"
+                  exit 1
+                fi
+                ;;
+            esac
           }
 
           # Login screen: the plugin's styles and footer HTML must be rendered.
