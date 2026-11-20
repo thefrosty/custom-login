@@ -69,7 +69,8 @@ class TrackingTest extends TestCase
     public function testAddHooks(): void
     {
         $this->tracking->addHooks();
-        $this->assertCount(6, $this->getProperty($this->tracking, 'filter_map'));
+        // sendCheckIn() is hooked twice, but WordPress' callback ID for a method doesn't include the hook.
+        $this->assertCount(5, $this->getProperty($this->tracking, 'filter_map'));
     }
 
     /**

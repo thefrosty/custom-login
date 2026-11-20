@@ -53,12 +53,12 @@ class DashboardTest extends TestCase
     }
 
     /**
-     * Test addHooks() registers the allowed filter on `load-index.php`.
+     * Test addHooks() registers the allowed filter on `load-index.php` (alongside the parent's widget setup).
      */
     public function testAddHooks(): void
     {
         $this->dashboard->addHooks();
-        $this->assertSame(1, $this->runMappedHook($this->dashboard, 'load-index.php'));
+        $this->assertSame(2, $this->runMappedHook($this->dashboard, 'load-index.php'));
         $filter = sprintf(Dashboard::HOOK_NAME_ALLOWED_S, 'frosty-media-feed');
         $this->assertSame(1, $this->runMappedHook($this->dashboard, $filter, true));
     }

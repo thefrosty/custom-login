@@ -19,6 +19,15 @@ tests_add_filter('muplugins_loaded', function () {
     add_filter('wp_die_handler', static function (): void {
         throw new WPDieException();
     });
+    /*
+     * Keep the bootstrapped plugin's wp-login.php hooks (e.g. the `gettext` filter) out of the test run:
+     * they'd execute Login code in unrelated tests, which `beStrictAboutCoverageMetadata` marks as risky.
+     * Login is tested directly in LoginTest.
+     */
+    $option = 'custom_login_general';
+    $filter = static fn(): array => ['active' => 'off'];
+    add_filter("pre_option_$option", $filter);
+    add_action('init', static fn() => remove_filter("pre_option_$option", $filter), PHP_INT_MAX);
     require dirname(__DIR__) . '/custom-login.php';
 });
 
