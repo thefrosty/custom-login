@@ -7,6 +7,8 @@ on:
   pull_request:
     branches-ignore:
       - main
+      - master
+      - translate/*
   workflow_dispatch:
 
 permissions:
