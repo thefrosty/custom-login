@@ -13,8 +13,6 @@ use PhpParser\Node\Expr\Variable;
 use Rector\Rector\AbstractRector;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
-use function str_contains;
-use function substr;
 
 /**
  * Remove the parentheses PHP 8.0 allows around a `new` class expression: `new ($class)($args)`.
@@ -52,13 +50,12 @@ final class DowngradeParenthesizedNewRector extends AbstractRector
             return null;
         }
 
-        // Only rewrite when the source has parentheses between `new` and the class expression.
+        // `new $class` has the class expression exactly 4 characters (`new `) after the start, anything else
+        // means parentheses (or unusual spacing, where reprinting is harmless). Nodes created by this rule have
+        // no positions, so they're never rewritten twice.
         $start = $node->getStartFilePos();
         $classStart = $node->class->getStartFilePos();
-        if ($start < 0 || $classStart <= $start) {
-            return null;
-        }
-        if (!str_contains(substr($this->file->getFileContent(), $start, $classStart - $start), '(')) {
+        if ($start < 0 || $classStart < 0 || $classStart - $start === 4) {
             return null;
         }
 
