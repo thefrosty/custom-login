@@ -146,6 +146,33 @@ class LoginTest extends TestCase
     }
 
     /**
+     * Test the nav link text shadow is only output when a shadow color is set.
+     */
+    public function testLoginHeadNavTextShadow(): void
+    {
+        $this->setDesign([
+            OptionKey::NAV_COLOR => '#111111',
+            OptionKey::NAV_TEXT_SHADOW_COLOR => '',
+            OptionKey::NAV_HOVER_COLOR => '#222222',
+            OptionKey::NAV_TEXT_SHADOW_HOVER_COLOR => '',
+        ]);
+        $output = $this->capture(fn() => $this->invoke($this->login, 'loginHead'));
+        $this->assertStringContainsString('color: #111111 !important;', $output);
+        $this->assertStringContainsString('color: #222222 !important;', $output);
+        $this->assertStringNotContainsString('text-shadow', $output);
+
+        $this->setDesign([
+            OptionKey::NAV_COLOR => '#111111',
+            OptionKey::NAV_TEXT_SHADOW_COLOR => '#333333',
+            OptionKey::NAV_HOVER_COLOR => '#222222',
+            OptionKey::NAV_TEXT_SHADOW_HOVER_COLOR => '#444444',
+        ]);
+        $output = $this->capture(fn() => $this->invoke($this->login, 'loginHead'));
+        $this->assertStringContainsString('text-shadow: 0 1px 0 #333333;', $output);
+        $this->assertStringContainsString('text-shadow: 0 1px 0 #444444;', $output);
+    }
+
+    /**
      * Test loginFooter() only renders the srcset markup when enabled.
      */
     public function testLoginFooter(): void

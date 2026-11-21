@@ -202,8 +202,9 @@ if (!empty($label_color)) {
 if (!empty($nav_color)) {
     $css .= openCssRule('.login #nav a, .login #backtoblog a');
     $css .= trailingSemicolonIt('color', sprintf('%1$s !important', $nav_color));
-    $nav_text_shadow_color ??= '';
-    $css .= trailingSemicolonIt('text-shadow', sprintf('0 1px 0 %1$s', $nav_text_shadow_color));
+    if (!empty($nav_text_shadow_color)) {
+        $css .= trailingSemicolonIt('text-shadow', sprintf('0 1px 0 %1$s', $nav_text_shadow_color));
+    }
     $css .= $close_rule; // CLOSE .login #nav a, .login #backtoblog a.
 }
 
@@ -214,8 +215,9 @@ if (!empty($nav_color)) {
 if (!empty($nav_hover_color)) {
     $css .= openCssRule('.login #nav a:hover, .login #backtoblog a:hover');
     $css .= trailingSemicolonIt('color', sprintf('%1$s !important', $nav_hover_color));
-    $nav_text_shadow_hover_color ??= '';
-    $css .= trailingSemicolonIt('text-shadow', sprintf('0 1px 0 %1$s', $nav_text_shadow_hover_color));
+    if (!empty($nav_text_shadow_hover_color)) {
+        $css .= trailingSemicolonIt('text-shadow', sprintf('0 1px 0 %1$s', $nav_text_shadow_hover_color));
+    }
     $css .= $close_rule; // CLOSE .login #nav a:hover, .login #backtoblog a:hover.
 }
 
