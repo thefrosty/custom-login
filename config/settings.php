@@ -327,7 +327,7 @@ return [
                 SettingField::LABEL => __('Box shadow', 'custom-login'),
                 SettingField::DESC => sprintf(
                     __(
-                        'Use <a href="%s" target="_blank">box shadow</a> syntax w/ out color. <code>inset h-shadow v-shadow blur spread</code>',
+                        'Use <a href="%s" target="_blank">box shadow</a> syntax w/ out color. <code>inset h-shadow v-shadow blur spread</code>. Enter <code>none</code> to remove the shadow entirely.',
                         'custom-login'
                     ),
                     'https://www.w3schools.com/cssref/css3_pr_box-shadow.asp'

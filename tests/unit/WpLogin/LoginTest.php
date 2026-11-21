@@ -124,6 +124,28 @@ class LoginTest extends TestCase
     }
 
     /**
+     * Test the login form box shadow, including `none` to remove it entirely.
+     */
+    public function testLoginHeadBoxShadow(): void
+    {
+        $this->setDesign([
+            OptionKey::LOGIN_FORM_BOX_SHADOW => '5px 5px 10px',
+            OptionKey::LOGIN_FORM_BOX_SHADOW_COLOR => '',
+        ]);
+        $output = $this->capture(fn() => $this->invoke($this->login, 'loginHead'));
+        $this->assertStringContainsString('box-shadow: 5px 5px 10px #121212;', $output);
+
+        $this->setDesign([
+            OptionKey::LOGIN_FORM_BOX_SHADOW => ' None ',
+            OptionKey::LOGIN_FORM_BOX_SHADOW_COLOR => '#ff0000',
+        ]);
+        $output = $this->capture(fn() => $this->invoke($this->login, 'loginHead'));
+        $this->assertStringContainsString('-webkit-box-shadow: none;', $output);
+        $this->assertStringContainsString("\tbox-shadow: none;", $output);
+        $this->assertStringNotContainsString('#ff0000', $output);
+    }
+
+    /**
      * Test loginFooter() only renders the srcset markup when enabled.
      */
     public function testLoginFooter(): void

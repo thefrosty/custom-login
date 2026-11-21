@@ -119,10 +119,15 @@ if (!empty($login_form_border_radius)) {
 }
 
 if (!empty($login_form_box_shadow)) {
-    if (empty($login_form_box_shadow_color)) {
-        $login_form_box_shadow_color = '#121212';
+    if (strtolower(trim($login_form_box_shadow)) === 'none') {
+        // Remove the shadow entirely (including WordPress' default form shadow).
+        $box_shadow = 'none';
+    } else {
+        if (empty($login_form_box_shadow_color)) {
+            $login_form_box_shadow_color = '#121212';
+        }
+        $box_shadow = $login_form_box_shadow . ' ' . $login_form_box_shadow_color;
     }
-    $box_shadow = $login_form_box_shadow . ' ' . $login_form_box_shadow_color;
 
     $css .= prefixIt('box-shadow', trim($box_shadow));
 }
