@@ -124,6 +124,55 @@ class LoginTest extends TestCase
     }
 
     /**
+     * Test the login form box shadow, including `none` to remove it entirely.
+     */
+    public function testLoginHeadBoxShadow(): void
+    {
+        $this->setDesign([
+            OptionKey::LOGIN_FORM_BOX_SHADOW => '5px 5px 10px',
+            OptionKey::LOGIN_FORM_BOX_SHADOW_COLOR => '',
+        ]);
+        $output = $this->capture(fn() => $this->invoke($this->login, 'loginHead'));
+        $this->assertStringContainsString('box-shadow: 5px 5px 10px #121212;', $output);
+
+        $this->setDesign([
+            OptionKey::LOGIN_FORM_BOX_SHADOW => ' None ',
+            OptionKey::LOGIN_FORM_BOX_SHADOW_COLOR => '#0a0b0c',
+        ]);
+        $output = $this->capture(fn() => $this->invoke($this->login, 'loginHead'));
+        $this->assertStringContainsString('-webkit-box-shadow: none;', $output);
+        $this->assertStringContainsString("\tbox-shadow: none;", $output);
+        $this->assertStringNotContainsString('#0a0b0c', $output);
+    }
+
+    /**
+     * Test the nav link text shadow is only output when a shadow color is set.
+     */
+    public function testLoginHeadNavTextShadow(): void
+    {
+        $this->setDesign([
+            OptionKey::NAV_COLOR => '#111111',
+            OptionKey::NAV_TEXT_SHADOW_COLOR => '',
+            OptionKey::NAV_HOVER_COLOR => '#222222',
+            OptionKey::NAV_TEXT_SHADOW_HOVER_COLOR => '',
+        ]);
+        $output = $this->capture(fn() => $this->invoke($this->login, 'loginHead'));
+        $this->assertStringContainsString('color: #111111 !important;', $output);
+        $this->assertStringContainsString('color: #222222 !important;', $output);
+        $this->assertStringNotContainsString('text-shadow', $output);
+
+        $this->setDesign([
+            OptionKey::NAV_COLOR => '#111111',
+            OptionKey::NAV_TEXT_SHADOW_COLOR => '#333333',
+            OptionKey::NAV_HOVER_COLOR => '#222222',
+            OptionKey::NAV_TEXT_SHADOW_HOVER_COLOR => '#444444',
+        ]);
+        $output = $this->capture(fn() => $this->invoke($this->login, 'loginHead'));
+        $this->assertStringContainsString('text-shadow: 0 1px 0 #333333;', $output);
+        $this->assertStringContainsString('text-shadow: 0 1px 0 #444444;', $output);
+    }
+
+    /**
      * Test loginFooter() only renders the srcset markup when enabled.
      */
     public function testLoginFooter(): void
