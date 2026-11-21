@@ -137,12 +137,12 @@ class LoginTest extends TestCase
 
         $this->setDesign([
             OptionKey::LOGIN_FORM_BOX_SHADOW => ' None ',
-            OptionKey::LOGIN_FORM_BOX_SHADOW_COLOR => '#ff0000',
+            OptionKey::LOGIN_FORM_BOX_SHADOW_COLOR => '#0a0b0c',
         ]);
         $output = $this->capture(fn() => $this->invoke($this->login, 'loginHead'));
         $this->assertStringContainsString('-webkit-box-shadow: none;', $output);
         $this->assertStringContainsString("\tbox-shadow: none;", $output);
-        $this->assertStringNotContainsString('#ff0000', $output);
+        $this->assertStringNotContainsString('#0a0b0c', $output);
     }
 
     /**
