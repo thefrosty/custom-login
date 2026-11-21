@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace TheFrosty\CustomLogin\Tests;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
+use TheFrosty\CustomLogin\CustomLogin;
 use TheFrosty\CustomLogin\Settings\Api\Factory;
 use TheFrosty\CustomLogin\Settings\OptionKey;
 use TheFrosty\CustomLogin\Settings\Sanitize;
@@ -12,6 +15,9 @@ use TheFrosty\CustomLogin\Settings\Sanitize;
  * Class SanitizeTest
  * @package TheFrosty\CustomLogin\Tests
  */
+#[CoversClass(Sanitize::class)]
+#[UsesClass(CustomLogin::class)]
+#[UsesClass(Factory::class)]
 class SanitizeTest extends TestCase
 {
 
@@ -21,6 +27,7 @@ class SanitizeTest extends TestCase
     public function tearDown(): void
     {
         remove_all_filters('user_has_cap');
+        remove_all_filters('custom_login/importable_options');
         delete_option(Factory::getSection(Factory::SECTION_DESIGN));
         wp_set_current_user(0);
         parent::tearDown();
@@ -114,5 +121,64 @@ class SanitizeTest extends TestCase
             return $allcaps;
         });
         $this->assertSame('console.log("new")', Sanitize::customJavascript('console.log("new")'));
+    }
+
+    /**
+     * Non-scalar values are rejected.
+     */
+    public function testNonScalarValues(): void
+    {
+        $this->assertSame('', Sanitize::cssUrl(['https://example.com']));
+        $this->assertSame('', Sanitize::cssUrl(''));
+
+        $design = Factory::getSection(Factory::SECTION_DESIGN);
+        update_option($design, [OptionKey::CUSTOM_JQUERY => ['not', 'a', 'string']]);
+        $this->assertSame('', Sanitize::customJavascript('alert(1)'));
+
+        add_filter('user_has_cap', static function (array $allcaps): array {
+            $allcaps['unfiltered_html'] = true;
+            return $allcaps;
+        });
+        $this->assertSame('', Sanitize::customJavascript(['array']));
+        $this->assertSame('<b>', Sanitize::customJavascript('&lt;b&gt;'));
+    }
+
+    /**
+     * Array values are left alone when building the stylesheet.
+     */
+    public function testDesignOptionsForCssSkipsArrays(): void
+    {
+        $options = Sanitize::designOptionsForCss(['some_key' => ['a' => 'b']]);
+        $this->assertSame(['a' => 'b'], $options['some_key']);
+    }
+
+    /**
+     * Extensions can add their own importable option names.
+     */
+    public function testImportableOptionsFilter(): void
+    {
+        $this->assertContains(Factory::getSection(Factory::SECTION_GENERAL), Sanitize::importableOptions());
+        add_filter('custom_login/importable_options', static fn(array $options): array => array_merge(
+            $options,
+            ['custom_login_extension', 123]
+        ));
+        $options = Sanitize::importableOptions();
+        $this->assertContains('custom_login_extension', $options);
+        $this->assertNotContains(123, $options);
+    }
+
+    /**
+     * Users with unfiltered_html can import custom javascript.
+     */
+    public function testImportPayloadWithUnfilteredHtml(): void
+    {
+        add_filter('user_has_cap', static function (array $allcaps): array {
+            $allcaps['unfiltered_html'] = true;
+            return $allcaps;
+        });
+        $design = Factory::getSection(Factory::SECTION_DESIGN);
+        $import = Sanitize::importPayload([$design => [OptionKey::CUSTOM_JQUERY => 'console.log(1)'], 'x' => 'y']);
+        $this->assertSame('console.log(1)', $import[$design][OptionKey::CUSTOM_JQUERY]);
+        $this->assertArrayNotHasKey('x', $import);
     }
 }

@@ -87,15 +87,18 @@ class ImportExport extends AbstractContainerProvider
         if (
             !current_user_can('manage_options') ||
             empty($options[OptionKey::SETTINGS_IMPORT]) ||
-            !is_string($options[OptionKey::SETTINGS_IMPORT]) ||
-            base64_encode(
-                base64_decode($options[OptionKey::SETTINGS_IMPORT], true)
-            ) !== $options[OptionKey::SETTINGS_IMPORT]
+            !is_string($options[OptionKey::SETTINGS_IMPORT])
         ) {
             return;
         }
 
-        $import = json_decode(base64_decode($options[OptionKey::SETTINGS_IMPORT]), true);
+        // Strict decoding returns false for anything that isn't valid base64 (e.g. pasted plain text).
+        $decoded = base64_decode($options[OptionKey::SETTINGS_IMPORT], true);
+        if ($decoded === false || base64_encode($decoded) !== $options[OptionKey::SETTINGS_IMPORT]) {
+            return;
+        }
+
+        $import = json_decode($decoded, true);
         if (is_array($import)) {
             // Only ever write the plugin's own options (never arbitrary `wp_options` keys).
             foreach (Sanitize::importPayload($import) as $setting_key => $settings) {
