@@ -3,12 +3,12 @@
  * Plugin Name: Custom Login
  * Plugin URI: https://frosty.media/plugins/custom-login
  * Description: A simple way to customize your WordPress <code>wp-login.php</code> screen! A <a href="https://frosty.media/">Frosty Media</a> plugin.
- * Version: 5.1.3
+ * Version: 6.0.0
  * Author: Austin Passy
  * Author URI: https://austin.passy.co
  * Requires at least: 6.7
- * Tested up to: 7.1
- * Requires PHP: 8.3
+ * Tested up to: 7.2.0
+ * Requires PHP: 8.4
  * Text Domain: custom-login
  * GitHub Plugin URI: https://github.com/thefrosty/custom-login
  * Primary Branch: develop
@@ -36,6 +36,8 @@ use TheFrosty\CustomLogin\WpAdmin\SettingsUpgrades;
 use TheFrosty\CustomLogin\WpAdmin\Tracking;
 use TheFrosty\CustomLogin\WpLogin\Login;
 use TheFrosty\WpUtilities\Plugin\PluginFactory;
+use TheFrosty\WpUtilities\WpAdmin\DisablePluginAutoUpdates;
+use TheFrosty\WpUtilities\WpAdmin\DisablePluginUpdateCheck;
 
 /**
  * Maybe trigger an error notice "message" on the `admin_notices` action hook.
@@ -49,11 +51,11 @@ add_action('admin_notices', static function (): void {
     echo wp_kses_post(sprintf('<div class="error">%s</div>', wpautop($message)));
 });
 
-if (version_compare(PHP_VERSION, '8.3', '<')) {
+if (version_compare(PHP_VERSION, '8.4', '<')) {
     return add_filter('custom_login_shutdown_error_message', static function (): string {
         return sprintf(
             esc_html__(
-                'Notice: Custom Login version %1$s requires PHP version >= 8.3, you are running %2$s, all features are currently disabled.',
+                'Notice: Custom Login version %1$s requires PHP version >= 8.4, you are running %2$s, all features are currently disabled.',
                 'custom-login'
             ),
             get_plugin_data(__FILE__, false, false)['Version'],
@@ -77,10 +79,14 @@ if (file_exists(__DIR__ . '/vendor/autoload.php') && !$isLoaded) {
     require_once __DIR__ . '/vendor/autoload.php';
 }
 $plugin = PluginFactory::create('custom-login', __FILE__);
+$plugin->addServiceProvider(new ServiceProvider());
 $container = $plugin->getContainer();
-$container->register(new ServiceProvider());
+$isComposerInstall = CustomLogin::isComposerInstall($plugin->getDirectory());
 $plugin
     ->add(new Cron())
+    // Composer installs are updated with Composer, so don't offer (or auto-install) the WordPress.org (PHP 7.4) build.
+    ->addIfCondition(DisablePluginUpdateCheck::class, $isComposerInstall)
+    ->addIfCondition(DisablePluginAutoUpdates::class, $isComposerInstall)
     ->addOnHook(CustomLogin::class, 'plugins_loaded', 5)
     ->addOnHook(Dashboard::class, 'load-index.php', 5, true, [Dashboard::getArgs()])
     ->addOnHook(Extensions::class, 'init', 10, true, [$container])
@@ -89,6 +95,13 @@ $plugin
     ->addOnHook(Settings::class, 'init', 10, true, [$container])
     ->addOnHook(SettingsUpgrades::class, 'init', 10, null, [$container])
     ->addOnHook(Tracking::class, 'admin_init', 10, true, [$container]);
+
+if ($isComposerInstall) {
+    // Shown on the Plugins screen in place of the auto-updates toggle.
+    add_filter(DisablePluginAutoUpdates::TAG_SETTING_TEXT, static function (): string {
+        return __('Updates are managed with Composer.', 'custom-login');
+    });
+}
 
 add_action('plugins_loaded', static function () use ($plugin): void {
     do_action('custom_login_loaded_before_initialize', $plugin);

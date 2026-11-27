@@ -9,6 +9,7 @@ use TheFrosty\CustomLogin\ServiceProvider;
 use TheFrosty\CustomLogin\Settings\Api\Factory;
 use TheFrosty\CustomLogin\Settings\OptionKey;
 use TheFrosty\CustomLogin\Settings\OptionValue;
+use TheFrosty\CustomLogin\Settings\Sanitize;
 use TheFrosty\WpUtilities\Plugin\AbstractContainerProvider;
 use TheFrosty\WpUtilities\Plugin\HooksTrait;
 use TheFrosty\WpUtilities\Utils\Viewable;
@@ -127,7 +128,7 @@ class Login extends AbstractContainerProvider
         $view = $this->getView(ServiceProvider::WP_UTILITIES_VIEW);
         $view->render(
             'wp-login/style',
-            Options::getOptions(Factory::getSection(Factory::SECTION_DESIGN))
+            Sanitize::designOptionsForCss(Options::getOptions(Factory::getSection(Factory::SECTION_DESIGN)))
         );
     }
 

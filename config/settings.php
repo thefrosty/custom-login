@@ -8,7 +8,7 @@ use Dwnload\WpSettingsApi\Settings\FieldTypes;
 use TheFrosty\CustomLogin\Settings\Api\Factory;
 use TheFrosty\CustomLogin\Settings\OptionKey;
 use TheFrosty\CustomLogin\Settings\OptionValue;
-use function TheFrosty\CustomLogin\getWpRoles;
+use TheFrosty\CustomLogin\Settings\Sanitize;
 
 // phpcs:disable Generic.Files.LineLength.TooLong
 
@@ -48,7 +48,7 @@ return [
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_FILE,
                 SettingField::DEFAULT => '',
                 SettingField::SIZE => 'medium',
-                SettingField::SANITIZE => '\sanitize_text_field',
+                SettingField::SANITIZE => [Sanitize::class, 'cssUrl'],
             ],
             [
                 SettingField::NAME => OptionKey::HTML_USE_IMG_SRCSET,
@@ -125,7 +125,7 @@ return [
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_FILE,
                 SettingField::DEFAULT => '',
                 SettingField::SIZE => 'medium',
-                SettingField::SANITIZE => '\sanitize_text_field',
+                SettingField::SANITIZE => [Sanitize::class, 'cssUrl'],
             ],
             [
                 SettingField::NAME => OptionKey::LOGO_BACKGROUND_SIZE_WIDTH,
@@ -251,7 +251,7 @@ return [
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_FILE,
                 SettingField::DEFAULT => '',
                 SettingField::SIZE => 'medium',
-                SettingField::SANITIZE => '\sanitize_text_field',
+                SettingField::SANITIZE => [Sanitize::class, 'cssUrl'],
             ],
             [
                 SettingField::NAME => OptionKey::LOGIN_FORM_BACKGROUND_POSITION,
@@ -327,7 +327,7 @@ return [
                 SettingField::LABEL => __('Box shadow', 'custom-login'),
                 SettingField::DESC => sprintf(
                     __(
-                        'Use <a href="%s" target="_blank">box shadow</a> syntax w/ out color. <code>inset h-shadow v-shadow blur spread</code>',
+                        'Use <a href="%s" target="_blank">box shadow</a> syntax w/ out color. <code>inset h-shadow v-shadow blur spread</code>. Enter <code>none</code> to remove the shadow entirely.',
                         'custom-login'
                     ),
                     'https://www.w3schools.com/cssref/css3_pr_box-shadow.asp'
@@ -458,9 +458,12 @@ return [
                     esc_html('<script type="text/javascript">'),
                     __('Your custom javascript will output here', 'custom-login'),
                     esc_html('</script>')
+                ) . esc_html__(
+                    'Only users with the unfiltered_html capability can change this setting.',
+                    'custom-login'
                 ),
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_TEXTAREA,
-                SettingField::SANITIZE => 'wp_specialchars_decode',
+                SettingField::SANITIZE => [Sanitize::class, 'customJavascript'],
                 SettingField::ATTRIBUTES => [
                     'data-codemirror' => 'javascript',
                 ],
@@ -473,21 +476,6 @@ return [
                 SettingField::DESC => __('Allow Custom Login to hook into WordPress.', 'custom-login'),
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_CHECKBOX,
                 SettingField::DEFAULT => OptionValue::ON,
-            ],
-            [
-                SettingField::NAME => OptionKey::CAPABILITY,
-                SettingField::LABEL => __('Capability', 'custom-login'),
-                SettingField::DESC => sprintf(
-                    __(
-                        'Set the minimum user capability to manage these settings. The default capability is <code>%s</code>',
-                        'custom-login'
-                    ),
-                    'manage_options'
-                ),
-                SettingField::TYPE => FieldTypes::FIELD_TYPE_SELECT,
-                SettingField::SIZE => 'medium',
-                SettingField::DEFAULT => 'manage_options',
-                SettingField::OPTIONS => getWpRoles(),
             ],
             [
                 SettingField::NAME => OptionKey::EXTENSIONS_MENU,
@@ -509,7 +497,7 @@ return [
                 SettingField::NAME => OptionKey::TRACKING,
                 SettingField::LABEL => __('Usage tracking', 'custom-login'),
                 SettingField::DESC => __(
-                    'Allow Frosty Media to anonymously track how this plugin is used (and help us make the plugin better). Opt-in and receive a 20% discount code for all Custom Login extensions. Get your coupon code <a href="https://frosty.media/?p=21442">here</a>.',
+                    'Allow Frosty Media to collect usage data (site URL, admin email, WordPress version, theme, and plugin list) once a week to help us make the plugin better. Opt-in and receive a 20% discount code for all Custom Login extensions. Get your coupon code <a href="https://frosty.media/?p=21442">here</a>.',
                     'custom-login'
                 ),
                 SettingField::TYPE => FieldTypes::FIELD_TYPE_CHECKBOX,

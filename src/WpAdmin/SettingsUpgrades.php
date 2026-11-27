@@ -10,11 +10,13 @@ use TheFrosty\WpUtilities\Plugin\AbstractContainerProvider;
 use TheFrosty\WpUtilities\Utils\Viewable;
 use function add_options_page;
 use function admin_url;
+use function current_user_can;
 use function get_option;
 use function printf;
 use function sprintf;
 use function update_option;
 use function version_compare;
+use function wp_send_json_error;
 use function wp_send_json_success;
 
 /**
@@ -103,6 +105,9 @@ class SettingsUpgrades extends AbstractContainerProvider
     protected function triggerUpgrades(): void
     {
         check_ajax_referer(self::ACTION_NONCE);
+        if (!current_user_can('update_plugins')) {
+            wp_send_json_error(null, 403);
+        }
 
         $version = get_option(self::OPTION_VERSION);
 

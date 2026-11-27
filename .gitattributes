@@ -1,6 +1,7 @@
 /.git export-ignore
 /.github export-ignore
 /.idea export-ignore
+/.rector export-ignore
 /.wordpress-org export-ignore
 /bin export-ignore
 /coverage export-ignore

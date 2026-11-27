@@ -19,11 +19,13 @@ use TheFrosty\WpUtilities\Utils\Viewable;
 use function array_keys;
 use function array_merge;
 use function current_time;
+use function current_user_can;
 use function function_exists;
 use function get_bloginfo;
 use function get_option;
 use function get_plugins;
 use function home_url;
+use function ksort;
 use function sprintf;
 use function TheFrosty\CustomLogin\isSettingsPage;
 use function wp_get_theme;
@@ -136,7 +138,11 @@ class Tracking extends AbstractContainerProvider
      */
     protected function checkForOptIn(): void
     {
-        if (!isset($_GET['_wpnonce']) || !wp_verify_nonce($_GET['_wpnonce'], self::ACTION)) {
+        if (
+            !isset($_GET['_wpnonce']) ||
+            !wp_verify_nonce($_GET['_wpnonce'], self::ACTION) ||
+            !current_user_can('manage_options')
+        ) {
             return;
         }
         $section_id = Factory::getSection(Factory::SECTION_GENERAL);
@@ -155,7 +161,11 @@ class Tracking extends AbstractContainerProvider
      */
     protected function checkForOptOut(): void
     {
-        if (!isset($_GET['_wpnonce']) || !wp_verify_nonce($_GET['_wpnonce'], self::ACTION)) {
+        if (
+            !isset($_GET['_wpnonce']) ||
+            !wp_verify_nonce($_GET['_wpnonce'], self::ACTION) ||
+            !current_user_can('manage_options')
+        ) {
             return;
         }
         $section_id = Factory::getSection(Factory::SECTION_GENERAL);
@@ -199,7 +209,8 @@ class Tracking extends AbstractContainerProvider
                 ]
             ),
             esc_html__(
-                'Allow Custom Login to anonymously track how this plugin is used and help us make the plugin better?',
+                // phpcs:ignore Generic.Files.LineLength.TooLong
+                'Allow Custom Login to send usage data (site URL, admin email, WordPress version, theme, and plugin list) once a week to help us make the plugin better?',
                 'custom-login'
             ),
             esc_html__('Allow', 'custom-login'),
@@ -257,7 +268,7 @@ class Tracking extends AbstractContainerProvider
         $data['post_count'] = wp_count_posts()->publish;
         $data['cl_version'] = CustomLogin::VERSION;
         $data = array_merge($data, $extra_data);
-        sort($data);
+        ksort($data);
 
         return $data;
     }

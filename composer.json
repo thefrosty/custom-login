@@ -19,31 +19,31 @@
     },
     "optimize-autoloader": true,
     "platform": {
-      "php": "8.3"
+      "php": "8.4.1"
     },
     "preferred-install": "dist",
     "sort-packages": true
   },
   "require": {
-    "php": "^8.3",
+    "php": "^8.4",
     "ext-json": "*",
-    "dwnload/edd-software-license-manager": "^2.1",
-    "dwnload/wp-settings-api": "^3.11",
-    "pimple/pimple": "^3.5",
+    "dwnload/edd-software-license-manager": "^2.3.3",
+    "dwnload/wp-settings-api": "^4.1",
+    "php-di/php-di": "^7.0.7",
     "psr/container": "^2.0",
-    "thefrosty/wp-utilities": "^3.8"
+    "thefrosty/wp-utilities": "^4.2"
   },
   "require-dev": {
     "ext-simplexml": "*",
     "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
-    "php-stubs/wordpress-stubs": "^6.8",
+    "php-stubs/wordpress-stubs": "^7.1",
     "phpcompatibility/php-compatibility": "^9.3",
     "phpunit/php-code-coverage": "^11",
-    "phpunit/phpunit": "^11",
+    "phpunit/phpunit": "^11.3.6",
     "rector/rector": "^2.0",
     "roots/wordpress": "^7.0",
     "slevomat/coding-standard": "^8.18",
-    "squizlabs/php_codesniffer": "^3.2",
+    "squizlabs/php_codesniffer": "^3.11",
     "symfony/var-dumper": "^6.4 || ^7.2",
     "szepeviktor/phpstan-wordpress": "^2.0",
     "wp-coding-standards/wpcs": "^3.1",
@@ -69,7 +69,7 @@
     "phpcs": "bash ./vendor/thefrosty/wp-utilities/bin/phpcs.sh --standard=phpcs-ruleset.xml",
     "phpcs:fix": "bash ./vendor/thefrosty/wp-utilities/bin/phpcbf.sh --standard=phpcs-ruleset.xml",
     "phpunit": "./vendor/bin/phpunit --colors",
-    "phpunit-coverage": "./vendor/bin/phpunit --colors --coverage-html ./tests/results && php ./tests/clover-results.php ./tests/clover.xml 01",
+    "phpunit-coverage": "./vendor/bin/phpunit --colors && php ./tests/clover-results.php ./tests/clover.xml 90",
     "refactor": "rector --ansi",
     "test:refactor": "rector --dry-run --debug --ansi",
     "tests": [
@@ -95,6 +95,7 @@
       "phpstan.neon.dist",
       "phpunit.xml",
       "README.md",
+      ".rector",
       "rector.php"
     ]
   }
