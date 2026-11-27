@@ -53,7 +53,10 @@ class DisableAutoUpdatesTest extends TestCase
                 $this->invoke($this->disable_auto_updates, 'disableAutoUpdate', $update, $this->item())
             );
             $other = $this->item(self::OTHER_PLUGIN);
-            $this->assertSame($update, $this->invoke($this->disable_auto_updates, 'disableAutoUpdate', $update, $other));
+            $this->assertSame(
+                $update,
+                $this->invoke($this->disable_auto_updates, 'disableAutoUpdate', $update, $other)
+            );
         }
         $this->assertTrue($this->invoke($this->disable_auto_updates, 'disableAutoUpdate', true, null));
         $this->assertSame(1, $this->invoke($this->disable_auto_updates, 'disableAutoUpdate', 1, (object)[]));
