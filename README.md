@@ -14,7 +14,7 @@
 **Tags:** admin, branding, customization, custom login, logo  
 **Requires at least:** 6.7  
 **Tested up to:** 7.1.0  
-**Requires PHP**: 8.3  
+**Requires PHP**: 8.4  
 **Stable tag:** 5.1.3  
 **License:** GPLv2 or later  
 **License URI:** https://www.gnu.org/licenses/gpl-2.0.html
@@ -26,7 +26,7 @@ Custom Login allows you to easily customize your admin login page, works great f
 Custom Login 2.0 was 140% faster than version 1.0, and version 4.0 is now even better!
 
 > NOTE: For version 5, this plugin should be installed via composer or from WordPress only. 
-> If you are not running PHP 8.3, grab the php74 release asset. 
+> If you are not running PHP 8.4, grab the php74 release asset. 
 
 For more information, visit the official [Custom Login](https://frosty.media/plugins/custom-login/) page.
 
@@ -172,6 +172,11 @@ Custom Login showcase on the [Flickr group](https://flickr.com/groups/custom-log
 ](https://ps.w.org/custom-login/assets/screenshot-4.png)
 
 ## Changelog
+
+### Unreleased
+
+* Requires PHP >= 8.4 (Composer/GitHub installs; the php74 release asset is unchanged).
+* Bump dependencies to their lowest PHP 8.4 releases: WP Utilities ^4.0, WP Settings API ^4.1, EDD Software License Manager ^2.3.3.
 
 ### Version 5.1.3 (2026/08/13) =
 

@@ -8,7 +8,7 @@
  * Author URI: https://austin.passy.co
  * Requires at least: 6.7
  * Tested up to: 7.1
- * Requires PHP: 8.3
+ * Requires PHP: 8.4
  * Text Domain: custom-login
  * GitHub Plugin URI: https://github.com/thefrosty/custom-login
  * Primary Branch: develop
@@ -35,6 +35,7 @@ use TheFrosty\CustomLogin\WpAdmin\Extensions;
 use TheFrosty\CustomLogin\WpAdmin\SettingsUpgrades;
 use TheFrosty\CustomLogin\WpAdmin\Tracking;
 use TheFrosty\CustomLogin\WpLogin\Login;
+use TheFrosty\WpUtilities\Plugin\Container;
 use TheFrosty\WpUtilities\Plugin\PluginFactory;
 
 /**
@@ -49,11 +50,11 @@ add_action('admin_notices', static function (): void {
     echo wp_kses_post(sprintf('<div class="error">%s</div>', wpautop($message)));
 });
 
-if (version_compare(PHP_VERSION, '8.3', '<')) {
+if (version_compare(PHP_VERSION, '8.4', '<')) {
     return add_filter('custom_login_shutdown_error_message', static function (): string {
         return sprintf(
             esc_html__(
-                'Notice: Custom Login version %1$s requires PHP version >= 8.3, you are running %2$s, all features are currently disabled.',
+                'Notice: Custom Login version %1$s requires PHP version >= 8.4, you are running %2$s, all features are currently disabled.',
                 'custom-login'
             ),
             get_plugin_data(__FILE__, false, false)['Version'],
@@ -76,7 +77,12 @@ if (!is_readable(__DIR__ . '/vendor/autoload.php') && !$isLoaded) {
 if (file_exists(__DIR__ . '/vendor/autoload.php') && !$isLoaded) {
     require_once __DIR__ . '/vendor/autoload.php';
 }
-$plugin = PluginFactory::create('custom-login', __FILE__);
+
+/*
+ * Keep a Pimple container (Custom Login 5.x registers its ServiceProvider with Pimple's `register()`):
+ * wp-utilities 4 would otherwise use PHP-DI whenever it's installed on the site.
+ */
+$plugin = PluginFactory::create('custom-login', __FILE__, new Container());
 $container = $plugin->getContainer();
 $container->register(new ServiceProvider());
 $plugin

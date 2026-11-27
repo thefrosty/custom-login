@@ -17,7 +17,7 @@
     },
     "optimize-autoloader": true,
     "platform": {
-      "php": "8.3"
+      "php": "8.4.1"
     },
     "preferred-install": "dist",
     "sort-packages": true
@@ -25,11 +25,11 @@
   "require": {
     "php": ">=7.4",
     "ext-json": "*",
-    "dwnload/edd-software-license-manager": "^2.1",
-    "dwnload/wp-settings-api": "^3.11",
+    "dwnload/edd-software-license-manager": "^2.3.3",
+    "dwnload/wp-settings-api": "^4.1",
     "pimple/pimple": "^3.5",
     "psr/container": "^2.0",
-    "thefrosty/wp-utilities": "^3.8"
+    "thefrosty/wp-utilities": "^4.0"
   },
   "require-dev": {
     "php-stubs/wordpress-stubs": "^7.1",
