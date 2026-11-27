@@ -29,9 +29,9 @@
     "ext-json": "*",
     "dwnload/edd-software-license-manager": "^2.3.3",
     "dwnload/wp-settings-api": "^4.1",
-    "pimple/pimple": "^3.5",
+    "php-di/php-di": "^7.0.7",
     "psr/container": "^2.0",
-    "thefrosty/wp-utilities": "^4.0"
+    "thefrosty/wp-utilities": "^4.1"
   },
   "require-dev": {
     "ext-simplexml": "*",

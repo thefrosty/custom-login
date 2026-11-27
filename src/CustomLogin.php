@@ -15,8 +15,10 @@ use TheFrosty\WpUtilities\Plugin\AbstractHookProvider;
 use function add_query_arg;
 use function admin_url;
 use function apply_filters;
+use function is_readable;
 use function printf;
 use function sprintf;
+use function trailingslashit;
 use function untrailingslashit;
 use function update_option;
 
@@ -30,6 +32,7 @@ class CustomLogin extends AbstractHookProvider
     use Activator;
 
     public const string API_URL = 'https://frosty.media/';
+    public const string BUNDLED_AUTOLOADER = 'vendor/autoload.php';
     public const string OPTION = 'custom_login';
     public const string VERSION = '5.1.3';
 
@@ -41,6 +44,18 @@ class CustomLogin extends AbstractHookProvider
     public static function getApiUrl(string $uri = ''): string
     {
         return sprintf('%1$s/%2$s', untrailingslashit(getenv('CUSTOM_LOGIN_API_URL') ?: self::API_URL), $uri);
+    }
+
+    /**
+     * Whether Custom Login was installed with Composer (`composer require thefrosty/custom-login`) rather than from
+     * a WordPress.org or GitHub release zip. Release zips bundle their dependencies (`vendor/autoload.php`); the
+     * Composer package excludes `/vendor` (see `.gitattributes`), so the site's own autoloader loads them instead.
+     * @param string $directory The plugin's directory.
+     * @return bool
+     */
+    public static function isComposerInstall(string $directory): bool
+    {
+        return !is_readable(trailingslashit($directory) . self::BUNDLED_AUTOLOADER);
     }
 
     /**

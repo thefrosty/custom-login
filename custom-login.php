@@ -35,8 +35,8 @@ use TheFrosty\CustomLogin\WpAdmin\Extensions;
 use TheFrosty\CustomLogin\WpAdmin\SettingsUpgrades;
 use TheFrosty\CustomLogin\WpAdmin\Tracking;
 use TheFrosty\CustomLogin\WpLogin\Login;
-use TheFrosty\WpUtilities\Plugin\Container;
 use TheFrosty\WpUtilities\Plugin\PluginFactory;
+use TheFrosty\WpUtilities\WpAdmin\DisablePluginUpdateCheck;
 
 /**
  * Maybe trigger an error notice "message" on the `admin_notices` action hook.
@@ -77,16 +77,13 @@ if (!is_readable(__DIR__ . '/vendor/autoload.php') && !$isLoaded) {
 if (file_exists(__DIR__ . '/vendor/autoload.php') && !$isLoaded) {
     require_once __DIR__ . '/vendor/autoload.php';
 }
-
-/*
- * Keep a Pimple container (Custom Login 5.x registers its ServiceProvider with Pimple's `register()`):
- * wp-utilities 4 would otherwise use PHP-DI whenever it's installed on the site.
- */
-$plugin = PluginFactory::create('custom-login', __FILE__, new Container());
+$plugin = PluginFactory::create('custom-login', __FILE__);
+$plugin->addServiceProvider(new ServiceProvider());
 $container = $plugin->getContainer();
-$container->register(new ServiceProvider());
 $plugin
     ->add(new Cron())
+    // Composer installs are updated with Composer, so don't offer the WordPress.org (PHP 7.4) build as an update.
+    ->addIfCondition(DisablePluginUpdateCheck::class, CustomLogin::isComposerInstall($plugin->getDirectory()))
     ->addOnHook(CustomLogin::class, 'plugins_loaded', 5)
     ->addOnHook(Dashboard::class, 'load-index.php', 5, true, [Dashboard::getArgs()])
     ->addOnHook(Extensions::class, 'init', 10, true, [$container])

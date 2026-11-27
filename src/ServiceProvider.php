@@ -4,31 +4,30 @@ declare(strict_types=1);
 
 namespace TheFrosty\CustomLogin;
 
-use Pimple\Container as PimpleContainer;
-use Pimple\ServiceProviderInterface;
-use TheFrosty\WpUtilities\Utils\View;
+use TheFrosty\WpUtilities\Plugin\DefaultServiceProvider;
 use function dirname;
 
 /**
  * Class ServiceProvider
- * @package TheFrosty
+ * Container entries for Custom Login: wp-utilities' defaults (the current request and the shared View),
+ * with the View loading Custom Login's templates. Registered with `Plugin::addServiceProvider()`, so it works
+ * with whichever container the plugin uses (PHP-DI by default).
+ * @package TheFrosty\CustomLogin
  */
-class ServiceProvider implements ServiceProviderInterface
+class ServiceProvider extends DefaultServiceProvider
 {
 
-    public const string WP_UTILITIES_VIEW = 'wp_utilities.view';
+    /**
+     * Container ID of the shared View (kept for backwards compatibility, same as `DefaultServiceProvider::VIEW`).
+     */
+    public const string WP_UTILITIES_VIEW = parent::VIEW;
 
     /**
-     * Register services.
-     * @param PimpleContainer $pimple Container instance.
+     * Directories the shared View loads templates from.
+     * @return string[]
      */
-    public function register(PimpleContainer $pimple): void
+    protected function getViewPaths(): array
     {
-        $pimple[self::WP_UTILITIES_VIEW] = static function (): View {
-            $view = new View();
-            $view->addPath(dirname(__DIR__) . '/resources/views/');
-
-            return $view;
-        };
+        return [dirname(__DIR__) . '/resources/views/'];
     }
 }

@@ -53,7 +53,7 @@ class CustomLoginTest extends TestCase
     public function testCustomLogin(): void
     {
         $this->assertInstanceOf(CustomLogin::class, $this->custom_login);
-        $this->assertCount(3, $this->reflection->getConstants());
+        $this->assertCount(4, $this->reflection->getConstants());
     }
 
     /**
@@ -64,6 +64,24 @@ class CustomLoginTest extends TestCase
         $this->assertSame('https://frosty.media/checkout/', CustomLogin::getApiUrl('checkout/'));
         putenv('CUSTOM_LOGIN_API_URL=https://example.test/');
         $this->assertSame('https://example.test/api', CustomLogin::getApiUrl('api'));
+    }
+
+    /**
+     * Test isComposerInstall(): release zips bundle `vendor/autoload.php`, Composer installs don't.
+     */
+    public function testIsComposerInstall(): void
+    {
+        $directory = trailingslashit(sys_get_temp_dir()) . 'custom-login-install-' . uniqid();
+        wp_mkdir_p($directory . '/vendor');
+        $this->assertTrue(CustomLogin::isComposerInstall($directory));
+
+        file_put_contents(trailingslashit($directory) . CustomLogin::BUNDLED_AUTOLOADER, '<?php');
+        $this->assertFalse(CustomLogin::isComposerInstall($directory));
+        $this->assertFalse(CustomLogin::isComposerInstall($directory . '/'));
+
+        unlink(trailingslashit($directory) . CustomLogin::BUNDLED_AUTOLOADER);
+        rmdir($directory . '/vendor');
+        rmdir($directory);
     }
 
     /**

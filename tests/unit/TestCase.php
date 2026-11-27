@@ -47,7 +47,7 @@ class TestCase extends PhpUnitTestCase
         $this->container = $this->plugin->getContainer();
         $_SERVER['REQUEST_URI'] ??= '/wp-admin/options-general.php';
         if (!$this->container->has(ServiceProvider::WP_UTILITIES_VIEW)) {
-            $this->container->register(new ServiceProvider());
+            $this->plugin->addServiceProvider(new ServiceProvider());
         }
     }
 
