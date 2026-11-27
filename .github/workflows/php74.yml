@@ -48,16 +48,19 @@ jobs:
       WP_ADMIN_USER: admin
       WP_ADMIN_PASSWORD: password
       ACCEPTANCE_DIR: ${{ github.workspace }}/repo/tests/acceptance
+      CHECKS_DIR: ${{ github.workspace }}/repo/tests/ci
       WP_DIR: ${{ github.workspace }}/wordpress
       PLUGIN_DIR: ${{ github.workspace }}/wordpress/wp-content/plugins/custom-login
 
     steps:
-      # Only the browser tests are needed from the repository; the plugin itself comes from the package.
-      - name: Checkout acceptance tests
+      # Only the tests are needed from the repository; the plugin itself comes from the package.
+      - name: Checkout tests
         uses: actions/checkout@v7
         with:
           path: repo
-          sparse-checkout: tests/acceptance
+          sparse-checkout: |
+            tests/acceptance
+            tests/ci
 
       - name: Setup PHP 7.4
         uses: shivammathur/setup-php@v2
@@ -146,6 +149,12 @@ jobs:
             '{"label_color":"#ff0000","login_form_width":"400","custom_html":"<p id=\"ci-html\">CI</p>","custom_jquery":"jQuery(\"body\").addClass(\"ci-custom-js\");"}' \
             --format=json
           wp cron event run --due-now
+
+      - name: Check WordPress.org update checks still include the release package
+        run: |
+          # The release zip bundles vendor/, so DisablePluginUpdateCheck (Composer installs only) isn't registered.
+          cd "$WP_DIR"
+          wp eval-file "$CHECKS_DIR/update-check.php" included
 
       - name: Start PHP 7.4 web server
         run: |

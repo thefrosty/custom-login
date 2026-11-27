@@ -1,0 +1,140 @@
+name: Composer Install
+
+# Installs Custom Login the way a Composer-managed site does: a Packagist-style dist (`git archive`, so
+# `.gitattributes` export-ignore applies and there's no bundled vendor/) installed by the site's root
+# composer.json with composer/installers, and loaded by the site's own autoloader. Then checks the plugin
+# activates without PHP errors and is excluded from WordPress.org update checks (DisablePluginUpdateCheck).
+on:
+  pull_request:
+    branches-ignore:
+      - main
+      - master
+      - translate/*
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Cancels all previous workflow runs for the same branch that have not yet completed.
+concurrency:
+  group: "${{ github.workflow }}-${{ github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Test (Composer install)
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_DATABASE: wordpress
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - "3306:3306"
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
+    env:
+      DIST_DIR: ${{ github.workspace }}/dist
+      SITE_DIR: ${{ github.workspace }}/site
+      WP_DIR: ${{ github.workspace }}/site/wordpress
+      PLUGIN_DIR: ${{ github.workspace }}/site/wordpress/wp-content/plugins/custom-login
+      CHECKS_DIR: ${{ github.workspace }}/repo/tests/ci
+      WP_ADMIN_USER: admin
+      WP_ADMIN_PASSWORD: password
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          path: repo
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          coverage: none
+          extensions: curl, mysqli, zip
+          tools: composer:v2, wp-cli
+        env:
+          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Export the package (like Packagist's dist)
+        run: |
+          mkdir -p "$DIST_DIR"
+          git -C repo archive --format=tar HEAD | tar -x -C "$DIST_DIR"
+          test -f "$DIST_DIR/custom-login.php"
+          if [ -e "$DIST_DIR/vendor" ]; then
+            echo "::error::The exported package must not contain vendor/"
+            exit 1
+          fi
+
+      - name: Install WordPress
+        run: |
+          mkdir -p "$WP_DIR" && cd "$WP_DIR"
+          wp core download
+          # Like a Composer-managed site (e.g. Bedrock): wp-config.php loads the site's autoloader.
+          wp config create --dbname=wordpress --dbuser=root --dbpass=root \
+            --dbhost=127.0.0.1:${{ job.services.mysql.ports['3306'] }} --skip-check --extra-php <<'PHP'
+          require_once dirname(__DIR__) . '/vendor/autoload.php';
+          PHP
+          wp config set WP_DEBUG true --raw
+          wp config set WP_DEBUG_LOG true --raw
+          wp config set WP_DEBUG_DISPLAY false --raw
+          wp core install --url=http://127.0.0.1 --title="Composer CI" \
+            --admin_user="$WP_ADMIN_USER" --admin_password="$WP_ADMIN_PASSWORD" \
+            --admin_email=ci@example.com --skip-email
+
+      - name: Install Custom Login with Composer
+        run: |
+          cd "$SITE_DIR"
+          cat > composer.json <<JSON
+          {
+            "name": "ci/composer-site",
+            "repositories": [
+              {
+                "type": "path",
+                "url": "$DIST_DIR",
+                "options": {"symlink": false, "versions": {"thefrosty/custom-login": "dev-ci"}}
+              }
+            ],
+            "require": {
+              "composer/installers": "^2.0",
+              "thefrosty/custom-login": "dev-ci"
+            },
+            "extra": {
+              "installer-paths": {"wordpress/wp-content/plugins/{\$name}/": ["type:wordpress-plugin"]}
+            },
+            "config": {"allow-plugins": {"composer/installers": true}}
+          }
+          JSON
+          composer install --no-interaction --no-progress --no-dev
+          test -f "$PLUGIN_DIR/custom-login.php"
+          if [ -e "$PLUGIN_DIR/vendor" ]; then
+            echo "::error::A Composer install must not have a bundled vendor/"
+            exit 1
+          fi
+
+      - name: Activate the plugin
+        run: |
+          cd "$WP_DIR"
+          wp plugin activate custom-login
+          wp plugin list --name=custom-login --field=status | grep -qx active
+
+      - name: Check WordPress.org update checks are disabled
+        run: |
+          cd "$WP_DIR"
+          wp eval-file "$CHECKS_DIR/update-check.php" excluded
+
+      - name: Check for PHP errors
+        if: always()
+        run: |
+          log="$WP_DIR/wp-content/debug.log"
+          if [ -f "$log" ]; then
+            echo "::group::$log"
+            cat "$log"
+            echo "::endgroup::"
+            if grep -E 'PHP (Fatal error|Parse error)|Uncaught' "$log" | grep -q .; then
+              echo "::error::PHP fatal errors were logged"
+              exit 1
+            fi
+          fi
