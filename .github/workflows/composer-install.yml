@@ -39,6 +39,8 @@ jobs:
       WP_DIR: ${{ github.workspace }}/site/wordpress
       PLUGIN_DIR: ${{ github.workspace }}/site/wordpress/wp-content/plugins/custom-login
       CHECKS_DIR: ${{ github.workspace }}/repo/tests/ci
+      # Version given to the exported package, so the site installs it instead of a Packagist release.
+      PACKAGE_VERSION: dev-ci
       WP_ADMIN_USER: admin
       WP_ADMIN_PASSWORD: password
 
@@ -67,6 +69,11 @@ jobs:
             echo "::error::The exported package must not contain vendor/"
             exit 1
           fi
+          # A path repository needs a version when the package isn't a git checkout.
+          php -r '$f = getenv("DIST_DIR") . "/composer.json";
+            $d = json_decode(file_get_contents($f), true);
+            $d["version"] = getenv("PACKAGE_VERSION");
+            file_put_contents($f, json_encode($d, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));'
 
       - name: Download WordPress
         run: |
@@ -91,12 +98,12 @@ jobs:
               {
                 "type": "path",
                 "url": "$DIST_DIR",
-                "options": {"symlink": false, "versions": {"thefrosty/custom-login": "dev-ci"}}
+                "options": {"symlink": false}
               }
             ],
             "require": {
               "composer/installers": "^2.0",
-              "thefrosty/custom-login": "dev-ci"
+              "thefrosty/custom-login": "$PACKAGE_VERSION"
             },
             "extra": {
               "installer-paths": {"wordpress/wp-content/plugins/{\$name}/": ["type:wordpress-plugin"]}
