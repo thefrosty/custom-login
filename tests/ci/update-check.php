@@ -5,7 +5,7 @@
  * Runs a sample `api.wordpress.org/plugins/update-check/` request through the `http_request_args` filter, the
  * way `wp_update_plugins()` does, and asks `auto_update_plugin` whether an update may be installed, the way
  * `WP_Automatic_Updater::should_update()` does. This exercises wp-utilities' DisablePluginUpdateCheck and
- * Custom Login's DisableAutoUpdates (both registered by custom-login.php for Composer installs) end to end.
+ * DisablePluginAutoUpdates (both registered by custom-login.php for Composer installs) end to end.
  *
  * Usage: wp eval-file tests/ci/update-check.php <excluded|included>
  *   - excluded: Composer installs (no bundled vendor/), which are updated with Composer: not sent to the update
@@ -25,6 +25,7 @@ const CUSTOM_LOGIN_CI_EXPECT_INCLUDED = 'included';
 const CUSTOM_LOGIN_CI_UPDATE_CHECK_URL = 'https://api.wordpress.org/plugins/update-check/1.1/';
 const CUSTOM_LOGIN_CI_OTHER_PLUGIN = 'hello.php';
 const CUSTOM_LOGIN_CI_AUTO_UPDATE_TOGGLE = '<a class="toggle-auto-update" href="#">Enable auto-updates</a>';
+const CUSTOM_LOGIN_CI_AUTO_UPDATE_NOTE = 'Updates are managed with Composer.';
 
 $expect = $args[0] ?? '';
 if (!in_array($expect, [CUSTOM_LOGIN_CI_EXPECT_EXCLUDED, CUSTOM_LOGIN_CI_EXPECT_INCLUDED], true)) {
@@ -98,6 +99,9 @@ if ($expect === CUSTOM_LOGIN_CI_EXPECT_INCLUDED && $auto_update !== true) {
 $toggle = apply_filters('plugin_auto_update_setting_html', CUSTOM_LOGIN_CI_AUTO_UPDATE_TOGGLE, $basename, []);
 if ($expect === CUSTOM_LOGIN_CI_EXPECT_EXCLUDED && $toggle === CUSTOM_LOGIN_CI_AUTO_UPDATE_TOGGLE) {
     WP_CLI::error(sprintf('%s still shows the auto-updates toggle.', $basename));
+}
+if ($expect === CUSTOM_LOGIN_CI_EXPECT_EXCLUDED && strpos($toggle, CUSTOM_LOGIN_CI_AUTO_UPDATE_NOTE) === false) {
+    WP_CLI::error(sprintf('%s is missing the "%s" note.', $basename, CUSTOM_LOGIN_CI_AUTO_UPDATE_NOTE));
 }
 if ($expect === CUSTOM_LOGIN_CI_EXPECT_INCLUDED && $toggle !== CUSTOM_LOGIN_CI_AUTO_UPDATE_TOGGLE) {
     WP_CLI::error(sprintf('%s is missing the auto-updates toggle.', $basename));

@@ -31,12 +31,12 @@ use TheFrosty\CustomLogin\Settings\Api\Factory;
 use TheFrosty\CustomLogin\Settings\ImportExport;
 use TheFrosty\CustomLogin\Settings\Settings;
 use TheFrosty\CustomLogin\WpAdmin\Dashboard;
-use TheFrosty\CustomLogin\WpAdmin\DisableAutoUpdates;
 use TheFrosty\CustomLogin\WpAdmin\Extensions;
 use TheFrosty\CustomLogin\WpAdmin\SettingsUpgrades;
 use TheFrosty\CustomLogin\WpAdmin\Tracking;
 use TheFrosty\CustomLogin\WpLogin\Login;
 use TheFrosty\WpUtilities\Plugin\PluginFactory;
+use TheFrosty\WpUtilities\WpAdmin\DisablePluginAutoUpdates;
 use TheFrosty\WpUtilities\WpAdmin\DisablePluginUpdateCheck;
 
 /**
@@ -86,7 +86,7 @@ $plugin
     ->add(new Cron())
     // Composer installs are updated with Composer, so don't offer (or auto-install) the WordPress.org (PHP 7.4) build.
     ->addIfCondition(DisablePluginUpdateCheck::class, $isComposerInstall)
-    ->addIfCondition(DisableAutoUpdates::class, $isComposerInstall)
+    ->addIfCondition(DisablePluginAutoUpdates::class, $isComposerInstall)
     ->addOnHook(CustomLogin::class, 'plugins_loaded', 5)
     ->addOnHook(Dashboard::class, 'load-index.php', 5, true, [Dashboard::getArgs()])
     ->addOnHook(Extensions::class, 'init', 10, true, [$container])
@@ -95,6 +95,13 @@ $plugin
     ->addOnHook(Settings::class, 'init', 10, true, [$container])
     ->addOnHook(SettingsUpgrades::class, 'init', 10, null, [$container])
     ->addOnHook(Tracking::class, 'admin_init', 10, true, [$container]);
+
+if ($isComposerInstall) {
+    // Shown on the Plugins screen in place of the auto-updates toggle.
+    add_filter(DisablePluginAutoUpdates::TAG_SETTING_TEXT, static function (): string {
+        return __('Updates are managed with Composer.', 'custom-login');
+    });
+}
 
 add_action('plugins_loaded', static function () use ($plugin): void {
     do_action('custom_login_loaded_before_initialize', $plugin);
