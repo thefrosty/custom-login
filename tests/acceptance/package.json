@@ -1,0 +1,14 @@
+{
+  "name": "custom-login-acceptance-tests",
+  "private": true,
+  "description": "Browser acceptance tests for the PHP 7.4 (Rector downgraded) Custom Login package.",
+  "scripts": {
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.62.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

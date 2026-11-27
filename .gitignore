@@ -40,3 +40,5 @@ Desktop.ini
 .svn
 publish
 .idea
+tests/acceptance/playwright-report/
+tests/acceptance/test-results/

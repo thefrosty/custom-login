@@ -1,8 +1,9 @@
 name: PHP 7.4 Compatibility
 
 # Builds the Rector-downgraded release package (same as `downgrade.yml`) and checks that it
-# actually works on PHP 7.4: every PHP file lints, and the plugin activates and renders
-# wp-login.php and its admin pages on a real WordPress install without fatal errors.
+# actually works on PHP 7.4: every PHP file lints, the plugin activates and renders wp-login.php
+# and its admin pages on a real WordPress install without fatal errors, and browser acceptance
+# tests (tests/acceptance, Playwright) use the login screen and settings UI.
 on:
   pull_request:
     branches-ignore:
@@ -44,10 +45,20 @@ jobs:
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
     env:
       SITE_URL: http://127.0.0.1:8080
+      WP_ADMIN_USER: admin
+      WP_ADMIN_PASSWORD: password
+      ACCEPTANCE_DIR: ${{ github.workspace }}/repo/tests/acceptance
       WP_DIR: ${{ github.workspace }}/wordpress
       PLUGIN_DIR: ${{ github.workspace }}/wordpress/wp-content/plugins/custom-login
 
     steps:
+      # Only the browser tests are needed from the repository; the plugin itself comes from the package.
+      - name: Checkout acceptance tests
+        uses: actions/checkout@v7
+        with:
+          path: repo
+          sparse-checkout: tests/acceptance
+
       - name: Setup PHP 7.4
         uses: shivammathur/setup-php@v2
         with:
@@ -117,7 +128,8 @@ jobs:
           wp config set AUTOMATIC_UPDATER_DISABLED true --raw
           wp config set WP_AUTO_UPDATE_CORE false --raw
           wp core install --url="$SITE_URL" --title="PHP 7.4 CI" \
-            --admin_user=admin --admin_password=password --admin_email=ci@example.com --skip-email
+            --admin_user="$WP_ADMIN_USER" --admin_password="$WP_ADMIN_PASSWORD" \
+            --admin_email=ci@example.com --skip-email
           # Older versions can be left asking for a database update, which redirects every admin page.
           wp core update-db
           wp core version
@@ -128,9 +140,10 @@ jobs:
           cd "$WP_DIR"
           wp plugin activate custom-login
           wp plugin list --name=custom-login --field=status | grep -qx active
-          # Exercise the design settings when building the login stylesheet.
+          # Exercise the design settings when building the login stylesheet, footer HTML and custom javascript.
+          # tests/acceptance/custom-login.spec.js asserts these values.
           wp option update custom_login_design \
-            '{"label_color":"#ff0000","login_form_width":"400","custom_html":"<p id=\"ci-html\">CI</p>"}' \
+            '{"label_color":"#ff0000","login_form_width":"400","custom_html":"<p id=\"ci-html\">CI</p>","custom_jquery":"jQuery(\"body\").addClass(\"ci-custom-js\");"}' \
             --format=json
           wp cron event run --due-now
 
@@ -180,13 +193,38 @@ jobs:
 
           # Log in and load the admin pages the plugin adds or hooks into.
           fetch /wp-login.php login-post.html \
-            --data-urlencode 'log=admin' --data-urlencode 'pwd=password' \
+            --data-urlencode "log=$WP_ADMIN_USER" --data-urlencode "pwd=$WP_ADMIN_PASSWORD" \
             --data-urlencode 'testcookie=1' --data-urlencode "redirect_to=$SITE_URL/wp-admin/"
           fetch /wp-admin/ dashboard.html
           fetch '/wp-admin/options-general.php?page=custom-login' settings.html
           grep -q 'custom_login_design' settings.html
           fetch '/wp-admin/options-general.php?page=custom-login/extensions' extensions.html
           fetch /wp-admin/plugins.php plugins.html
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      - name: Install Playwright
+        working-directory: ${{ env.ACCEPTANCE_DIR }}
+        run: |
+          npm install --no-audit --no-fund
+          npx playwright install --with-deps chromium
+
+      - name: Run browser acceptance tests
+        working-directory: ${{ env.ACCEPTANCE_DIR }}
+        run: npx playwright test
+
+      - name: Upload Playwright report
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: playwright-report-wp-${{ matrix.wp-version }}
+          path: |
+            ${{ env.ACCEPTANCE_DIR }}/playwright-report/
+            ${{ env.ACCEPTANCE_DIR }}/test-results/
+          retention-days: 7
 
       - name: Check for PHP errors
         if: always()
