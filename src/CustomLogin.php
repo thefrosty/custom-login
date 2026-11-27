@@ -34,7 +34,7 @@ class CustomLogin extends AbstractHookProvider
     public const string API_URL = 'https://frosty.media/';
     public const string BUNDLED_AUTOLOADER = 'vendor/autoload.php';
     public const string OPTION = 'custom_login';
-    public const string VERSION = '5.1.3';
+    public const string VERSION = '6.0.0';
 
     /**
      * Get the API URL.
