@@ -176,7 +176,7 @@ Custom Login showcase on the [Flickr group](https://flickr.com/groups/custom-log
 ### Unreleased
 
 * Requires PHP >= 8.4 (Composer/GitHub installs; the php74 release asset is unchanged).
-* Bump dependencies to their lowest PHP 8.4 releases: WP Utilities ^3.11, WP Settings API ^4.1, EDD Software License Manager ^2.3.3.
+* Bump dependencies to their lowest PHP 8.4 releases: WP Utilities ^3.11 || ^4.0, WP Settings API ^4.1, EDD Software License Manager ^2.3.3.
 
 ### Version 5.1.3 (2026/08/13) =
 
