@@ -23,9 +23,9 @@ Custom Login allows you to easily customize your admin login page, works great f
 
 ## Description
 
-Custom Login 2.0 was 140% faster than version 1.0, and version 4.0 is now even better!
+Custom Login 2.0 was 140% faster than version 1.0, and version >= 4.0 is now even better!
 
-> NOTE: For version 5, this plugin should be installed via composer or from WordPress only. 
+> NOTE: For version 6.x, this plugin should be installed via composer or from WordPress only. 
 > If you are not running PHP 8.4, grab the php74 release asset. 
 
 For more information, visit the official [Custom Login](https://frosty.media/plugins/custom-login/) page.
@@ -104,7 +104,7 @@ Share you designs with the community!**
 Installation via composer:
 
 ```bash
-composer require thefrosty/custom-login:^5
+composer require thefrosty/custom-login:^6
 ```
 
 Or, follow the steps below to install the plugin.

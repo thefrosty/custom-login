@@ -3,7 +3,7 @@ Contributors: austyfrosty, frostymedia
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7431290
 Tags: admin, branding, customization, custom login, logo
 Requires at least: 6.7
-Tested up to: 7.1.0
+Tested up to: 7.2.0
 Requires PHP: 7.4
 Stable tag: 6.0.0
 License: GPLv2 or later
@@ -14,9 +14,10 @@ Custom Login allows you to easily customize your admin login page, works great f
 == Description ==
 
 NOTE: in Custom Login 4.4, PHP 8.1 or greater was required, but in version 5.x, PHP requirements were
-dropped back to 7.4 or greater. Enjoy the update.
+dropped back to 7.4 or greater. Enjoy the update. Version 6.x runs PHP >= 8.4 if installed from GitHub or
+composer (suggested route).
 
-Custom Login 3.0 was 200% faster than version 2.0, and version 4.0 and 5.0 is now even better!
+Custom Login 3.0 was 200% faster than version 2.0, and version 4.x, 5.x, and 6.x are now even better!
 
 For more information visit the official [Custom Login](https://frosty.media/plugins/custom-login/) page.
 
