@@ -31,6 +31,7 @@ use TheFrosty\CustomLogin\Settings\Api\Factory;
 use TheFrosty\CustomLogin\Settings\ImportExport;
 use TheFrosty\CustomLogin\Settings\Settings;
 use TheFrosty\CustomLogin\WpAdmin\Dashboard;
+use TheFrosty\CustomLogin\WpAdmin\DisableAutoUpdates;
 use TheFrosty\CustomLogin\WpAdmin\Extensions;
 use TheFrosty\CustomLogin\WpAdmin\SettingsUpgrades;
 use TheFrosty\CustomLogin\WpAdmin\Tracking;
@@ -80,10 +81,12 @@ if (file_exists(__DIR__ . '/vendor/autoload.php') && !$isLoaded) {
 $plugin = PluginFactory::create('custom-login', __FILE__);
 $plugin->addServiceProvider(new ServiceProvider());
 $container = $plugin->getContainer();
+$isComposerInstall = CustomLogin::isComposerInstall($plugin->getDirectory());
 $plugin
     ->add(new Cron())
-    // Composer installs are updated with Composer, so don't offer the WordPress.org (PHP 7.4) build as an update.
-    ->addIfCondition(DisablePluginUpdateCheck::class, CustomLogin::isComposerInstall($plugin->getDirectory()))
+    // Composer installs are updated with Composer, so don't offer (or auto-install) the WordPress.org (PHP 7.4) build.
+    ->addIfCondition(DisablePluginUpdateCheck::class, $isComposerInstall)
+    ->addIfCondition(DisableAutoUpdates::class, $isComposerInstall)
     ->addOnHook(CustomLogin::class, 'plugins_loaded', 5)
     ->addOnHook(Dashboard::class, 'load-index.php', 5, true, [Dashboard::getArgs()])
     ->addOnHook(Extensions::class, 'init', 10, true, [$container])
