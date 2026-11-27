@@ -30,62 +30,6 @@ return [
         ],
     ],
     [
-        'title' => 'Custom Login Page Template',
-        'slug' => 'custom-login-page-template/custom-login-page-template.php',
-        'description' => 'Add a login form to any WordPress page.',
-        'url' => 'https://frosty.media/plugins/custom-login-page-template/',
-        'image' => 'https://i.imgur.com/A0rzS9q.jpg',
-        'download_id' => '120',
-        'links' => [
-            [
-                'description' => 'Personal',
-                'download_id' => '120',
-                'price_id' => '1',
-                'price' => '$35',
-            ],
-            [
-                'description' => 'Plus',
-                'download_id' => '120',
-                'price_id' => '2',
-                'price' => '$95',
-            ],
-            [
-                'description' => 'Professional',
-                'download_id' => '120',
-                'price_id' => '3',
-                'price' => '$195',
-            ],
-        ],
-    ],
-    [
-        'title' => 'Custom Login Redirects',
-        'slug' => 'custom-login-redirects/custom-login-redirects.php',
-        'description' => 'Manage redirects after logging in.',
-        'url' => 'https://extendd.com/plugin/wordpress-login-redirects/',
-        'image' => 'https://i.imgur.com/aNGoyAa.jpg',
-        'download_id' => '124',
-        'links' => [
-            [
-                'description' => 'Personal',
-                'download_id' => '124',
-                'price_id' => '1',
-                'price' => '$35',
-            ],
-            [
-                'description' => 'Plus',
-                'download_id' => '124',
-                'price_id' => '2',
-                'price' => '$95',
-            ],
-            [
-                'description' => 'Professional',
-                'download_id' => '124',
-                'price_id' => '3',
-                'price' => '$195',
-            ],
-        ],
-    ],
-    [
         'title' => 'Custom Login No Password',
         'slug' => 'custom-login-no-password/custom-login-no-password.php',
         'description' => 'Allow users to login without a password.',

@@ -48,17 +48,13 @@ For more information, visit the official [Custom Login](https://frosty.media/plu
 
 ### Extensions
 
-There are currently 7 premium extensions available, with more coming (suggestions welcome - and *will be offered for
+There are currently 5 premium extensions available, with more coming (suggestions welcome - and *will be offered for
 free to said user*).
 
 **Extensions available now**
 
 * [Stealth Login](https://frosty.media/plugins/custom-login-stealth-login/?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt "Custom Login Stealth Login")
   - obscure your login URL.
-* [Page Template](https://frosty.media/plugins/custom-login-page-template/?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt "Custom Login Page Template")
-  - add a login form to any WordPress page.
-* [Login Redirects](https://frosty.media/plugins/custom-login-redirects/?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt "Custom Login Redirects")
-  - Manage login redirects.
 * [No Password](https://frosty.media/plugins/custom-login-no-password-login/?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt "Custom Login No Password logins")
   - allow users to login without a password.
 * [Style Pack #1](https://frosty.media/plugins/custom-login-style-pack-1?utm_source=wordpressorg&utm_medium=custom-login&utm_campaign=readme.txt "Custom Login Style Pack #1") ⭐️
@@ -172,6 +168,10 @@ Custom Login showcase on the [Flickr group](https://flickr.com/groups/custom-log
 ](https://ps.w.org/custom-login/assets/screenshot-4.png)
 
 ## Changelog
+
+### Unreleased
+
+* Remove the retired Page Template and Login Redirects add-ons from the Extensions page and readme.
 
 ### Version 6.0.0 (2026/11/27)
 
