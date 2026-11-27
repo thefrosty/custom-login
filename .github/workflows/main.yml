@@ -90,8 +90,8 @@ jobs:
 
       - name: Setup WordPress ${{ matrix.wp-version }}
         run: |
-          chmod u+x vendor/thefrosty/wp-utilities/bin/install-wp-tests.sh
-          ./vendor/thefrosty/wp-utilities/bin/install-wp-tests.sh ${{ env.WORDPRESS_DB_NAME }} ${{ env.WORDPRESS_DB_USER }} ${{ env.WORDPRESS_DB_PASS }} 127.0.0.1:${{ job.services.mysql.ports['3306'] }} ${{ matrix.wp-version }} true
+          chmod u+x vendor/bin/install-wp-tests.sh
+          ./vendor/bin/install-wp-tests.sh ${{ env.WORDPRESS_DB_NAME }} ${{ env.WORDPRESS_DB_USER }} ${{ env.WORDPRESS_DB_PASS }} 127.0.0.1:${{ job.services.mysql.ports['3306'] }} ${{ matrix.wp-version }} true
 
       - name: Run PHPUnit
         id: phpunit
