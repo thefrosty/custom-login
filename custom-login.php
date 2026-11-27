@@ -36,6 +36,7 @@ use TheFrosty\CustomLogin\WpAdmin\SettingsUpgrades;
 use TheFrosty\CustomLogin\WpAdmin\Tracking;
 use TheFrosty\CustomLogin\WpLogin\Login;
 use TheFrosty\WpUtilities\Plugin\PluginFactory;
+use TheFrosty\WpUtilities\WpAdmin\DisablePluginUpdateCheck;
 
 /**
  * Maybe trigger an error notice "message" on the `admin_notices` action hook.
@@ -81,6 +82,8 @@ $plugin->addServiceProvider(new ServiceProvider());
 $container = $plugin->getContainer();
 $plugin
     ->add(new Cron())
+    // Composer installs are updated with Composer, so don't offer the WordPress.org (PHP 7.4) build as an update.
+    ->addIfCondition(DisablePluginUpdateCheck::class, CustomLogin::isComposerInstall($plugin->getDirectory()))
     ->addOnHook(CustomLogin::class, 'plugins_loaded', 5)
     ->addOnHook(Dashboard::class, 'load-index.php', 5, true, [Dashboard::getArgs()])
     ->addOnHook(Extensions::class, 'init', 10, true, [$container])
