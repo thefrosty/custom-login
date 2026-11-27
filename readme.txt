@@ -5,7 +5,7 @@ Tags: admin, branding, customization, custom login, logo
 Requires at least: 6.7
 Tested up to: 7.1.0
 Requires PHP: 7.4
-Stable tag: 5.1.3
+Stable tag: 6.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -113,6 +113,25 @@ Custom Login showcase on the [Flickr group](https://flickr.com/groups/custom-log
 4. Custom Login Extensions Installer (an active license key is required).
 
 == Changelog ==
+
+= Version 6.0.0 (2026/11/27) =
+
+* **Breaking:** the dependency injection container is now [PHP-DI](https://php-di.org) instead of Pimple.
+  `$plugin->getContainer()` is a PSR-11 `DI\Container`, so Pimple array access (`$container['id']`) and
+  `$container->register()` no longer work; register entries with `$plugin->addServiceProvider()`.
+  `ServiceProvider` now extends WP Utilities' `DefaultServiceProvider` (`ServiceProvider::WP_UTILITIES_VIEW` is unchanged).
+* Requires PHP >= 8.4 for Composer/GitHub installs (the WordPress.org and php74 release builds still run on PHP 7.4).
+* Bump dependencies: WP Utilities ^4.2, WP Settings API ^4.1, EDD Software License Manager ^2.3.3, PHP-DI ^7.0.7.
+* When installed with Composer, WordPress.org updates and WordPress auto-updates are disabled for the plugin (update it with Composer).
+* Security: Custom JavaScript can only be changed (including by import or style packs) by users with `unfiltered_html`.
+* Security: settings imports only write Custom Login's own options (extend with the new `custom_login/importable_options` filter).
+* Security: login CSS output is sanitized, so custom CSS and design fields can't break out of the `<style>` element.
+* Security: capability checks added to settings export/import, style pack import, upgrades and tracking opt-in/out.
+* Removed the unused "Capability" setting.
+* The tracking notice now lists exactly what is sent.
+* Allow `none` to remove the login form box shadow.
+* Tests: PHPUnit coverage restored and enforced at 90%; CI now tests the PHP 7.4 package (including browser tests) and Composer installs.
+* **Full Changelog**: https://github.com/thefrosty/custom-login/compare/5.1.3...6.0.0
 
 = Version 5.1.3 (2026/08/13) =
 
@@ -225,6 +244,9 @@ Custom Login showcase on the [Flickr group](https://flickr.com/groups/custom-log
 [All Releases](https://github.com/thefrosty/custom-login/releases)
 
 == Upgrade Notice ==
+
+= 6.0.0 =
+Breaking: the container is now PHP-DI instead of Pimple; update custom code or extensions that use `$container['id']`. On multisite, site admins without `unfiltered_html` can no longer change Custom JavaScript.
 
 = 5.0.1 =
 Requires WordPress version >= 6.4 and PHP version >= 7.4.
