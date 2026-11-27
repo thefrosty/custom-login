@@ -79,8 +79,8 @@ if (file_exists(__DIR__ . '/vendor/autoload.php') && !$isLoaded) {
 }
 
 /*
- * Keep a Pimple container (Custom Login 5.x registers its ServiceProvider with Pimple's `register()`).
- * wp-utilities 4 would otherwise use PHP-DI whenever it's installed on the site; 3.x ignores this argument.
+ * Keep a Pimple container (Custom Login 5.x registers its ServiceProvider with Pimple's `register()`):
+ * wp-utilities 4 would otherwise use PHP-DI whenever it's installed on the site.
  */
 $plugin = PluginFactory::create('custom-login', __FILE__, new Container());
 $container = $plugin->getContainer();
