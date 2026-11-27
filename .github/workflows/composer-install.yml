@@ -60,6 +60,16 @@ jobs:
         env:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Ensure WP-CLI
+        run: |
+          # setup-php's wp-cli download occasionally fails; fall back to the official phar.
+          if ! command -v wp > /dev/null; then
+            curl -sSfL --retry 5 --retry-all-errors -o wp-cli.phar \
+              https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+            sudo install -m 0755 wp-cli.phar /usr/local/bin/wp
+          fi
+          wp --info
+
       - name: Export the package (like Packagist's dist)
         run: |
           mkdir -p "$DIST_DIR"
