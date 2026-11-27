@@ -173,8 +173,12 @@ Custom Login showcase on the [Flickr group](https://flickr.com/groups/custom-log
 
 ## Changelog
 
-### Unreleased
+### Unreleased (6.0.0)
 
+* **Breaking:** the dependency injection container is now [PHP-DI](https://php-di.org) instead of Pimple (WP Utilities ^4.1).
+  `$plugin->getContainer()` is a PSR-11 `DI\Container`, so Pimple array access (`$container['id']`) and
+  `$container->register()` no longer work; register entries with `$plugin->addServiceProvider()`.
+  `ServiceProvider` now extends WP Utilities' `DefaultServiceProvider` (`ServiceProvider::WP_UTILITIES_VIEW` is unchanged).
 * Requires PHP >= 8.4 (Composer/GitHub installs; the php74 release asset is unchanged).
 * Bump dependencies to their lowest PHP 8.4 releases: WP Utilities ^4.0, WP Settings API ^4.1, EDD Software License Manager ^2.3.3.
 

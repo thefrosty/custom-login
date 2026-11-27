@@ -35,7 +35,6 @@ use TheFrosty\CustomLogin\WpAdmin\Extensions;
 use TheFrosty\CustomLogin\WpAdmin\SettingsUpgrades;
 use TheFrosty\CustomLogin\WpAdmin\Tracking;
 use TheFrosty\CustomLogin\WpLogin\Login;
-use TheFrosty\WpUtilities\Plugin\Container;
 use TheFrosty\WpUtilities\Plugin\PluginFactory;
 
 /**
@@ -77,14 +76,9 @@ if (!is_readable(__DIR__ . '/vendor/autoload.php') && !$isLoaded) {
 if (file_exists(__DIR__ . '/vendor/autoload.php') && !$isLoaded) {
     require_once __DIR__ . '/vendor/autoload.php';
 }
-
-/*
- * Keep a Pimple container (Custom Login 5.x registers its ServiceProvider with Pimple's `register()`):
- * wp-utilities 4 would otherwise use PHP-DI whenever it's installed on the site.
- */
-$plugin = PluginFactory::create('custom-login', __FILE__, new Container());
+$plugin = PluginFactory::create('custom-login', __FILE__);
+$plugin->addServiceProvider(new ServiceProvider());
 $container = $plugin->getContainer();
-$container->register(new ServiceProvider());
 $plugin
     ->add(new Cron())
     ->addOnHook(CustomLogin::class, 'plugins_loaded', 5)
