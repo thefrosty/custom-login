@@ -894,7 +894,7 @@ msgstr ""
 
 #: custom-login.php:55
 #, php-format
-msgid "Notice: Custom Login version %1$s requires PHP version >= 8.3, you are running %2$s, all features are currently disabled."
+msgid "Notice: Custom Login version %1$s requires PHP version >= 8.4, you are running %2$s, all features are currently disabled."
 msgstr ""
 
 #: src/CustomLogin.php:104

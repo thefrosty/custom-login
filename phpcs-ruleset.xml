@@ -24,8 +24,8 @@
     <!-- For CI, don't fail on warnings -->
     <config name="ignore_warnings_on_exit" value="1"/>
     <config name="minimum_supported_wp_version" value="6.4"/>
-    <!-- Check for cross-version support for PHP 8.3 and higher. -->
-    <config name="testVersion" value="8.3-"/>
+    <!-- Check for cross-version support for PHP 8.4 and higher. -->
+    <config name="testVersion" value="8.4-"/>
 
     <rule ref="WordPress-Docs">
         <exclude name="Generic.Commenting.DocComment.MissingShort"/>

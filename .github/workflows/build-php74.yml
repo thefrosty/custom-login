@@ -20,7 +20,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.3
+          php-version: 8.4
           coverage: none
           tools: composer:v2
         env:
@@ -44,8 +44,8 @@ jobs:
       - name: Transform Requires PHP via sed
         run: |
           sed -i 's/\* Requires at least: 6\.7/* Requires at least: 6.4/g' custom-login.php
-          sed -i 's/\* Requires PHP: 8\.3/* Requires PHP: 7.4/g' custom-login.php
-          sed -i "s/'8\.3'/'7.4'/g" custom-login.php
+          sed -i 's/\* Requires PHP: 8\.4/* Requires PHP: 7.4/g' custom-login.php
+          sed -i "s/'8\.4'/'7.4'/g" custom-login.php
 
       - name: Setup Node
         uses: actions/setup-node@v7
