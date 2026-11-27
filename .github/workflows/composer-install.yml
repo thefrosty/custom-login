@@ -69,7 +69,9 @@ jobs:
             echo "::error::The exported package must not contain vendor/"
             exit 1
           fi
-          # A path repository needs a version when the package isn't a git checkout.
+          # composer.json is export-ignored, so like Packagist take the package metadata from the repository,
+          # with a version (a path repository needs one when the package isn't a git checkout).
+          cp repo/composer.json "$DIST_DIR/composer.json"
           php -r '$f = getenv("DIST_DIR") . "/composer.json";
             $d = json_decode(file_get_contents($f), true);
             $d["version"] = getenv("PACKAGE_VERSION");
